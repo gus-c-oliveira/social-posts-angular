@@ -39,6 +39,7 @@
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "26.2.2",
     "jest-preset-angular": "8.2.1",
+    "prettier": "^2.0.5",
     "protractor": "~7.0.0",
     "stylelint": "^13.6.1",
     "stylelint-config-rational-order": "^0.1.2",
