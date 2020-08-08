@@ -1,31 +1,88 @@
-import { TestBed, async } from '@angular/core/testing';
+import { Location } from '@angular/common';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { APP_ROUTES } from '@app/router';
+import {
+  userListSelector,
+  UserModule,
+  userPostSelector,
+  userProfileSelector,
+} from '@app/user';
+
 import { AppComponent } from './app.component';
+import { APP_CONSTANTS } from './app.constants';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let router: Router;
+  let location: Location;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
+      imports: [UserModule, RouterTestingModule.withRoutes(APP_ROUTES)],
     }).compileComponents();
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    fixture.ngZone.run(() => {
+      router.initialNavigation();
+    });
+    fixture.detectChanges();
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'social-posts-angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('social-posts-angular');
+  it(`should display the app title`, () => {
+    const title = APP_CONSTANTS.AppTitle;
+    const displayedTitle = fixture.debugElement
+      .query(By.css('h1'))
+      .nativeElement.textContent.trim();
+    expect(displayedTitle).toEqual(title);
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain(
-      'social-posts-angular app is running!'
-    );
+  it('should render the route links', () => {
+    const routeLinks = component.links;
+    const displayedLinks = fixture.debugElement
+      .queryAll(By.css('a'))
+      .map((item) => item.nativeElement.textContent.trim());
+    displayedLinks.forEach((link, index) => {
+      expect(link).toEqual(routeLinks[index].title);
+    });
   });
+
+  it('should initially display the user list component', () => {
+    const userList = fixture.debugElement.query(By.css(userListSelector));
+    expect(userList).toBeTruthy();
+  });
+
+  it('should navigate to user components using links', async(() => {
+    fixture.ngZone.run(() => {
+      const selectors = [
+        { path: APP_ROUTES[0].path, selector: userListSelector },
+        { path: APP_ROUTES[1].path, selector: userPostSelector },
+        { path: APP_ROUTES[2].path, selector: userProfileSelector },
+      ];
+      const displayedLinks = fixture.debugElement
+        .queryAll(By.css('a'))
+        .map((item) => item.nativeElement);
+      displayedLinks.forEach((linkElement) => {
+        linkElement.click();
+        fixture.detectChanges();
+        const userComponentSelector = selectors.filter(
+          (item) => '/' + item.path === router.url
+        )[0].selector;
+        const userComponent = fixture.debugElement.query(
+          By.css(userComponentSelector)
+        );
+        expect(userComponent).toBeTruthy();
+      });
+    });
+  }));
 });
