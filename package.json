@@ -27,7 +27,8 @@
     "@ngrx/router-store": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
-    "rxjs": "~6.5.4",
+    "@nrwl/angular": "^10.0.10",
+    "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
