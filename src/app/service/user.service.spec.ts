@@ -2,11 +2,11 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { mockUserList } from '@app/mocks';
 
-import { UserService } from './user.service';
 import { APP_CONSTANTS } from '../app.constants';
-import { mockUserList } from './user.mock';
+import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;
