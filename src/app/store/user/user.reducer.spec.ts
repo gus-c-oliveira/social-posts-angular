@@ -22,7 +22,7 @@ describe('UserReducer', () => {
   });
 
   describe('LoadUsersSuccess', () => {
-    it('should set users to received data and loading to false', () => {
+    it('should set users to received data and loading and error to false', () => {
       const newState = userReducer(
         initialUserState,
         new LoadUsersSuccess(mockUserList)
