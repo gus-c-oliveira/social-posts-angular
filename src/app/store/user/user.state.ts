@@ -1,5 +1,7 @@
 import { User } from './user.model';
 
+export const USER_STATE_KEY = 'user';
+
 export interface UserState {
   users: User[];
   selectedUserID: number;
