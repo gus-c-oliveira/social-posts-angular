@@ -1,10 +1,12 @@
 import { Action } from '@ngrx/store';
+
 import { User } from './user.model';
 
 export enum UserActionTypes {
   LoadUsers = '[User] Load Users',
   LoadUsersSuccess = '[User] Load Users Success',
   LoadUsersError = '[User] Load Users Error',
+  SetSelectedUserID = '[User] Set Selected User ID',
 }
 
 export class LoadUsers implements Action {
@@ -21,4 +23,14 @@ export class LoadUsersError implements Action {
   public readonly type = UserActionTypes.LoadUsersError;
 }
 
-export type UserAction = LoadUsers | LoadUsersSuccess | LoadUsersError;
+export class SetSelectedUserID implements Action {
+  public readonly type = UserActionTypes.SetSelectedUserID;
+
+  public constructor(public id: number) {}
+}
+
+export type UserAction =
+  | LoadUsers
+  | LoadUsersSuccess
+  | LoadUsersError
+  | SetSelectedUserID;

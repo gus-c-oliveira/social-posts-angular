@@ -25,5 +25,12 @@ export const userReducer = (
         loading: false,
         error: true,
       };
+    case UserActionTypes.SetSelectedUserID:
+      return {
+        ...state,
+        selectedUserID: action.id,
+      };
+    default:
+      return state;
   }
 };

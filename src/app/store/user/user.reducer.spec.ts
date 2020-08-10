@@ -1,6 +1,11 @@
 import { mockUserList } from '@app/mocks';
 
-import { LoadUsers, LoadUsersError, LoadUsersSuccess } from './user.actions';
+import {
+  LoadUsers,
+  LoadUsersError,
+  LoadUsersSuccess,
+  SetSelectedUserID,
+} from './user.actions';
 import { userReducer } from './user.reducer';
 import { initialUserState } from './user.state';
 
@@ -39,6 +44,23 @@ describe('UserReducer', () => {
         loading: false,
         error: true,
       });
+    });
+  });
+
+  describe('SetSelectedUserID', () => {
+    it('should set the selected user ID', () => {
+      const newState = userReducer(initialUserState, new SetSelectedUserID(5));
+      expect(newState).toEqual({
+        ...initialUserState,
+        selectedUserID: 5,
+      });
+    });
+  });
+
+  describe('Unknown action', () => {
+    it('should return the original state without modifications', () => {
+      const newState = userReducer(initialUserState, { type: null });
+      expect(newState).toEqual(initialUserState);
     });
   });
 });
