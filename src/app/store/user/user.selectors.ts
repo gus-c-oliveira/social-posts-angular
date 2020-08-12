@@ -1,8 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserState, USER_STATE_KEY } from './user.state';
-import { User } from './user.model';
+import { User, SimpleUser } from './user.model';
 
 const getUserState = createFeatureSelector<UserState>(USER_STATE_KEY);
+
+export const mapUserToSimpleUser = (user: User): SimpleUser => ({
+  id: user.id,
+  name: user.name,
+  username: user.username,
+  email: user.email,
+});
 
 const getLoading = createSelector(
   getUserState,
@@ -19,6 +26,12 @@ const getUsers = createSelector(
   (state: UserState): User[] => state.users || []
 );
 
+const getSimpleUsers = createSelector(
+  getUserState,
+  (state: UserState): SimpleUser[] =>
+    state.users.map((user) => mapUserToSimpleUser(user))
+);
+
 const getSelectedUserID = createSelector(
   getUserState,
   (state: UserState): number => state.selectedUserID
@@ -29,4 +42,5 @@ export const userQuery = {
   getError,
   getSelectedUserID,
   getUsers,
+  getSimpleUsers,
 };

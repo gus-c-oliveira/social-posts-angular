@@ -25,3 +25,10 @@ export interface User {
   website: string;
   company: UserCompany;
 }
+
+export interface SimpleUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
