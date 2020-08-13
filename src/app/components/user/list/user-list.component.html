@@ -1,0 +1,16 @@
+<ng-container *ngIf="loading$ | async; else loadedTemplate">
+  <app-spinner></app-spinner>
+</ng-container>
+<ng-template #loadedTemplate>
+  <ng-container *ngIf="error$ | async; else cardTemplate">
+    <p class="error">Error loading users! Please try again...</p>
+  </ng-container>
+  <ng-template #cardTemplate>
+    <div class="card-container">
+      <app-user-card
+        *ngFor="let user of userList$ | async"
+        [user]="user"
+      ></app-user-card>
+    </div>
+  </ng-template>
+</ng-template>

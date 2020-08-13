@@ -1,15 +1,19 @@
 import { Location } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
+import { UserService } from '@app/service';
+import { USER_STATE_KEY } from '@app/store';
 import {
   userListSelector,
   UserModule,
   userPostSelector,
   userProfileSelector,
 } from '@app/user';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
 import { APP_CONSTANTS } from './app.constants';
@@ -19,11 +23,29 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let router: Router;
   let location: Location;
+  const key = USER_STATE_KEY;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [UserModule, RouterTestingModule.withRoutes(APP_ROUTES)],
+      imports: [
+        UserModule,
+        RouterTestingModule.withRoutes(APP_ROUTES),
+        HttpClientTestingModule,
+      ],
+      providers: [
+        UserService,
+        provideMockStore({
+          initialState: {
+            [key]: {
+              loading: false,
+              users: [],
+              error: false,
+              selectedUserID: null,
+            },
+          },
+        }),
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
@@ -57,11 +79,6 @@ describe('AppComponent', () => {
     });
   });
 
-  it('should initially display the user list component', () => {
-    const userList = fixture.debugElement.query(By.css(userListSelector));
-    expect(userList).toBeTruthy();
-  });
-
   it('should navigate to user components using links', async(() => {
     fixture.ngZone.run(() => {
       const selectors = [
@@ -85,4 +102,9 @@ describe('AppComponent', () => {
       });
     });
   }));
+
+  it('should initially display the user list component', () => {
+    const userList = fixture.debugElement.query(By.css(userListSelector));
+    expect(userList).toBeTruthy();
+  });
 });
