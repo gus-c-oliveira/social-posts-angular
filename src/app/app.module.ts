@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
 import { UserService } from '@app/service';
-import { appReducer } from '@app/store';
+import { appReducer, UserEffects } from '@app/store';
 import { UserModule } from '@app/user';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -27,6 +28,7 @@ import { AppComponent } from './app.component';
 
     // Store
     StoreModule.forRoot(appReducer),
+    EffectsModule.forRoot([UserEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
