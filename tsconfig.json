@@ -13,6 +13,7 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
+      "@app/ui": ["src/app/components/ui/index.ts"],
       "@app/user": ["src/app/components/user/index.ts"],
       "@app/router": ["src/app/router/index.ts"],
       "@app/store": ["src/app/store/index.ts"],
