@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { SimpleUser } from '@app/store';
 
 export const userCardSelector = 'app-user-card';
@@ -10,5 +16,7 @@ export const userCardSelector = 'app-user-card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent {
-  @Input() user: SimpleUser = null;
+  @Input() public user: SimpleUser = null;
+  // Emits the user id when card is clicked.
+  @Output() public selected = new EventEmitter<number>();
 }
