@@ -1,7 +1,7 @@
 <ng-container *ngIf="user">
   <div [class]="cssClass" (click)="selected.emit(user.id)">
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Name:</strong> {{ user.name }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><b>Username:</b> {{ user.username }}</p>
+    <p><b>Name:</b> {{ user.name }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
   </div>
 </ng-container>
