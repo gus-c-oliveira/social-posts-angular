@@ -1,10 +1,21 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AppState, LoadUsers, SimpleUser, userQuery } from '@app/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  AppState,
+  LoadUsers,
+  SetSelectedUserID,
+  SimpleUser,
+  userQuery,
+} from '@app/store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { USER_PROFILE_PATH } from '../profile';
 
 export const userListSelector = 'app-user-list';
+export const USER_LIST_PATH = 'user-list';
 
 @Component({
   selector: userListSelector,
@@ -17,13 +28,22 @@ export class UserListComponent implements OnDestroy {
   public loading$: Observable<boolean>;
   public error$: Observable<boolean>;
 
-  public constructor(private store: Store<AppState>) {
-    this.loadUserList();
+  public constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.listenUserStoreData();
+    this.loadUserList();
   }
 
   private loadUserList() {
-    this.store.dispatch(new LoadUsers());
+    this.userList$.pipe(take(1)).subscribe((users) => {
+      // Dispatch action to load users if user list is empty.
+      if (!users || !users.length) {
+        this.store.dispatch(new LoadUsers());
+      }
+    });
   }
 
   private listenUserStoreData() {
@@ -39,6 +59,15 @@ export class UserListComponent implements OnDestroy {
       select(userQuery.getSimpleUsers),
       untilDestroyed(this)
     );
+  }
+
+  public setSelectedUser(id: number) {
+    // Dispatch action to set selected user id in Store.
+    this.store.dispatch(new SetSelectedUserID(id));
+    // Navigate to selected user's profile.
+    this.router.navigate([USER_PROFILE_PATH], {
+      relativeTo: this.route.parent,
+    });
   }
 
   public ngOnDestroy() {}
