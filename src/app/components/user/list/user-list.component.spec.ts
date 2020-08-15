@@ -91,7 +91,9 @@ describe('UserListComponent', () => {
     spyOn(router, 'navigate');
     store.setState({ [key]: { ...storeStates.usersLoaded } });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.card')).nativeElement.click();
+    fixture.debugElement
+      .query(By.css('.' + cardCssClass))
+      .nativeElement.click();
     expect(router.navigate).toHaveBeenCalledWith([USER_PROFILE_PATH], {
       relativeTo: route.parent,
     });
