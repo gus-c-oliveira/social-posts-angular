@@ -1,0 +1,26 @@
+<ng-container *ngIf="user$ | async">
+  <div class="general">
+    <span><b>Username:</b> {{ (user$ | async).username }}</span>
+    <span><b>Name:</b> {{ (user$ | async).name }}</span>
+    <span><b>Email:</b> {{ (user$ | async).email }}</span>
+    <span><b>Website:</b> {{ (user$ | async).website }}</span>
+    <span><b>Phone Number:</b> {{ (user$ | async).phone }}</span>
+  </div>
+
+  <div class="address">
+    <span><b>Street:</b> {{ (user$ | async).address.street }}</span>
+    <span><b>Suite:</b> {{ (user$ | async).address.suite }}</span>
+    <span><b>City:</b> {{ (user$ | async).address.city }}</span>
+    <span><b>Zip:</b> {{ (user$ | async).address.zipcode }}</span>
+    <span
+      ><b>Geo:</b> {{ (user$ | async).address.geo.lat }} |
+      {{ (user$ | async).address.geo.lng }}</span
+    >
+  </div>
+
+  <div class="company">
+    <span><b>Company Name:</b> {{ (user$ | async).company.name }}</span>
+    <span><b>Catch Phrase:</b> {{ (user$ | async).company.catchPhrase }}</span>
+    <span><b>BS:</b> {{ (user$ | async).company.bs }}</span>
+  </div>
+</ng-container>
