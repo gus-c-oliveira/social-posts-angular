@@ -4,7 +4,11 @@ import { By } from '@angular/platform-browser';
 import { mockUserList } from '@app/mocks';
 import { mapUserToSimpleUser, SimpleUser } from '@app/store';
 
-import { UserCardComponent, userCardSelector } from './user-card.component';
+import {
+  UserCardComponent,
+  userCardSelector,
+  cardCssClass,
+} from './user-card.component';
 
 const mockSimpleUser: SimpleUser = mapUserToSimpleUser(mockUserList[0]);
 
@@ -60,7 +64,8 @@ describe('UserCardComponent', () => {
   });
 
   it('should emit the id of the user to the parent component when clicked', () => {
-    const card = fixture.debugElement.query(By.css('.card')).nativeElement;
+    const card = fixture.debugElement.query(By.css('.' + cardCssClass))
+      .nativeElement;
     card.click();
     expect(component.selected).toEqual(mockSimpleUser.id);
   });

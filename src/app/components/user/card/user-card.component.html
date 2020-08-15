@@ -1,5 +1,5 @@
 <ng-container *ngIf="user">
-  <div class="card" (click)="selected.emit(user.id)">
+  <div [class]="cssClass" (click)="selected.emit(user.id)">
     <p><strong>Username:</strong> {{ user.username }}</p>
     <p><strong>Name:</strong> {{ user.name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
