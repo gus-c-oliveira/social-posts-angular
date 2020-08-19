@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
-import { UserService } from '@app/service';
+import { PostService, UserService } from '@app/service';
 import { appReducer, UserEffects } from '@app/store';
 import { UserModule } from '@app/user';
 import { EffectsModule } from '@ngrx/effects';
@@ -32,7 +32,7 @@ import { AppComponent } from './app.component';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [UserService],
+  providers: [UserService, PostService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
