@@ -5,7 +5,7 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { mockUserList } from '@app/mocks';
 
-import { APP_CONSTANTS } from '../app.constants';
+import { APP_CONSTANTS } from '../../app.constants';
 import { UserService } from './user.service';
 
 describe('UserService', () => {

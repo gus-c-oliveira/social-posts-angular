@@ -3,7 +3,13 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockUserList } from '@app/mocks';
-import { AppState, SetSelectedUserID, USER_STATE_KEY } from '@app/store';
+import {
+  AppState,
+  SetSelectedUserID,
+  USER_STATE_KEY,
+  POST_STATE_KEY,
+  initialPostState,
+} from '@app/store';
 import { spinnerSelector, UiModule } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -27,7 +33,8 @@ describe('UserListComponent', () => {
       selectedUserID: null,
     },
   };
-  const key = USER_STATE_KEY;
+  const userStateKey = USER_STATE_KEY;
+  const postStateKey = POST_STATE_KEY;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -35,7 +42,10 @@ describe('UserListComponent', () => {
       declarations: [UserListComponent, UserCardComponent],
       providers: [
         provideMockStore({
-          initialState: { [key]: {} },
+          initialState: {
+            [userStateKey]: {},
+            [postStateKey]: initialPostState,
+          },
         }),
       ],
     }).compileComponents();
@@ -45,13 +55,19 @@ describe('UserListComponent', () => {
   });
 
   it('should create', () => {
-    store.setState({ [key]: { ...storeStates.empty } });
+    store.setState({
+      [userStateKey]: { ...storeStates.empty },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
   it(`should display the spinner while the user list is loading`, () => {
-    store.setState({ [key]: { ...storeStates.loading } });
+    store.setState({
+      [userStateKey]: { ...storeStates.loading },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     const spinner = fixture.debugElement
       .query(By.css(spinnerSelector))
@@ -60,14 +76,20 @@ describe('UserListComponent', () => {
   });
 
   it('should display one card for each user', () => {
-    store.setState({ [key]: { ...storeStates.usersLoaded } });
+    store.setState({
+      [userStateKey]: { ...storeStates.usersLoaded },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     const cards = fixture.debugElement.queryAll(By.css(userCardSelector));
     expect(cards.length).toEqual(mockUserList.length);
   });
 
   it('should display the error message if users fail to load', () => {
-    store.setState({ [key]: { ...storeStates.error } });
+    store.setState({
+      [userStateKey]: { ...storeStates.error },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     const error = fixture.debugElement.query(By.css('.error')).nativeElement;
     expect(error).toBeTruthy();
@@ -75,7 +97,10 @@ describe('UserListComponent', () => {
 
   it('should dispatch action to set selected user id after clicking on a card', () => {
     spyOn(store, 'dispatch');
-    store.setState({ [key]: { ...storeStates.usersLoaded } });
+    store.setState({
+      [userStateKey]: { ...storeStates.usersLoaded },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     fixture.debugElement
       .query(By.css('.' + cardCssClass))
@@ -89,7 +114,10 @@ describe('UserListComponent', () => {
     const router: Router = TestBed.inject(Router);
     const route: ActivatedRoute = TestBed.inject(ActivatedRoute);
     spyOn(router, 'navigate');
-    store.setState({ [key]: { ...storeStates.usersLoaded } });
+    store.setState({
+      [userStateKey]: { ...storeStates.usersLoaded },
+      [postStateKey]: initialPostState,
+    });
     fixture.detectChanges();
     fixture.debugElement
       .query(By.css('.' + cardCssClass))
