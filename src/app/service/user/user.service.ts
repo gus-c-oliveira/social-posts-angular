@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { APP_CONSTANTS } from '../app.constants';
+import { Injectable } from '@angular/core';
+import { User } from '@app/store';
 import { Observable } from 'rxjs';
-import { User } from '../store/user';
+
+import { APP_CONSTANTS } from '../../app.constants';
 
 @Injectable()
 export class UserService {
