@@ -6,10 +6,12 @@ export interface PostState {
   posts: Post[];
   loading: boolean;
   error: boolean;
+  selectedPostID: number;
 }
 
 export const initialPostState: PostState = {
   posts: [],
   loading: false,
   error: false,
+  selectedPostID: null,
 };
