@@ -10,6 +10,8 @@ export enum PostActionTypes {
 
 export class LoadPosts implements Action {
   public readonly type = PostActionTypes.LoadPosts;
+
+  public constructor(public userId: number) {}
 }
 
 export class LoadPostsSuccess implements Action {

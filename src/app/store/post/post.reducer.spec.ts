@@ -12,7 +12,7 @@ import { initialPostState } from './post.state';
 describe('postReducer', () => {
   describe('LoadPosts', () => {
     it('should set loading to true and error to false', () => {
-      const newState = postReducer(initialPostState, new LoadPosts());
+      const newState = postReducer(initialPostState, new LoadPosts(5));
       expect(newState).toEqual({
         ...initialPostState,
         loading: true,
