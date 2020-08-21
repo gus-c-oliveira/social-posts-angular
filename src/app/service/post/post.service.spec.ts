@@ -26,7 +26,8 @@ describe('PostService', () => {
   });
 
   it('should retrieve an array of posts using a GET request', (done) => {
-    service.getPosts(1).subscribe((data) => {
+    const userId = 1;
+    service.getPosts(userId).subscribe((data) => {
       expect(data.length).toEqual(10);
       data.forEach((post, index) => {
         expect(post).toEqual(mockPostList[index]);
@@ -34,7 +35,9 @@ describe('PostService', () => {
       done();
     });
 
-    const req = http.expectOne(APP_CONSTANTS.baseURL + 'posts?userId=1');
+    const req = http.expectOne(
+      APP_CONSTANTS.baseURL + `posts?userId=${userId}`
+    );
     expect(req.request.method).toEqual('GET');
 
     req.flush(mockPostList);
