@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { mockUserList } from '@app/mocks';
-import { USER_STATE_KEY } from '@app/store';
+import { mockUserList, mockPostList } from '@app/mocks';
+import {
+  USER_STATE_KEY,
+  POST_STATE_KEY,
+  PostState,
+  UserState,
+} from '@app/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { UserProfileComponent } from './user-profile.component';
@@ -10,12 +15,19 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
   const selectedUser = { ...mockUserList[0] };
-  const key = USER_STATE_KEY;
-  const storeState = {
+  const userKey = USER_STATE_KEY;
+  const userStoreState: UserState = {
     loading: false,
     users: mockUserList,
     error: false,
     selectedUserID: selectedUser.id,
+  };
+  const postKey = POST_STATE_KEY;
+  const postStoreState: PostState = {
+    loading: false,
+    posts: mockPostList,
+    error: false,
+    selectedPostID: null,
   };
 
   beforeEach(() => {
@@ -23,7 +35,10 @@ describe('UserProfileComponent', () => {
       declarations: [UserProfileComponent],
       providers: [
         provideMockStore({
-          initialState: { [key]: { ...storeState } },
+          initialState: {
+            [userKey]: { ...userStoreState },
+            [postKey]: { ...postStoreState },
+          },
         }),
       ],
     }).compileComponents();
@@ -77,5 +92,13 @@ describe('UserProfileComponent', () => {
     expectedUserInfo.forEach((info) => {
       expect(displayedUserInfo.indexOf(info)).toBeGreaterThan(-1);
     });
+  });
+
+  it(`should display the user's posts`, () => {
+    const posts = fixture.debugElement
+      .queryAll(By.css('.post'))
+      .map((item) => item.nativeElement.textContent.trim());
+    const expected = mockPostList.map((post) => `#${post.id}: ${post.title}`);
+    expect(posts).toEqual(expected);
   });
 });

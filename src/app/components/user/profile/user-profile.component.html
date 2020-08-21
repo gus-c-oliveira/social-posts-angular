@@ -24,3 +24,9 @@
     <span><b>BS:</b> {{ (user$ | async).company.bs }}</span>
   </div>
 </ng-container>
+<div class="post-container">
+  <h4 *ngIf="!!(posts$ | async).length">User Posts:</h4>
+  <span class="post" *ngFor="let post of posts$ | async">
+    <b>#{{ post.id }}:</b> {{ post.title }}
+  </span>
+</div>
