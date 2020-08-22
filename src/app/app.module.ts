@@ -2,8 +2,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
-import { PostService, UserService } from '@app/service';
-import { appReducer, PostEffects, UserEffects } from '@app/store';
+import { CommentService, PostService, UserService } from '@app/service';
+import {
+  appReducer,
+  CommentEffects,
+  PostEffects,
+  UserEffects,
+} from '@app/store';
 import { UserModule } from '@app/user';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -28,11 +33,11 @@ import { AppComponent } from './app.component';
 
     // Store
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([PostEffects, UserEffects]),
+    EffectsModule.forRoot([CommentEffects, PostEffects, UserEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [UserService, PostService],
+  providers: [UserService, PostService, CommentService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
