@@ -28,6 +28,7 @@ export const USER_PROFILE_PATH = 'user-profile';
 export class UserProfileComponent implements OnDestroy {
   public user$: Observable<User>;
   public posts$: Observable<Post[]>;
+  private currentUserID: number = null;
 
   public constructor(
     private store: Store<AppState>,
@@ -39,7 +40,13 @@ export class UserProfileComponent implements OnDestroy {
       select(userQuery.getSelectedUser),
       filter((user) => !!user),
       // Dispatch action to load user posts
-      tap((user) => this.store.dispatch(new LoadPosts(user.id))),
+      tap((user) => {
+        if (this.currentUserID === user.id) {
+          return;
+        }
+        this.currentUserID = user.id;
+        this.store.dispatch(new LoadPosts(user.id));
+      }),
       untilDestroyed(this)
     );
     this.posts$ = this.store.pipe(
