@@ -1,14 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { mockUserList, mockPostList } from '@app/mocks';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { mockPostList, mockUserList } from '@app/mocks';
 import {
-  USER_STATE_KEY,
   POST_STATE_KEY,
   PostState,
+  USER_STATE_KEY,
   UserState,
 } from '@app/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
+import { USER_POST_PATH } from '../post';
 import { UserProfileComponent } from './user-profile.component';
 
 describe('UserProfileComponent', () => {
@@ -32,6 +35,7 @@ describe('UserProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([])],
       declarations: [UserProfileComponent],
       providers: [
         provideMockStore({
@@ -100,5 +104,15 @@ describe('UserProfileComponent', () => {
       .map((item) => item.nativeElement.textContent.trim());
     const expected = mockPostList.map((post) => `#${post.id}: ${post.title}`);
     expect(posts).toEqual(expected);
+  });
+
+  it(`should navigate to user post after clicking a user's post`, () => {
+    const router: Router = TestBed.inject(Router);
+    const route: ActivatedRoute = TestBed.inject(ActivatedRoute);
+    spyOn(router, 'navigate');
+    fixture.debugElement.query(By.css('.post')).nativeElement.click();
+    expect(router.navigate).toHaveBeenCalledWith([USER_POST_PATH], {
+      relativeTo: route.parent,
+    });
   });
 });
