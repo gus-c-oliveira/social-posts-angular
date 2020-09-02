@@ -26,7 +26,11 @@
 </ng-container>
 <div class="post-container">
   <h4 *ngIf="!!(posts$ | async).length">User Posts:</h4>
-  <span class="post" *ngFor="let post of posts$ | async">
+  <span
+    class="post"
+    *ngFor="let post of posts$ | async"
+    (click)="openPost(post.id)"
+  >
     <b>#{{ post.id }}:</b> {{ post.title }}
   </span>
 </div>

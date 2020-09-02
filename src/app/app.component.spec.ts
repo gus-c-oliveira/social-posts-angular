@@ -6,7 +6,14 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
 import { UserService } from '@app/service';
-import { POST_STATE_KEY, USER_STATE_KEY } from '@app/store';
+import {
+  POST_STATE_KEY,
+  USER_STATE_KEY,
+  COMMENT_STATE_KEY,
+  initialCommentState,
+  initialPostState,
+  initialUserState,
+} from '@app/store';
 import {
   userListSelector,
   UserModule,
@@ -25,6 +32,7 @@ describe('AppComponent', () => {
   let location: Location;
   const userKey = USER_STATE_KEY;
   const postKey = POST_STATE_KEY;
+  const commentKey = COMMENT_STATE_KEY;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,16 +47,13 @@ describe('AppComponent', () => {
         provideMockStore({
           initialState: {
             [userKey]: {
-              loading: false,
-              users: [],
-              error: false,
-              selectedUserID: null,
+              ...initialUserState,
             },
             [postKey]: {
-              loading: false,
-              posts: [],
-              error: false,
-              selectedPostID: null,
+              ...initialPostState,
+            },
+            [commentKey]: {
+              ...initialCommentState,
             },
           },
         }),

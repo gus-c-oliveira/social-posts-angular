@@ -9,6 +9,8 @@ import {
   USER_STATE_KEY,
   POST_STATE_KEY,
   initialPostState,
+  COMMENT_STATE_KEY,
+  initialCommentState,
 } from '@app/store';
 import { spinnerSelector, UiModule } from '@app/ui';
 import { Store } from '@ngrx/store';
@@ -35,6 +37,7 @@ describe('UserListComponent', () => {
   };
   const userStateKey = USER_STATE_KEY;
   const postStateKey = POST_STATE_KEY;
+  const commentStateKey = COMMENT_STATE_KEY;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -58,6 +61,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.empty },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     expect(component).toBeTruthy();
@@ -67,6 +71,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.loading },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     const spinner = fixture.debugElement
@@ -79,6 +84,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.usersLoaded },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     const cards = fixture.debugElement.queryAll(By.css(userCardSelector));
@@ -89,6 +95,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.error },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     const error = fixture.debugElement.query(By.css('.error')).nativeElement;
@@ -100,6 +107,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.usersLoaded },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     fixture.debugElement
@@ -117,6 +125,7 @@ describe('UserListComponent', () => {
     store.setState({
       [userStateKey]: { ...storeStates.usersLoaded },
       [postStateKey]: initialPostState,
+      [commentStateKey]: initialCommentState,
     });
     fixture.detectChanges();
     fixture.debugElement
