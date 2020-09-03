@@ -6,6 +6,8 @@ import {
   LoadComments,
   Post,
   postQuery,
+  ClearComments,
+  ClearSelectedPostID,
 } from '@app/store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -26,16 +28,14 @@ export class UserPostComponent implements OnDestroy {
   private selectedPostID: number = null;
 
   public constructor(private store: Store<AppState>) {
+    this.listenPostData();
+  }
+
+  private listenPostData() {
     this.post$ = this.store.pipe(
       select(postQuery.getSelectedPost),
       filter((post) => !!post),
-      tap((post) => {
-        if (this.selectedPostID === post.id) {
-          return;
-        }
-        this.selectedPostID = post.id;
-        this.store.dispatch(new LoadComments(this.selectedPostID));
-      }),
+      tap((post) => this.loadComments(post.id)),
       untilDestroyed(this)
     );
     this.comments$ = this.store.pipe(
@@ -44,5 +44,20 @@ export class UserPostComponent implements OnDestroy {
     );
   }
 
-  public ngOnDestroy() {}
+  private loadComments(postId: number) {
+    if (this.selectedPostID === postId) {
+      return;
+    }
+    this.selectedPostID = postId;
+    this.store.dispatch(new LoadComments(postId));
+  }
+
+  public ngOnDestroy() {
+    this.clear();
+  }
+
+  private clear() {
+    this.store.dispatch(new ClearSelectedPostID());
+    this.store.dispatch(new ClearComments());
+  }
 }
