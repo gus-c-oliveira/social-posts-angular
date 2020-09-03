@@ -6,6 +6,7 @@ export enum CommentActionTypes {
   LoadComments = '[Comment] Load Comments',
   LoadCommentsSuccess = '[Comment] Load Comments Success',
   LoadCommentsError = '[Comment] Load Comments Error',
+  ClearComments = '[Comment] Clear Comments',
 }
 
 export class LoadComments implements Action {
@@ -24,7 +25,12 @@ export class LoadCommentsError implements Action {
   public readonly type = CommentActionTypes.LoadCommentsError;
 }
 
+export class ClearComments implements Action {
+  public readonly type = CommentActionTypes.ClearComments;
+}
+
 export type CommentAction =
   | LoadComments
   | LoadCommentsSuccess
-  | LoadCommentsError;
+  | LoadCommentsError
+  | ClearComments;
