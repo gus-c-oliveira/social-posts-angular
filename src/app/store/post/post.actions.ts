@@ -6,6 +6,7 @@ export enum PostActionTypes {
   LoadPostsSuccess = '[Post] Load Posts Success',
   LoadPostsError = '[Post] Load Posts Error',
   SetSelectedPostID = '[Post] Set Selected Post ID',
+  ClearPosts = '[Post] Clear Posts',
 }
 
 export class LoadPosts implements Action {
@@ -30,8 +31,13 @@ export class SetSelectedPostID implements Action {
   public constructor(public id: number) {}
 }
 
+export class ClearPosts implements Action {
+  public readonly type = PostActionTypes.ClearPosts;
+}
+
 export type PostAction =
   | LoadPosts
   | LoadPostsSuccess
   | LoadPostsError
-  | SetSelectedPostID;
+  | SetSelectedPostID
+  | ClearPosts;

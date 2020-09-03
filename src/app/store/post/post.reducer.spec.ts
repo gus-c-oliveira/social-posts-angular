@@ -1,6 +1,7 @@
 import { mockPostList } from '@app/mocks';
 
 import {
+  ClearPosts,
   LoadPosts,
   LoadPostsError,
   LoadPostsSuccess,
@@ -53,6 +54,18 @@ describe('postReducer', () => {
       expect(newState).toEqual({
         ...initialPostState,
         selectedPostID: 5,
+      });
+    });
+  });
+
+  describe('ClearPosts', () => {
+    it('should set posts to an empty array', () => {
+      const newState = postReducer(
+        { ...initialPostState, posts: mockPostList },
+        new ClearPosts()
+      );
+      expect(newState).toEqual({
+        ...initialPostState,
       });
     });
   });
