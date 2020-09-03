@@ -30,6 +30,11 @@ export const userReducer = (
         ...state,
         selectedUserID: action.id,
       };
+    case UserActionTypes.ClearSelectedUserID:
+      return {
+        ...state,
+        selectedUserID: null,
+      };
     default:
       return state;
   }

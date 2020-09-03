@@ -25,6 +25,11 @@ export const commentReducer = (
         loading: false,
         error: true,
       };
+    case CommentActionTypes.ClearComments:
+      return {
+        ...state,
+        comments: [],
+      };
     default:
       return state;
   }

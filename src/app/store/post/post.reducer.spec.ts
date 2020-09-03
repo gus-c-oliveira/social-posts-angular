@@ -1,6 +1,8 @@
 import { mockPostList } from '@app/mocks';
 
 import {
+  ClearPosts,
+  ClearSelectedPostID,
   LoadPosts,
   LoadPostsError,
   LoadPostsSuccess,
@@ -55,6 +57,26 @@ describe('postReducer', () => {
         selectedPostID: 5,
       });
     });
+  });
+
+  describe('ClearPosts', () => {
+    it('should set posts to an empty array', () => {
+      const newState = postReducer(
+        { ...initialPostState, posts: mockPostList },
+        new ClearPosts()
+      );
+      expect(newState).toEqual({
+        ...initialPostState,
+      });
+    });
+  });
+
+  describe('ClearSelectedPostID', () => {
+    const newState = postReducer(
+      { ...initialPostState, selectedPostID: 5 },
+      new ClearSelectedPostID()
+    );
+    expect(newState).toEqual(initialPostState);
   });
 
   describe('Unknown action', () => {

@@ -30,6 +30,16 @@ export const postReducer = (
         ...state,
         selectedPostID: action.id,
       };
+    case PostActionTypes.ClearPosts:
+      return {
+        ...state,
+        posts: [],
+      };
+    case PostActionTypes.ClearSelectedPostID:
+      return {
+        ...state,
+        selectedPostID: null,
+      };
     default:
       return state;
   }

@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AppState,
+  ClearPosts,
+  ClearSelectedUserID,
   LoadUsers,
   SetSelectedUserID,
   SimpleUser,
@@ -33,17 +35,14 @@ export class UserListComponent implements OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.clearPreviousUserData();
     this.listenUserStoreData();
     this.loadUserList();
   }
 
-  private loadUserList() {
-    this.userList$.pipe(take(1)).subscribe((users) => {
-      // Dispatch action to load users if user list is empty.
-      if (!users || !users.length) {
-        this.store.dispatch(new LoadUsers());
-      }
-    });
+  private clearPreviousUserData() {
+    this.store.dispatch(new ClearSelectedUserID());
+    this.store.dispatch(new ClearPosts());
   }
 
   private listenUserStoreData() {
@@ -61,10 +60,24 @@ export class UserListComponent implements OnDestroy {
     );
   }
 
-  public setSelectedUser(id: number) {
-    // Dispatch action to set selected user id in Store.
+  private loadUserList() {
+    this.userList$.pipe(take(1)).subscribe((users) => {
+      if (!users || !users.length) {
+        this.store.dispatch(new LoadUsers());
+      }
+    });
+  }
+
+  public handleUserSelection(id: number) {
+    this.setSelectedUser(id);
+    this.navigateToUserProfile();
+  }
+
+  private setSelectedUser(id: number) {
     this.store.dispatch(new SetSelectedUserID(id));
-    // Navigate to selected user's profile.
+  }
+
+  private navigateToUserProfile() {
     this.router.navigate([USER_PROFILE_PATH], {
       relativeTo: this.route.parent,
     });

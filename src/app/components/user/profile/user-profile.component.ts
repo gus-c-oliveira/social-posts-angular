@@ -35,18 +35,15 @@ export class UserProfileComponent implements OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.listenProfileData();
+  }
+
+  private listenProfileData() {
     // Get selected user from store
     this.user$ = this.store.pipe(
       select(userQuery.getSelectedUser),
       filter((user) => !!user),
-      // Dispatch action to load user posts
-      tap((user) => {
-        if (this.currentUserID === user.id) {
-          return;
-        }
-        this.currentUserID = user.id;
-        this.store.dispatch(new LoadPosts(user.id));
-      }),
+      tap((user) => this.loadPosts(user.id)),
       untilDestroyed(this)
     );
     this.posts$ = this.store.pipe(
@@ -55,10 +52,24 @@ export class UserProfileComponent implements OnDestroy {
     );
   }
 
-  public openPost(id: number) {
-    // Set selected post ID
+  private loadPosts(id: number) {
+    if (this.currentUserID === id) {
+      return;
+    }
+    this.currentUserID = id;
+    this.store.dispatch(new LoadPosts(id));
+  }
+
+  public handlePostSelection(id: number) {
+    this.setSelectedPostID(id);
+    this.navigateToPost();
+  }
+
+  private setSelectedPostID(id: number) {
     this.store.dispatch(new SetSelectedPostID(id));
-    // Navigate to Post Component
+  }
+
+  private navigateToPost() {
     this.router.navigate([USER_POST_PATH], {
       relativeTo: this.route.parent,
     });
