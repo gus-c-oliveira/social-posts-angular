@@ -7,6 +7,7 @@ export enum UserActionTypes {
   LoadUsersSuccess = '[User] Load Users Success',
   LoadUsersError = '[User] Load Users Error',
   SetSelectedUserID = '[User] Set Selected User ID',
+  ClearSelectedUserID = '[User] Clear Selected User ID',
 }
 
 export class LoadUsers implements Action {
@@ -29,8 +30,13 @@ export class SetSelectedUserID implements Action {
   public constructor(public id: number) {}
 }
 
+export class ClearSelectedUserID implements Action {
+  public readonly type = UserActionTypes.ClearSelectedUserID;
+}
+
 export type UserAction =
   | LoadUsers
   | LoadUsersSuccess
   | LoadUsersError
-  | SetSelectedUserID;
+  | SetSelectedUserID
+  | ClearSelectedUserID;

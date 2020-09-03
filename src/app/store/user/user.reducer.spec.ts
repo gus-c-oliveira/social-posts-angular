@@ -5,6 +5,7 @@ import {
   LoadUsersError,
   LoadUsersSuccess,
   SetSelectedUserID,
+  ClearSelectedUserID,
 } from './user.actions';
 import { userReducer } from './user.reducer';
 import { initialUserState } from './user.state';
@@ -54,6 +55,16 @@ describe('UserReducer', () => {
         ...initialUserState,
         selectedUserID: 5,
       });
+    });
+  });
+
+  describe('ClearSelectedUserID', () => {
+    it('should clear the selected user ID', () => {
+      const newState = userReducer(
+        { ...initialUserState, selectedUserID: 5 },
+        new ClearSelectedUserID()
+      );
+      expect(newState).toEqual({ ...initialUserState });
     });
   });
 
