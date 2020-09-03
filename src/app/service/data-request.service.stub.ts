@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { mockCommentList, mockPostList, mockUserList } from '@app/mocks';
 import { Comment, Post, User } from '@app/store';
-import { Observable, of } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 
 @Injectable()
-export class DataRequestServiceSuccessful {
+export class DataRequestServiceStubSuccessful {
   public getUsers(): Observable<User[]> {
     return of(mockUserList);
   }
@@ -19,16 +19,25 @@ export class DataRequestServiceSuccessful {
 }
 
 @Injectable()
-export class DataRequestServiceFailed {
+export class DataRequestServiceStubFailed {
   public getUsers(): Observable<User[]> {
-    throw new Error('Request Failed!');
+    return new Observable((observer: Observer<any>) => {
+      observer.error('Failed request');
+      observer.complete();
+    });
   }
 
   public getPosts(userId: number): Observable<Post[]> {
-    throw new Error('Request Failed!');
+    return new Observable((observer: Observer<any>) => {
+      observer.error('Failed request');
+      observer.complete();
+    });
   }
 
   public getComments(postId: number): Observable<Comment[]> {
-    throw new Error('Request Failed!');
+    return new Observable((observer: Observer<any>) => {
+      observer.error('Failed request');
+      observer.complete();
+    });
   }
 }

@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { mockUserList } from '@app/mocks';
 import {
-  UserService,
-  UserServiceStubFailed,
-  UserServiceStubSuccessful,
+  DataRequestService,
+  DataRequestServiceStubFailed,
+  DataRequestServiceStubSuccessful,
 } from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -23,7 +23,10 @@ describe('UserEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: UserService, useClass: UserServiceStubSuccessful },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubSuccessful,
+          },
           UserEffects,
           provideMockActions(() => actions),
         ],
@@ -44,7 +47,10 @@ describe('UserEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: UserService, useClass: UserServiceStubFailed },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubFailed,
+          },
           UserEffects,
           provideMockActions(() => actions),
         ],

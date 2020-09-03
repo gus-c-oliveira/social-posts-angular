@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { mockCommentList } from '@app/mocks';
 import {
-  CommentService,
-  CommentServiceStubFailed,
-  CommentServiceStubSuccessful,
+  DataRequestService,
+  DataRequestServiceStubFailed,
+  DataRequestServiceStubSuccessful,
 } from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -27,7 +27,10 @@ describe('CommentEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: CommentService, useClass: CommentServiceStubSuccessful },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubSuccessful,
+          },
           CommentEffects,
           provideMockActions(() => actions),
         ],
@@ -48,7 +51,10 @@ describe('CommentEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: CommentService, useClass: CommentServiceStubFailed },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubFailed,
+          },
           CommentEffects,
           provideMockActions(() => actions),
         ],
