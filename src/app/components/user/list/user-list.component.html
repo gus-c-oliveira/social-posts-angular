@@ -10,7 +10,7 @@
       <app-user-card
         *ngFor="let user of userList$ | async"
         [user]="user"
-        (selected)="setSelectedUser($event)"
+        (selected)="handleUserSelection($event)"
       ></app-user-card>
     </div>
   </ng-template>
