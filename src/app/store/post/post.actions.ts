@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+
 import { Post } from './post.model';
 
 export enum PostActionTypes {
@@ -6,6 +7,7 @@ export enum PostActionTypes {
   LoadPostsSuccess = '[Post] Load Posts Success',
   LoadPostsError = '[Post] Load Posts Error',
   SetSelectedPostID = '[Post] Set Selected Post ID',
+  ClearSelectedPostID = '[Post] Clear Selected Post ID',
   ClearPosts = '[Post] Clear Posts',
 }
 
@@ -31,6 +33,10 @@ export class SetSelectedPostID implements Action {
   public constructor(public id: number) {}
 }
 
+export class ClearSelectedPostID implements Action {
+  public readonly type = PostActionTypes.ClearSelectedPostID;
+}
+
 export class ClearPosts implements Action {
   public readonly type = PostActionTypes.ClearPosts;
 }
@@ -40,4 +46,5 @@ export type PostAction =
   | LoadPostsSuccess
   | LoadPostsError
   | SetSelectedPostID
-  | ClearPosts;
+  | ClearPosts
+  | ClearSelectedPostID;

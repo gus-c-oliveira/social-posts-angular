@@ -2,6 +2,7 @@ import { mockPostList } from '@app/mocks';
 
 import {
   ClearPosts,
+  ClearSelectedPostID,
   LoadPosts,
   LoadPostsError,
   LoadPostsSuccess,
@@ -68,6 +69,14 @@ describe('postReducer', () => {
         ...initialPostState,
       });
     });
+  });
+
+  describe('ClearSelectedPostID', () => {
+    const newState = postReducer(
+      { ...initialPostState, selectedPostID: 5 },
+      new ClearSelectedPostID()
+    );
+    expect(newState).toEqual(initialPostState);
   });
 
   describe('Unknown action', () => {
