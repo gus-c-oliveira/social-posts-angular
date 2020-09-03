@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { mockPostList } from '@app/mocks';
 import {
-  PostService,
-  PostServiceStubFailed,
-  PostServiceStubSuccessful,
+  DataRequestService,
+  DataRequestServiceStubFailed,
+  DataRequestServiceStubSuccessful,
 } from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -23,7 +23,10 @@ describe('PostEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: PostService, useClass: PostServiceStubSuccessful },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubSuccessful,
+          },
           PostEffects,
           provideMockActions(() => actions),
         ],
@@ -44,7 +47,10 @@ describe('PostEffects', () => {
       TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
-          { provide: PostService, useClass: PostServiceStubFailed },
+          {
+            provide: DataRequestService,
+            useClass: DataRequestServiceStubFailed,
+          },
           PostEffects,
           provideMockActions(() => actions),
         ],

@@ -5,14 +5,14 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
-import { UserService } from '@app/service';
+import { DataRequestService } from '@app/service';
 import {
-  POST_STATE_KEY,
-  USER_STATE_KEY,
   COMMENT_STATE_KEY,
   initialCommentState,
   initialPostState,
   initialUserState,
+  POST_STATE_KEY,
+  USER_STATE_KEY,
 } from '@app/store';
 import {
   userListSelector,
@@ -43,7 +43,7 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        UserService,
+        DataRequestService,
         provideMockStore({
           initialState: {
             [userKey]: {
