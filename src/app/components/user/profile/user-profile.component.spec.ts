@@ -4,12 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockPostList, mockUserList } from '@app/mocks';
 import {
+  AppState,
   POST_STATE_KEY,
   PostState,
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
-import { provideMockStore } from '@ngrx/store/testing';
+import { spinnerSelector, UiModule } from '@app/ui';
+import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { USER_POST_PATH } from '../post';
 import { UserProfileComponent } from './user-profile.component';
@@ -17,6 +20,7 @@ import { UserProfileComponent } from './user-profile.component';
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
+  let store$: MockStore<any>;
   const selectedUser = { ...mockUserList[0] };
   const userKey = USER_STATE_KEY;
   const userStoreState: UserState = {
@@ -35,7 +39,7 @@ describe('UserProfileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule.withRoutes([]), UiModule],
       declarations: [UserProfileComponent],
       providers: [
         provideMockStore({
@@ -48,6 +52,7 @@ describe('UserProfileComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
+    store$ = TestBed.inject(Store) as MockStore<AppState>;
     fixture.detectChanges();
   });
 
@@ -96,6 +101,26 @@ describe('UserProfileComponent', () => {
     expectedUserInfo.forEach((info) => {
       expect(displayedUserInfo.indexOf(info)).toBeGreaterThan(-1);
     });
+  });
+
+  it(`should display the spinner while the user's posts are loading`, () => {
+    store$.setState({
+      [postKey]: { ...postStoreState, loading: true },
+    });
+    fixture.detectChanges();
+    const spinner = fixture.debugElement
+      .query(By.css(spinnerSelector))
+      .nativeElement.textContent.trim();
+    expect(spinner).toBeTruthy();
+  });
+
+  it('should display the error message if posts fail to load', () => {
+    store$.setState({
+      [postKey]: { ...postStoreState, error: true },
+    });
+    fixture.detectChanges();
+    const error = fixture.debugElement.query(By.css('.error')).nativeElement;
+    expect(error).toBeTruthy();
   });
 
   it(`should display the user's posts`, () => {

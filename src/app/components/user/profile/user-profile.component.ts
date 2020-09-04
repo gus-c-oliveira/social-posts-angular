@@ -28,10 +28,12 @@ export const USER_PROFILE_PATH = 'user-profile';
 export class UserProfileComponent implements OnDestroy {
   public user$: Observable<User>;
   public posts$: Observable<Post[]>;
+  public loading$: Observable<boolean>;
+  public error$: Observable<boolean>;
   private currentUserID: number = null;
 
   public constructor(
-    private store: Store<AppState>,
+    private store$: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -39,14 +41,21 @@ export class UserProfileComponent implements OnDestroy {
   }
 
   private listenProfileData() {
-    // Get selected user from store
-    this.user$ = this.store.pipe(
+    this.loading$ = this.store$.pipe(
+      select(postQuery.getLoading),
+      untilDestroyed(this)
+    );
+    this.error$ = this.store$.pipe(
+      select(postQuery.getError),
+      untilDestroyed(this)
+    );
+    this.user$ = this.store$.pipe(
       select(userQuery.getSelectedUser),
       filter((user) => !!user),
       tap((user) => this.loadPosts(user.id)),
       untilDestroyed(this)
     );
-    this.posts$ = this.store.pipe(
+    this.posts$ = this.store$.pipe(
       select(postQuery.getPosts),
       untilDestroyed(this)
     );
@@ -57,7 +66,7 @@ export class UserProfileComponent implements OnDestroy {
       return;
     }
     this.currentUserID = id;
-    this.store.dispatch(new LoadPosts(id));
+    this.store$.dispatch(new LoadPosts(id));
   }
 
   public handlePostSelection(id: number) {
@@ -66,7 +75,7 @@ export class UserProfileComponent implements OnDestroy {
   }
 
   private setSelectedPostID(id: number) {
-    this.store.dispatch(new SetSelectedPostID(id));
+    this.store$.dispatch(new SetSelectedPostID(id));
   }
 
   private navigateToPost() {

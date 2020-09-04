@@ -4,9 +4,19 @@
     <p>{{ (post$ | async).body }}</p>
   </div>
 </ng-container>
-<ng-container *ngIf="((comments$ | async) || []).length">
-  <div class="comment" *ngFor="let comment of comments$ | async">
-    <strong>Name: </strong><span>{{ comment.name }}</span>
-    <p>{{ comment.body }}</p>
-  </div>
+<ng-container *ngIf="loading$ | async; else loaded">
+  <app-spinner></app-spinner>
 </ng-container>
+<ng-template #loaded>
+  <ng-container *ngIf="error$ | async; else noError">
+    <p class="error">Error loading comments!</p>
+  </ng-container>
+  <ng-template #noError>
+    <ng-container *ngIf="((comments$ | async) || []).length">
+      <div class="comment" *ngFor="let comment of comments$ | async">
+        <strong>Name: </strong><span>{{ comment.name }}</span>
+        <p>{{ comment.body }}</p>
+      </div>
+    </ng-container>
+  </ng-template>
+</ng-template>

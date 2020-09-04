@@ -1,26 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { mockCommentList, mockPostList } from '@app/mocks';
+import {
+  COMMENT_STATE_KEY,
+  initialCommentState,
+  initialPostState,
+  POST_STATE_KEY,
+} from '@app/store';
+import { spinnerSelector, UiModule } from '@app/ui';
+import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserPostComponent } from './user-post.component';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import {
-  POST_STATE_KEY,
-  COMMENT_STATE_KEY,
-  initialPostState,
-  initialCommentState,
-} from '@app/store';
-import { Store } from '@ngrx/store';
-import { mockPostList, mockCommentList } from '@app/mocks';
 
 describe('UserPostComponent', () => {
   let component: UserPostComponent;
   let fixture: ComponentFixture<UserPostComponent>;
   const postKey = POST_STATE_KEY;
   const commentKey = COMMENT_STATE_KEY;
-  let store: MockStore<any>;
+  let store$: MockStore<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [UiModule],
       declarations: [UserPostComponent],
       providers: [
         provideMockStore({
@@ -33,7 +35,7 @@ describe('UserPostComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(UserPostComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(Store) as MockStore<any>;
+    store$ = TestBed.inject(Store) as MockStore<any>;
     fixture.detectChanges();
   });
 
@@ -46,7 +48,7 @@ describe('UserPostComponent', () => {
     const selectedPost = mockPostList.find(
       (item) => item.id === selectedPostID
     );
-    store.setState({
+    store$.setState({
       [postKey]: {
         posts: mockPostList,
         loading: false,
@@ -61,8 +63,28 @@ describe('UserPostComponent', () => {
     expect(post).toEqual(selectedPost.title + selectedPost.body);
   });
 
+  it(`should display the spinner while the post's comments are loading`, () => {
+    store$.setState({
+      [commentKey]: { ...initialCommentState, loading: true },
+    });
+    fixture.detectChanges();
+    const spinner = fixture.debugElement
+      .query(By.css(spinnerSelector))
+      .nativeElement.textContent.trim();
+    expect(spinner).toBeTruthy();
+  });
+
+  it('should display the error message if comments fail to load', () => {
+    store$.setState({
+      [commentKey]: { ...initialCommentState, error: true },
+    });
+    fixture.detectChanges();
+    const error = fixture.debugElement.query(By.css('.error')).nativeElement;
+    expect(error).toBeTruthy();
+  });
+
   it('should display the selected post comments', () => {
-    store.setState({
+    store$.setState({
       [commentKey]: {
         comments: mockCommentList,
         loading: false,
