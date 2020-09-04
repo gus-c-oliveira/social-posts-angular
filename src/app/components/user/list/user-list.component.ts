@@ -31,7 +31,7 @@ export class UserListComponent implements OnDestroy {
   public error$: Observable<boolean>;
 
   public constructor(
-    private store: Store<AppState>,
+    private store$: Store<AppState>,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -41,20 +41,20 @@ export class UserListComponent implements OnDestroy {
   }
 
   private clearPreviousUserData() {
-    this.store.dispatch(new ClearSelectedUserID());
-    this.store.dispatch(new ClearPosts());
+    this.store$.dispatch(new ClearSelectedUserID());
+    this.store$.dispatch(new ClearPosts());
   }
 
   private listenUserStoreData() {
-    this.loading$ = this.store.pipe(
+    this.loading$ = this.store$.pipe(
       select(userQuery.getLoading),
       untilDestroyed(this)
     );
-    this.error$ = this.store.pipe(
+    this.error$ = this.store$.pipe(
       select(userQuery.getError),
       untilDestroyed(this)
     );
-    this.userList$ = this.store.pipe(
+    this.userList$ = this.store$.pipe(
       select(userQuery.getSimpleUsers),
       untilDestroyed(this)
     );
@@ -63,7 +63,7 @@ export class UserListComponent implements OnDestroy {
   private loadUserList() {
     this.userList$.pipe(take(1)).subscribe((users) => {
       if (!users || !users.length) {
-        this.store.dispatch(new LoadUsers());
+        this.store$.dispatch(new LoadUsers());
       }
     });
   }
@@ -74,7 +74,7 @@ export class UserListComponent implements OnDestroy {
   }
 
   private setSelectedUser(id: number) {
-    this.store.dispatch(new SetSelectedUserID(id));
+    this.store$.dispatch(new SetSelectedUserID(id));
   }
 
   private navigateToUserProfile() {
