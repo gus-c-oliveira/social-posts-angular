@@ -25,20 +25,30 @@ export const USER_POST_PATH = 'user-post';
 export class UserPostComponent implements OnDestroy {
   public post$: Observable<Post>;
   public comments$: Observable<Comment[]>;
+  public loading$: Observable<boolean>;
+  public error$: Observable<boolean>;
   private selectedPostID: number = null;
 
-  public constructor(private store: Store<AppState>) {
+  public constructor(private store$: Store<AppState>) {
     this.listenPostData();
   }
 
   private listenPostData() {
-    this.post$ = this.store.pipe(
+    this.loading$ = this.store$.pipe(
+      select(commentQuery.getLoading),
+      untilDestroyed(this)
+    );
+    this.error$ = this.store$.pipe(
+      select(commentQuery.getError),
+      untilDestroyed(this)
+    );
+    this.post$ = this.store$.pipe(
       select(postQuery.getSelectedPost),
       filter((post) => !!post),
       tap((post) => this.loadComments(post.id)),
       untilDestroyed(this)
     );
-    this.comments$ = this.store.pipe(
+    this.comments$ = this.store$.pipe(
       select(commentQuery.getComments),
       untilDestroyed(this)
     );
@@ -49,7 +59,7 @@ export class UserPostComponent implements OnDestroy {
       return;
     }
     this.selectedPostID = postId;
-    this.store.dispatch(new LoadComments(postId));
+    this.store$.dispatch(new LoadComments(postId));
   }
 
   public ngOnDestroy() {
@@ -57,7 +67,7 @@ export class UserPostComponent implements OnDestroy {
   }
 
   private clear() {
-    this.store.dispatch(new ClearSelectedPostID());
-    this.store.dispatch(new ClearComments());
+    this.store$.dispatch(new ClearSelectedPostID());
+    this.store$.dispatch(new ClearComments());
   }
 }
