@@ -1,5 +1,6 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import {
   AppState,
   LoadPosts,
@@ -14,7 +15,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import { USER_POST_PATH } from '../post';
+import { UserPostComponent } from '../post';
 
 export const userProfileSelector = 'app-user-profile';
 export const USER_PROFILE_PATH = 'user-profile';
@@ -30,12 +31,12 @@ export class UserProfileComponent implements OnDestroy {
   public posts$: Observable<Post[]>;
   public loading$: Observable<boolean>;
   public error$: Observable<boolean>;
+  public overlayRef: OverlayRef;
   private currentUserID: number = null;
 
   public constructor(
     private store$: Store<AppState>,
-    private router: Router,
-    private route: ActivatedRoute
+    private overlay: Overlay
   ) {
     this.listenProfileData();
   }
@@ -71,17 +72,31 @@ export class UserProfileComponent implements OnDestroy {
 
   public handlePostSelection(id: number) {
     this.setSelectedPostID(id);
-    this.navigateToPost();
+    this.openPostModal();
   }
 
   private setSelectedPostID(id: number) {
     this.store$.dispatch(new SetSelectedPostID(id));
   }
 
-  private navigateToPost() {
-    this.router.navigate([USER_POST_PATH], {
-      relativeTo: this.route.parent,
+  private openPostModal() {
+    const positionStrategy = this.overlay
+      .position()
+      .global()
+      .centerHorizontally()
+      .centerVertically();
+    this.overlayRef = this.overlay.create({
+      width: '80%',
+      hasBackdrop: true,
+      disposeOnNavigation: true,
+      backdropClass: ['post-overlay', 'cdk-overlay-dark-backdrop'],
+      positionStrategy,
     });
+    this.overlayRef.backdropClick().subscribe((_) => this.overlayRef.dispose());
+    const portal = new ComponentPortal(UserPostComponent);
+    const postComponent = this.overlayRef.attach<UserPostComponent>(portal)
+      .instance;
+    postComponent.overlayRef = this.overlayRef;
   }
 
   public ngOnDestroy() {}

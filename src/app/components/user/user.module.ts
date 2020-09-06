@@ -1,3 +1,4 @@
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { UiModule } from '@app/ui';
@@ -8,7 +9,7 @@ import { UserPostComponent } from './post';
 import { UserProfileComponent } from './profile';
 
 @NgModule({
-  imports: [CommonModule, UiModule],
+  imports: [CommonModule, OverlayModule, UiModule],
   declarations: [
     UserCardComponent,
     UserListComponent,
@@ -16,5 +17,6 @@ import { UserProfileComponent } from './profile';
     UserProfileComponent,
   ],
   exports: [UserListComponent, UserPostComponent, UserProfileComponent],
+  entryComponents: [UserPostComponent],
 })
 export class UserModule {}
