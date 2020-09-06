@@ -1,20 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockPostList, mockUserList } from '@app/mocks';
 import {
   AppState,
+  COMMENT_STATE_KEY,
+  initialCommentState,
   POST_STATE_KEY,
   PostState,
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
-import { spinnerSelector, UiModule } from '@app/ui';
+import { spinnerSelector } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { USER_POST_PATH } from '../post';
+import { userPostSelector } from '../post';
+import { UserModule } from '../user.module';
 import { UserProfileComponent } from './user-profile.component';
 
 describe('UserProfileComponent', () => {
@@ -36,16 +38,18 @@ describe('UserProfileComponent', () => {
     error: false,
     selectedPostID: null,
   };
+  const commentKey = COMMENT_STATE_KEY;
+  const commentStoreState = initialCommentState;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([]), UiModule],
-      declarations: [UserProfileComponent],
+      imports: [UserModule, RouterTestingModule.withRoutes([])],
       providers: [
         provideMockStore({
           initialState: {
             [userKey]: { ...userStoreState },
             [postKey]: { ...postStoreState },
+            [commentKey]: { ...commentStoreState },
           },
         }),
       ],
@@ -131,13 +135,12 @@ describe('UserProfileComponent', () => {
     expect(posts).toEqual(expected);
   });
 
-  it(`should navigate to user post after clicking a user's post`, () => {
-    const router: Router = TestBed.inject(Router);
-    const route: ActivatedRoute = TestBed.inject(ActivatedRoute);
-    spyOn(router, 'navigate');
+  it(`should create an overlay to display post after clicking a user's post`, () => {
     fixture.debugElement.query(By.css('.post')).nativeElement.click();
-    expect(router.navigate).toHaveBeenCalledWith([USER_POST_PATH], {
-      relativeTo: route.parent,
-    });
+    fixture.detectChanges();
+    const post = component.overlayRef.overlayElement.querySelector(
+      userPostSelector
+    );
+    expect(post).toBeTruthy();
   });
 });
