@@ -16,7 +16,6 @@ import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 export const userPostSelector = 'app-user-post';
-export const USER_POST_PATH = 'user-post';
 
 @Component({
   selector: userPostSelector,

@@ -95,8 +95,7 @@ describe('AppComponent', () => {
     fixture.ngZone.run(() => {
       const selectors = [
         { path: APP_ROUTES[0].path, selector: userListSelector },
-        { path: APP_ROUTES[1].path, selector: userPostSelector },
-        { path: APP_ROUTES[2].path, selector: userProfileSelector },
+        { path: APP_ROUTES[1].path, selector: userProfileSelector },
       ];
       const displayedLinks = fixture.debugElement
         .queryAll(By.css('a'))
