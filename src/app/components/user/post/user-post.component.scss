@@ -1,3 +1,25 @@
+:host {
+  position: relative;
+
+  width: 100%;
+  padding: 1rem;
+
+  background-color: #fff;
+
+  border-radius: 1rem;
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+}
+
 .error {
   margin-top: 1rem;
 

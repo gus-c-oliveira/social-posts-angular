@@ -1,13 +1,14 @@
-import { Component, OnDestroy } from '@angular/core';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { Component, Input, OnDestroy } from '@angular/core';
 import {
   AppState,
+  ClearComments,
+  ClearSelectedPostID,
   Comment,
   commentQuery,
   LoadComments,
   Post,
   postQuery,
-  ClearComments,
-  ClearSelectedPostID,
 } from '@app/store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -23,6 +24,8 @@ export const USER_POST_PATH = 'user-post';
   styleUrls: ['./user-post.component.scss'],
 })
 export class UserPostComponent implements OnDestroy {
+  @Input() public overlayRef: OverlayRef = null;
+
   public post$: Observable<Post>;
   public comments$: Observable<Comment[]>;
   public loading$: Observable<boolean>;
@@ -30,10 +33,10 @@ export class UserPostComponent implements OnDestroy {
   private selectedPostID: number = null;
 
   public constructor(private store$: Store<AppState>) {
-    this.listenPostData();
+    this.initializeObservables();
   }
 
-  private listenPostData() {
+  private initializeObservables() {
     this.loading$ = this.store$.pipe(
       select(commentQuery.getLoading),
       untilDestroyed(this)
@@ -60,6 +63,14 @@ export class UserPostComponent implements OnDestroy {
     }
     this.selectedPostID = postId;
     this.store$.dispatch(new LoadComments(postId));
+  }
+
+  public closePost() {
+    if (!this.overlayRef) {
+      console.warn('Error! No overlay!');
+      return;
+    }
+    this.overlayRef.dispose();
   }
 
   public ngOnDestroy() {

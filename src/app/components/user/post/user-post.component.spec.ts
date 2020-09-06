@@ -12,18 +12,33 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserPostComponent } from './user-post.component';
+import { Component, ViewChild } from '@angular/core';
+import { Overlay, OverlayRef, OverlayModule } from '@angular/cdk/overlay';
+
+@Component({
+  selector: 'app-test-host',
+  template: ` <app-user-post [overlayRef]="overlayRef"> </app-user-post> `,
+})
+export class TestHostComponent {
+  @ViewChild(UserPostComponent) public postComponent: UserPostComponent;
+  public overlayRef: OverlayRef;
+
+  public constructor(private overlay: Overlay) {
+    this.overlayRef = this.overlay.create();
+  }
+}
 
 describe('UserPostComponent', () => {
-  let component: UserPostComponent;
-  let fixture: ComponentFixture<UserPostComponent>;
+  let host: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
   const postKey = POST_STATE_KEY;
   const commentKey = COMMENT_STATE_KEY;
   let store$: MockStore<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [UiModule],
-      declarations: [UserPostComponent],
+      imports: [UiModule, OverlayModule],
+      declarations: [UserPostComponent, TestHostComponent],
       providers: [
         provideMockStore({
           initialState: {
@@ -33,14 +48,14 @@ describe('UserPostComponent', () => {
         }),
       ],
     }).compileComponents();
-    fixture = TestBed.createComponent(UserPostComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    host = fixture.componentInstance;
     store$ = TestBed.inject(Store) as MockStore<any>;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(host.postComponent).toBeTruthy();
   });
 
   it('should display the selected post', () => {
@@ -61,6 +76,17 @@ describe('UserPostComponent', () => {
       .query(By.css('.post'))
       .nativeElement.textContent.trim();
     expect(post).toEqual(selectedPost.title + selectedPost.body);
+  });
+
+  it('should display the close icon', () => {
+    const close = fixture.debugElement.query(By.css('.close')).nativeElement;
+    expect(close).toBeTruthy();
+  });
+
+  it('should close the overlay after clicking the close icon', () => {
+    spyOn(host.postComponent.overlayRef, 'dispose');
+    fixture.debugElement.query(By.css('.close')).nativeElement.click();
+    expect(host.postComponent.overlayRef.dispose).toHaveBeenCalled();
   });
 
   it(`should display the spinner while the post's comments are loading`, () => {
