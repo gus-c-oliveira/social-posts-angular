@@ -46,8 +46,36 @@ section {
   }
 }
 
-.general {
+.general,
+.company {
   background-color: var(--color-white);
+}
+
+.general {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem 1fr;
+  gap: 2rem;
+  padding: 5rem 7rem 7rem;
+
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    filter: invert(72%) sepia(69%) saturate(432%) hue-rotate(95deg) brightness(92%) contrast(87%);
+  }
+
+  &__value {
+    width: min-content;
+    padding: 0 1.5rem;
+
+    font-size: 1.6rem;
+    white-space: nowrap;
+
+    background-color: var(--color-light-shade);
+    border-radius: 1.5rem;
+  }
 }
 
 .post-container {

@@ -64,18 +64,37 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the user profile picture', () => {
-    const profilePicture = fixture.debugElement.query(
-      By.css('.banner__picture')
-    ).nativeElement;
-    expect(profilePicture.src).toContain(selectedUser.pictureURL);
+  describe('banner', () => {
+    it('should display the user profile picture', () => {
+      const profilePicture = fixture.debugElement.query(
+        By.css('.banner__picture')
+      ).nativeElement;
+      expect(profilePicture.src).toContain(selectedUser.pictureURL);
+    });
+
+    it(`should display the user's username`, () => {
+      const username = fixture.debugElement
+        .query(By.css('.banner__username'))
+        .nativeElement.textContent.trim();
+      expect(username).toEqual(selectedUser.username);
+    });
   });
 
-  it(`should display the user's username`, () => {
-    const username = fixture.debugElement
-      .query(By.css('.banner__username'))
-      .nativeElement.textContent.trim();
-    expect(username).toEqual(selectedUser.username);
+  describe('general', () => {
+    it(`should display the user's name, phone, website and email`, () => {
+      const generalSectionValues = fixture.debugElement
+        .queryAll(By.css('.general__value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be name, phone, website and email.
+      const name = generalSectionValues[0];
+      const phone = generalSectionValues[1];
+      const website = generalSectionValues[2];
+      const email = generalSectionValues[3];
+      expect(name).toEqual(selectedUser.name);
+      expect(phone).toEqual(selectedUser.phone);
+      expect(website).toEqual(selectedUser.website);
+      expect(email).toEqual(selectedUser.email);
+    });
   });
 
   it(`should display the spinner while the user's posts are loading`, () => {

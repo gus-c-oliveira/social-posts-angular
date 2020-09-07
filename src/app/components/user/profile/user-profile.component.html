@@ -1,18 +1,31 @@
 <ng-container *ngIf="user$ | async">
   <section class="banner">
     <div class="banner__picture-container">
-      <img class="banner__picture" [src]="(user$ | async).pictureURL" />
+      <img
+        class="banner__picture"
+        [src]="(user$ | async).pictureURL"
+        alt="User Picture"
+      />
     </div>
     <span class="banner__username">{{ (user$ | async).username }}</span>
   </section>
-  <div class="general">
-    <span><b>Name:</b> {{ (user$ | async).name }}</span>
-    <span><b>Email:</b> {{ (user$ | async).email }}</span>
-    <span><b>Website:</b> {{ (user$ | async).website }}</span>
-    <span><b>Phone Number:</b> {{ (user$ | async).phone }}</span>
-  </div>
 
-  <div class="address">
+  <section class="general">
+    <img class="general__icon" src="assets/img/v-card.svg" alt="Card Icon" />
+    <span class="general__value">{{ (user$ | async).name }}</span>
+    <img class="general__icon" src="assets/img/phone.svg" alt="Phone Icon" />
+    <span class="general__value">{{ (user$ | async).phone }}</span>
+    <img
+      class="general__icon"
+      src="assets/img/network.svg"
+      alt="Website Icon"
+    />
+    <span class="general__value">{{ (user$ | async).website }}</span>
+    <img class="general__icon" src="assets/img/mail.svg" alt="Email Icon" />
+    <span class="general__value">{{ (user$ | async).email }}</span>
+  </section>
+
+  <section class="address">
     <span><b>Street:</b> {{ (user$ | async).address.street }}</span>
     <span><b>Suite:</b> {{ (user$ | async).address.suite }}</span>
     <span><b>City:</b> {{ (user$ | async).address.city }}</span>
@@ -21,21 +34,24 @@
       ><b>Geo:</b> {{ (user$ | async).address.geo.lat }} |
       {{ (user$ | async).address.geo.lng }}</span
     >
-  </div>
+  </section>
 
-  <div class="company">
+  <section class="company">
     <span><b>Company Name:</b> {{ (user$ | async).company.name }}</span>
     <span><b>Catch Phrase:</b> {{ (user$ | async).company.catchPhrase }}</span>
     <span><b>BS:</b> {{ (user$ | async).company.bs }}</span>
-  </div>
+  </section>
 </ng-container>
+
 <ng-container *ngIf="loading$ | async; else loaded">
   <app-spinner></app-spinner>
 </ng-container>
+
 <ng-template #loaded>
   <ng-container *ngIf="error$ | async; else noError">
     <p class="error">Error loading posts!</p>
   </ng-container>
+
   <ng-template #noError>
     <div class="post-container" *ngIf="!!(posts$ | async).length">
       <h4>User Posts:</h4>
