@@ -1,7 +1,12 @@
 <ng-container *ngIf="user">
-  <div [class]="cssClass" (click)="selected.emit(user.id)">
-    <p><b>Username:</b> {{ user.username }}</p>
-    <p><b>Name:</b> {{ user.name }}</p>
-    <p><b>Email:</b> {{ user.email }}</p>
+  <div class="card" (click)="selected.emit(user.id)">
+    <img class="card__picture" [src]="user.pictureURL" />
+    <span class="card__username">{{ user.username }}</span>
+    <div class="card__info">
+      <span class="card__info-label">Name:</span>
+      <span class="card__info-value">{{ user.name }}</span>
+      <span class="card__info-label">Email:</span>
+      <span class="card__info-value">{{ user.email }}</span>
+    </div>
   </div>
 </ng-container>

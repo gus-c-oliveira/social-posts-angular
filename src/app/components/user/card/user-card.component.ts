@@ -8,7 +8,6 @@ import {
 import { SimpleUser } from '@app/store';
 
 export const userCardSelector = 'app-user-card';
-export const cardCssClass = 'card';
 
 @Component({
   selector: userCardSelector,
@@ -20,6 +19,4 @@ export class UserCardComponent {
   @Input() public user: SimpleUser = null;
   // Emits the user id when card is clicked.
   @Output() public selected = new EventEmitter<number>();
-
-  public cssClass = cardCssClass;
 }
