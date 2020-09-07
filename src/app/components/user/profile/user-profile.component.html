@@ -1,6 +1,11 @@
 <ng-container *ngIf="user$ | async">
+  <section class="banner">
+    <div class="banner__picture-container">
+      <img class="banner__picture" [src]="(user$ | async).pictureURL" />
+    </div>
+    <span class="banner__username">{{ (user$ | async).username }}</span>
+  </section>
   <div class="general">
-    <span><b>Username:</b> {{ (user$ | async).username }}</span>
     <span><b>Name:</b> {{ (user$ | async).name }}</span>
     <span><b>Email:</b> {{ (user$ | async).email }}</span>
     <span><b>Website:</b> {{ (user$ | async).website }}</span>

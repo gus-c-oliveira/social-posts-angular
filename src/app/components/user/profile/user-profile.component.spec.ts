@@ -64,50 +64,18 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should display the selected user's info`, () => {
-    const generalInfo = fixture.debugElement
-      .queryAll(By.css('.general span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
-      );
-    const addressInfo = fixture.debugElement
-      .queryAll(By.css('.address span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
-      );
-    const companyInfo = fixture.debugElement
-      .queryAll(By.css('.company span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
-      );
-    const expectedUserInfo = [];
-    for (const k in selectedUser) {
-      if (k === 'pictureURL') {
-        continue;
-      }
-      if (typeof selectedUser[k] === 'string') {
-        expectedUserInfo.push(selectedUser[k]);
-      } else {
-        for (const j in selectedUser[k]) {
-          if (typeof selectedUser[k][j] === 'string') {
-            expectedUserInfo.push(selectedUser[k][j]);
-          }
-        }
-      }
-    }
-    const displayedUserInfo = []
-      .concat(generalInfo)
-      .concat(addressInfo)
-      .concat(companyInfo);
-    expectedUserInfo.forEach((info) => {
-      expect(displayedUserInfo.indexOf(info)).toBeGreaterThan(-1);
-    });
+  it('should display the user profile picture', () => {
+    const profilePicture = fixture.debugElement.query(
+      By.css('.banner__picture')
+    ).nativeElement;
+    expect(profilePicture.src).toContain(selectedUser.pictureURL);
+  });
+
+  it(`should display the user's username`, () => {
+    const username = fixture.debugElement
+      .query(By.css('.banner__username'))
+      .nativeElement.textContent.trim();
+    expect(username).toEqual(selectedUser.username);
   });
 
   it(`should display the spinner while the user's posts are loading`, () => {

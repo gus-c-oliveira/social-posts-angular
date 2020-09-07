@@ -1,5 +1,53 @@
-span {
+:host {
   display: block;
+  padding: 2rem;
+
+  background-color: var(--color-light-shade);
+}
+
+section {
+  padding: 2rem;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-dark-shade));
+
+  &__picture-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 21rem;
+    height: 21rem;
+
+    background-color: var(--color-white);
+  }
+
+  &__picture {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  &__picture-container,
+  &__picture {
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  &__username {
+    display: block;
+    margin-top: 2rem;
+
+    color: var(--color-white);
+    font-size: 3rem;
+  }
+}
+
+.general {
+  background-color: var(--color-white);
 }
 
 .post-container {
