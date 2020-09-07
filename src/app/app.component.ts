@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { USER_LIST_PATH } from '@app/user';
 
 import { APP_CONSTANTS } from './app.constants';
-import { APP_ROUTES } from '@app/router';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,13 @@ import { APP_ROUTES } from '@app/router';
 })
 export class AppComponent {
   public title = APP_CONSTANTS.AppTitle;
-  public links = [
-    { path: APP_ROUTES[0].path, title: 'User List Component' },
-    { path: APP_ROUTES[1].path, title: 'User Profile Component' },
-  ];
+  public buttonText = 'User List';
+
+  public constructor(private router: Router, private route: ActivatedRoute) {}
+
+  public navigateToUserList() {
+    this.router.navigate([USER_LIST_PATH], {
+      relativeTo: this.route.parent,
+    });
+  }
 }

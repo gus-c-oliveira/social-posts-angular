@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
 import { DataRequestService } from '@app/service';
@@ -14,16 +14,12 @@ import {
   POST_STATE_KEY,
   USER_STATE_KEY,
 } from '@app/store';
-import {
-  userListSelector,
-  UserModule,
-  userPostSelector,
-  userProfileSelector,
-} from '@app/user';
+import { USER_LIST_PATH, userListSelector, UserModule } from '@app/user';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
-import { APP_CONSTANTS } from './app.constants';
+import { headerSelector } from './components/ui/header';
+import { UiModule } from './components/ui/ui.module';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -38,6 +34,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
+        UiModule,
         UserModule,
         RouterTestingModule.withRoutes(APP_ROUTES),
         HttpClientTestingModule,
@@ -73,46 +70,21 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should display the app title`, () => {
-    const title = APP_CONSTANTS.AppTitle;
-    const displayedTitle = fixture.debugElement
-      .query(By.css('h1'))
-      .nativeElement.textContent.trim();
-    expect(displayedTitle).toEqual(title);
+  it(`should display the app header`, () => {
+    const header = fixture.debugElement.query(By.css(headerSelector))
+      .nativeElement;
+    expect(header).toBeTruthy();
   });
 
-  it('should render the route links', () => {
-    const routeLinks = component.links;
-    const displayedLinks = fixture.debugElement
-      .queryAll(By.css('a'))
-      .map((item) => item.nativeElement.textContent.trim());
-    displayedLinks.forEach((link, index) => {
-      expect(link).toEqual(routeLinks[index].title);
+  it('should navigate to user list component when clicking the header button', () => {
+    router = TestBed.inject(Router);
+    const route = TestBed.inject(ActivatedRoute);
+    spyOn(router, 'navigate');
+    fixture.debugElement.query(By.css('button')).nativeElement.click();
+    expect(router.navigate).toHaveBeenCalledWith([USER_LIST_PATH], {
+      relativeTo: route.parent,
     });
   });
-
-  it('should navigate to user components using links', async(() => {
-    fixture.ngZone.run(() => {
-      const selectors = [
-        { path: APP_ROUTES[0].path, selector: userListSelector },
-        { path: APP_ROUTES[1].path, selector: userProfileSelector },
-      ];
-      const displayedLinks = fixture.debugElement
-        .queryAll(By.css('a'))
-        .map((item) => item.nativeElement);
-      displayedLinks.forEach((linkElement) => {
-        linkElement.click();
-        fixture.detectChanges();
-        const userComponentSelector = selectors.filter(
-          (item) => '/' + item.path === router.url
-        )[0].selector;
-        const userComponent = fixture.debugElement.query(
-          By.css(userComponentSelector)
-        );
-        expect(userComponent).toBeTruthy();
-      });
-    });
-  }));
 
   it('should initially display the user list component', () => {
     const userList = fixture.debugElement.query(By.css(userListSelector));
