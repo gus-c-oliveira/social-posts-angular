@@ -1,13 +1,13 @@
 import { mockUserList } from '@app/mocks';
 
 import {
+  ClearSelectedUserID,
   LoadUsers,
   LoadUsersError,
   LoadUsersSuccess,
   SetSelectedUserID,
-  ClearSelectedUserID,
 } from './user.actions';
-import { userReducer } from './user.reducer';
+import { addUserPicture, userReducer } from './user.reducer';
 import { initialUserState } from './user.state';
 
 describe('UserReducer', () => {
@@ -31,7 +31,7 @@ describe('UserReducer', () => {
       expect(newState).toEqual({
         ...initialUserState,
         loading: false,
-        users: mockUserList,
+        users: mockUserList.map(addUserPicture),
         error: false,
       });
     });

@@ -9,6 +9,7 @@ export const mapUserToSimpleUser = (user: User): SimpleUser => ({
   name: user.name,
   username: user.username,
   email: user.email,
+  pictureURL: user.pictureURL || '',
 });
 
 const getLoading = createSelector(
