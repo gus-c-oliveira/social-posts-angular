@@ -1,6 +1,10 @@
 <ng-container *ngIf="user">
   <div class="card" (click)="selected.emit(user.id)">
-    <img class="card__picture" [src]="user.pictureURL" />
+    <img
+      class="card__picture"
+      [src]="user.pictureURL"
+      alt="User Card Picture"
+    />
     <span class="card__username">{{ user.username }}</span>
     <div class="card__info">
       <span class="card__info-label">Name:</span>
