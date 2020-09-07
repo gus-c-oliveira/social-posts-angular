@@ -1,11 +1,7 @@
-<h1>{{ title }}</h1>
-
-<nav>
-  <ul>
-    <li *ngFor="let link of links">
-      <a [routerLink]="link.path" routerLinkActive="active">{{ link.title }}</a>
-    </li>
-  </ul>
-</nav>
+<app-header
+  [title]="title"
+  [buttonText]="buttonText"
+  (buttonClick)="navigateToUserList()"
+></app-header>
 
 <router-outlet></router-outlet>

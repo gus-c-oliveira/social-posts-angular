@@ -9,6 +9,7 @@ import {
   PostEffects,
   UserEffects,
 } from '@app/store';
+import { UiModule } from '@app/ui';
 import { UserModule } from '@app/user';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -29,6 +30,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
 
     // Components
+    UiModule,
     UserModule,
 
     // Store
