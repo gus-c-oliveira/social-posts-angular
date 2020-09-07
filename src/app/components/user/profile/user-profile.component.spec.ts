@@ -88,6 +88,9 @@ describe('UserProfileComponent', () => {
       );
     const expectedUserInfo = [];
     for (const k in selectedUser) {
+      if (k === 'pictureURL') {
+        continue;
+      }
       if (typeof selectedUser[k] === 'string') {
         expectedUserInfo.push(selectedUser[k]);
       } else {

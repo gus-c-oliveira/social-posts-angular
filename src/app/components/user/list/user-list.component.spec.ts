@@ -17,7 +17,7 @@ import { spinnerSelector, UiModule } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { cardCssClass, UserCardComponent, userCardSelector } from '../card';
+import { UserCardComponent, userCardSelector } from '../card';
 import { USER_PROFILE_PATH } from '../profile';
 import { UserListComponent } from './user-list.component';
 
@@ -102,9 +102,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    fixture.debugElement
-      .query(By.css('.' + cardCssClass))
-      .nativeElement.click();
+    fixture.debugElement.query(By.css('.card')).nativeElement.click();
     expect(store.dispatch).toHaveBeenCalledWith(
       new SetSelectedUserID(mockUserList[0].id)
     );
@@ -119,9 +117,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    fixture.debugElement
-      .query(By.css('.' + cardCssClass))
-      .nativeElement.click();
+    fixture.debugElement.query(By.css('.card')).nativeElement.click();
     expect(router.navigate).toHaveBeenCalledWith([USER_PROFILE_PATH], {
       relativeTo: route.parent,
     });

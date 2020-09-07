@@ -24,6 +24,7 @@ export interface User {
   phone: string;
   website: string;
   company: UserCompany;
+  pictureURL?: string;
 }
 
 export interface SimpleUser {
@@ -31,4 +32,5 @@ export interface SimpleUser {
   name: string;
   username: string;
   email: string;
+  pictureURL?: string;
 }

@@ -23,6 +23,7 @@ export const mockUserList: User[] = [
       catchPhrase: 'Multi-layered client-server neural-net',
       bs: 'harness real-time e-markets',
     },
+    pictureURL: 'assets/img/emoji-flirt.svg',
   },
   {
     id: 2,
@@ -46,5 +47,6 @@ export const mockUserList: User[] = [
       catchPhrase: 'Proactive didactic contingency',
       bs: 'synergize scalable supply-chains',
     },
+    pictureURL: 'assets/img/emoji-flirt.svg',
   },
 ];
