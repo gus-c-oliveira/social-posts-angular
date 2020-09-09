@@ -1,5 +1,5 @@
 <ng-container *ngIf="user$ | async">
-  <section class="banner">
+  <div class="banner">
     <div class="banner__picture-container">
       <img
         class="banner__picture"
@@ -8,7 +8,7 @@
       />
     </div>
     <span class="banner__username">{{ (user$ | async).username }}</span>
-  </section>
+  </div>
 
   <section class="general">
     <h2 class="section-header">About Me</h2>
@@ -29,14 +29,15 @@
   </section>
 
   <section class="address">
-    <span><b>Street:</b> {{ (user$ | async).address.street }}</span>
-    <span><b>Suite:</b> {{ (user$ | async).address.suite }}</span>
-    <span><b>City:</b> {{ (user$ | async).address.city }}</span>
-    <span><b>Zip:</b> {{ (user$ | async).address.zipcode }}</span>
-    <span
-      ><b>Geo:</b> {{ (user$ | async).address.geo.lat }} |
-      {{ (user$ | async).address.geo.lng }}</span
-    >
+    <h2 class="section-header section-header--address">Enjoying Life At</h2>
+    <span class="address__value"> {{ (user$ | async).address.street }}</span>
+    <span class="address__value"> {{ (user$ | async).address.suite }}</span>
+    <span class="address__value"> {{ (user$ | async).address.city }}</span>
+    <span class="address__value"> {{ (user$ | async).address.zipcode }}</span>
+    <span class="address__value">
+      {{ (user$ | async).address.geo.lat }} |
+      {{ (user$ | async).address.geo.lng }}
+    </span>
   </section>
 
   <section class="company">

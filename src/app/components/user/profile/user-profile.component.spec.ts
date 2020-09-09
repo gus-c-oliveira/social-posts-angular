@@ -97,6 +97,27 @@ describe('UserProfileComponent', () => {
     });
   });
 
+  describe('address', () => {
+    it(`it should display the user's address street, suite, city, zipcode and geo`, () => {
+      const addressSectionValues = fixture.debugElement
+        .queryAll(By.css('.address__value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be street, suite, city, zipcode and email.
+      const street = addressSectionValues[0];
+      const suite = addressSectionValues[1];
+      const city = addressSectionValues[2];
+      const zipcode = addressSectionValues[3];
+      const geo = addressSectionValues[4];
+      expect(street).toEqual(selectedUser.address.street);
+      expect(suite).toEqual(selectedUser.address.suite);
+      expect(city).toEqual(selectedUser.address.city);
+      expect(zipcode).toEqual(selectedUser.address.zipcode);
+      expect(geo).toEqual(
+        `${selectedUser.address.geo.lat} | ${selectedUser.address.geo.lng}`
+      );
+    });
+  });
+
   it(`should display the spinner while the user's posts are loading`, () => {
     store$.setState({
       [postKey]: { ...postStoreState, loading: true },
