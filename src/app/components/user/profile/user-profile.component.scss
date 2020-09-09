@@ -9,6 +9,14 @@ section {
   padding: 2rem;
 }
 
+.section-header {
+  margin-bottom: 2rem;
+
+  color: var(--color-primary);
+  font-size: 2.5rem;
+  text-align: center;
+}
+
 .banner {
   display: flex;
   flex-direction: column;
@@ -44,6 +52,7 @@ section {
     margin-top: 2rem;
 
     color: var(--color-white);
+    font-weight: 300;
     font-size: 3rem;
   }
 }
@@ -54,12 +63,14 @@ section {
 }
 
 .general {
-  display: grid;
-  grid-template-columns: 2rem 1fr 2rem 1fr;
-  gap: 2rem;
-  padding: 5rem 7rem 7rem;
-
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+
+  &__container {
+    display: grid;
+    grid-template-columns: 2rem 1fr 2rem 1fr;
+    gap: 2rem;
+    padding: 2rem 7rem 10rem;
+  }
 
   &__icon {
     width: 2.5rem;

@@ -11,18 +11,21 @@
   </section>
 
   <section class="general">
-    <img class="general__icon" src="assets/img/v-card.svg" alt="Card Icon" />
-    <span class="general__value">{{ (user$ | async).name }}</span>
-    <img class="general__icon" src="assets/img/phone.svg" alt="Phone Icon" />
-    <span class="general__value">{{ (user$ | async).phone }}</span>
-    <img
-      class="general__icon"
-      src="assets/img/network.svg"
-      alt="Website Icon"
-    />
-    <span class="general__value">{{ (user$ | async).website }}</span>
-    <img class="general__icon" src="assets/img/mail.svg" alt="Email Icon" />
-    <span class="general__value">{{ (user$ | async).email }}</span>
+    <h2 class="section-header">About Me</h2>
+    <div class="general__container">
+      <img class="general__icon" src="assets/img/v-card.svg" alt="Card Icon" />
+      <span class="general__value">{{ (user$ | async).name }}</span>
+      <img class="general__icon" src="assets/img/phone.svg" alt="Phone Icon" />
+      <span class="general__value">{{ (user$ | async).phone }}</span>
+      <img
+        class="general__icon"
+        src="assets/img/network.svg"
+        alt="Website Icon"
+      />
+      <span class="general__value">{{ (user$ | async).website }}</span>
+      <img class="general__icon" src="assets/img/mail.svg" alt="Email Icon" />
+      <span class="general__value">{{ (user$ | async).email }}</span>
+    </div>
   </section>
 
   <section class="address">
