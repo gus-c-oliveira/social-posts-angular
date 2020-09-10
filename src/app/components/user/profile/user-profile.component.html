@@ -41,9 +41,23 @@
   </section>
 
   <section class="company">
-    <span><b>Company Name:</b> {{ (user$ | async).company.name }}</span>
-    <span><b>Catch Phrase:</b> {{ (user$ | async).company.catchPhrase }}</span>
-    <span><b>BS:</b> {{ (user$ | async).company.bs }}</span>
+    <h2 class="section-header">Building Awesome Projects With</h2>
+    <img
+      class="company__image"
+      src="assets/img/company-illustration.jpg"
+      alt="Company Section Picture"
+    />
+    <div class="company__info-container">
+      <span class="company__info-value company__info-value--name">{{
+        (user$ | async).company.name
+      }}</span>
+      <span class="company__info-value company__info-value--catchPhrase"
+        >&ldquo;{{ (user$ | async).company.catchPhrase }}&rdquo;</span
+      >
+      <span class="company__info-value company__info-value--bs">{{
+        (user$ | async).company.bs
+      }}</span>
+    </div>
   </section>
 </ng-container>
 

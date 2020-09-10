@@ -118,6 +118,21 @@ describe('UserProfileComponent', () => {
     });
   });
 
+  describe('company', () => {
+    it(`should display the user company's name, catchphrase and bs`, () => {
+      const companySectionValues = fixture.debugElement
+        .queryAll(By.css('.company__info-value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be name, catchphrase and bs.
+      const name = companySectionValues[0];
+      const catchphrase = companySectionValues[1];
+      const bs = companySectionValues[2];
+      expect(name).toEqual(selectedUser.company.name);
+      expect(catchphrase).toEqual(`“${selectedUser.company.catchPhrase}”`);
+      expect(bs).toEqual(selectedUser.company.bs);
+    });
+  });
+
   it(`should display the spinner while the user's posts are loading`, () => {
     store$.setState({
       [postKey]: { ...postStoreState, loading: true },

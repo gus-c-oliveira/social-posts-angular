@@ -108,11 +108,11 @@ section {
 }
 
 .address {
-  top: -75px;
+  top: -7.5rem;
   z-index: $address-section-index;
 
-  height: 575px;
-  padding-top: 75px;
+  height: 57.5rem;
+  padding-top: 7.5rem;
 
   background-image: url('../../../../assets/img/address-background.jpg');
   background-repeat: no-repeat;
@@ -131,6 +131,55 @@ section {
     font-size: 1.6rem;
 
     border-radius: 1.5rem;
+  }
+}
+
+.company {
+  top: -22rem;
+
+  display: grid;
+  grid-template-areas: 'header header'
+    'image info';
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: repeat(2, 1fr);
+
+  height: 70rem;
+  padding: 15rem 10% 0;
+
+  column-gap: 3rem;
+
+  .section-header {
+    grid-area: header;
+  }
+
+  &__image {
+    grid-area: image;
+    width: 50rem;
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    grid-area: info;
+    justify-content: space-around;
+  }
+
+  &__info-value {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+
+    border-top: 1px solid var(--color-accent-1);
+    border-bottom: 1px solid var(--color-accent-1);
+  }
+
+  &__info-value--name {
+    font-size: 2rem;
+  }
+
+  &__info-value--catchPhrase,
+  &__info-value--bs {
+    font-size: 1.6rem;
   }
 }
 
