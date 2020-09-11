@@ -157,7 +157,7 @@ describe('UserProfileComponent', () => {
     const posts = fixture.debugElement
       .queryAll(By.css('.post'))
       .map((item) => item.nativeElement.textContent.trim());
-    const expected = mockPostList.map((post) => `#${post.id}: ${post.title}`);
+    const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
   });
 

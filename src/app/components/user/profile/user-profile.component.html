@@ -41,22 +41,24 @@
   </section>
 
   <section class="company">
-    <h2 class="section-header">Building Awesome Projects With</h2>
-    <img
-      class="company__image"
-      src="assets/img/company-illustration.jpg"
-      alt="Company Section Picture"
-    />
-    <div class="company__info-container">
-      <span class="company__info-value company__info-value--name">{{
-        (user$ | async).company.name
-      }}</span>
-      <span class="company__info-value company__info-value--catchPhrase"
-        >&ldquo;{{ (user$ | async).company.catchPhrase }}&rdquo;</span
-      >
-      <span class="company__info-value company__info-value--bs">{{
-        (user$ | async).company.bs
-      }}</span>
+    <div class="company__grid">
+      <h2 class="section-header">Building Awesome Projects With</h2>
+      <img
+        class="company__image"
+        src="assets/img/company-illustration.jpg"
+        alt="Company Section Picture"
+      />
+      <div class="company__info-container">
+        <span class="company__info-value company__info-value--name">{{
+          (user$ | async).company.name
+        }}</span>
+        <span class="company__info-value company__info-value--catchPhrase"
+          >&ldquo;{{ (user$ | async).company.catchPhrase }}&rdquo;</span
+        >
+        <span class="company__info-value company__info-value--bs">{{
+          (user$ | async).company.bs
+        }}</span>
+      </div>
     </div>
   </section>
 </ng-container>
@@ -71,15 +73,15 @@
   </ng-container>
 
   <ng-template #noError>
-    <div class="post-container" *ngIf="!!(posts$ | async).length">
-      <h4>User Posts:</h4>
+    <section class="post-container" *ngIf="!!(posts$ | async).length">
+      <h2 class="section-header">What I've Been Thinking About</h2>
       <span
         class="post"
         *ngFor="let post of posts$ | async"
         (click)="handlePostSelection(post.id)"
       >
-        <b>#{{ post.id }}:</b> {{ post.title }}
+        {{ post.title }}
       </span>
-    </div>
+    </section>
   </ng-template>
 </ng-template>
