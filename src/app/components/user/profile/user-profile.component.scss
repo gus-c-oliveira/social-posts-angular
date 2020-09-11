@@ -1,31 +1,258 @@
-span {
+:host {
   display: block;
+  padding: 2rem;
+
+  background-color: var(--color-light-shade);
+}
+
+section {
+  padding: 2rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+
+  color: var(--color-primary);
+  font-size: 2.5rem;
+  text-align: center;
+
+  &--address {
+    width: max-content;
+    margin: 2rem auto 6.5rem;
+    padding: 0 1.5rem;
+
+    border-radius: 1.5rem;
+  }
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-dark-shade));
+
+  &__picture-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 21rem;
+    height: 21rem;
+
+    background-color: var(--color-white);
+  }
+
+  &__picture {
+    width: 20rem;
+    height: 20rem;
+
+    object-fit: cover;
+  }
+
+  &__picture-container,
+  &__picture {
+    clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+  }
+
+  &__username {
+    display: block;
+    margin-top: 2rem;
+
+    color: var(--color-white);
+    font-weight: 300;
+    font-size: 3rem;
+  }
+}
+
+.general,
+.company {
+  background-color: var(--color-white);
+}
+
+.address,
+.company {
+  transform: skewY(-7deg);
+
+  > * {
+    transform: skewY(7deg);
+  }
+}
+
+.general {
+  padding-bottom: 25rem;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 2rem 1fr 2rem 1fr;
+    gap: 2rem;
+    width: 50%;
+    margin: 2rem auto;
+
+    // 900px
+    @media only screen and (max-width: 56.25em) {
+      width: max-content;
+    }
+
+    // 600px
+    @media only screen and (max-width: 37.5em) {
+      grid-template-columns: 2rem auto;
+    }
+  }
+
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    filter: invert(72%) sepia(69%) saturate(432%) hue-rotate(95deg) brightness(92%) contrast(87%);
+  }
+
+  &__value {
+    width: min-content;
+    padding: 0 1.5rem;
+
+    font-size: 1.6rem;
+    white-space: nowrap;
+
+    background-color: var(--color-light-shade);
+    border-radius: 1.5rem;
+  }
+}
+
+.address {
+  margin-top: -15rem;
+  padding: 7rem;
+
+  background-image: url('../../../../assets/img/address-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  > * {
+    background-color: rgba(#fff, 0.5);
+  }
+
+  &__value {
+    display: block;
+    width: max-content;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+
+    font-size: 1.6rem;
+
+    border-radius: 1.5rem;
+  }
+}
+
+.company {
+  padding: 7rem;
+
+  // 600px
+  @media only screen and (max-width: 37.5em) {
+    padding: 4rem;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-areas: 'header header'
+      'image info';
+    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: repeat(2, 1fr);
+
+    column-gap: 3rem;
+  }
+
+  .section-header {
+    grid-area: header;
+  }
+
+  &__image {
+    grid-area: image;
+    width: 50rem;
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    grid-area: info;
+    justify-content: space-around;
+  }
+
+  &__info-value {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+
+    text-align: center;
+
+    border-top: 1px solid var(--color-accent-1);
+    border-bottom: 1px solid var(--color-accent-1);
+  }
+
+  &__info-value--name {
+    font-size: 2rem;
+  }
+
+  &__info-value--catchPhrase,
+  &__info-value--bs {
+    font-size: 1.6rem;
+  }
+
+  // 900px
+  @media only screen and (max-width: 56.25em) {
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__image {
+      width: 80%;
+    }
+
+    &__image,
+    &__info-value {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .post-container {
-  margin-top: 20px;
+  padding-top: 7rem;
 }
 
 .post {
-  width: 500px;
-  margin: 10px;
-  padding: 5px;
+  display: block;
+  width: max-content;
+  min-width: 70rem;
+  margin: 1rem auto;
+  padding: 0.5rem 1.5rem;
 
-  border: 1px solid #eee;
+  font-size: 1.6rem;
+  text-align: center;
 
-  border-radius: 5px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-accent-2);
+  border-radius: 1.5rem;
 
   cursor: pointer;
 
   &:hover {
+    box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
     transform: scale(1.03);
+  }
+
+  // 900px
+  @media only screen and (max-width: 56.25em) {
+    width: auto;
+    min-width: 80%;
   }
 }
 
 .error {
   margin-top: 1rem;
 
-  color: #f00;
+  color: var(--color-warning);
   font-size: 2rem;
   text-align: center;
 }

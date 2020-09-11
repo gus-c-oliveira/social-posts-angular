@@ -38,10 +38,10 @@ export class UserProfileComponent implements OnDestroy {
     private store$: Store<AppState>,
     private overlay: Overlay
   ) {
-    this.listenProfileData();
+    this.initializeObservables();
   }
 
-  private listenProfileData() {
+  private initializeObservables() {
     this.loading$ = this.store$.pipe(
       select(postQuery.getLoading),
       untilDestroyed(this)

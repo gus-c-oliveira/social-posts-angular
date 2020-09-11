@@ -64,49 +64,72 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should display the selected user's info`, () => {
-    const generalInfo = fixture.debugElement
-      .queryAll(By.css('.general span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
+  describe('banner', () => {
+    it('should display the user profile picture', () => {
+      const profilePicture = fixture.debugElement.query(
+        By.css('.banner__picture')
+      ).nativeElement;
+      expect(profilePicture.src).toContain(selectedUser.pictureURL);
+    });
+
+    it(`should display the user's username`, () => {
+      const username = fixture.debugElement
+        .query(By.css('.banner__username'))
+        .nativeElement.textContent.trim();
+      expect(username).toEqual(selectedUser.username);
+    });
+  });
+
+  describe('general', () => {
+    it(`should display the user's name, phone, website and email`, () => {
+      const generalSectionValues = fixture.debugElement
+        .queryAll(By.css('.general__value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be name, phone, website and email.
+      const name = generalSectionValues[0];
+      const phone = generalSectionValues[1];
+      const website = generalSectionValues[2];
+      const email = generalSectionValues[3];
+      expect(name).toEqual(selectedUser.name);
+      expect(phone).toEqual(selectedUser.phone);
+      expect(website).toEqual(selectedUser.website);
+      expect(email).toEqual(selectedUser.email);
+    });
+  });
+
+  describe('address', () => {
+    it(`it should display the user's address street, suite, city, zipcode and geo`, () => {
+      const addressSectionValues = fixture.debugElement
+        .queryAll(By.css('.address__value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be street, suite, city, zipcode and email.
+      const street = addressSectionValues[0];
+      const suite = addressSectionValues[1];
+      const city = addressSectionValues[2];
+      const zipcode = addressSectionValues[3];
+      const geo = addressSectionValues[4];
+      expect(street).toEqual(selectedUser.address.street);
+      expect(suite).toEqual(selectedUser.address.suite);
+      expect(city).toEqual(selectedUser.address.city);
+      expect(zipcode).toEqual(selectedUser.address.zipcode);
+      expect(geo).toEqual(
+        `${selectedUser.address.geo.lat} | ${selectedUser.address.geo.lng}`
       );
-    const addressInfo = fixture.debugElement
-      .queryAll(By.css('.address span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
-      );
-    const companyInfo = fixture.debugElement
-      .queryAll(By.css('.company span'))
-      .reduce(
-        (acc, curr) =>
-          acc.concat(curr.nativeElement.textContent.trim().split(': ')),
-        []
-      );
-    const expectedUserInfo = [];
-    for (const k in selectedUser) {
-      if (k === 'pictureURL') {
-        continue;
-      }
-      if (typeof selectedUser[k] === 'string') {
-        expectedUserInfo.push(selectedUser[k]);
-      } else {
-        for (const j in selectedUser[k]) {
-          if (typeof selectedUser[k][j] === 'string') {
-            expectedUserInfo.push(selectedUser[k][j]);
-          }
-        }
-      }
-    }
-    const displayedUserInfo = []
-      .concat(generalInfo)
-      .concat(addressInfo)
-      .concat(companyInfo);
-    expectedUserInfo.forEach((info) => {
-      expect(displayedUserInfo.indexOf(info)).toBeGreaterThan(-1);
+    });
+  });
+
+  describe('company', () => {
+    it(`should display the user company's name, catchphrase and bs`, () => {
+      const companySectionValues = fixture.debugElement
+        .queryAll(By.css('.company__info-value'))
+        .map((item) => item.nativeElement.textContent.trim());
+      // Order should be name, catchphrase and bs.
+      const name = companySectionValues[0];
+      const catchphrase = companySectionValues[1];
+      const bs = companySectionValues[2];
+      expect(name).toEqual(selectedUser.company.name);
+      expect(catchphrase).toEqual(`“${selectedUser.company.catchPhrase}”`);
+      expect(bs).toEqual(selectedUser.company.bs);
     });
   });
 
@@ -134,7 +157,7 @@ describe('UserProfileComponent', () => {
     const posts = fixture.debugElement
       .queryAll(By.css('.post'))
       .map((item) => item.nativeElement.textContent.trim());
-    const expected = mockPostList.map((post) => `#${post.id}: ${post.title}`);
+    const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
   });
 

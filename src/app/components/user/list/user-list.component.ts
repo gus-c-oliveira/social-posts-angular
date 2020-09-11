@@ -36,7 +36,7 @@ export class UserListComponent implements OnDestroy {
     private route: ActivatedRoute
   ) {
     this.clearPreviousUserData();
-    this.listenUserStoreData();
+    this.initializeObservables();
     this.loadUserList();
   }
 
@@ -45,7 +45,7 @@ export class UserListComponent implements OnDestroy {
     this.store$.dispatch(new ClearPosts());
   }
 
-  private listenUserStoreData() {
+  private initializeObservables() {
     this.loading$ = this.store$.pipe(
       select(userQuery.getLoading),
       untilDestroyed(this)
