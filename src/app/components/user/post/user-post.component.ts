@@ -26,6 +26,7 @@ export class UserPostComponent implements OnDestroy {
   @Input() public overlayRef: OverlayRef = null;
 
   public post$: Observable<Post>;
+  public postImageURL = '';
   public comments$: Observable<Comment[]>;
   public loading$: Observable<boolean>;
   public error$: Observable<boolean>;
@@ -47,7 +48,10 @@ export class UserPostComponent implements OnDestroy {
     this.post$ = this.store$.pipe(
       select(postQuery.getSelectedPost),
       filter((post) => !!post),
-      tap((post) => this.loadComments(post.id)),
+      tap((post) => {
+        this.loadComments(post.id);
+        this.postImageURL = `https://picsum.photos/500?random=${post.id}`;
+      }),
       untilDestroyed(this)
     );
     this.comments$ = this.store$.pipe(
