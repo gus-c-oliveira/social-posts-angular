@@ -118,9 +118,7 @@ describe('UserPostComponent', () => {
       },
     });
     fixture.detectChanges();
-    const expected = mockCommentList.map(
-      (item) => `Name: ${item.name}${item.body}`
-    );
+    const expected = mockCommentList.map((item) => `${item.name}${item.body}`);
     const comments = fixture.debugElement
       .queryAll(By.css('.comment'))
       .map((item) => item.nativeElement.textContent.trim());
