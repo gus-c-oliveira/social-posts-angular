@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { APP_CONSTANTS } from 'src/app/app.constants';
 
+import { ButtonComponent, buttonSelector } from '../button';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -9,10 +10,13 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   const buttonText = 'Click me!';
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ButtonComponent, HeaderComponent],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     component.title = APP_CONSTANTS.AppTitle;
@@ -32,13 +36,14 @@ describe('HeaderComponent', () => {
   });
 
   it('should display the button', () => {
-    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    const button = fixture.debugElement.query(By.css(buttonSelector))
+      .nativeElement;
     expect(button).toBeTruthy();
   });
 
   it('should display the button text inside the button', () => {
     const text = fixture.debugElement
-      .query(By.css('button'))
+      .query(By.css(buttonSelector))
       .nativeElement.textContent.trim();
     expect(text).toEqual(buttonText);
   });
