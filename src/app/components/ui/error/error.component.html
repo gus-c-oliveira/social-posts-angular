@@ -1,0 +1,9 @@
+<div class="error">
+  <ng-content></ng-content>
+  <app-button
+    buttonText="Let me try again!"
+    class="error__button"
+    (click)="tryAgain.emit()"
+  >
+  </app-button>
+</div>
