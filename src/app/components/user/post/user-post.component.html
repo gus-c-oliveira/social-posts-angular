@@ -17,7 +17,11 @@
   </ng-container>
   <ng-template #loaded>
     <ng-container *ngIf="error$ | async; else noError">
-      <p class="error">Error loading comments!</p>
+      <app-error (tryAgain)="retryLoadingComments()">
+        <span class="error__message">
+          Error loading comments!
+        </span>
+      </app-error>
     </ng-container>
     <ng-template #noError>
       <ng-container *ngIf="((comments$ | async) || []).length">

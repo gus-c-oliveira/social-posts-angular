@@ -76,7 +76,12 @@
   }
 }
 
-.error {
+app-error {
+  position: relative;
+  top: -2rem;
+}
+
+.error__message {
   margin-top: 1rem;
 
   color: var(--color-warning);

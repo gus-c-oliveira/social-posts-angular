@@ -5,9 +5,10 @@ import {
   COMMENT_STATE_KEY,
   initialCommentState,
   initialPostState,
+  LoadComments,
   POST_STATE_KEY,
 } from '@app/store';
-import { spinnerSelector, UiModule } from '@app/ui';
+import { errorSelector, spinnerSelector, UiModule } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -34,20 +35,26 @@ describe('UserPostComponent', () => {
   const postKey = POST_STATE_KEY;
   const commentKey = COMMENT_STATE_KEY;
   let store$: MockStore<any>;
+  const initialState = {
+    [postKey]: { ...initialPostState },
+    [commentKey]: { ...initialCommentState },
+  };
+  const selectedPostID = 3;
+  const selectedPost = mockPostList.find((item) => item.id === selectedPostID);
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [UiModule, OverlayModule],
       declarations: [UserPostComponent, TestHostComponent],
       providers: [
         provideMockStore({
-          initialState: {
-            [postKey]: { ...initialPostState },
-            [commentKey]: { ...initialCommentState },
-          },
+          initialState,
         }),
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     host = fixture.componentInstance;
     store$ = TestBed.inject(Store) as MockStore<any>;
@@ -59,10 +66,6 @@ describe('UserPostComponent', () => {
   });
 
   it('should display the selected post', () => {
-    const selectedPostID = 3;
-    const selectedPost = mockPostList.find(
-      (item) => item.id === selectedPostID
-    );
     store$.setState({
       [postKey]: {
         posts: mockPostList,
@@ -100,13 +103,32 @@ describe('UserPostComponent', () => {
     expect(spinner).toBeTruthy();
   });
 
-  it('should display the error message if comments fail to load', () => {
+  it('should display the error component if comments fail to load', () => {
     store$.setState({
       [commentKey]: { ...initialCommentState, error: true },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css('.error')).nativeElement;
+    const error = fixture.debugElement.query(By.css(errorSelector))
+      .nativeElement;
     expect(error).toBeTruthy();
+  });
+
+  it('should retry loading the post comments when clicking the error button', () => {
+    spyOn(store$, 'dispatch');
+    store$.setState({
+      [postKey]: {
+        posts: mockPostList,
+        loading: false,
+        error: false,
+        selectedPostID,
+      },
+      [commentKey]: { ...initialCommentState, error: true },
+    });
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    expect(store$.dispatch).toHaveBeenCalledWith(
+      new LoadComments(selectedPost.id)
+    );
   });
 
   it('should display the selected post comments', () => {
