@@ -8,6 +8,6 @@ import { SpinnerComponent } from './spinner';
 @NgModule({
   imports: [CommonModule],
   declarations: [ButtonComponent, HeaderComponent, SpinnerComponent],
-  exports: [HeaderComponent, SpinnerComponent],
+  exports: [ButtonComponent, HeaderComponent, SpinnerComponent],
 })
 export class UiModule {}
