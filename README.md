@@ -1,3 +1,30 @@
-# social-posts-angular
+# Social Posts
 
-An app that displays user profiles and posts. Built with Angular.
+A demo app that displays user profiles and posts.
+
+# Play With It!
+
+App is [deployed and live](https://social-posts-angular-gus-c-oliveira.netlify.app/) on Netlify!
+
+# Technologies
+
+- [Angular](https://angular.io/)
+- [Jest](https://jestjs.io/)
+- [Stylelint](https://stylelint.io/)
+- [Prettier](https://prettier.io/)
+- [Husky](https://github.com/typicode/husky)
+
+# App Structure
+
+- UserListComponent retrieves and displays a list of users.
+- UserProfileComponent displays the selected user's profile information and posts.
+- UserPostComponent opens in a modal, showing the contents and comments of the selected post.
+
+# User Data and Images
+
+The app performs HTTP requests to retrieve data from [JSON Placeholder](https://jsonplaceholder.typicode.com/), a fake online REST API for testing and prototyping.
+Images are also retrieved via HTTP requests from [Lorem Picsum](https://picsum.photos/).
+
+# Latest Improvements
+
+This app is still under development. You can check the latest improvements in the [repository's pull requests](https://github.com/gus-c-oliveira/social-posts-angular/pulls?q=is%3Apr+is%3Aclosed).
