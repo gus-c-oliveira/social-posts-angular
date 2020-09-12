@@ -83,5 +83,9 @@ export class UserListComponent implements OnDestroy {
     });
   }
 
+  public retryLoadingUsers() {
+    this.store$.dispatch(new LoadUsers());
+  }
+
   public ngOnDestroy() {}
 }

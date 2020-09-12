@@ -9,11 +9,12 @@ import {
   initialCommentState,
   initialPostState,
   initialUserState,
+  LoadUsers,
   POST_STATE_KEY,
   SetSelectedUserID,
   USER_STATE_KEY,
 } from '@app/store';
-import { spinnerSelector, UiModule } from '@app/ui';
+import { errorSelector, spinnerSelector, UiModule } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -44,8 +45,8 @@ describe('UserListComponent', () => {
     [commentStateKey]: initialCommentState,
   };
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [UiModule, RouterTestingModule.withRoutes([])],
       declarations: [UserListComponent, UserCardComponent],
       providers: [
@@ -54,6 +55,9 @@ describe('UserListComponent', () => {
         }),
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
     store = TestBed.inject(Store) as MockStore<AppState>;
@@ -85,14 +89,26 @@ describe('UserListComponent', () => {
     expect(cards.length).toEqual(mockUserList.length);
   });
 
-  it('should display the error message if users fail to load', () => {
+  it('should display the error component if users fail to load', () => {
     store.setState({
       ...initialState,
       [userStateKey]: { ...storeStates.error },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css('.error')).nativeElement;
+    const error = fixture.debugElement.query(By.css(errorSelector))
+      .nativeElement;
     expect(error).toBeTruthy();
+  });
+
+  it('should retry loading the user list when clicking the error button', () => {
+    spyOn(store, 'dispatch');
+    store.setState({
+      ...initialState,
+      [userStateKey]: { ...storeStates.error },
+    });
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    expect(store.dispatch).toHaveBeenCalledWith(new LoadUsers());
   });
 
   it('should dispatch action to set selected user id after clicking on a card', () => {

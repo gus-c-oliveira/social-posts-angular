@@ -6,12 +6,13 @@ import {
   AppState,
   COMMENT_STATE_KEY,
   initialCommentState,
+  LoadPosts,
   POST_STATE_KEY,
   PostState,
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
-import { spinnerSelector } from '@app/ui';
+import { errorSelector, spinnerSelector } from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -40,20 +41,24 @@ describe('UserProfileComponent', () => {
   };
   const commentKey = COMMENT_STATE_KEY;
   const commentStoreState = initialCommentState;
+  const initialState = {
+    [userKey]: { ...userStoreState },
+    [postKey]: { ...postStoreState },
+    [commentKey]: { ...commentStoreState },
+  };
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [UserModule, RouterTestingModule.withRoutes([])],
       providers: [
         provideMockStore({
-          initialState: {
-            [userKey]: { ...userStoreState },
-            [postKey]: { ...postStoreState },
-            [commentKey]: { ...commentStoreState },
-          },
+          initialState,
         }),
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     store$ = TestBed.inject(Store) as MockStore<AppState>;
@@ -144,13 +149,27 @@ describe('UserProfileComponent', () => {
     expect(spinner).toBeTruthy();
   });
 
-  it('should display the error message if posts fail to load', () => {
+  it('should display the error component if posts fail to load', () => {
     store$.setState({
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css('.error')).nativeElement;
+    const error = fixture.debugElement.query(By.css(errorSelector))
+      .nativeElement;
     expect(error).toBeTruthy();
+  });
+
+  it('should retry loading the user posts when clicking the error button', () => {
+    spyOn(store$, 'dispatch');
+    store$.setState({
+      ...initialState,
+      [postKey]: { ...postStoreState, error: true },
+    });
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    expect(store$.dispatch).toHaveBeenCalledWith(
+      new LoadPosts(selectedUser.id)
+    );
   });
 
   it(`should display the user's posts`, () => {

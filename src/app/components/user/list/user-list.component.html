@@ -3,7 +3,9 @@
 </ng-container>
 <ng-template #loadedTemplate>
   <ng-container *ngIf="error$ | async; else cardTemplate">
-    <p class="error">Error loading users! Please try again...</p>
+    <app-error (tryAgain)="retryLoadingUsers()">
+      <span class="error__message"> Sorry!<br />Error loading users... </span>
+    </app-error>
   </ng-container>
   <ng-template #cardTemplate>
     <div class="card-container">

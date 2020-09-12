@@ -5,11 +5,11 @@
   (click)="closePost()"
 />
 <div class="content">
-  <ng-container *ngIf="post$ | async">
+  <ng-container *ngIf="post$ | async; let post">
     <div class="post">
       <img class="post__image" [src]="postImageURL" />
-      <h2 class="post__title">{{ (post$ | async).title }}</h2>
-      <p class="post__body">{{ (post$ | async).body }}</p>
+      <h2 class="post__title">{{ post.title }}</h2>
+      <p class="post__body">{{ post.body }}</p>
     </div>
   </ng-container>
   <ng-container *ngIf="loading$ | async; else loaded">
@@ -17,7 +17,11 @@
   </ng-container>
   <ng-template #loaded>
     <ng-container *ngIf="error$ | async; else noError">
-      <p class="error">Error loading comments!</p>
+      <app-error (tryAgain)="retryLoadingComments()">
+        <span class="error__message">
+          Error loading comments!
+        </span>
+      </app-error>
     </ng-container>
     <ng-template #noError>
       <ng-container *ngIf="((comments$ | async) || []).length">

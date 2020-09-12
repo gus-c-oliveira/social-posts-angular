@@ -13,7 +13,7 @@ import {
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 
 import { UserPostComponent } from '../post';
 
@@ -97,6 +97,12 @@ export class UserProfileComponent implements OnDestroy {
     const postComponent = this.overlayRef.attach<UserPostComponent>(portal)
       .instance;
     postComponent.overlayRef = this.overlayRef;
+  }
+
+  public retryLoadingPosts() {
+    this.user$
+      .pipe(take(1))
+      .subscribe((user) => this.store$.dispatch(new LoadPosts(user.id)));
   }
 
   public ngOnDestroy() {}
