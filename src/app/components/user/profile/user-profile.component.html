@@ -82,7 +82,9 @@
 
 <ng-template #loaded>
   <ng-container *ngIf="error$ | async; else noError">
-    <p class="error">Error loading posts!</p>
+    <app-error (tryAgain)="retryLoadingPosts()">
+      <span class="error__message">Error loading posts!</span>
+    </app-error>
   </ng-container>
 
   <ng-template #noError>
