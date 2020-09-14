@@ -19,8 +19,8 @@ describe('PostEffects', () => {
   let effects: PostEffects;
 
   describe('Successful Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -31,6 +31,9 @@ describe('PostEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(PostEffects);
     });
 
@@ -43,8 +46,8 @@ describe('PostEffects', () => {
   });
 
   describe('Failed Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -55,6 +58,9 @@ describe('PostEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(PostEffects);
     });
 
