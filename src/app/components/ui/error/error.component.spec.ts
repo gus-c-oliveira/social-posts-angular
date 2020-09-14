@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { getElementBySelector } from '@app/utils';
 
 import { ButtonComponent, buttonSelector } from '../button';
 import { ErrorComponent, errorSelector } from './error.component';
@@ -22,7 +22,7 @@ describe('ErrorComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [ButtonComponent, TestHostComponent, ErrorComponent],
     }).compileComponents();
   });
@@ -34,26 +34,23 @@ describe('ErrorComponent', () => {
   });
 
   it('should create', () => {
-    const errorComponent = fixture.debugElement.query(By.css(errorSelector))
-      .nativeElement;
+    const errorComponent = getElementBySelector(fixture, errorSelector);
     expect(errorComponent).toBeTruthy();
   });
 
   it('should display its content using content projection', () => {
-    const errorMessage = fixture.debugElement.query(By.css('.error__message'))
-      .nativeElement;
+    const errorMessage = getElementBySelector(fixture, '.error__message');
     expect(errorMessage).toBeTruthy();
   });
 
   it('should display the try again button', () => {
-    const tryAgainButton = fixture.debugElement.query(By.css(buttonSelector))
-      .nativeElement;
+    const tryAgainButton = getElementBySelector(fixture, buttonSelector);
     expect(tryAgainButton).toBeTruthy();
   });
 
   it('should emit an event when the try again button is clicked', () => {
     spyOn(host, 'retry');
-    fixture.debugElement.query(By.css(buttonSelector)).nativeElement.click();
+    getElementBySelector(fixture, buttonSelector).click();
     expect(host.retry).toHaveBeenCalled();
   });
 });

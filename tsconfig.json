@@ -18,7 +18,8 @@
       "@app/router": ["src/app/router/index.ts"],
       "@app/store": ["src/app/store/index.ts"],
       "@app/service": ["src/app/service/index.ts"],
-      "@app/mocks": ["src/app/mocks/index.ts"]
+      "@app/mocks": ["src/app/mocks/index.ts"],
+      "@app/utils": ["src/app/utils/index.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -1,5 +1,6 @@
+import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { mockCommentList, mockPostList } from '@app/mocks';
 import {
   COMMENT_STATE_KEY,
@@ -9,12 +10,15 @@ import {
   POST_STATE_KEY,
 } from '@app/store';
 import { errorSelector, spinnerSelector, UiModule } from '@app/ui';
+import {
+  getAllElementsTextContentBySelector,
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserPostComponent } from './user-post.component';
-import { Component, ViewChild } from '@angular/core';
-import { Overlay, OverlayRef, OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-test-host',
@@ -75,20 +79,18 @@ describe('UserPostComponent', () => {
       },
     });
     fixture.detectChanges();
-    const post = fixture.debugElement
-      .query(By.css('.post'))
-      .nativeElement.textContent.trim();
+    const post = getElementTextContentBySelector(fixture, '.post');
     expect(post).toEqual(selectedPost.title + selectedPost.body);
   });
 
   it('should display the close icon', () => {
-    const close = fixture.debugElement.query(By.css('.close')).nativeElement;
+    const close = getElementBySelector(fixture, '.close');
     expect(close).toBeTruthy();
   });
 
   it('should close the overlay after clicking the close icon', () => {
     spyOn(host.postComponent.overlayRef, 'dispose');
-    fixture.debugElement.query(By.css('.close')).nativeElement.click();
+    getElementBySelector(fixture, '.close').click();
     expect(host.postComponent.overlayRef.dispose).toHaveBeenCalled();
   });
 
@@ -97,9 +99,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, loading: true },
     });
     fixture.detectChanges();
-    const spinner = fixture.debugElement
-      .query(By.css(spinnerSelector))
-      .nativeElement.textContent.trim();
+    const spinner = getElementBySelector(fixture, spinnerSelector);
     expect(spinner).toBeTruthy();
   });
 
@@ -108,8 +108,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, error: true },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css(errorSelector))
-      .nativeElement;
+    const error = getElementBySelector(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -125,7 +124,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, error: true },
     });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    getElementBySelector(fixture, '.error__button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
       new LoadComments(selectedPost.id)
     );
@@ -141,9 +140,7 @@ describe('UserPostComponent', () => {
     });
     fixture.detectChanges();
     const expected = mockCommentList.map((item) => `${item.name}${item.body}`);
-    const comments = fixture.debugElement
-      .queryAll(By.css('.comment'))
-      .map((item) => item.nativeElement.textContent.trim());
+    const comments = getAllElementsTextContentBySelector(fixture, '.comment');
     expect(comments).toEqual(expected);
   });
 });

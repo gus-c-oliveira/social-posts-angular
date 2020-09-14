@@ -23,8 +23,8 @@ describe('CommentEffects', () => {
   let effects: CommentEffects;
 
   describe('Successful Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -35,6 +35,9 @@ describe('CommentEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(CommentEffects);
     });
 
@@ -47,8 +50,8 @@ describe('CommentEffects', () => {
   });
 
   describe('Failed Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -59,6 +62,9 @@ describe('CommentEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(CommentEffects);
     });
 

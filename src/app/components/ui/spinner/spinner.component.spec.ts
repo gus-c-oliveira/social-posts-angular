@@ -1,15 +1,19 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { getElementBySelector } from '@app/utils';
+
 import { SpinnerComponent } from './spinner.component';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 describe('SpinnerComponent', () => {
   let fixture: ComponentFixture<SpinnerComponent>;
   let component: SpinnerComponent;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [SpinnerComponent],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(SpinnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,8 +24,7 @@ describe('SpinnerComponent', () => {
   });
 
   it('should display a div with class loader', () => {
-    const loader = fixture.debugElement.query(By.css('div.loader'))
-      .nativeElement;
+    const loader = getElementBySelector(fixture, 'div.loader');
     expect(loader).toBeTruthy();
   });
 });

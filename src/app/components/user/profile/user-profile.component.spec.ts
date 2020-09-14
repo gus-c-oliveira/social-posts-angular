@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockPostList, mockUserList } from '@app/mocks';
 import {
@@ -13,6 +12,11 @@ import {
   UserState,
 } from '@app/store';
 import { errorSelector, spinnerSelector } from '@app/ui';
+import {
+  getAllElementsTextContentBySelector,
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -71,25 +75,25 @@ describe('UserProfileComponent', () => {
 
   describe('banner', () => {
     it('should display the user profile picture', () => {
-      const profilePicture = fixture.debugElement.query(
-        By.css('.banner__picture')
-      ).nativeElement;
+      const profilePicture = getElementBySelector(fixture, '.banner__picture');
       expect(profilePicture.src).toContain(selectedUser.pictureURL);
     });
 
     it(`should display the user's username`, () => {
-      const username = fixture.debugElement
-        .query(By.css('.banner__username'))
-        .nativeElement.textContent.trim();
+      const username = getElementTextContentBySelector(
+        fixture,
+        '.banner__username'
+      );
       expect(username).toEqual(selectedUser.username);
     });
   });
 
   describe('general', () => {
     it(`should display the user's name, phone, website and email`, () => {
-      const generalSectionValues = fixture.debugElement
-        .queryAll(By.css('.general__value'))
-        .map((item) => item.nativeElement.textContent.trim());
+      const generalSectionValues = getAllElementsTextContentBySelector(
+        fixture,
+        '.general__value'
+      );
       // Order should be name, phone, website and email.
       const name = generalSectionValues[0];
       const phone = generalSectionValues[1];
@@ -104,9 +108,10 @@ describe('UserProfileComponent', () => {
 
   describe('address', () => {
     it(`it should display the user's address street, suite, city, zipcode and geo`, () => {
-      const addressSectionValues = fixture.debugElement
-        .queryAll(By.css('.address__value'))
-        .map((item) => item.nativeElement.textContent.trim());
+      const addressSectionValues = getAllElementsTextContentBySelector(
+        fixture,
+        '.address__value'
+      );
       // Order should be street, suite, city, zipcode and email.
       const street = addressSectionValues[0];
       const suite = addressSectionValues[1];
@@ -125,9 +130,10 @@ describe('UserProfileComponent', () => {
 
   describe('company', () => {
     it(`should display the user company's name, catchphrase and bs`, () => {
-      const companySectionValues = fixture.debugElement
-        .queryAll(By.css('.company__info-value'))
-        .map((item) => item.nativeElement.textContent.trim());
+      const companySectionValues = getAllElementsTextContentBySelector(
+        fixture,
+        '.company__info-value'
+      );
       // Order should be name, catchphrase and bs.
       const name = companySectionValues[0];
       const catchphrase = companySectionValues[1];
@@ -143,9 +149,7 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, loading: true },
     });
     fixture.detectChanges();
-    const spinner = fixture.debugElement
-      .query(By.css(spinnerSelector))
-      .nativeElement.textContent.trim();
+    const spinner = getElementBySelector(fixture, spinnerSelector);
     expect(spinner).toBeTruthy();
   });
 
@@ -154,8 +158,7 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css(errorSelector))
-      .nativeElement;
+    const error = getElementBySelector(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -166,22 +169,20 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    getElementBySelector(fixture, '.error__button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
       new LoadPosts(selectedUser.id)
     );
   });
 
   it(`should display the user's posts`, () => {
-    const posts = fixture.debugElement
-      .queryAll(By.css('.post'))
-      .map((item) => item.nativeElement.textContent.trim());
+    const posts = getAllElementsTextContentBySelector(fixture, '.post');
     const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
   });
 
   it(`should create an overlay to display post after clicking a user's post`, () => {
-    fixture.debugElement.query(By.css('.post')).nativeElement.click();
+    getElementBySelector(fixture, '.post').click();
     fixture.detectChanges();
     const post = component.overlayRef.overlayElement.querySelector(
       userPostSelector

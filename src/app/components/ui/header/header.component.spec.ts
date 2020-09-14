@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 import { APP_CONSTANTS } from 'src/app/app.constants';
 
 import { ButtonComponent, buttonSelector } from '../button';
@@ -29,28 +32,23 @@ describe('HeaderComponent', () => {
   });
 
   it('should display the title', () => {
-    const title = fixture.debugElement
-      .query(By.css('h1'))
-      .nativeElement.textContent.trim();
+    const title = getElementTextContentBySelector(fixture, 'h1');
     expect(title).toEqual(APP_CONSTANTS.AppTitle);
   });
 
   it('should display the button', () => {
-    const button = fixture.debugElement.query(By.css(buttonSelector))
-      .nativeElement;
+    const button = getElementBySelector(fixture, buttonSelector);
     expect(button).toBeTruthy();
   });
 
   it('should display the button text inside the button', () => {
-    const text = fixture.debugElement
-      .query(By.css(buttonSelector))
-      .nativeElement.textContent.trim();
+    const text = getElementTextContentBySelector(fixture, buttonSelector);
     expect(text).toEqual(buttonText);
   });
 
   it('should emit an event when the button is clicked', () => {
     spyOn(component.buttonClick, 'emit');
-    fixture.debugElement.query(By.css('button')).nativeElement.click();
+    getElementBySelector(fixture, 'button').click();
     expect(component.buttonClick.emit).toHaveBeenCalled();
   });
 });

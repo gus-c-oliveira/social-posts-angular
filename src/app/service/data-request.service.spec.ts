@@ -12,11 +12,14 @@ describe('DataRequestService', () => {
   let service: DataRequestService;
   let http: HttpTestingController;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [DataRequestService],
     });
+  });
+
+  beforeEach(() => {
     service = TestBed.inject(DataRequestService);
     http = TestBed.inject(HttpTestingController);
   });

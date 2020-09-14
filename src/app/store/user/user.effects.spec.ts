@@ -19,8 +19,8 @@ describe('UserEffects', () => {
   let effects: UserEffects;
 
   describe('Successful Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -31,6 +31,9 @@ describe('UserEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(UserEffects);
     });
 
@@ -43,8 +46,8 @@ describe('UserEffects', () => {
   });
 
   describe('Failed Requests', () => {
-    beforeEach(() => {
-      TestBed.configureTestingModule({
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
@@ -55,6 +58,9 @@ describe('UserEffects', () => {
           provideMockActions(() => actions),
         ],
       });
+    });
+
+    beforeEach(() => {
       effects = TestBed.inject(UserEffects);
     });
 
