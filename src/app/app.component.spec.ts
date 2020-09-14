@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
@@ -15,6 +14,7 @@ import {
   USER_STATE_KEY,
 } from '@app/store';
 import { USER_LIST_PATH, userListSelector, UserModule } from '@app/user';
+import { getElementBySelector } from '@app/utils';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
@@ -29,9 +29,14 @@ describe('AppComponent', () => {
   const userKey = USER_STATE_KEY;
   const postKey = POST_STATE_KEY;
   const commentKey = COMMENT_STATE_KEY;
+  const initialState = {
+    userKey: { ...initialUserState },
+    postKey: { ...initialPostState },
+    commentKey: { ...initialCommentState },
+  };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
         UiModule,
@@ -42,20 +47,13 @@ describe('AppComponent', () => {
       providers: [
         DataRequestService,
         provideMockStore({
-          initialState: {
-            [userKey]: {
-              ...initialUserState,
-            },
-            [postKey]: {
-              ...initialPostState,
-            },
-            [commentKey]: {
-              ...initialCommentState,
-            },
-          },
+          initialState,
         }),
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
@@ -64,15 +62,14 @@ describe('AppComponent', () => {
       router.initialNavigation();
     });
     fixture.detectChanges();
-  }));
+  });
 
   it('should create the app', () => {
     expect(component).toBeTruthy();
   });
 
   it(`should display the app header`, () => {
-    const header = fixture.debugElement.query(By.css(headerSelector))
-      .nativeElement;
+    const header = getElementBySelector(fixture, headerSelector);
     expect(header).toBeTruthy();
   });
 
@@ -80,14 +77,14 @@ describe('AppComponent', () => {
     router = TestBed.inject(Router);
     const route = TestBed.inject(ActivatedRoute);
     spyOn(router, 'navigate');
-    fixture.debugElement.query(By.css('button')).nativeElement.click();
+    getElementBySelector(fixture, 'button').click();
     expect(router.navigate).toHaveBeenCalledWith([USER_LIST_PATH], {
       relativeTo: route.parent,
     });
   });
 
   it('should initially display the user list component', () => {
-    const userList = fixture.debugElement.query(By.css(userListSelector));
+    const userList = getElementBySelector(fixture, userListSelector);
     expect(userList).toBeTruthy();
   });
 });
