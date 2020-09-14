@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 
 import { ButtonComponent } from './button.component';
 
@@ -26,14 +29,12 @@ describe('ButtonComponent', () => {
   });
 
   it('should display a button', () => {
-    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    const button = getElementBySelector(fixture, 'button');
     expect(button).toBeTruthy();
   });
 
   it('should display the button text inside the button', () => {
-    const displayedText = fixture.debugElement
-      .query(By.css('button'))
-      .nativeElement.textContent.trim();
+    const displayedText = getElementTextContentBySelector(fixture, 'button');
     expect(displayedText).toEqual(buttonText);
   });
 });
