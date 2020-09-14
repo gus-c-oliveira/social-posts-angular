@@ -15,6 +15,11 @@ import {
   USER_STATE_KEY,
 } from '@app/store';
 import { errorSelector, spinnerSelector, UiModule } from '@app/ui';
+import {
+  getAllElementsBySelector,
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
@@ -73,9 +78,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.loading },
     });
     fixture.detectChanges();
-    const spinner = fixture.debugElement
-      .query(By.css(spinnerSelector))
-      .nativeElement.textContent.trim();
+    const spinner = getElementTextContentBySelector(fixture, spinnerSelector);
     expect(spinner).toBeTruthy();
   });
 
@@ -85,7 +88,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    const cards = fixture.debugElement.queryAll(By.css(userCardSelector));
+    const cards = getAllElementsBySelector(fixture, userCardSelector);
     expect(cards.length).toEqual(mockUserList.length);
   });
 
@@ -95,8 +98,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.error },
     });
     fixture.detectChanges();
-    const error = fixture.debugElement.query(By.css(errorSelector))
-      .nativeElement;
+    const error = getElementBySelector(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -107,7 +109,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.error },
     });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.error__button')).nativeElement.click();
+    getElementBySelector(fixture, '.error__button').click();
     expect(store.dispatch).toHaveBeenCalledWith(new LoadUsers());
   });
 
@@ -118,7 +120,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.card')).nativeElement.click();
+    getElementBySelector(fixture, '.card').click();
     expect(store.dispatch).toHaveBeenCalledWith(
       new SetSelectedUserID(mockUserList[0].id)
     );
@@ -133,7 +135,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    fixture.debugElement.query(By.css('.card')).nativeElement.click();
+    getElementBySelector(fixture, '.card').click();
     expect(router.navigate).toHaveBeenCalledWith([USER_PROFILE_PATH], {
       relativeTo: route.parent,
     });
