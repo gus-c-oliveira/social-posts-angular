@@ -3,6 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { mockUserList } from '@app/mocks';
 import { mapUserToSimpleUser, SimpleUser } from '@app/store';
+import {
+  getAllElementsTextContentBySelector,
+  getElementBySelector,
+  getElementTextContentBySelector,
+} from '@app/utils';
 
 import { UserCardComponent, userCardSelector } from './user-card.component';
 
@@ -30,40 +35,43 @@ describe('UserCardComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let component: TestHostComponent;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [TestHostComponent, UserCardComponent],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    const card = fixture.debugElement.query(By.css(userCardSelector))
-      .nativeElement;
+    const card = getElementBySelector(fixture, userCardSelector);
     expect(card).toBeTruthy();
   });
 
   it('should display the user picture', () => {
-    const picture = fixture.debugElement.query(By.css('.card__picture'))
-      .nativeElement;
+    const picture = getElementBySelector(fixture, '.card__picture');
     expect(picture.src).toContain(mockSimpleUser.pictureURL);
   });
 
   it(`should display the user's username`, () => {
-    const username = fixture.debugElement
-      .query(By.css('.card__username'))
-      .nativeElement.textContent.trim();
+    const username = getElementTextContentBySelector(
+      fixture,
+      '.card__username'
+    );
     expect(username).toEqual(mockSimpleUser.username);
   });
 
   it(`should display the user's name and email`, () => {
     let name = '';
     let email = '';
-    const nameAndEmail = fixture.debugElement
-      .queryAll(By.css('.card__info-value'))
-      .map((item) => item.nativeElement.textContent.trim());
+    const nameAndEmail = getAllElementsTextContentBySelector(
+      fixture,
+      '.card__info-value'
+    );
     // Name should be the first value, Email should be the second value.
     name = nameAndEmail[0];
     email = nameAndEmail[1];
@@ -72,8 +80,7 @@ describe('UserCardComponent', () => {
   });
 
   it('should emit the id of the user to the parent component when clicked', () => {
-    const card = fixture.debugElement.query(By.css('.card')).nativeElement;
-    card.click();
+    getElementBySelector(fixture, '.card').click();
     expect(component.selected).toEqual(mockSimpleUser.id);
   });
 });
