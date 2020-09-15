@@ -83,6 +83,14 @@ describe('AppComponent', () => {
     });
   });
 
+  it('should scroll to top when NavigationEnd events occur', () => {
+    router = TestBed.inject(Router);
+    const route = TestBed.inject(ActivatedRoute);
+    spyOn(window, 'scrollTo');
+    getElementBySelector(fixture, 'button').click();
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+  });
+
   it('should initially display the user list component', () => {
     const userList = getElementBySelector(fixture, userListSelector);
     expect(userList).toBeTruthy();
