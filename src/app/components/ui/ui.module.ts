@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent } from './button';
 import { ErrorComponent } from './error';
@@ -7,7 +8,7 @@ import { HeaderComponent } from './header';
 import { SpinnerComponent } from './spinner';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   declarations: [
     ButtonComponent,
     ErrorComponent,
