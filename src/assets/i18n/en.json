@@ -8,5 +8,43 @@
   },
   "SPINNER": {
     "LOADING": "Loading..."
+  },
+  "USER_CARD": {
+    "IMAGE_ALT": "User Card Picture",
+    "LABELS": {
+      "NAME": "Name:",
+      "EMAIL": "Email:"
+    }
+  },
+  "USER_LIST": {
+    "LOAD_ERROR": "Sorry! Error loading users..."
+  },
+  "USER_PROFILE": {
+    "LOAD_ERROR": "Sorry! Error loading posts...",
+    "BANNER": {
+      "PICTURE_ALT": "User Picture"
+    },
+    "GENERAL": {
+      "TITLE": "About Me",
+      "CARD_ALT": "Card Icon",
+      "PHONE_ALT": "Phone Icon",
+      "WEBSITE_ALT": "Website Icon",
+      "EMAIL_ALT": "Email Icon"
+    },
+    "ADDRESS": {
+      "TITLE": "Enjoying Life At"
+    },
+    "COMPANY": {
+      "TITLE": "Building Awesome Projects With",
+      "PICTURE_ALT": "Company Section Picture"
+    },
+    "POSTS": {
+      "TITLE": "What I've Been Thinking About"
+    }
+  },
+  "USER_POST": {
+    "LOAD_ERROR": "Sorry! Error loading comments...",
+    "CLOSE_ALT": "Close",
+    "POST_IMAGE_ALT": "Post Image"
   }
 }

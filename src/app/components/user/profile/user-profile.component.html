@@ -1,7 +1,11 @@
 <ng-container *ngIf="user$ | async; let user">
   <div class="banner">
     <div class="banner__picture-container">
-      <img class="banner__picture" [src]="user.pictureURL" alt="User Picture" />
+      <img
+        class="banner__picture"
+        [src]="user.pictureURL"
+        [alt]="'USER_PROFILE.BANNER.PICTURE_ALT' | translate"
+      />
     </div>
     <span class="banner__username">
       {{ user.username }}
@@ -9,25 +13,39 @@
   </div>
 
   <section class="general">
-    <h2 class="section-header">About Me</h2>
+    <h2 class="section-header">
+      {{ 'USER_PROFILE.GENERAL.TITLE' | translate }}
+    </h2>
     <div class="general__container">
-      <img class="general__icon" src="assets/img/v-card.svg" alt="Card Icon" />
+      <img
+        class="general__icon"
+        src="assets/img/v-card.svg"
+        [alt]="'USER_PROFILE.GENERAL.CARD_ALT' | translate"
+      />
       <span class="general__value">
         {{ user.name }}
       </span>
-      <img class="general__icon" src="assets/img/phone.svg" alt="Phone Icon" />
+      <img
+        class="general__icon"
+        src="assets/img/phone.svg"
+        [alt]="'USER_PROFILE.GENERAL.PHONE_ALT' | translate"
+      />
       <span class="general__value">
         {{ user.phone }}
       </span>
       <img
         class="general__icon"
         src="assets/img/network.svg"
-        alt="Website Icon"
+        [alt]="'USER_PROFILE.GENERAL.WEBSITE_ALT' | translate"
       />
       <span class="general__value">
         {{ user.website }}
       </span>
-      <img class="general__icon" src="assets/img/mail.svg" alt="Email Icon" />
+      <img
+        class="general__icon"
+        src="assets/img/mail.svg"
+        [alt]="'USER_PROFILE.GENERAL.EMAIL_ALT' | translate"
+      />
       <span class="general__value">
         {{ user.email }}
       </span>
@@ -35,7 +53,9 @@
   </section>
 
   <section class="address">
-    <h2 class="section-header section-header--address">Enjoying Life At</h2>
+    <h2 class="section-header section-header--address">
+      {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
+    </h2>
     <span class="address__value">
       {{ user.address.street }}
     </span>
@@ -55,11 +75,13 @@
 
   <section class="company">
     <div class="company__container">
-      <h2 class="section-header">Building Awesome Projects With</h2>
+      <h2 class="section-header">
+        {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
+      </h2>
       <img
         class="company__image"
         src="assets/img/company-illustration.jpg"
-        alt="Company Section Picture"
+        [alt]="'USER_PROFILE.COMPANY.PICTURE_ALT' | translate"
       />
       <div class="company__info-container">
         <span class="company__info-value company__info-value--name">
@@ -83,13 +105,17 @@
 <ng-template #loaded>
   <ng-container *ngIf="error$ | async; else noError">
     <app-error (tryAgain)="retryLoadingPosts()">
-      <span class="error__message">Error loading posts!</span>
+      <span class="error__message">
+        {{ 'USER_PROFILE.LOAD_ERROR' | translate }}
+      </span>
     </app-error>
   </ng-container>
 
   <ng-template #noError>
     <section class="post-container" *ngIf="!!(posts$ | async).length">
-      <h2 class="section-header">What I've Been Thinking About</h2>
+      <h2 class="section-header">
+        {{ 'USER_PROFILE.POSTS.TITLE' | translate }}
+      </h2>
       <span
         class="post"
         *ngFor="let post of posts$ | async"

@@ -1,13 +1,17 @@
 <img
   class="close"
   src="assets/img/close.svg"
-  alt="close"
+  [alt]="'USER_POST.CLOSE_ALT' | translate"
   (click)="closePost()"
 />
 <div class="content">
   <ng-container *ngIf="post$ | async; let post">
     <div class="post">
-      <img class="post__image" [src]="postImageURL" />
+      <img
+        class="post__image"
+        [src]="postImageURL"
+        [alt]="'USER_POST.POST_IMAGE_ALT' | translate"
+      />
       <h2 class="post__title">{{ post.title }}</h2>
       <p class="post__body">{{ post.body }}</p>
     </div>
@@ -19,7 +23,7 @@
     <ng-container *ngIf="error$ | async; else noError">
       <app-error (tryAgain)="retryLoadingComments()">
         <span class="error__message">
-          Error loading comments!
+          {{ 'USER_POST.LOAD_ERROR' | translate }}
         </span>
       </app-error>
     </ng-container>

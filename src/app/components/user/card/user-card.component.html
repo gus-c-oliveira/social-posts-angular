@@ -3,13 +3,17 @@
     <img
       class="card__picture"
       [src]="user.pictureURL"
-      alt="User Card Picture"
+      [alt]="'USER_CARD.IMAGE_ALT' | translate"
     />
     <span class="card__username">{{ user.username }}</span>
     <div class="card__info">
-      <span class="card__info-label">Name:</span>
+      <span class="card__info-label">
+        {{ 'USER_CARD.LABELS.NAME' | translate }}
+      </span>
       <span class="card__info-value">{{ user.name }}</span>
-      <span class="card__info-label">Email:</span>
+      <span class="card__info-label">
+        {{ 'USER_CARD.LABELS.EMAIL' | translate }}
+      </span>
       <span class="card__info-value">{{ user.email }}</span>
     </div>
   </div>
