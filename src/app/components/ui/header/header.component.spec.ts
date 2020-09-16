@@ -3,7 +3,7 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
 } from '@app/utils';
-import { APP_CONSTANTS } from 'src/app/app.constants';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent, buttonSelector } from '../button';
 import { HeaderComponent } from './header.component';
@@ -15,6 +15,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       declarations: [ButtonComponent, HeaderComponent],
     }).compileComponents();
   });
@@ -22,7 +23,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    component.title = APP_CONSTANTS.AppTitle;
+    component.title = 'TITLE';
     component.buttonText = buttonText;
     fixture.detectChanges();
   });
@@ -33,7 +34,7 @@ describe('HeaderComponent', () => {
 
   it('should display the title', () => {
     const title = getElementTextContentBySelector(fixture, 'h1');
-    expect(title).toEqual(APP_CONSTANTS.AppTitle);
+    expect(title).toEqual('TITLE');
   });
 
   it('should display the button', () => {

@@ -3,6 +3,7 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
 } from '@app/utils';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent } from './button.component';
 
@@ -13,6 +14,7 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       declarations: [ButtonComponent],
     }).compileComponents();
   });
