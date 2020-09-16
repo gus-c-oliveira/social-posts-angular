@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { USER_LIST_PATH } from '@app/user';
+import { TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { filter } from 'rxjs/operators';
 
@@ -15,8 +16,18 @@ export class AppComponent implements OnDestroy {
   public title = APP_CONSTANTS.AppTitle;
   public buttonText = 'User List';
 
-  public constructor(private router: Router, private route: ActivatedRoute) {
+  public constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private translateService: TranslateService
+  ) {
+    this.setupTranslations();
     this.setupScrollToTopOnNavigation();
+  }
+
+  private setupTranslations() {
+    this.translateService.addLangs(['en']);
+    this.translateService.setDefaultLang('en');
   }
 
   private setupScrollToTopOnNavigation() {

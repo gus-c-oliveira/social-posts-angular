@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_ROUTES } from '@app/router';
@@ -16,8 +17,14 @@ import {
 import { USER_LIST_PATH, userListSelector, UserModule } from '@app/user';
 import { getElementBySelector } from '@app/utils';
 import { provideMockStore } from '@ngrx/store/testing';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
+import { HttpLoaderFactory } from './app.module';
 import { headerSelector } from './components/ui/header';
 import { UiModule } from './components/ui/ui.module';
 
@@ -43,12 +50,20 @@ describe('AppComponent', () => {
         UserModule,
         RouterTestingModule.withRoutes(APP_ROUTES),
         HttpClientTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient],
+          },
+        }),
       ],
       providers: [
         DataRequestService,
         provideMockStore({
           initialState,
         }),
+        TranslateService,
       ],
     }).compileComponents();
   });
@@ -66,6 +81,12 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should setup translations', () => {
+    const translate = TestBed.inject(TranslateService);
+    expect(translate.getLangs()).toEqual(['en']);
+    expect(translate.getDefaultLang()).toEqual('en');
   });
 
   it(`should display the app header`, () => {
