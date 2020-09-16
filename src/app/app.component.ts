@@ -5,16 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { filter } from 'rxjs/operators';
 
-import { APP_CONSTANTS } from './app.constants';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
-  public title = APP_CONSTANTS.AppTitle;
-  public buttonText = 'User List';
+  public title = 'HEADER.APP_TITLE';
+  public buttonText = 'HEADER.BUTTON';
 
   public constructor(
     private router: Router,
