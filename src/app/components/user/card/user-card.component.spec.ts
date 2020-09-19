@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { mockUserList } from '@app/mocks';
 import { mapUserToSimpleUser, SimpleUser } from '@app/store';
 import {
@@ -8,6 +7,7 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
 } from '@app/utils';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { UserCardComponent, userCardSelector } from './user-card.component';
 
@@ -37,6 +37,7 @@ describe('UserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       declarations: [TestHostComponent, UserCardComponent],
     }).compileComponents();
   });

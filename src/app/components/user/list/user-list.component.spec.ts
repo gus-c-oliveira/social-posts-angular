@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockUserList } from '@app/mocks';
@@ -22,6 +21,7 @@ import {
 } from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { UserCardComponent, userCardSelector } from '../card';
 import { USER_PROFILE_PATH } from '../profile';
@@ -52,7 +52,11 @@ describe('UserListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UiModule, RouterTestingModule.withRoutes([])],
+      imports: [
+        UiModule,
+        RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
+      ],
       declarations: [UserListComponent, UserCardComponent],
       providers: [
         provideMockStore({
