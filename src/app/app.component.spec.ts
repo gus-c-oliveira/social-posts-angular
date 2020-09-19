@@ -85,8 +85,8 @@ describe('AppComponent', () => {
 
   it('should setup translations', () => {
     const translate = TestBed.inject(TranslateService);
-    expect(translate.getLangs()).toEqual(['en']);
-    expect(translate.getDefaultLang()).toEqual('en');
+    expect(translate.getLangs()).toEqual(['en-US', 'pt-BR']);
+    expect(translate.getDefaultLang()).toEqual(navigator.language);
   });
 
   it(`should display the app header`, () => {

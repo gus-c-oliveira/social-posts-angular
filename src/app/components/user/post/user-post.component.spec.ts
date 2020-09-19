@@ -17,6 +17,7 @@ import {
 } from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { UserPostComponent } from './user-post.component';
 
@@ -48,7 +49,7 @@ describe('UserPostComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [UiModule, OverlayModule],
+      imports: [UiModule, OverlayModule, TranslateModule.forRoot()],
       declarations: [UserPostComponent, TestHostComponent],
       providers: [
         provideMockStore({

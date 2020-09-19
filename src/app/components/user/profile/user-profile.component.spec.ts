@@ -19,6 +19,7 @@ import {
 } from '@app/utils';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { userPostSelector } from '../post';
 import { UserModule } from '../user.module';
@@ -53,7 +54,11 @@ describe('UserProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserModule, RouterTestingModule.withRoutes([])],
+      imports: [
+        UserModule,
+        RouterTestingModule.withRoutes([]),
+        TranslateModule.forRoot(),
+      ],
       providers: [
         provideMockStore({
           initialState,
