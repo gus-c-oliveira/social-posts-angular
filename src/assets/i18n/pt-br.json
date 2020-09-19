@@ -1,0 +1,50 @@
+{
+  "HEADER": {
+    "APP_TITLE": "Rede Social",
+    "BUTTON": "Lista de Usuários"
+  },
+  "ERROR": {
+    "BUTTON": "Quero tentar de novo!"
+  },
+  "SPINNER": {
+    "LOADING": "Carregando..."
+  },
+  "USER_CARD": {
+    "IMAGE_ALT": "Foto do Usuário",
+    "LABELS": {
+      "NAME": "Nome:",
+      "EMAIL": "Email:"
+    }
+  },
+  "USER_LIST": {
+    "LOAD_ERROR": "Desculpe! Erro ao carregar usuários..."
+  },
+  "USER_PROFILE": {
+    "LOAD_ERROR": "Desculpe! Erro ao carregar publicações...",
+    "BANNER": {
+      "PICTURE_ALT": "Foto do Usuário"
+    },
+    "GENERAL": {
+      "TITLE": "Sobre Mim",
+      "CARD_ALT": "Ícone de Cartão",
+      "PHONE_ALT": "Ícone de Telefone",
+      "WEBSITE_ALT": "Ícone de Website",
+      "EMAIL_ALT": "Ícone de Email"
+    },
+    "ADDRESS": {
+      "TITLE": "Aproveitando A Vida Em"
+    },
+    "COMPANY": {
+      "TITLE": "Construindo Projetos Maravilhosos Com",
+      "PICTURE_ALT": "Foto da Área de Empresa"
+    },
+    "POSTS": {
+      "TITLE": "No Que Estive Pensando"
+    }
+  },
+  "USER_POST": {
+    "LOAD_ERROR": "Desculpe! Erro ao carregar comentários...",
+    "CLOSE_ALT": "Fechar",
+    "POST_IMAGE_ALT": "Imagem da Publicação"
+  }
+}
