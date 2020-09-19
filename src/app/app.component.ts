@@ -19,13 +19,22 @@ export class AppComponent implements OnDestroy {
     private route: ActivatedRoute,
     private translateService: TranslateService
   ) {
-    this.setupTranslations();
+    this.addTranslations();
+    this.setupDefaultLanguage();
     this.setupScrollToTopOnNavigation();
   }
 
-  private setupTranslations() {
-    this.translateService.addLangs(['en']);
-    this.translateService.setDefaultLang('en');
+  private addTranslations() {
+    this.translateService.addLangs(['en-US', 'pt-BR']);
+  }
+
+  private setupDefaultLanguage() {
+    const browserLanguage = navigator.language;
+    if (this.translateService.langs.indexOf(browserLanguage) !== -1) {
+      this.translateService.setDefaultLang(browserLanguage);
+    } else {
+      this.translateService.setDefaultLang('en-US');
+    }
   }
 
   private setupScrollToTopOnNavigation() {
