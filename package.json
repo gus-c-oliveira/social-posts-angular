@@ -73,7 +73,7 @@
       "<rootDir>/src/setup-jest.ts"
     ],
     "moduleNameMapper": {
-      "@app/utils": "<rootDir>/src/app/utils/index.ts",
+      "@app/testing": "<rootDir>/src/app/testing/index.ts",
       "@app/store": "<rootDir>/src/app/store/index.ts",
       "@app/service": "<rootDir>/src/app/service/index.ts",
       "@app/ui": "<rootDir>/src/app/components/ui/index.ts",

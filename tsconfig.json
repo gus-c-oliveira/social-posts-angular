@@ -19,7 +19,7 @@
       "@app/store": ["src/app/store/index.ts"],
       "@app/service": ["src/app/service/index.ts"],
       "@app/mocks": ["src/app/mocks/index.ts"],
-      "@app/utils": ["src/app/utils/index.ts"]
+      "@app/testing": ["src/app/testing/index.ts"]
     }
   },
   "angularCompilerOptions": {

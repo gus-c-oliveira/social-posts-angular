@@ -15,7 +15,7 @@ import {
   USER_STATE_KEY,
 } from '@app/store';
 import { USER_LIST_PATH, userListSelector, UserModule } from '@app/user';
-import { getElementBySelector } from '@app/utils';
+import { getElementBySelector } from '@app/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import {
   TranslateLoader,

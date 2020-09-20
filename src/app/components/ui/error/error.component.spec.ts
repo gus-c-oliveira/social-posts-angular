@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector } from '@app/utils';
+import { getElementBySelector } from '@app/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent, buttonSelector } from '../button';

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   getElementBySelector,
   getElementTextContentBySelector,
-} from '@app/utils';
+} from '@app/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent, buttonSelector } from '../button';

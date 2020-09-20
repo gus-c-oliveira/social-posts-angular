@@ -6,7 +6,7 @@ import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-} from '@app/utils';
+} from '@app/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { UserCardComponent, userCardSelector } from './user-card.component';
