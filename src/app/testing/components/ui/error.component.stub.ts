@@ -6,6 +6,6 @@ export const errorSelector = 'app-error';
   selector: errorSelector,
   template: 'Error Stub',
 })
-export class ErrorComponent {
+export class ErrorStubComponent {
   @Output() public tryAgain = new EventEmitter<void>();
 }

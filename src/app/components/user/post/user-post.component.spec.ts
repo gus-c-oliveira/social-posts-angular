@@ -13,7 +13,7 @@ import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-  SpinnerComponent,
+  SpinnerStubComponent,
   TranslatePipeStub,
 } from '@app/testing';
 import {
@@ -59,7 +59,7 @@ describe('UserPostComponent', () => {
       declarations: [
         ErrorComponent,
         ButtonComponent,
-        SpinnerComponent,
+        SpinnerStubComponent,
         UserPostComponent,
         TestHostComponent,
         TranslatePipeStub,

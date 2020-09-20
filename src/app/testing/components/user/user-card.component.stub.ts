@@ -6,7 +6,7 @@ export const userCardSelector = 'app-user-card';
   selector: userCardSelector,
   template: 'User Card Stub',
 })
-export class UserCardComponent {
+export class UserCardStubComponent {
   @Input() public user: any = null;
   @Output() public selected = new EventEmitter<number>();
 }

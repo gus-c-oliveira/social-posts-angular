@@ -6,4 +6,4 @@ export const spinnerSelector = 'app-spinner';
   selector: spinnerSelector,
   template: 'Spinner Stub',
 })
-export class SpinnerComponent {}
+export class SpinnerStubComponent {}

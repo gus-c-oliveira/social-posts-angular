@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  ButtonComponent,
+  ButtonStubComponent,
   buttonSelector,
   getElementBySelector,
   getElementTextContentBySelector,
@@ -16,7 +16,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonComponent, HeaderComponent, TranslatePipeStub],
+      declarations: [ButtonStubComponent, HeaderComponent, TranslatePipeStub],
     }).compileComponents();
   });
 

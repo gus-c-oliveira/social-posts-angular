@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  ButtonComponent,
+  ButtonStubComponent,
   buttonSelector,
   getElementBySelector,
   TranslatePipeStub,
@@ -28,7 +28,7 @@ describe('ErrorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
+        ButtonStubComponent,
         TestHostComponent,
         ErrorComponent,
         TranslatePipeStub,

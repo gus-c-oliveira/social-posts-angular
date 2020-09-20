@@ -13,7 +13,7 @@ import {
   getAllElementsBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-  SpinnerComponent,
+  SpinnerStubComponent,
   TranslatePipeStub,
 } from '@app/testing';
 import {
@@ -49,7 +49,7 @@ describe('UserListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       declarations: [
-        SpinnerComponent,
+        SpinnerStubComponent,
         ButtonComponent,
         ErrorComponent,
         UserListComponent,

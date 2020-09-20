@@ -6,7 +6,7 @@ export const userPostSelector = 'app-user-post';
   selector: userPostSelector,
   template: 'User Post Stub',
 })
-export class UserPostComponent implements OnDestroy {
+export class UserPostStubComponent implements OnDestroy {
   @Input() public overlayRef: any = null;
 
   public post$: any;

@@ -6,7 +6,7 @@ export const userProfileSelector = 'app-user-profile';
   selector: userProfileSelector,
   template: 'User Profile Stub',
 })
-export class UserProfileComponent implements OnDestroy {
+export class UserProfileStubComponent implements OnDestroy {
   public user$: any;
   public posts$: any;
   public loading$: any;

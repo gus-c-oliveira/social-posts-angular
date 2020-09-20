@@ -1,24 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { UserCardComponent } from './user-card.component.stub';
-import { UserListComponent } from './user-list.component.stub';
-import { UserPostComponent } from './user-post.component.stub';
-import { UserProfileComponent } from './user-profile.component.stub';
+import { UserCardStubComponent } from './user-card.component.stub';
+import { UserListStubComponent } from './user-list.component.stub';
+import { UserPostStubComponent } from './user-post.component.stub';
+import { UserProfileStubComponent } from './user-profile.component.stub';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    UserCardComponent,
-    UserListComponent,
-    UserPostComponent,
-    UserProfileComponent,
+    UserCardStubComponent,
+    UserListStubComponent,
+    UserPostStubComponent,
+    UserProfileStubComponent,
   ],
   exports: [
-    UserCardComponent,
-    UserListComponent,
-    UserPostComponent,
-    UserProfileComponent,
+    UserCardStubComponent,
+    UserListStubComponent,
+    UserPostStubComponent,
+    UserProfileStubComponent,
   ],
 })
 export class UserTestingModule {}

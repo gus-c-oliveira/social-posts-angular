@@ -6,7 +6,7 @@ export const userListSelector = 'app-user-list';
   selector: userListSelector,
   template: 'User List Stub',
 })
-export class UserListComponent implements OnDestroy {
+export class UserListStubComponent implements OnDestroy {
   public userList$: any;
   public loading$: any;
   public error$: any;

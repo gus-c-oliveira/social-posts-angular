@@ -6,7 +6,7 @@ export const headerSelector = 'app-header';
   selector: headerSelector,
   template: 'Header Stub',
 })
-export class HeaderComponent {
+export class HeaderStubComponent {
   @Input() public title: any = '';
   @Input() public buttonText: any = '';
   @Output() public buttonClick = new EventEmitter<void>();

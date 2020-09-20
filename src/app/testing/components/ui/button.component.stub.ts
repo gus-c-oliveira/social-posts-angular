@@ -6,6 +6,6 @@ export const buttonSelector = 'app-button';
   selector: buttonSelector,
   template: 'Button Stub',
 })
-export class ButtonComponent {
+export class ButtonStubComponent {
   @Input() public buttonText: any = '';
 }

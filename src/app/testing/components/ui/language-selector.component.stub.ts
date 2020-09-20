@@ -6,7 +6,7 @@ export const selector = 'app-language-selector';
   selector,
   template: 'Language Selector Stub',
 })
-export class LanguageSelectorComponent implements OnDestroy {
+export class LanguageSelectorStubComponent implements OnDestroy {
   public flagImage: any = null;
 
   public toggleLanguage() {}

@@ -6,9 +6,9 @@ import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   getElementBySelector,
-  LanguageSelectorComponent,
-  UserListComponent,
-  UserProfileComponent,
+  LanguageSelectorStubComponent,
+  UserListStubComponent,
+  UserProfileStubComponent,
   UserTestingModule,
 } from '@app/testing';
 import {
@@ -28,9 +28,9 @@ import { HttpLoaderFactory } from './app.module';
 import { headerSelector } from './components/ui/header';
 
 const APP_ROUTES: Routes = [
-  { path: USER_LIST_PATH, component: UserListComponent },
-  { path: '**', component: UserListComponent },
-  { path: USER_PROFILE_PATH, component: UserProfileComponent },
+  { path: USER_LIST_PATH, component: UserListStubComponent },
+  { path: '**', component: UserListStubComponent },
+  { path: USER_PROFILE_PATH, component: UserProfileStubComponent },
 ];
 
 describe('AppComponent', () => {
@@ -45,7 +45,7 @@ describe('AppComponent', () => {
         AppComponent,
         HeaderComponent,
         ButtonComponent,
-        LanguageSelectorComponent,
+        LanguageSelectorStubComponent,
       ],
       imports: [
         UserTestingModule,
