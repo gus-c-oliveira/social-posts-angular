@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector } from '@app/utils';
+import { getElementBySelector } from '@app/testing';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { LanguageSelectorComponent } from './language-selector.component';

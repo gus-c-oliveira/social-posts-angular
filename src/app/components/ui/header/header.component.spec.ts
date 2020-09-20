@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
+  ButtonStubComponent,
+  buttonSelector,
   getElementBySelector,
   getElementTextContentBySelector,
-} from '@app/utils';
-import { TranslateModule } from '@ngx-translate/core';
+  TranslatePipeStub,
+} from '@app/testing';
 
-import { ButtonComponent, buttonSelector } from '../button';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -15,8 +16,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [ButtonComponent, HeaderComponent],
+      declarations: [ButtonStubComponent, HeaderComponent, TranslatePipeStub],
     }).compileComponents();
   });
 
@@ -42,14 +42,9 @@ describe('HeaderComponent', () => {
     expect(button).toBeTruthy();
   });
 
-  it('should display the button text inside the button', () => {
-    const text = getElementTextContentBySelector(fixture, buttonSelector);
-    expect(text).toEqual(buttonText);
-  });
-
   it('should emit an event when the button is clicked', () => {
     spyOn(component.buttonClick, 'emit');
-    getElementBySelector(fixture, 'button').click();
+    getElementBySelector(fixture, buttonSelector).click();
     expect(component.buttonClick.emit).toHaveBeenCalled();
   });
 });

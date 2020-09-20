@@ -6,8 +6,8 @@ import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-} from '@app/utils';
-import { TranslateModule } from '@ngx-translate/core';
+  TranslatePipeStub,
+} from '@app/testing';
 
 import { UserCardComponent, userCardSelector } from './user-card.component';
 
@@ -37,8 +37,7 @@ describe('UserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [TestHostComponent, UserCardComponent],
+      declarations: [TestHostComponent, UserCardComponent, TranslatePipeStub],
     }).compileComponents();
   });
 

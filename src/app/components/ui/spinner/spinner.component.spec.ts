@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector } from '@app/utils';
-import { TranslateModule } from '@ngx-translate/core';
+import { getElementBySelector, TranslatePipeStub } from '@app/testing';
 
 import { SpinnerComponent } from './spinner.component';
 
@@ -10,8 +9,7 @@ describe('SpinnerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [SpinnerComponent],
+      declarations: [SpinnerComponent, TranslatePipeStub],
     }).compileComponents();
   });
 

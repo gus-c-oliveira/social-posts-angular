@@ -5,7 +5,7 @@ import { User } from './user.model';
 // Since User objects provided by the 3rd party API don't
 // include user profile pictures, manually add one for each.
 const userProfilePictures = [
-  'assets/img/emoji-flirt.svg',
+  'assets/img/user-profile/emoji-flirt.svg',
   'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
   'https://i.picsum.photos/id/1011/5472/3648.jpg?hmac=Koo9845x2akkVzVFX3xxAc9BCkeGYA9VRVfLE4f0Zzk',
   'https://i.picsum.photos/id/64/4326/2884.jpg?hmac=9_SzX666YRpR_fOyYStXpfSiJ_edO3ghlSRnH2w09Kg',
