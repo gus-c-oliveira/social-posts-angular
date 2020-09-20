@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector } from '@app/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import {
+  ButtonComponent,
+  buttonSelector,
+  getElementBySelector,
+  TranslatePipeStub,
+} from '@app/testing';
 
-import { ButtonComponent, buttonSelector } from '../button';
 import { ErrorComponent, errorSelector } from './error.component';
 
 @Component({
@@ -24,8 +27,12 @@ describe('ErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
-      declarations: [ButtonComponent, TestHostComponent, ErrorComponent],
+      declarations: [
+        ButtonComponent,
+        TestHostComponent,
+        ErrorComponent,
+        TranslatePipeStub,
+      ],
     }).compileComponents();
   });
 
