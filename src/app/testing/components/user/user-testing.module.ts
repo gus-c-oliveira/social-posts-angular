@@ -21,4 +21,4 @@ import { UserProfileComponent } from './user-profile.component.stub';
     UserProfileComponent,
   ],
 })
-export class UserModule {}
+export class UserTestingModule {}
