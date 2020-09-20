@@ -9,15 +9,21 @@ import {
   LoadComments,
   POST_STATE_KEY,
 } from '@app/store';
-import { errorSelector, spinnerSelector, UiModule } from '@app/ui';
 import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
+  SpinnerComponent,
+  TranslatePipeStub,
 } from '@app/testing';
+import {
+  ButtonComponent,
+  ErrorComponent,
+  errorSelector,
+  spinnerSelector,
+} from '@app/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { UserPostComponent } from './user-post.component';
 
@@ -49,8 +55,15 @@ describe('UserPostComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [UiModule, OverlayModule, TranslateModule.forRoot()],
-      declarations: [UserPostComponent, TestHostComponent],
+      imports: [OverlayModule],
+      declarations: [
+        ErrorComponent,
+        ButtonComponent,
+        SpinnerComponent,
+        UserPostComponent,
+        TestHostComponent,
+        TranslatePipeStub,
+      ],
       providers: [
         provideMockStore({
           initialState,
