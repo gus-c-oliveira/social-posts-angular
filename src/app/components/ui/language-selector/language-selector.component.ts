@@ -28,9 +28,9 @@ export class LanguageSelectorComponent implements OnDestroy {
 
   private setFlagImage() {
     if (this.currentLanguage === 'en-US') {
-      this.flagImage = 'assets/img/pt-BR.svg';
+      this.flagImage = 'assets/img/flags/pt-BR.svg';
     } else {
-      this.flagImage = 'assets/img/en-US.svg';
+      this.flagImage = 'assets/img/flags/en-US.svg';
     }
   }
 
