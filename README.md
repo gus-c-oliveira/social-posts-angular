@@ -2,6 +2,14 @@
 
 A demo app that displays user profiles and posts.
 
+In this demo:
+- State management using Redux/NgRx
+- Internationalization
+- Communicating with a REST API using a service and HTTP requests
+- Routing
+- Displaying a component in a modal window
+- Unit testing using Jest
+
 # Play With It!
 
 App is [deployed and live](https://social-posts-angular-gus-c-oliveira.netlify.app/) on Netlify!
