@@ -9,13 +9,13 @@ import {
   LoadComments,
   POST_STATE_KEY,
 } from '@app/store';
+import { SpinnerStubComponent } from '@app/testing';
 import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-  SpinnerStubComponent,
   TranslatePipeStub,
-} from '@app/testing';
+} from '@gus/testing';
 import {
   ButtonComponent,
   ErrorComponent,

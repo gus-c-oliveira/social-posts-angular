@@ -5,12 +5,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  getElementBySelector,
   LanguageSelectorStubComponent,
   UserListStubComponent,
   UserProfileStubComponent,
   UserTestingModule,
 } from '@app/testing';
+import { getElementBySelector } from '@gus/testing';
 import {
   ButtonComponent,
   HeaderComponent,
