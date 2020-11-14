@@ -21,7 +21,8 @@
       "@app/store": ["apps/social-posts-angular/src/app/store/index.ts"],
       "@app/service": ["apps/social-posts-angular/src/app/service/index.ts"],
       "@app/mocks": ["apps/social-posts-angular/src/app/mocks/index.ts"],
-      "@app/testing": ["apps/social-posts-angular/src/app/testing/index.ts"]
+      "@app/testing": ["apps/social-posts-angular/src/app/testing/index.ts"],
+      "@gus/testing": ["libs/testing/src/index.ts"]
     },
     "rootDir": "."
   },

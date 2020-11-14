@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector, TranslatePipeStub } from '@app/testing';
+import { getElementBySelector, TranslatePipeStub } from '@gus/testing';
 
 import { SpinnerComponent } from './spinner.component';
 

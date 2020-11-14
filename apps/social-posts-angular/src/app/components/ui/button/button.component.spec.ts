@@ -3,7 +3,7 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
   TranslatePipeStub,
-} from '@app/testing';
+} from '@gus/testing';
 
 import { ButtonComponent } from './button.component';
 

@@ -7,7 +7,7 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
   TranslatePipeStub,
-} from '@app/testing';
+} from '@gus/testing';
 
 import { UserCardComponent, userCardSelector } from './user-card.component';
 

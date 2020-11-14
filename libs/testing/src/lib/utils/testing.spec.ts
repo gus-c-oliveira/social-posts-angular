@@ -9,7 +9,7 @@ import {
 } from './testing';
 
 @Component({
-  selector: 'app-test-host',
+  selector: 'gus-test-host',
   template: `
     <button>Click Me!</button>
     <span class="test-span">I'm a test component</span>

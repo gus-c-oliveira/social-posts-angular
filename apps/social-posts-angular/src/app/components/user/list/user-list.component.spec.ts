@@ -9,13 +9,13 @@ import {
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
+import { SpinnerStubComponent } from '@app/testing';
 import {
   getAllElementsBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
-  SpinnerStubComponent,
   TranslatePipeStub,
-} from '@app/testing';
+} from '@gus/testing';
 import {
   ButtonComponent,
   ErrorComponent,

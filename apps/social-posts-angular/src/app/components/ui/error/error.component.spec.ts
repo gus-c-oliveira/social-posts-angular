@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  ButtonStubComponent,
-  buttonSelector,
-  getElementBySelector,
-  TranslatePipeStub,
-} from '@app/testing';
+import { ButtonStubComponent, buttonSelector } from '@app/testing';
+import { getElementBySelector, TranslatePipeStub } from '@gus/testing';
 
 import { ErrorComponent, errorSelector } from './error.component';
 
