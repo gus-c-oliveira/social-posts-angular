@@ -99,16 +99,16 @@
 </ng-container>
 
 <ng-container *ngIf="loading$ | async; else loaded">
-  <app-spinner></app-spinner>
+  <gus-spinner></gus-spinner>
 </ng-container>
 
 <ng-template #loaded>
   <ng-container *ngIf="error$ | async; else noError">
-    <app-error (tryAgain)="retryLoadingPosts()">
+    <gus-error (tryAgain)="retryLoadingPosts()">
       <span class="error__message">
         {{ 'USER_PROFILE.LOAD_ERROR' | translate }}
       </span>
-    </app-error>
+    </gus-error>
   </ng-container>
 
   <ng-template #noError>

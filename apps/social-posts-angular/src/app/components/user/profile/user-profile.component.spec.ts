@@ -11,7 +11,7 @@ import {
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
-import { errorSelector, spinnerSelector } from '@app/ui';
+import { errorSelector, spinnerSelector } from '@gus/ui';
 import {
   getAllElementsTextContentBySelector,
   getElementBySelector,

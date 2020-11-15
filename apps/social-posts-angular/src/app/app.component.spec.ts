@@ -5,17 +5,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  LanguageSelectorStubComponent,
   UserListStubComponent,
   UserProfileStubComponent,
   UserTestingModule,
 } from '@app/testing';
+import { LanguageSelectorStubComponent } from '@gus/ui/testing';
 import { getElementBySelector } from '@gus/testing';
 import {
   ButtonComponent,
   HeaderComponent,
   languageComponentSelector,
-} from '@app/ui';
+  headerSelector,
+} from '@gus/ui';
 import { USER_LIST_PATH, USER_PROFILE_PATH, userListSelector } from '@app/user';
 import {
   TranslateLoader,
@@ -25,7 +26,6 @@ import {
 
 import { AppComponent } from './app.component';
 import { HttpLoaderFactory } from './app.module';
-import { headerSelector } from './components/ui/header';
 
 const APP_ROUTES: Routes = [
   { path: USER_LIST_PATH, component: UserListStubComponent },
