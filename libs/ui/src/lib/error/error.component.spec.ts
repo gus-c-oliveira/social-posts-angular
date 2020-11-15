@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonStubComponent, buttonSelector } from '@app/testing';
+import { ButtonStubComponent, buttonSelector } from '@gus/ui/testing';
 import { getElementBySelector, TranslatePipeStub } from '@gus/testing';
 
 import { ErrorComponent, errorSelector } from './error.component';
 
 @Component({
-  selector: 'app-test-host',
+  selector: 'gus-test-host',
   template: `
-    <app-error (tryAgain)="retry()">
+    <gus-error (tryAgain)="retry()">
       <span class="error__message">Error</span>
-    </app-error>
+    </gus-error>
   `,
 })
 class TestHostComponent {

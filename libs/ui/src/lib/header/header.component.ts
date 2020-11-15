@@ -6,7 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-export const headerSelector = 'app-header';
+export const headerSelector = 'gus-header';
 
 @Component({
   selector: headerSelector,

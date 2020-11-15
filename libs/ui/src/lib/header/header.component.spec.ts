@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonStubComponent, buttonSelector } from '@app/testing';
+import { ButtonStubComponent, buttonSelector } from '@gus/ui/testing';
 import {
   getElementBySelector,
   getElementTextContentBySelector,
