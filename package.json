@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
-    "stylelint": "stylelint apps/social-posts-angular/src/**/*.scss",
+    "stylelint": "stylelint apps/social-posts-angular/src/**/*.scss libs/**/*.scss",
     "e2e": "ng e2e",
     "nx": "nx",
     "affected:apps": "nx affected:apps",
