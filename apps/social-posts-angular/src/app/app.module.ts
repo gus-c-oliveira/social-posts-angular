@@ -9,7 +9,7 @@ import {
   PostEffects,
   UserEffects,
 } from '@app/store';
-import { UiModule } from '@app/ui';
+import { UiModule } from '@gus/ui';
 import { UserModule } from '@app/user';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -35,8 +35,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     // Router
     AppRoutingModule,
 
-    // Components
+    // Libs
     UiModule,
+
+    // Components
     UserModule,
 
     // Store

@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { UiModule } from '@app/ui';
+import { UiModule } from '@gus/ui';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { UserCardComponent } from './card';

@@ -9,19 +9,14 @@ import {
   USER_STATE_KEY,
   UserState,
 } from '@app/store';
-import { SpinnerStubComponent } from '@app/testing';
+import { SpinnerStubComponent, spinnerSelector } from '@gus/ui/testing';
 import {
   getAllElementsBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
   TranslatePipeStub,
 } from '@gus/testing';
-import {
-  ButtonComponent,
-  ErrorComponent,
-  errorSelector,
-  spinnerSelector,
-} from '@app/ui';
+import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 

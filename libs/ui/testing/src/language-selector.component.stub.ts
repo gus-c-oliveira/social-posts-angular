@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 
-export const selector = 'app-language-selector';
+export const selector = 'gus-language-selector';
 
 @Component({
   selector,

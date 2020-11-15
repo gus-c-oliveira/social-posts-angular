@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-export const spinnerSelector = 'app-spinner';
+export const spinnerSelector = 'gus-spinner';
 
 @Component({
   selector: spinnerSelector,

@@ -5,7 +5,7 @@ import {
   Output,
 } from '@angular/core';
 
-export const errorSelector = 'app-error';
+export const errorSelector = 'gus-error';
 
 @Component({
   selector: errorSelector,

@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
-export const languageComponentSelector = 'app-language-selector';
+export const languageComponentSelector = 'gus-language-selector';
 
 @Component({
   selector: languageComponentSelector,

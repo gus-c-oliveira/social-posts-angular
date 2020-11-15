@@ -9,7 +9,7 @@ import {
   LoadComments,
   POST_STATE_KEY,
 } from '@app/store';
-import { SpinnerStubComponent } from '@app/testing';
+import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
   getAllElementsTextContentBySelector,
   getElementBySelector,
@@ -21,7 +21,7 @@ import {
   ErrorComponent,
   errorSelector,
   spinnerSelector,
-} from '@app/ui';
+} from '@gus/ui';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 

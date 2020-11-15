@@ -1,13 +1,13 @@
 <ng-container *ngIf="loading$ | async; else loadedTemplate">
-  <app-spinner></app-spinner>
+  <gus-spinner></gus-spinner>
 </ng-container>
 <ng-template #loadedTemplate>
   <ng-container *ngIf="error$ | async; else cardTemplate">
-    <app-error (tryAgain)="retryLoadingUsers()">
+    <gus-error (tryAgain)="retryLoadingUsers()">
       <span class="error__message">
         {{ 'USER_LIST.LOAD_ERROR' | translate }}
       </span>
-    </app-error>
+    </gus-error>
   </ng-container>
   <ng-template #cardTemplate>
     <div class="card-container">
