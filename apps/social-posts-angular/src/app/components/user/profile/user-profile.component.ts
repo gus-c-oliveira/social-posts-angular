@@ -7,9 +7,8 @@ import {
   Post,
   postQuery,
   SetSelectedPostID,
-  User,
-  userQuery,
 } from '@app/store';
+import { User, userQuery } from '@gus/user-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';

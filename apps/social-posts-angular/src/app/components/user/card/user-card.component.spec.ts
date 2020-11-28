@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockUserList } from '@app/mocks';
-import { mapUserToSimpleUser, SimpleUser } from '@app/store';
+import { mockUserList, mapUserToSimpleUser, SimpleUser } from '@gus/user-store';
 import {
   getAllElementsTextContentBySelector,
   getElementBySelector,

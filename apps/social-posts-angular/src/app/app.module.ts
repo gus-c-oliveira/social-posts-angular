@@ -3,14 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
 import { DataRequestService } from '@app/service';
-import {
-  appReducer,
-  CommentEffects,
-  PostEffects,
-  UserEffects,
-} from '@app/store';
-import { UiModule } from '@gus/ui';
+import { appReducer, CommentEffects, PostEffects } from '@app/store';
 import { UserModule } from '@app/user';
+import { UiModule } from '@gus/ui';
+import { USER_SERVICE_BASE_URL, UserStoreModule } from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -20,6 +16,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { APP_CONSTANTS } from './app.constants';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -37,13 +34,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     // Libs
     UiModule,
+    UserStoreModule,
 
     // Components
     UserModule,
 
     // Store
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CommentEffects, PostEffects, UserEffects]),
+    EffectsModule.forRoot([CommentEffects, PostEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
@@ -56,7 +54,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [DataRequestService],
+  providers: [
+    DataRequestService,
+    { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

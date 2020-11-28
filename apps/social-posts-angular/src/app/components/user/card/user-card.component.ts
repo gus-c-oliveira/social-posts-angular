@@ -5,7 +5,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { SimpleUser } from '@app/store';
+import { SimpleUser } from '@gus/user-store';
 
 export const userCardSelector = 'app-user-card';
 
