@@ -1,5 +1,5 @@
-import { postQuery } from './post.selectors';
-import { initialPostState, POST_STATE_KEY, PostState } from './post.state';
+import { postQuery } from '../selectors/index';
+import { initialPostState, POST_STATE_KEY, PostState } from '../state/index';
 
 describe('Post Selectors', () => {
   let store: { [POST_STATE_KEY]: PostState };

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { DataRequestService } from '@app/service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
+import { PostService } from '../service/index';
 import {
   LoadPostsError,
   LoadPostsSuccess,
   PostActionTypes,
   LoadPosts,
-} from './post.actions';
+} from '../actions/index';
 
 @Injectable()
 export class PostEffects {
@@ -24,8 +24,5 @@ export class PostEffects {
     )
   );
 
-  public constructor(
-    private service: DataRequestService,
-    private actions$: Actions
-  ) {}
+  public constructor(private service: PostService, private actions$: Actions) {}
 }

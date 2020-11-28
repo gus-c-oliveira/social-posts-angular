@@ -1,4 +1,4 @@
-import { Post } from './post.model';
+import { Post } from '../model/index';
 
 export const POST_STATE_KEY = 'post';
 

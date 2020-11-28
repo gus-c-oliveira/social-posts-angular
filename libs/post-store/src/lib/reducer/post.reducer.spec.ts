@@ -1,4 +1,4 @@
-import { mockPostList } from '@app/mocks';
+import { mockPostList } from '../mocks/index';
 
 import {
   ClearPosts,
@@ -7,9 +7,9 @@ import {
   LoadPostsError,
   LoadPostsSuccess,
   SetSelectedPostID,
-} from './post.actions';
+} from '../actions/index';
 import { postReducer } from './post.reducer';
-import { initialPostState } from './post.state';
+import { initialPostState } from '../state/index';
 
 describe('postReducer', () => {
   describe('LoadPosts', () => {

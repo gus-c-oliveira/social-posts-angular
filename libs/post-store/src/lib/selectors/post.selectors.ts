@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { Post } from './post.model';
-import { POST_STATE_KEY, PostState } from './post.state';
+import { Post } from '../model/index';
+import { POST_STATE_KEY, PostState } from '../state/index';
 
 const getPostState = createFeatureSelector<PostState>(POST_STATE_KEY);
 
