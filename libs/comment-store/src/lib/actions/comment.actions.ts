@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Comment } from './comment.model';
+import { Comment } from '../model/index';
 
 export enum CommentActionTypes {
   LoadComments = '[Comment] Load Comments',

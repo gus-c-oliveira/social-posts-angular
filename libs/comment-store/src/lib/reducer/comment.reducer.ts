@@ -1,5 +1,5 @@
-import { CommentAction, CommentActionTypes } from './comment.actions';
-import { CommentState, initialCommentState } from './comment.state';
+import { CommentAction, CommentActionTypes } from '../actions/index';
+import { CommentState, initialCommentState } from '../state/index';
 
 export const commentReducer = (
   state: CommentState = initialCommentState,

@@ -1,4 +1,4 @@
-import { Comment } from '@app/store';
+import { Comment } from '../model/index';
 
 export const mockCommentList: Comment[] = [
   {

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { Comment } from './comment.model';
-import { COMMENT_STATE_KEY, CommentState } from './comment.state';
+import { Comment } from '../model/index';
+import { COMMENT_STATE_KEY, CommentState } from '../state/index';
 
 const getCommentState = createFeatureSelector<CommentState>(COMMENT_STATE_KEY);
 

@@ -3,7 +3,7 @@ import {
   COMMENT_STATE_KEY,
   CommentState,
   initialCommentState,
-} from './comment.state';
+} from '../state/index';
 
 describe('Comment Selectors', () => {
   let store: { [COMMENT_STATE_KEY]: CommentState };

@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
-import { mockCommentList } from '@app/mocks';
-import {
-  DataRequestService,
-  DataRequestServiceStubFailed,
-  DataRequestServiceStubSuccessful,
-} from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { cold, hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
+import { mockCommentList } from '../mocks/index';
 import {
   LoadComments,
   LoadCommentsError,
   LoadCommentsSuccess,
-} from './comment.actions';
+} from '../actions/index';
 import { CommentEffects } from './comment.effects';
+import {
+  CommentService,
+  CommentServiceStubFailed,
+  CommentServiceStubSuccessful,
+} from '../service/index';
 
 describe('CommentEffects', () => {
   let actions: Observable<any>;
@@ -28,8 +28,8 @@ describe('CommentEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubSuccessful,
+            provide: CommentService,
+            useClass: CommentServiceStubSuccessful,
           },
           CommentEffects,
           provideMockActions(() => actions),
@@ -55,8 +55,8 @@ describe('CommentEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubFailed,
+            provide: CommentService,
+            useClass: CommentServiceStubFailed,
           },
           CommentEffects,
           provideMockActions(() => actions),

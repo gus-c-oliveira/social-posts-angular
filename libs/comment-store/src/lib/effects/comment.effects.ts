@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DataRequestService } from '@app/service';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -9,7 +8,8 @@ import {
   LoadCommentsSuccess,
   CommentActionTypes,
   LoadComments,
-} from './comment.actions';
+} from '../actions/index';
+import { CommentService } from '../service/index';
 
 @Injectable()
 export class CommentEffects {
@@ -25,7 +25,7 @@ export class CommentEffects {
   );
 
   public constructor(
-    private service: DataRequestService,
+    private service: CommentService,
     private actions$: Actions
   ) {}
 }
