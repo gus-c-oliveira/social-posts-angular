@@ -1,14 +1,17 @@
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockCommentList, mockPostList } from '@app/mocks';
+import { mockCommentList } from '@app/mocks';
 import {
   COMMENT_STATE_KEY,
   initialCommentState,
-  initialPostState,
   LoadComments,
-  POST_STATE_KEY,
 } from '@app/store';
+import {
+  initialPostState,
+  POST_STATE_KEY,
+  mockPostList,
+} from '@gus/post-store';
 import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
   getAllElementsTextContentBySelector,

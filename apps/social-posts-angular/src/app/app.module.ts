@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
 import { DataRequestService } from '@app/service';
-import { appReducer, CommentEffects, PostEffects } from '@app/store';
+import { appReducer, CommentEffects } from '@app/store';
 import { UserModule } from '@app/user';
 import { UiModule } from '@gus/ui';
+import { POST_SERVICE_BASE_URL, PostStoreModule } from '@gus/post-store';
 import { USER_SERVICE_BASE_URL, UserStoreModule } from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -33,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
 
     // Libs
+    PostStoreModule,
     UiModule,
     UserStoreModule,
 
@@ -41,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     // Store
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CommentEffects, PostEffects]),
+    EffectsModule.forRoot([CommentEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
@@ -57,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     DataRequestService,
     { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
+    { provide: POST_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
   ],
   bootstrap: [AppComponent],
 })

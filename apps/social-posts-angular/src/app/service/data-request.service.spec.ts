@@ -6,7 +6,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { DataRequestService } from './data-request.service';
 import { APP_CONSTANTS } from '../app.constants';
-import { mockPostList, mockCommentList } from '@app/mocks';
+import { mockCommentList } from '@app/mocks';
 
 describe('DataRequestService', () => {
   let service: DataRequestService;
@@ -26,26 +26,6 @@ describe('DataRequestService', () => {
 
   it('should create', () => {
     expect(service).toBeTruthy();
-  });
-
-  describe('getPosts', () => {
-    it('should retrieve an array of posts using a GET request', (done) => {
-      const userId = 1;
-      service.getPosts(userId).subscribe((data) => {
-        expect(data.length).toEqual(10);
-        data.forEach((post, index) => {
-          expect(post).toEqual(mockPostList[index]);
-        });
-        done();
-      });
-
-      const req = http.expectOne(
-        APP_CONSTANTS.baseURL + `posts?userId=${userId}`
-      );
-      expect(req.request.method).toEqual('GET');
-
-      req.flush(mockPostList);
-    });
   });
 
   describe('getComments', () => {

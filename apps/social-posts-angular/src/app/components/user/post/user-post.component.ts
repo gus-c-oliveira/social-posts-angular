@@ -3,13 +3,11 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import {
   AppState,
   ClearComments,
-  ClearSelectedPostID,
   Comment,
   commentQuery,
   LoadComments,
-  Post,
-  postQuery,
 } from '@app/store';
+import { ClearSelectedPostID, Post, postQuery } from '@gus/post-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';

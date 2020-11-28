@@ -1,13 +1,8 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import {
-  AppState,
-  LoadPosts,
-  Post,
-  postQuery,
-  SetSelectedPostID,
-} from '@app/store';
+import { AppState } from '@app/store';
+import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';

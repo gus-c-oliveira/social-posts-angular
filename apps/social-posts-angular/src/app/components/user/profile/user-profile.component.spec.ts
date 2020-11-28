@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockPostList } from '@app/mocks';
 import { USER_STATE_KEY, UserState, mockUserList } from '@gus/user-store';
+import { AppState, COMMENT_STATE_KEY, initialCommentState } from '@app/store';
 import {
-  AppState,
-  COMMENT_STATE_KEY,
-  initialCommentState,
   LoadPosts,
   POST_STATE_KEY,
   PostState,
-} from '@app/store';
+  mockPostList,
+} from '@gus/post-store';
 import { errorSelector, spinnerSelector } from '@gus/ui';
 import {
   getAllElementsTextContentBySelector,
