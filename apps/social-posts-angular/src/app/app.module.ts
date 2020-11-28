@@ -2,14 +2,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
-import { DataRequestService } from '@app/service';
-import { appReducer, CommentEffects } from '@app/store';
 import { UserModule } from '@app/user';
-import { UiModule } from '@gus/ui';
+import {
+  COMMENT_SERVICE_BASE_URL,
+  CommentStoreModule,
+} from '@gus/comment-store';
 import { POST_SERVICE_BASE_URL, PostStoreModule } from '@gus/post-store';
+import { UiModule } from '@gus/ui';
 import { USER_SERVICE_BASE_URL, UserStoreModule } from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -33,18 +34,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     // Router
     AppRoutingModule,
 
-    // Libs
-    PostStoreModule,
+    // Ui
     UiModule,
-    UserStoreModule,
-
-    // Components
     UserModule,
 
     // Store
-    StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CommentEffects]),
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    CommentStoreModule,
+    PostStoreModule,
+    UserStoreModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
     // Translations
@@ -57,9 +56,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   providers: [
-    DataRequestService,
-    { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
+    { provide: COMMENT_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
     { provide: POST_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
+    { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
   ],
   bootstrap: [AppComponent],
 })

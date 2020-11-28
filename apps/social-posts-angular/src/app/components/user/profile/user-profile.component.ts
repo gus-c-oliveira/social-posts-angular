@@ -1,7 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { AppState } from '@app/store';
 import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
 import { select, Store } from '@ngrx/store';
@@ -28,10 +27,7 @@ export class UserProfileComponent implements OnDestroy {
   public overlayRef: OverlayRef;
   private currentUserID: number = null;
 
-  public constructor(
-    private store$: Store<AppState>,
-    private overlay: Overlay
-  ) {
+  public constructor(private store$: Store<any>, private overlay: Overlay) {
     this.initializeObservables();
   }
 

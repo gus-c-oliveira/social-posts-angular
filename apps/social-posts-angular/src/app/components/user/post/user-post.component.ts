@@ -1,12 +1,11 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Component, Input, OnDestroy } from '@angular/core';
 import {
-  AppState,
   ClearComments,
   Comment,
   commentQuery,
   LoadComments,
-} from '@app/store';
+} from '@gus/comment-store';
 import { ClearSelectedPostID, Post, postQuery } from '@gus/post-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -30,7 +29,7 @@ export class UserPostComponent implements OnDestroy {
   public error$: Observable<boolean>;
   private selectedPostID: number = null;
 
-  public constructor(private store$: Store<AppState>) {
+  public constructor(private store$: Store<any>) {
     this.initializeObservables();
   }
 
