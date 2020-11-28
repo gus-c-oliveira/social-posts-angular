@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { USER_STATE_KEY, UserState, mockUserList } from '@gus/user-store';
-import { AppState, COMMENT_STATE_KEY, initialCommentState } from '@app/store';
+import { COMMENT_STATE_KEY, initialCommentState } from '@gus/comment-store';
 import {
   LoadPosts,
   POST_STATE_KEY,
@@ -67,7 +67,7 @@ describe('UserProfileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
-    store$ = TestBed.inject(Store) as MockStore<AppState>;
+    store$ = TestBed.inject(Store) as MockStore<any>;
     fixture.detectChanges();
   });
 

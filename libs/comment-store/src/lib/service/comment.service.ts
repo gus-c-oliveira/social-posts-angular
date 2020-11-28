@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Comment } from '@app/store';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { APP_CONSTANTS } from '../app.constants';
+import { Comment } from '../model';
+import { COMMENT_SERVICE_BASE_URL } from '../token';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DataRequestService {
-  private baseURL = APP_CONSTANTS.baseURL;
-
-  public constructor(private http: HttpClient) {}
+export class CommentService {
+  public constructor(
+    @Inject(COMMENT_SERVICE_BASE_URL) private baseURL: string,
+    private http: HttpClient
+  ) {}
 
   public getComments(postId: number): Observable<Comment[]> {
     const url = this.baseURL + `comments?postId=${postId}`;

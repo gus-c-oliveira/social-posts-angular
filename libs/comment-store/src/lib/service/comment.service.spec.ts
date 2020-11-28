@@ -4,23 +4,26 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { DataRequestService } from './data-request.service';
-import { APP_CONSTANTS } from '../app.constants';
-import { mockCommentList } from '@app/mocks';
+import { CommentService } from './comment.service';
+import { mockCommentList } from '../mocks/index';
+import { COMMENT_SERVICE_BASE_URL } from '../token';
 
-describe('DataRequestService', () => {
-  let service: DataRequestService;
+describe('CommentService', () => {
+  let service: CommentService;
   let http: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [DataRequestService],
+      providers: [
+        CommentService,
+        { provide: COMMENT_SERVICE_BASE_URL, useValue: '/' },
+      ],
     });
   });
 
   beforeEach(() => {
-    service = TestBed.inject(DataRequestService);
+    service = TestBed.inject(CommentService);
     http = TestBed.inject(HttpTestingController);
   });
 
@@ -39,9 +42,7 @@ describe('DataRequestService', () => {
         done();
       });
 
-      const req = http.expectOne(
-        APP_CONSTANTS.baseURL + `comments?postId=${postId}`
-      );
+      const req = http.expectOne(`/comments?postId=${postId}`);
       expect(req.request.method).toEqual('GET');
 
       req.flush(mockCommentList);

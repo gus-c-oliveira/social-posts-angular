@@ -1,13 +1,12 @@
-import { mockCommentList } from '@app/mocks';
-
+import { mockCommentList } from '../mocks/index';
 import {
   LoadComments,
   LoadCommentsError,
   LoadCommentsSuccess,
   ClearComments,
-} from './comment.actions';
+} from '../actions/index';
 import { commentReducer } from './comment.reducer';
-import { initialCommentState } from './comment.state';
+import { initialCommentState } from '../state/index';
 
 describe('commentReducer', () => {
   describe('LoadComments', () => {

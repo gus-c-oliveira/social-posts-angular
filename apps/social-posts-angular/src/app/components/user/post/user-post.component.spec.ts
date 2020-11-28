@@ -1,12 +1,12 @@
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockCommentList } from '@app/mocks';
 import {
+  mockCommentList,
   COMMENT_STATE_KEY,
   initialCommentState,
   LoadComments,
-} from '@app/store';
+} from '@gus/comment-store';
 import {
   initialPostState,
   POST_STATE_KEY,

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppState } from '@app/store';
 import {
   ClearSelectedUserID,
   LoadUsers,
@@ -31,7 +30,7 @@ export class UserListComponent implements OnDestroy {
   public error$: Observable<boolean>;
 
   public constructor(
-    private store$: Store<AppState>,
+    private store$: Store<any>,
     private router: Router,
     private route: ActivatedRoute
   ) {
