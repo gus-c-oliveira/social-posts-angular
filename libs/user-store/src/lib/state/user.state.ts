@@ -1,4 +1,4 @@
-import { User } from './user.model';
+import { User } from '../model/index';
 
 export const USER_STATE_KEY = 'user';
 

@@ -1,5 +1,5 @@
 import { userQuery } from './user.selectors';
-import { initialUserState, UserState, USER_STATE_KEY } from './user.state';
+import { initialUserState, UserState, USER_STATE_KEY } from '../state/index';
 
 describe('User Selectors', () => {
   let store: { [USER_STATE_KEY]: UserState };

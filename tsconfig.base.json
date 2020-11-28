@@ -7,6 +7,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
@@ -24,7 +25,8 @@
       "@app/testing": ["apps/social-posts-angular/src/app/testing/index.ts"],
       "@gus/testing": ["libs/testing/src/index.ts"],
       "@gus/ui": ["libs/ui/src/index.ts"],
-      "@gus/ui/testing": ["libs/ui/testing/index.ts"]
+      "@gus/ui/testing": ["libs/ui/testing/index.ts"],
+      "@gus/user-store": ["libs/user-store/src/index.ts"]
     },
     "rootDir": "."
   },
