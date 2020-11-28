@@ -26,7 +26,8 @@
       "@gus/testing": ["libs/testing/src/index.ts"],
       "@gus/ui": ["libs/ui/src/index.ts"],
       "@gus/ui/testing": ["libs/ui/testing/index.ts"],
-      "@gus/user-store": ["libs/user-store/src/index.ts"]
+      "@gus/user-store": ["libs/user-store/src/index.ts"],
+      "@gus/post-store": ["libs/post-store/src/index.ts"]
     },
     "rootDir": "."
   },

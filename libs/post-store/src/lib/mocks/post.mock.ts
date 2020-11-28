@@ -1,4 +1,4 @@
-import { Post } from '@app/store';
+import { Post } from '../model/index';
 
 export const mockPostList: Post[] = [
   {

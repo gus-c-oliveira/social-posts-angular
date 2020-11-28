@@ -1,5 +1,5 @@
-import { PostAction, PostActionTypes } from './post.actions';
-import { initialPostState, PostState } from './post.state';
+import { PostAction, PostActionTypes } from '../actions/index';
+import { initialPostState, PostState } from '../state/index';
 
 export const postReducer = (
   state: PostState = initialPostState,

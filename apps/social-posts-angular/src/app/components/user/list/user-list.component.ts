@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppState, ClearPosts } from '@app/store';
+import { AppState } from '@app/store';
 import {
   ClearSelectedUserID,
   LoadUsers,
@@ -8,6 +8,7 @@ import {
   SimpleUser,
   userQuery,
 } from '@gus/user-store';
+import { ClearPosts } from '@gus/post-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';

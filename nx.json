@@ -26,6 +26,9 @@
     },
     "user-store": {
       "tags": []
+    },
+    "post-store": {
+      "tags": []
     }
   }
 }

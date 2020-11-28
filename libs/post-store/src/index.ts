@@ -1,4 +1,4 @@
-export * from './lib/user-store.module';
+export * from './lib/post-store.module';
 export * from './lib/token';
 export * from './lib/model/index';
 export * from './lib/state/index';

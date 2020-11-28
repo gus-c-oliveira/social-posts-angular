@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { mockPostList } from '@app/mocks';
-import {
-  DataRequestService,
-  DataRequestServiceStubFailed,
-  DataRequestServiceStubSuccessful,
-} from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { cold, hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
-import { LoadPosts, LoadPostsError, LoadPostsSuccess } from './post.actions';
+import {
+  PostService,
+  PostServiceStubFailed,
+  PostServiceStubSuccessful,
+} from '../service/index';
+import { LoadPosts, LoadPostsError, LoadPostsSuccess } from '../actions/index';
 import { PostEffects } from './post.effects';
+import { mockPostList } from '../mocks/index';
 
 describe('PostEffects', () => {
   let actions: Observable<any>;
@@ -24,8 +24,8 @@ describe('PostEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubSuccessful,
+            provide: PostService,
+            useClass: PostServiceStubSuccessful,
           },
           PostEffects,
           provideMockActions(() => actions),
@@ -51,8 +51,8 @@ describe('PostEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubFailed,
+            provide: PostService,
+            useClass: PostServiceStubFailed,
           },
           PostEffects,
           provideMockActions(() => actions),
