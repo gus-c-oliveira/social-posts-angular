@@ -181,6 +181,36 @@
           "style": "scss"
         }
       }
+    },
+    "user-store": {
+      "projectType": "library",
+      "root": "libs/user-store",
+      "sourceRoot": "libs/user-store/src",
+      "prefix": "gus",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/user-store/tsconfig.lib.json",
+              "libs/user-store/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/user-store/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/user-store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "defaultProject": "social-posts-angular"

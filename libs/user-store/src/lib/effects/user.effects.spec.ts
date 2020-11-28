@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { mockUserList } from '@app/mocks';
-import {
-  DataRequestService,
-  DataRequestServiceStubFailed,
-  DataRequestServiceStubSuccessful,
-} from '@app/service';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { cold, hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
-import { LoadUsers, LoadUsersError, LoadUsersSuccess } from './user.actions';
-import { UserEffects } from './user.effects';
+import {
+  UserService,
+  UserServiceStubFailed,
+  UserServiceStubSuccessful,
+} from '../service/index';
+import { LoadUsers, LoadUsersError, LoadUsersSuccess } from '../actions/index';
+import { UserEffects } from '../effects/index';
+import { mockUserList } from '../mocks/index';
 
 describe('UserEffects', () => {
   let actions: Observable<any>;
@@ -24,8 +24,8 @@ describe('UserEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubSuccessful,
+            provide: UserService,
+            useClass: UserServiceStubSuccessful,
           },
           UserEffects,
           provideMockActions(() => actions),
@@ -51,8 +51,8 @@ describe('UserEffects', () => {
         imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
         providers: [
           {
-            provide: DataRequestService,
-            useClass: DataRequestServiceStubFailed,
+            provide: UserService,
+            useClass: UserServiceStubFailed,
           },
           UserEffects,
           provideMockActions(() => actions),

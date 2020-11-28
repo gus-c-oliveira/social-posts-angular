@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockPostList, mockUserList } from '@app/mocks';
+import { mockPostList } from '@app/mocks';
+import { USER_STATE_KEY, UserState, mockUserList } from '@gus/user-store';
 import {
   AppState,
   COMMENT_STATE_KEY,
@@ -8,8 +9,6 @@ import {
   LoadPosts,
   POST_STATE_KEY,
   PostState,
-  USER_STATE_KEY,
-  UserState,
 } from '@app/store';
 import { errorSelector, spinnerSelector } from '@gus/ui';
 import {

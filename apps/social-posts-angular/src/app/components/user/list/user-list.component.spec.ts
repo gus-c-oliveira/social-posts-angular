@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockUserList } from '@app/mocks';
 import {
+  mockUserList,
   initialUserState,
   LoadUsers,
   SetSelectedUserID,
   USER_STATE_KEY,
   UserState,
-} from '@app/store';
+} from '@gus/user-store';
 import { SpinnerStubComponent, spinnerSelector } from '@gus/ui/testing';
 import {
   getAllElementsBySelector,

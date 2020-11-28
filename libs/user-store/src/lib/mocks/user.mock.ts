@@ -1,4 +1,4 @@
-import { User } from '@app/store';
+import { User } from '../model/index';
 
 export const mockUserList: User[] = [
   {

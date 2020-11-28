@@ -1,14 +1,13 @@
-import { mockUserList } from '@app/mocks';
-
+import { mockUserList } from '../mocks/index';
 import {
   ClearSelectedUserID,
   LoadUsers,
   LoadUsersError,
   LoadUsersSuccess,
   SetSelectedUserID,
-} from './user.actions';
-import { addUserPicture, userReducer } from './user.reducer';
-import { initialUserState } from './user.state';
+} from '../actions/index';
+import { addUserPicture, userReducer } from '../reducer/index';
+import { initialUserState } from '../state/index';
 
 describe('UserReducer', () => {
   describe('LoadUsers', () => {

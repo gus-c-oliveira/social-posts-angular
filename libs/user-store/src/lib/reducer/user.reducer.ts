@@ -1,6 +1,6 @@
-import { UserAction, UserActionTypes } from './user.actions';
-import { initialUserState, UserState } from './user.state';
-import { User } from './user.model';
+import { UserAction, UserActionTypes } from '../actions/index';
+import { initialUserState, UserState } from '../state/index';
+import { User } from '../model/index';
 
 // Since User objects provided by the 3rd party API don't
 // include user profile pictures, manually add one for each.
