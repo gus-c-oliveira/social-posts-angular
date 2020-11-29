@@ -11,11 +11,11 @@
   </ng-container>
   <ng-template #cardTemplate>
     <div class="card-container">
-      <app-user-card
+      <gus-user-card
         *ngFor="let user of userList$ | async"
         [user]="user"
         (selected)="handleUserSelection($event)"
-      ></app-user-card>
+      ></gus-user-card>
     </div>
   </ng-template>
 </ng-template>

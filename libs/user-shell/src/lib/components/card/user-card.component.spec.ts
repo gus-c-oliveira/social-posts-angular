@@ -13,12 +13,12 @@ import { UserCardComponent, userCardSelector } from './user-card.component';
 const mockSimpleUser: SimpleUser = mapUserToSimpleUser(mockUserList[0]);
 
 @Component({
-  selector: 'app-test-host',
+  selector: 'gus-test-host',
   template: `
-    <app-user-card
+    <gus-user-card
       [user]="user"
       (selected)="saveSelected($event)"
-    ></app-user-card>
+    ></gus-user-card>
   `,
 })
 class TestHostComponent {

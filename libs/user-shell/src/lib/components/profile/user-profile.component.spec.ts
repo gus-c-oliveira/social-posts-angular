@@ -1,12 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { USER_STATE_KEY, UserState, mockUserList } from '@gus/user-store';
-import { COMMENT_STATE_KEY, initialCommentState } from '@gus/comment-store';
+import {
+  USER_STATE_KEY,
+  UserState,
+  mockUserList,
+  USER_SERVICE_BASE_URL,
+} from '@gus/user-store';
+import {
+  COMMENT_SERVICE_BASE_URL,
+  COMMENT_STATE_KEY,
+  initialCommentState,
+} from '@gus/comment-store';
 import {
   LoadPosts,
   POST_STATE_KEY,
   PostState,
   mockPostList,
+  POST_SERVICE_BASE_URL,
 } from '@gus/post-store';
 import { errorSelector, spinnerSelector } from '@gus/ui';
 import {
@@ -14,13 +24,15 @@ import {
   getElementBySelector,
   getElementTextContentBySelector,
 } from '@gus/testing';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { userPostSelector } from '../post';
-import { UserModule } from '../user.module';
+import { UserShellModule } from '../../user-shell.module';
 import { UserProfileComponent } from './user-profile.component';
+import { EffectsModule } from '@ngrx/effects';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -52,14 +64,20 @@ describe('UserProfileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        UserModule,
+        UserShellModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot(),
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot(),
+        HttpClientTestingModule,
       ],
       providers: [
         provideMockStore({
           initialState,
         }),
+        { provide: COMMENT_SERVICE_BASE_URL, useValue: '/' },
+        { provide: POST_SERVICE_BASE_URL, useValue: '/' },
+        { provide: USER_SERVICE_BASE_URL, useValue: '/' },
       ],
     }).compileComponents();
   });

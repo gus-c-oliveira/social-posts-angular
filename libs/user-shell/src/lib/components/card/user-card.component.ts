@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { SimpleUser } from '@gus/user-store';
 
-export const userCardSelector = 'app-user-card';
+export const userCardSelector = 'gus-user-card';
 
 @Component({
   selector: userCardSelector,

@@ -13,9 +13,9 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { USER_PROFILE_PATH } from '../profile';
+import { USER_PROFILE_PATH } from '../profile/index';
 
-export const userListSelector = 'app-user-list';
+export const userListSelector = 'gus-user-list';
 export const USER_LIST_PATH = 'user-list';
 
 @Component({

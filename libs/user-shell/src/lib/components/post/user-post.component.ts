@@ -12,7 +12,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 
-export const userPostSelector = 'app-user-post';
+export const userPostSelector = 'gus-user-post';
 
 @Component({
   selector: userPostSelector,
