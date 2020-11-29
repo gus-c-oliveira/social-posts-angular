@@ -26,7 +26,7 @@
     "dep-graph": "nx dep-graph",
     "workspace-schematic": "nx workspace-schematic",
     "help": "nx help",
-    "postinstall": "node ./decorate-angular-cli.js"
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {
@@ -57,6 +57,7 @@
     "@angular-devkit/build-angular": "~0.1002.0",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.1",
+    "@angular/language-service": "^10.1.0",
     "@nrwl/jest": "10.3.1",
     "@nrwl/workspace": "10.3.2",
     "@types/jasmine": "~3.5.0",
@@ -79,6 +80,8 @@
     "ts-jest": "26.4.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "cypress": "^4.1.0",
+    "@nrwl/cypress": "10.3.1"
   }
 }
