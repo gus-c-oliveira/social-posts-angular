@@ -15,6 +15,6 @@ import { USER_SERVICE_BASE_URL } from './token';
     StoreModule.forFeature(USER_STATE_KEY, userReducer),
     EffectsModule.forFeature([UserEffects]),
   ],
-  providers: [UserService, { provide: USER_SERVICE_BASE_URL, useValue: '/' }],
+  providers: [UserService],
 })
 export class UserStoreModule {}
