@@ -98,13 +98,15 @@
       }
     },
     "social-posts-angular-e2e": {
-      "projectType": "application",
       "root": "apps/social-posts-angular-e2e",
+      "sourceRoot": "apps/social-posts-angular-e2e/src",
+      "projectType": "application",
       "architect": {
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
-            "protractorConfig": "apps/social-posts-angular-e2e/protractor.conf.js",
+            "cypressConfig": "apps/social-posts-angular-e2e/cypress.json",
+            "tsConfig": "apps/social-posts-angular-e2e/tsconfig.e2e.json",
             "devServerTarget": "social-posts-angular:serve"
           },
           "configurations": {
@@ -116,8 +118,11 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "apps/social-posts-angular-e2e/tsconfig.json",
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": ["apps/social-posts-angular-e2e/tsconfig.e2e.json"],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/social-posts-angular-e2e/**/*"
+            ]
           }
         }
       }
@@ -303,5 +308,17 @@
       }
     }
   },
-  "defaultProject": "social-posts-angular"
+  "defaultProject": "social-posts-angular",
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  }
 }
