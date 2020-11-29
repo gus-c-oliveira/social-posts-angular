@@ -15,6 +15,6 @@ import { POST_SERVICE_BASE_URL } from './token';
     StoreModule.forFeature(POST_STATE_KEY, postReducer),
     EffectsModule.forFeature([PostEffects]),
   ],
-  providers: [PostService, { provide: POST_SERVICE_BASE_URL, useValue: '/' }],
+  providers: [PostService],
 })
 export class PostStoreModule {}

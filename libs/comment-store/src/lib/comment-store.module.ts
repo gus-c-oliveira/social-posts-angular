@@ -15,9 +15,6 @@ import { COMMENT_SERVICE_BASE_URL } from './token';
     StoreModule.forFeature(COMMENT_STATE_KEY, commentReducer),
     EffectsModule.forFeature([CommentEffects]),
   ],
-  providers: [
-    CommentService,
-    { provide: COMMENT_SERVICE_BASE_URL, useValue: '/' },
-  ],
+  providers: [CommentService],
 })
 export class CommentStoreModule {}

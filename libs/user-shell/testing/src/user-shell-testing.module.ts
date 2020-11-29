@@ -9,4 +9,4 @@ import { UserProfileStubComponent } from './user-profile.component.stub';
   declarations: [UserListStubComponent, UserProfileStubComponent],
   exports: [UserListStubComponent, UserProfileStubComponent],
 })
-export class UserTestingModule {}
+export class UserShellTestingModule {}

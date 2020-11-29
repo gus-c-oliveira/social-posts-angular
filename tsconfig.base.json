@@ -14,17 +14,15 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@app/user": [
-        "apps/social-posts-angular/src/app/components/user/index.ts"
-      ],
       "@app/router": ["apps/social-posts-angular/src/app/router/index.ts"],
-      "@app/testing": ["apps/social-posts-angular/src/app/testing/index.ts"],
       "@gus/testing": ["libs/testing/src/index.ts"],
       "@gus/ui": ["libs/ui/src/index.ts"],
       "@gus/ui/testing": ["libs/ui/testing/index.ts"],
       "@gus/user-store": ["libs/user-store/src/index.ts"],
       "@gus/post-store": ["libs/post-store/src/index.ts"],
-      "@gus/comment-store": ["libs/comment-store/src/index.ts"]
+      "@gus/comment-store": ["libs/comment-store/src/index.ts"],
+      "@gus/user-shell": ["libs/user-shell/src/index.ts"],
+      "@gus/user-shell/testing": ["libs/user-shell/testing/index.ts"]
     },
     "rootDir": "."
   },

@@ -2,14 +2,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
-import { UserModule } from '@app/user';
-import {
-  COMMENT_SERVICE_BASE_URL,
-  CommentStoreModule,
-} from '@gus/comment-store';
-import { POST_SERVICE_BASE_URL, PostStoreModule } from '@gus/post-store';
+import { COMMENT_SERVICE_BASE_URL } from '@gus/comment-store';
+import { POST_SERVICE_BASE_URL } from '@gus/post-store';
 import { UiModule } from '@gus/ui';
-import { USER_SERVICE_BASE_URL, UserStoreModule } from '@gus/user-store';
+import { USER_SERVICE_BASE_URL } from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -36,14 +32,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     // Ui
     UiModule,
-    UserModule,
 
     // Store
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    CommentStoreModule,
-    PostStoreModule,
-    UserStoreModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
     // Translations

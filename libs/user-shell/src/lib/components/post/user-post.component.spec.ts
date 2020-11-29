@@ -31,8 +31,8 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { UserPostComponent } from './user-post.component';
 
 @Component({
-  selector: 'app-test-host',
-  template: ` <app-user-post [overlayRef]="overlayRef"> </app-user-post> `,
+  selector: 'gus-test-host',
+  template: ` <gus-user-post [overlayRef]="overlayRef"> </gus-user-post> `,
 })
 export class TestHostComponent {
   @ViewChild(UserPostComponent) public postComponent: UserPostComponent;
