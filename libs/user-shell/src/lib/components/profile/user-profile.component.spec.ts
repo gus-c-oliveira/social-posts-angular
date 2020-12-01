@@ -93,16 +93,16 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('banner', () => {
+  describe('cover', () => {
     it('should display the user profile picture', () => {
-      const profilePicture = getElementBySelector(fixture, '.banner__picture');
+      const profilePicture = getElementBySelector(fixture, '.cover__picture');
       expect(profilePicture.src).toContain(selectedUser.pictureURL);
     });
 
     it(`should display the user's username`, () => {
       const username = getElementTextContentBySelector(
         fixture,
-        '.banner__username'
+        '.cover__username'
       );
       expect(username).toEqual(selectedUser.username);
     });
@@ -152,7 +152,7 @@ describe('UserProfileComponent', () => {
     it(`should display the user company's name, catchphrase and bs`, () => {
       const companySectionValues = getAllElementsTextContentBySelector(
         fixture,
-        '.company__info-value'
+        '.company__value'
       );
       // Order should be name, catchphrase and bs.
       const name = companySectionValues[0];
@@ -197,14 +197,14 @@ describe('UserProfileComponent', () => {
   });
 
   it(`should display the user's posts`, () => {
-    const posts = getAllElementsTextContentBySelector(fixture, '.post');
+    const posts = getAllElementsTextContentBySelector(fixture, '.post__item');
     const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
   });
 
   it(`should create an overlay to display post
       after clicking a user's post`, () => {
-    getElementBySelector(fixture, '.post').click();
+    getElementBySelector(fixture, '.post__item').click();
     fixture.detectChanges();
     const post = component.overlayRef.overlayElement.querySelector(
       userPostSelector
