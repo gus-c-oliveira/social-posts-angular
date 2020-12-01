@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 5rem;
 
   background-color: var(--color-light-shade);
 
@@ -39,18 +39,27 @@ section {
   }
 }
 
-.banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+.cover {
+  width: 100%;
+  height: 30rem;
+  padding: 0;
 
-  background-image: linear-gradient(
-    to right bottom,
-    var(--color-primary),
-    var(--color-dark-shade)
+  background-image: url(
+    'https://picsum.photos/1500/300' /* Random Cover Picture */
   );
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border-radius: 1rem;
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    margin: 7rem auto 0;
+  }
 
   &__picture-container {
     display: flex;
@@ -71,6 +80,8 @@ section {
 
   &__picture-container,
   &__picture {
+    z-index: 5;
+
     clip-path: polygon(
       50% 0%,
       83% 12%,
@@ -85,12 +96,20 @@ section {
   }
 
   &__username {
+    position: relative;
+    top: -1.5rem;
+
     display: block;
-    margin-top: 2rem;
+    min-width: 20rem;
+    padding: 1rem 2rem;
 
     color: var(--color-white);
     font-weight: 300;
     font-size: 3rem;
+    text-align: center;
+
+    background-color: var(--color-primary);
+    border-radius: 5rem;
   }
 }
 
@@ -109,7 +128,7 @@ section {
 }
 
 .general {
-  padding-bottom: 25rem;
+  padding: 3rem 0 20rem;
 
   &__container {
     display: grid;

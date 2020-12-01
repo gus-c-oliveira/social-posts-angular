@@ -1,21 +1,20 @@
 <ng-container *ngIf="user$ | async; let user">
-  <div class="banner">
-    <div class="banner__picture-container">
-      <img
-        class="banner__picture"
-        [src]="user.pictureURL"
-        [alt]="'USER_PROFILE.BANNER.PICTURE_ALT' | translate"
-      />
+  <section class="cover">
+    <div class="cover__box">
+      <div class="cover__picture-container">
+        <img
+          class="cover__picture"
+          [src]="user.pictureURL"
+          [alt]="'USER_PROFILE.COVER.PICTURE_ALT' | translate"
+        />
+      </div>
+      <span class="cover__username">
+        {{ user.username }}
+      </span>
     </div>
-    <span class="banner__username">
-      {{ user.username }}
-    </span>
-  </div>
+  </section>
 
   <section class="general">
-    <h2 class="section-header">
-      {{ 'USER_PROFILE.GENERAL.TITLE' | translate }}
-    </h2>
     <div class="general__container">
       <img
         class="general__icon"

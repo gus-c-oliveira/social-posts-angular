@@ -24,11 +24,10 @@
   },
   "USER_PROFILE": {
     "LOAD_ERROR": "Desculpe! Erro ao carregar publicações...",
-    "BANNER": {
+    "COVER": {
       "PICTURE_ALT": "Foto do Usuário"
     },
     "GENERAL": {
-      "TITLE": "Sobre Mim",
       "CARD_ALT": "Ícone de Cartão",
       "PHONE_ALT": "Ícone de Telefone",
       "WEBSITE_ALT": "Ícone de Website",
