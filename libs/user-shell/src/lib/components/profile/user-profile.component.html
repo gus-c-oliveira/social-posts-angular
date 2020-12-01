@@ -77,27 +77,18 @@
     </section>
 
     <section class="company">
-      <div class="company__container">
-        <h2 class="section-header">
-          {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
-        </h2>
-        <img
-          class="company__image"
-          src="https://i.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
-          [alt]="'USER_PROFILE.COMPANY.PICTURE_ALT' | translate"
-        />
-        <div class="company__info-container">
-          <span class="company__info-value company__info-value--name">
-            {{ user.company.name }}
-          </span>
-          <span class="company__info-value company__info-value--catchPhrase">
-            &ldquo;{{ user.company.catchPhrase }}&rdquo;
-          </span>
-          <span class="company__info-value company__info-value--bs">
-            {{ user.company.bs }}
-          </span>
-        </div>
-      </div>
+      <h2 class="section-header">
+        {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
+      </h2>
+      <span class="company__value company__value--name">
+        {{ user.company.name }}
+      </span>
+      <span class="company__value">
+        &ldquo;{{ user.company.catchPhrase }}&rdquo;
+      </span>
+      <span class="company__value">
+        {{ user.company.bs }}
+      </span>
     </section>
   </div>
 </ng-container>

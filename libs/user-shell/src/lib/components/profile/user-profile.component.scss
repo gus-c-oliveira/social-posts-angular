@@ -197,76 +197,24 @@ section {
 }
 
 .company {
-  padding: 7rem;
-
-  // 600px
-  @media only screen and (max-width: 37.5em) {
-    padding: 4rem;
-  }
-
-  &__container {
-    display: grid;
-    grid-template-areas:
-      'header header'
-      'image info';
-    grid-template-rows: repeat(2, min-content);
-    grid-template-columns: repeat(2, 1fr);
-
-    column-gap: 3rem;
-  }
-
   .section-header {
-    grid-area: header;
+    white-space: pre;
   }
 
-  &__image {
-    grid-area: image;
-    width: 50rem;
-  }
-
-  &__info-container {
-    display: flex;
-    flex-direction: column;
-    grid-area: info;
-    justify-content: space-around;
-  }
-
-  &__info-value {
+  &__value {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 1rem 1.5rem;
 
+    font-size: 1.6rem;
     text-align: center;
 
     border-top: 1px solid var(--color-accent-1);
     border-bottom: 1px solid var(--color-accent-1);
   }
 
-  &__info-value--name {
+  &__value--name {
     font-size: 2rem;
-  }
-
-  &__info-value--catchPhrase,
-  &__info-value--bs {
-    font-size: 1.6rem;
-  }
-
-  // 900px
-  @media only screen and (max-width: 56.25em) {
-    &__container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__image {
-      width: 80%;
-    }
-
-    &__image,
-    &__info-value {
-      margin-bottom: 2rem;
-    }
   }
 }
 
