@@ -24,7 +24,7 @@
   },
   "USER_PROFILE": {
     "LOAD_ERROR": "Sorry! Error loading posts...",
-    "BANNER": {
+    "COVER": {
       "PICTURE_ALT": "User Picture"
     },
     "GENERAL": {
@@ -38,11 +38,8 @@
       "TITLE": "Enjoying Life At"
     },
     "COMPANY": {
-      "TITLE": "Building Awesome Projects With",
+      "TITLE": "Building Awesome\nProjects With",
       "PICTURE_ALT": "Company Section Picture"
-    },
-    "POSTS": {
-      "TITLE": "What I've Been Thinking About"
     }
   },
   "USER_POST": {

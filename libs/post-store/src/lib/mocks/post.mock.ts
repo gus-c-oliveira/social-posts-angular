@@ -1,6 +1,7 @@
 import { Post } from '../model/index';
+import { addImageToPost } from '../reducer';
 
-export const mockPostList: Post[] = [
+export const mockPostList: Post[] = addImageToPost([
   {
     userId: 1,
     id: 1,
@@ -76,4 +77,4 @@ export const mockPostList: Post[] = [
       vero nisi sit\n
       quos veniam quod sed accusamus veritatis error`,
   },
-];
+]);

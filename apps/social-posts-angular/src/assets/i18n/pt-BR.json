@@ -24,7 +24,7 @@
   },
   "USER_PROFILE": {
     "LOAD_ERROR": "Desculpe! Erro ao carregar publicações...",
-    "BANNER": {
+    "COVER": {
       "PICTURE_ALT": "Foto do Usuário"
     },
     "GENERAL": {
@@ -38,11 +38,8 @@
       "TITLE": "Aproveitando A Vida Em"
     },
     "COMPANY": {
-      "TITLE": "Construindo Projetos Maravilhosos Com",
+      "TITLE": "Construindo Projetos\nMaravilhosos Com",
       "PICTURE_ALT": "Foto da Área de Empresa"
-    },
-    "POSTS": {
-      "TITLE": "No Que Estive Pensando"
     }
   },
   "USER_POST": {

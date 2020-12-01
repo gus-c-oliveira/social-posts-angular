@@ -1,15 +1,36 @@
 :host {
-  display: flex;
+  display: grid;
   flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  grid-template-areas:
+    'cover cover'
+    'sidebar post';
+  grid-template-columns: 30% auto;
+  margin: 5rem;
+
+  column-gap: 2rem;
+  row-gap: 5rem;
 
   background-color: var(--color-light-shade);
+  box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
 
   > * {
     width: 100%;
+  }
+
+  // 1200px
+  @media only screen and (max-width: 75em) {
+    grid-template-columns: 40% auto;
+  }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // 500px
+  @media only screen and (max-width: 31.25em) {
+    margin: 0;
   }
 }
 
@@ -39,18 +60,31 @@ section {
   }
 }
 
-.banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+.cover {
+  grid-area: cover;
+  width: 100%;
+  height: 30rem;
+  padding: 0;
 
-  background-image: linear-gradient(
-    to right bottom,
-    var(--color-primary),
-    var(--color-dark-shade)
-  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  border-radius: 1rem;
+
+  // 500px
+  @media only screen and (max-width: 31.25em) {
+    border-radius: 0;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    margin: 7rem auto 0;
+  }
 
   &__picture-container {
     display: flex;
@@ -71,6 +105,8 @@ section {
 
   &__picture-container,
   &__picture {
+    z-index: 5;
+
     clip-path: polygon(
       50% 0%,
       83% 12%,
@@ -85,12 +121,34 @@ section {
   }
 
   &__username {
+    position: relative;
+    top: -1.5rem;
+
     display: block;
-    margin-top: 2rem;
+    min-width: 20rem;
+    padding: 1rem 2rem;
 
     color: var(--color-white);
     font-weight: 300;
     font-size: 3rem;
+    text-align: center;
+
+    background-color: var(--color-primary);
+    border: 5px solid var(--color-white);
+    border-radius: 5rem;
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+  margin-top: 3rem;
+
+  > * {
+    width: 90%;
+    margin: 0 auto 3rem;
+
+    border-radius: 2rem;
+    box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
   }
 }
 
@@ -99,32 +157,19 @@ section {
   background-color: var(--color-white);
 }
 
-.address,
-.company {
-  transform: skewY(-7deg);
-
-  > * {
-    transform: skewY(7deg);
-  }
-}
-
 .general {
-  padding-bottom: 25rem;
-
   &__container {
     display: grid;
-    grid-template-columns: 2rem 1fr 2rem 1fr;
+    grid-template-columns: 2rem auto;
     gap: 2rem;
-    width: 50%;
-    margin: 2rem auto;
 
-    // 900px
-    @media only screen and (max-width: 56.25em) {
-      width: max-content;
+    // 1100px
+    @media only screen and (max-width: 68.75em) {
+      grid-template-columns: 2rem auto 2rem auto;
     }
 
-    // 600px
-    @media only screen and (max-width: 37.5em) {
+    // 800px
+    @media only screen and (max-width: 50em) {
       grid-template-columns: 2rem auto;
     }
   }
@@ -147,18 +192,23 @@ section {
     background-color: var(--color-light-shade);
     border-radius: 1.5rem;
   }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .address {
-  margin-top: -15rem;
-  padding: 7rem;
-
   background-image: url('https://i.picsum.photos/id/817/5760/3840.jpg?hmac=72A1UPQSZ_algnVG99d3MqsF71Iq4QN623Fv4Eds-hw');
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
 
   > * {
-    background-color: rgba(#fff, 0.85);
+    background-color: rgba(#fff, 0.9);
   }
 
   &__value {
@@ -174,108 +224,84 @@ section {
 }
 
 .company {
-  padding: 7rem;
-
-  // 600px
-  @media only screen and (max-width: 37.5em) {
-    padding: 4rem;
-  }
-
-  &__container {
-    display: grid;
-    grid-template-areas:
-      'header header'
-      'image info';
-    grid-template-rows: repeat(2, min-content);
-    grid-template-columns: repeat(2, 1fr);
-
-    column-gap: 3rem;
-  }
-
   .section-header {
-    grid-area: header;
+    white-space: pre;
   }
 
-  &__image {
-    grid-area: image;
-    width: 50rem;
-  }
-
-  &__info-container {
-    display: flex;
-    flex-direction: column;
-    grid-area: info;
-    justify-content: space-around;
-  }
-
-  &__info-value {
+  &__value {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     padding: 1rem 1.5rem;
 
+    font-size: 1.6rem;
     text-align: center;
 
     border-top: 1px solid var(--color-accent-1);
     border-bottom: 1px solid var(--color-accent-1);
+
+    // 1100px
+    @media only screen and (max-width: 68.75em) {
+      width: max-content;
+    }
   }
 
-  &__info-value--name {
+  &__value--name {
     font-size: 2rem;
   }
-
-  &__info-value--catchPhrase,
-  &__info-value--bs {
-    font-size: 1.6rem;
-  }
-
-  // 900px
-  @media only screen and (max-width: 56.25em) {
-    &__container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__image {
-      width: 80%;
-    }
-
-    &__image,
-    &__info-value {
-      margin-bottom: 2rem;
-    }
-  }
-}
-
-.post-container {
-  padding-top: 7rem;
 }
 
 .post {
-  display: block;
-  width: max-content;
-  min-width: 70rem;
-  margin: 1rem auto;
-  padding: 0.5rem 1.5rem;
+  grid-area: post;
 
-  font-size: 1.6rem;
-  text-align: center;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    min-width: 70rem;
+    margin: 1rem auto 2rem;
+    padding: 3rem 1.5rem;
 
-  background-color: var(--color-white);
-  border: 1px solid var(--color-accent-2);
-  border-radius: 1.5rem;
+    color: var(--color-white);
+    font-size: 1.6rem;
+    text-align: center;
 
-  cursor: pointer;
+    background-color: var(--color-primary);
+    border: 5px solid var(--color-white);
 
-  &:hover {
+    border-radius: 1.5rem;
+
+    cursor: pointer;
+
+    // 1200px
+    @media only screen and (max-width: 75em) {
+      width: auto;
+      min-width: 80%;
+    }
+  }
+
+  &__item:hover {
     box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
     transform: scale(1.03);
   }
 
-  // 900px
-  @media only screen and (max-width: 56.25em) {
-    width: auto;
-    min-width: 80%;
+  &__img {
+    margin-bottom: 1.5rem;
+
+    border-radius: 1.5rem;
+
+    // 700px
+    @media only screen and (max-width: 43.75em) {
+      width: 80%;
+    }
+  }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
   }
 }
 

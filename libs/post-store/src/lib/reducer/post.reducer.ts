@@ -1,5 +1,13 @@
 import { PostAction, PostActionTypes } from '../actions/index';
+import { Post } from '../model';
 import { initialPostState, PostState } from '../state/index';
+
+export const addImageToPost = (posts) => {
+  return posts.map((post) => ({
+    ...post,
+    img: `https://picsum.photos/seed/${post.id}/500`,
+  }));
+};
 
 export const postReducer = (
   state: PostState = initialPostState,
@@ -13,9 +21,10 @@ export const postReducer = (
         error: false,
       };
     case PostActionTypes.LoadPostsSuccess:
+      const posts = addImageToPost(action.posts);
       return {
         ...state,
-        posts: action.posts,
+        posts,
         loading: false,
         error: false,
       };
