@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnDestroy {
   public loading$: Observable<boolean>;
   public error$: Observable<boolean>;
   public overlayRef: OverlayRef;
+  public userCoverImgSRC = '';
   private currentUserID: number = null;
 
   public constructor(private store$: Store<any>, private overlay: Overlay) {
@@ -43,7 +44,12 @@ export class UserProfileComponent implements OnDestroy {
     this.user$ = this.store$.pipe(
       select(userQuery.getSelectedUser),
       filter((user) => !!user),
-      tap((user) => this.loadPosts(user.id)),
+      tap((user) => {
+        this.loadPosts(user.id);
+        this.userCoverImgSRC = `url(https://picsum.photos/seed/${
+          10 * user.id
+        }/1500/300)`;
+      }),
       untilDestroyed(this)
     );
     this.posts$ = this.store$.pipe(

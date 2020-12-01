@@ -50,9 +50,6 @@ section {
   height: 30rem;
   padding: 0;
 
-  background-image: url(
-    'https://picsum.photos/1500/300' /* Random Cover Picture */
-  );
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -116,12 +113,14 @@ section {
     text-align: center;
 
     background-color: var(--color-primary);
+    border: 5px solid var(--color-white);
     border-radius: 5rem;
   }
 }
 
 .sidebar {
   grid-area: sidebar;
+  margin-top: 3rem;
 
   > * {
     width: 90%;
@@ -218,36 +217,46 @@ section {
   }
 }
 
-.post-container {
-  grid-area: post;
-  padding-top: 7rem;
-}
-
 .post {
-  display: block;
-  width: max-content;
-  min-width: 70rem;
-  margin: 1rem auto;
-  padding: 0.5rem 1.5rem;
+  grid-area: post;
 
-  font-size: 1.6rem;
-  text-align: center;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    min-width: 70rem;
+    margin: 1rem auto 2rem;
+    padding: 3rem 1.5rem;
 
-  background-color: var(--color-white);
-  border: 1px solid var(--color-accent-2);
-  border-radius: 1.5rem;
+    color: var(--color-white);
+    font-size: 1.6rem;
+    text-align: center;
 
-  cursor: pointer;
+    background-color: var(--color-primary);
+    border: 5px solid var(--color-white);
 
-  &:hover {
+    border-radius: 1.5rem;
+
+    cursor: pointer;
+
+    // 900px
+    @media only screen and (max-width: 56.25em) {
+      width: auto;
+      min-width: 80%;
+    }
+  }
+
+  &__item:hover {
     box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
     transform: scale(1.03);
   }
 
-  // 900px
-  @media only screen and (max-width: 56.25em) {
-    width: auto;
-    min-width: 80%;
+  &__img {
+    margin-bottom: 1.5rem;
+
+    border-radius: 1.5rem;
   }
 }
 
