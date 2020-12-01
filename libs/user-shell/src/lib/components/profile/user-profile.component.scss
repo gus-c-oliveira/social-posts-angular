@@ -7,6 +7,9 @@
   grid-template-columns: 30% auto;
   margin: 5rem;
 
+  column-gap: 2rem;
+  row-gap: 5rem;
+
   background-color: var(--color-light-shade);
   box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
 
@@ -136,14 +139,16 @@ section {
 }
 
 .general {
-  padding: 3rem 0 20rem;
+  width: 90%;
+  margin: 0 auto;
+
+  border-radius: 2rem;
+  box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
 
   &__container {
     display: grid;
-    grid-template-columns: 2rem 1fr 2rem 1fr;
+    grid-template-columns: 2rem auto;
     gap: 2rem;
-    width: 50%;
-    margin: 2rem auto;
 
     // 900px
     @media only screen and (max-width: 56.25em) {
@@ -177,7 +182,6 @@ section {
 }
 
 .address {
-  margin-top: -15rem;
   padding: 7rem;
 
   background-image: url('https://i.picsum.photos/id/817/5760/3840.jpg?hmac=72A1UPQSZ_algnVG99d3MqsF71Iq4QN623Fv4Eds-hw');
