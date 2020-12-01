@@ -14,87 +14,89 @@
     </div>
   </section>
 
-  <section class="general">
-    <div class="general__container">
-      <img
-        class="general__icon"
-        src="assets/img/user-profile/v-card.svg"
-        [alt]="'USER_PROFILE.GENERAL.CARD_ALT' | translate"
-      />
-      <span class="general__value">
-        {{ user.name }}
-      </span>
-      <img
-        class="general__icon"
-        src="assets/img/user-profile/phone.svg"
-        [alt]="'USER_PROFILE.GENERAL.PHONE_ALT' | translate"
-      />
-      <span class="general__value">
-        {{ user.phone }}
-      </span>
-      <img
-        class="general__icon"
-        src="assets/img/user-profile/network.svg"
-        [alt]="'USER_PROFILE.GENERAL.WEBSITE_ALT' | translate"
-      />
-      <span class="general__value">
-        {{ user.website }}
-      </span>
-      <img
-        class="general__icon"
-        src="assets/img/user-profile/mail.svg"
-        [alt]="'USER_PROFILE.GENERAL.EMAIL_ALT' | translate"
-      />
-      <span class="general__value">
-        {{ user.email }}
-      </span>
-    </div>
-  </section>
-
-  <section class="address">
-    <h2 class="section-header section-header--address">
-      {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
-    </h2>
-    <span class="address__value">
-      {{ user.address.street }}
-    </span>
-    <span class="address__value">
-      {{ user.address.suite }}
-    </span>
-    <span class="address__value">
-      {{ user.address.city }}
-    </span>
-    <span class="address__value">
-      {{ user.address.zipcode }}
-    </span>
-    <span class="address__value">
-      {{ user.address.geo.lat }} | {{ user.address.geo.lng }}
-    </span>
-  </section>
-
-  <section class="company">
-    <div class="company__container">
-      <h2 class="section-header">
-        {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
-      </h2>
-      <img
-        class="company__image"
-        src="https://i.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
-        [alt]="'USER_PROFILE.COMPANY.PICTURE_ALT' | translate"
-      />
-      <div class="company__info-container">
-        <span class="company__info-value company__info-value--name">
-          {{ user.company.name }}
+  <div class="sidebar">
+    <section class="general">
+      <div class="general__container">
+        <img
+          class="general__icon"
+          src="assets/img/user-profile/v-card.svg"
+          [alt]="'USER_PROFILE.GENERAL.CARD_ALT' | translate"
+        />
+        <span class="general__value">
+          {{ user.name }}
         </span>
-        <span class="company__info-value company__info-value--catchPhrase">
-          &ldquo;{{ user.company.catchPhrase }}&rdquo;
+        <img
+          class="general__icon"
+          src="assets/img/user-profile/phone.svg"
+          [alt]="'USER_PROFILE.GENERAL.PHONE_ALT' | translate"
+        />
+        <span class="general__value">
+          {{ user.phone }}
         </span>
-        <span class="company__info-value company__info-value--bs">
-          {{ user.company.bs }}
+        <img
+          class="general__icon"
+          src="assets/img/user-profile/network.svg"
+          [alt]="'USER_PROFILE.GENERAL.WEBSITE_ALT' | translate"
+        />
+        <span class="general__value">
+          {{ user.website }}
+        </span>
+        <img
+          class="general__icon"
+          src="assets/img/user-profile/mail.svg"
+          [alt]="'USER_PROFILE.GENERAL.EMAIL_ALT' | translate"
+        />
+        <span class="general__value">
+          {{ user.email }}
         </span>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="address">
+      <h2 class="section-header section-header--address">
+        {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
+      </h2>
+      <span class="address__value">
+        {{ user.address.street }}
+      </span>
+      <span class="address__value">
+        {{ user.address.suite }}
+      </span>
+      <span class="address__value">
+        {{ user.address.city }}
+      </span>
+      <span class="address__value">
+        {{ user.address.zipcode }}
+      </span>
+      <span class="address__value">
+        {{ user.address.geo.lat }} | {{ user.address.geo.lng }}
+      </span>
+    </section>
+
+    <section class="company">
+      <div class="company__container">
+        <h2 class="section-header">
+          {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
+        </h2>
+        <img
+          class="company__image"
+          src="https://i.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
+          [alt]="'USER_PROFILE.COMPANY.PICTURE_ALT' | translate"
+        />
+        <div class="company__info-container">
+          <span class="company__info-value company__info-value--name">
+            {{ user.company.name }}
+          </span>
+          <span class="company__info-value company__info-value--catchPhrase">
+            &ldquo;{{ user.company.catchPhrase }}&rdquo;
+          </span>
+          <span class="company__info-value company__info-value--bs">
+            {{ user.company.bs }}
+          </span>
+        </div>
+      </div>
+    </section>
+  </div>
 </ng-container>
 
 <ng-container *ngIf="loading$ | async; else loaded">
