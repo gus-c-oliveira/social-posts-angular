@@ -122,6 +122,14 @@ section {
 
 .sidebar {
   grid-area: sidebar;
+
+  > * {
+    width: 90%;
+    margin: 0 auto 3rem;
+
+    border-radius: 2rem;
+    box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
+  }
 }
 
 .general,
@@ -129,22 +137,7 @@ section {
   background-color: var(--color-white);
 }
 
-.address,
-.company {
-  transform: skewY(-7deg);
-
-  > * {
-    transform: skewY(7deg);
-  }
-}
-
 .general {
-  width: 90%;
-  margin: 0 auto;
-
-  border-radius: 2rem;
-  box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
-
   &__container {
     display: grid;
     grid-template-columns: 2rem auto;
@@ -182,15 +175,13 @@ section {
 }
 
 .address {
-  padding: 7rem;
-
   background-image: url('https://i.picsum.photos/id/817/5760/3840.jpg?hmac=72A1UPQSZ_algnVG99d3MqsF71Iq4QN623Fv4Eds-hw');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 
   > * {
-    background-color: rgba(#fff, 0.85);
+    background-color: rgba(#fff, 0.9);
   }
 
   &__value {
