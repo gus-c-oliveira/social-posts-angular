@@ -16,6 +16,22 @@
   > * {
     width: 100%;
   }
+
+  // 1200px
+  @media only screen and (max-width: 75em) {
+    grid-template-columns: 40% auto;
+  }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // 500px
+  @media only screen and (max-width: 31.25em) {
+    margin: 0;
+  }
 }
 
 section {
@@ -55,6 +71,11 @@ section {
   background-size: cover;
 
   border-radius: 1rem;
+
+  // 500px
+  @media only screen and (max-width: 31.25em) {
+    border-radius: 0;
+  }
 
   &__box {
     display: flex;
@@ -142,13 +163,13 @@ section {
     grid-template-columns: 2rem auto;
     gap: 2rem;
 
-    // 900px
-    @media only screen and (max-width: 56.25em) {
-      width: max-content;
+    // 1100px
+    @media only screen and (max-width: 68.75em) {
+      grid-template-columns: 2rem auto 2rem auto;
     }
 
-    // 600px
-    @media only screen and (max-width: 37.5em) {
+    // 800px
+    @media only screen and (max-width: 50em) {
       grid-template-columns: 2rem auto;
     }
   }
@@ -170,6 +191,13 @@ section {
 
     background-color: var(--color-light-shade);
     border-radius: 1.5rem;
+  }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -210,6 +238,11 @@ section {
 
     border-top: 1px solid var(--color-accent-1);
     border-bottom: 1px solid var(--color-accent-1);
+
+    // 1100px
+    @media only screen and (max-width: 68.75em) {
+      width: max-content;
+    }
   }
 
   &__value--name {
@@ -241,8 +274,8 @@ section {
 
     cursor: pointer;
 
-    // 900px
-    @media only screen and (max-width: 56.25em) {
+    // 1200px
+    @media only screen and (max-width: 75em) {
       width: auto;
       min-width: 80%;
     }
@@ -257,6 +290,18 @@ section {
     margin-bottom: 1.5rem;
 
     border-radius: 1.5rem;
+
+    // 700px
+    @media only screen and (max-width: 43.75em) {
+      width: 80%;
+    }
+  }
+
+  // 1100px
+  @media only screen and (max-width: 68.75em) {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
   }
 }
 
