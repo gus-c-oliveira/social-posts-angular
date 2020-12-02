@@ -4,36 +4,41 @@
   [alt]="'USER_POST.CLOSE_ALT' | translate"
   (click)="closePost()"
 />
-<div class="content">
+<div *ngIf="user$ | async; let user" class="content">
   <ng-container *ngIf="post$ | async; let post">
-    <div class="post">
-      <img
-        class="post__image"
-        [src]="post.img"
-        [alt]="'USER_POST.POST_IMAGE_ALT' | translate"
-      />
+    <img
+      class="post__image"
+      [src]="post.img"
+      [alt]="'USER_POST.POST_IMAGE_ALT' | translate"
+    />
+    <div class="post__content">
+      <img class="post__user-img" [src]="user.pictureURL" />
+      <span class="post__user-username">{{ user.username }}</span>
+      <span class="post__user-name">{{ user.name }}</span>
       <h2 class="post__title">{{ post.title }}</h2>
       <p class="post__body">{{ post.body }}</p>
     </div>
   </ng-container>
-  <ng-container *ngIf="loading$ | async; else loaded">
-    <gus-spinner></gus-spinner>
-  </ng-container>
-  <ng-template #loaded>
-    <ng-container *ngIf="error$ | async; else noError">
-      <gus-error (tryAgain)="retryLoadingComments()">
-        <span class="error__message">
-          {{ 'USER_POST.LOAD_ERROR' | translate }}
-        </span>
-      </gus-error>
+  <div class="comment__box">
+    <ng-container *ngIf="loading$ | async; else loaded">
+      <gus-spinner></gus-spinner>
     </ng-container>
-    <ng-template #noError>
-      <ng-container *ngIf="((comments$ | async) || []).length">
-        <div class="comment" *ngFor="let comment of comments$ | async">
-          <span class="comment__name">{{ comment.name }}</span>
-          <p class="comment__body">{{ comment.body }}</p>
-        </div>
+    <ng-template #loaded>
+      <ng-container *ngIf="error$ | async; else noError">
+        <gus-error (tryAgain)="retryLoadingComments()">
+          <span class="error__message">
+            {{ 'USER_POST.LOAD_ERROR' | translate }}
+          </span>
+        </gus-error>
       </ng-container>
+      <ng-template #noError>
+        <ng-container *ngIf="((comments$ | async) || []).length">
+          <div class="comment__item" *ngFor="let comment of comments$ | async">
+            <span class="comment__name">{{ comment.name }}</span>
+            <p class="comment__body">{{ comment.body }}</p>
+          </div>
+        </ng-container>
+      </ng-template>
     </ng-template>
-  </ng-template>
+  </div>
 </div>

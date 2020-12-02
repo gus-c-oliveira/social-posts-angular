@@ -2,7 +2,7 @@
   position: relative;
 
   width: 100%;
-  padding: 2rem;
+  padding: 3rem;
 
   background-color: var(--color-light-shade);
   border-radius: 1rem;
@@ -20,51 +20,96 @@
 }
 
 .content {
+  display: grid;
+  grid-template-areas:
+    'img content'
+    'img comments';
+  grid-template-columns: 2.5fr 1.5fr;
   height: 100%;
-  overflow: auto;
 
   font-size: 1.6rem;
 }
 
 .post {
-  margin-bottom: 3rem;
-
-  text-align: center;
-
-  > * {
-    max-width: 80%;
-  }
-
   &__image {
     display: block;
-    margin: 0 auto 2rem;
+    grid-area: img;
+    width: 80%;
+    margin: auto;
     padding: 1rem;
 
     background-color: var(--color-primary);
   }
 
-  &__title,
-  &__body {
+  &__content {
+    display: grid;
+    grid-area: content;
+    grid-template-areas:
+      'img username'
+      'img name'
+      'title title'
+      'body body';
+    grid-template-columns: 5rem auto;
+    padding: 2rem;
+
+    column-gap: 2rem;
+
+    background-color: var(--color-white);
+    border-radius: 2rem;
+    box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
+  }
+
+  &__user-img {
     display: block;
-    margin: 0 auto;
+    grid-area: img;
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+  &__user-username {
+    grid-area: username;
+  }
+
+  &__user-name {
+    grid-area: name;
+
+    font-size: 1.2rem;
   }
 
   &__title {
-    margin-bottom: 2rem;
+    grid-area: title;
+    margin-top: 1rem;
 
     font-weight: 300;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    text-transform: capitalize;
+  }
+
+  &__body {
+    grid-area: body;
   }
 }
 
 .comment {
-  display: block;
-  width: 70%;
-  margin: 2rem auto;
-  padding: 2rem;
+  &__box {
+    grid-area: comments;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    overflow: auto;
+  }
 
-  background-color: var(--color-white);
-  border-radius: 1.5rem;
+  &__item {
+    display: block;
+    margin: 2rem 0;
+    padding: 2rem;
+
+    background-color: var(--color-white);
+    border-radius: 1.5rem;
+    box-shadow: 0 0.5rem 1rem var(--color-box-shadow);
+  }
 
   &__name {
     display: block;
@@ -72,7 +117,11 @@
     margin-bottom: 1.5rem;
 
     font-weight: 600;
-    text-align: center;
+    font-size: 1.4rem;
+  }
+
+  &__body {
+    font-size: 1.2rem;
   }
 }
 
