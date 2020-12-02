@@ -29,6 +29,7 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserPostComponent } from './user-post.component';
+import { mockUserList, USER_STATE_KEY } from '@gus/user-store';
 
 @Component({
   selector: 'gus-test-host',
@@ -46,10 +47,17 @@ export class TestHostComponent {
 describe('UserPostComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  const userKey = USER_STATE_KEY;
   const postKey = POST_STATE_KEY;
   const commentKey = COMMENT_STATE_KEY;
   let store$: MockStore<any>;
   const initialState = {
+    [userKey]: {
+      users: mockUserList,
+      loading: false,
+      error: false,
+      selectedUserID: 1,
+    },
     [postKey]: { ...initialPostState },
     [commentKey]: { ...initialCommentState },
   };
@@ -96,8 +104,10 @@ describe('UserPostComponent', () => {
       },
     });
     fixture.detectChanges();
-    const post = getElementTextContentBySelector(fixture, '.post');
-    expect(post).toEqual(selectedPost.title + selectedPost.body);
+    const postTitle = getElementTextContentBySelector(fixture, '.post__title');
+    const postBody = getElementTextContentBySelector(fixture, '.post__body');
+    expect(postTitle).toEqual(selectedPost.title);
+    expect(postBody).toEqual(selectedPost.body);
   });
 
   it('should display the close icon', () => {
@@ -158,7 +168,10 @@ describe('UserPostComponent', () => {
     });
     fixture.detectChanges();
     const expected = mockCommentList.map((item) => `${item.name}${item.body}`);
-    const comments = getAllElementsTextContentBySelector(fixture, '.comment');
+    const comments = getAllElementsTextContentBySelector(
+      fixture,
+      '.comment__item'
+    );
     expect(comments).toEqual(expected);
   });
 });

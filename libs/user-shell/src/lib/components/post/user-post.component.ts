@@ -7,6 +7,7 @@ import {
   LoadComments,
 } from '@gus/comment-store';
 import { ClearSelectedPostID, Post, postQuery } from '@gus/post-store';
+import { User, userQuery } from '@gus/user-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
@@ -22,6 +23,7 @@ export const userPostSelector = 'gus-user-post';
 export class UserPostComponent implements OnDestroy {
   @Input() public overlayRef: OverlayRef = null;
 
+  public user$: Observable<User>;
   public post$: Observable<Post>;
   public comments$: Observable<Comment[]>;
   public loading$: Observable<boolean>;
@@ -39,6 +41,10 @@ export class UserPostComponent implements OnDestroy {
     );
     this.error$ = this.store$.pipe(
       select(commentQuery.getError),
+      untilDestroyed(this)
+    );
+    this.user$ = this.store$.pipe(
+      select(userQuery.getSelectedUser),
       untilDestroyed(this)
     );
     this.post$ = this.store$.pipe(
