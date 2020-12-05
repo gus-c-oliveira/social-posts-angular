@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { languageQuery } from '@gus/language';
+import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 export const selector = 'gus-stats-page';
 
@@ -8,10 +11,14 @@ export const selector = 'gus-stats-page';
   templateUrl: './stats-page.component.html',
   styleUrls: ['./stats-page.component.scss'],
 })
-export class StatsPageComponent {
-  public constructor(private translateService: TranslateService) {
+export class StatsPageComponent implements OnDestroy {
+  public constructor(
+    private store$: Store<any>,
+    private translateService: TranslateService
+  ) {
     this.addTranslations();
     this.setupDefaultLanguage();
+    this.listenToLanguageChanges();
   }
 
   private addTranslations() {
@@ -26,4 +33,12 @@ export class StatsPageComponent {
       this.translateService.setDefaultLang('en-US');
     }
   }
+
+  private listenToLanguageChanges() {
+    this.store$
+      .pipe(untilDestroyed(this), select(languageQuery.getCurrentLanguage))
+      .subscribe((lang) => this.translateService.use(lang));
+  }
+
+  public ngOnDestroy() {}
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LanguageModule } from '@gus/language';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import en from '../assets/i18n/en-US.json';
@@ -35,6 +36,7 @@ function LibTranslationLoaderFactory() {
       },
       isolate: true,
     }),
+    LanguageModule,
   ],
   declarations: [StatsPageComponent],
   exports: [StatsPageComponent],

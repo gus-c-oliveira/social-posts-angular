@@ -3,6 +3,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { getElementTextContentBySelector } from '@gus/testing';
 
 import { selector, StatsPageComponent } from './stats-page.component';
+import { StoreModule } from '@ngrx/store';
+import { LanguageModule } from '@gus/language';
 
 describe('StatsPageComponent', () => {
   let component: StatsPageComponent;
@@ -10,7 +12,11 @@ describe('StatsPageComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [
+        TranslateModule.forRoot(),
+        StoreModule.forRoot({}),
+        LanguageModule,
+      ],
       declarations: [StatsPageComponent],
     }).compileComponents();
   });
