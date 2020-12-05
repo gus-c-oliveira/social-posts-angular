@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommentStoreModule } from '@gus/comment-store';
 import { PostStoreModule } from '@gus/post-store';
+import { LanguageModule } from '@gus/language';
 import { UiModule } from '@gus/ui';
 import { UserStoreModule } from '@gus/user-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -51,6 +52,7 @@ function LibTranslationLoaderFactory() {
     CommentStoreModule,
     PostStoreModule,
     UserStoreModule,
+    LanguageModule,
   ],
   declarations: [
     UserCardComponent,
