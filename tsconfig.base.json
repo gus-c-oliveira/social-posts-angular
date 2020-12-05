@@ -13,6 +13,9 @@
     "importHelpers": true,
     "target": "es2015",
     "lib": ["es2018", "dom"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@app/router": ["apps/social-posts-angular/src/app/router/index.ts"],
       "@gus/testing": ["libs/testing/src/index.ts"],

@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { UserPageComponent } from './page.component';
 
@@ -10,7 +11,7 @@ describe('UserPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule.withRoutes([]), TranslateModule.forRoot()],
       declarations: [UserPageComponent],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }).compileComponents();
