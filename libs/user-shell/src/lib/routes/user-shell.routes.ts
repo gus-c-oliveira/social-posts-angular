@@ -1,12 +1,11 @@
 import { Route } from '@angular/router';
 
 import {
-  USER_LIST_PATH,
-  USER_PROFILE_PATH,
   UserListComponent,
   UserProfileComponent,
   UserPageComponent,
 } from '../components/index';
+import { USER_LIST_PATH, USER_PROFILE_PATH } from './paths';
 
 export const ROUTES: Route[] = [
   {
