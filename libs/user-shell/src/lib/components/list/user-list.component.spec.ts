@@ -21,7 +21,7 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserCardComponent, userCardSelector } from '../card';
-import { USER_PROFILE_PATH } from '../profile';
+import { USER_PROFILE_PATH } from '../../routes/paths';
 import { UserListComponent } from './user-list.component';
 
 describe('UserListComponent', () => {
