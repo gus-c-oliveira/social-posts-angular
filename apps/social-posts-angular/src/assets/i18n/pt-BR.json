@@ -1,7 +1,10 @@
 {
   "HEADER": {
     "APP_TITLE": "Rede Social",
-    "BUTTON": "Lista de Usuários"
+    "BUTTON": {
+      "STATS": "Estatísticas",
+      "USER": "Lista de Usuários"
+    }
   },
   "LANGUAGE_SELECTOR": {
     "IMAGE_ALT": "Bandeira do País"
@@ -46,5 +49,8 @@
     "LOAD_ERROR": "Desculpe! Erro ao carregar comentários...",
     "CLOSE_ALT": "Fechar",
     "POST_IMAGE_ALT": "Imagem da Publicação"
+  },
+  "STATS": {
+    "WARNING": "Em Desenvolvimento!"
   }
 }

@@ -2,8 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { getElementBySelector } from '@gus/testing';
-import { languageComponentSelector } from '@gus/ui';
-import { LanguageSelectorStubComponent } from '@gus/ui/testing';
+import { headerSelector, languageComponentSelector, UiModule } from '@gus/ui';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
@@ -14,11 +13,12 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent, LanguageSelectorStubComponent],
+      declarations: [AppComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({}),
+        UiModule,
       ],
     }).compileComponents();
   });
@@ -45,5 +45,10 @@ describe('AppComponent', () => {
       languageComponentSelector
     );
     expect(langComponent).toBeTruthy();
+  });
+
+  it('should display the header', () => {
+    const header = getElementBySelector(fixture, headerSelector);
+    expect(header).toBeTruthy();
   });
 });

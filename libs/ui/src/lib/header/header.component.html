@@ -1,2 +1,8 @@
 <h1>{{ title | translate }}</h1>
-<gus-button [buttonText]="buttonText" (click)="emitButtonClick()"></gus-button>
+<div>
+  <gus-button
+    *ngFor="let config of buttonConfigs"
+    [buttonText]="config.text"
+    (click)="emitButtonClick(config.eventType)"
+  ></gus-button>
+</div>

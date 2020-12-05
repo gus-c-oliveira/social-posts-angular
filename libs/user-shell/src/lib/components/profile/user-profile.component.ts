@@ -11,7 +11,6 @@ import { filter, take, tap } from 'rxjs/operators';
 import { UserPostComponent } from '../post';
 
 export const userProfileSelector = 'gus-user-profile';
-export const USER_PROFILE_PATH = 'user-profile';
 
 @Component({
   selector: userProfileSelector,

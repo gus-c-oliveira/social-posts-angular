@@ -1,4 +1,9 @@
 <main>
+  <gus-header
+    [title]="title"
+    [buttonConfigs]="headerButtonConfigs"
+    (buttonClick)="reduce($event)"
+  ></gus-header>
   <router-outlet></router-outlet>
   <gus-language-selector></gus-language-selector>
 </main>

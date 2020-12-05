@@ -1,7 +1,10 @@
 {
   "HEADER": {
     "APP_TITLE": "Social Posts",
-    "BUTTON": "User List"
+    "BUTTON": {
+      "STATS": "Statistics",
+      "USER": "User List"
+    }
   },
   "LANGUAGE_SELECTOR": {
     "IMAGE_ALT": "Country Flag"
@@ -46,5 +49,8 @@
     "LOAD_ERROR": "Sorry! Error loading comments...",
     "CLOSE_ALT": "Close",
     "POST_IMAGE_ALT": "Post Image"
+  },
+  "STATS": {
+    "WARNING": "Under Development!"
   }
 }

@@ -35,6 +35,9 @@
     },
     "user-shell": {
       "tags": []
+    },
+    "stats-shell": {
+      "tags": []
     }
   }
 }

@@ -10,7 +10,8 @@ In this demo:
 - Routing
 - Displaying a component in a modal window
 - Unit testing using Jest
-- Using Nx to create libs and apps.
+- Using Nx to create libs and apps
+- Lazy-loading feature modules
 
 # Play With It!
 
