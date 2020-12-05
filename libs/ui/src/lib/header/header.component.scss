@@ -15,3 +15,19 @@ h1 {
   font-weight: 300;
   font-size: 3.5rem;
 }
+
+gus-button:not(:last-of-type) {
+  margin-right: 2rem;
+
+  @media only screen and (max-width: 31.25em) {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  gus-button {
+    display: block;
+    width: max-content;
+    margin: 1rem 0 1rem auto;
+  }
+}

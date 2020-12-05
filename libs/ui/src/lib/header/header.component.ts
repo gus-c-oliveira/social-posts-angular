@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { HeaderButtonConfig } from './header.model';
 
 export const headerSelector = 'gus-header';
 
@@ -16,10 +17,11 @@ export const headerSelector = 'gus-header';
 })
 export class HeaderComponent {
   @Input() public title = '';
-  @Input() public buttonText = '';
-  @Output() public buttonClick = new EventEmitter<void>();
+  @Input() public buttonConfigs: HeaderButtonConfig[] = [];
 
-  public emitButtonClick() {
-    this.buttonClick.emit();
+  @Output() public buttonClick = new EventEmitter<{ type: string }>();
+
+  public emitButtonClick(type: string) {
+    this.buttonClick.emit({ type });
   }
 }
