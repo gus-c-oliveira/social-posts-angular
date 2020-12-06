@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { getElementTextContentBySelector } from '@gus/testing';
 
-import { selector, StatsPageComponent } from './stats-page.component';
+import { selector, StatsPageComponent } from './page.component';
 import { StoreModule } from '@ngrx/store';
 import { LanguageModule } from '@gus/language';
 
