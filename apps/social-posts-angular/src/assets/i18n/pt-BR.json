@@ -8,11 +8,5 @@
   },
   "LANGUAGE_SELECTOR": {
     "IMAGE_ALT": "Bandeira do País"
-  },
-  "ERROR": {
-    "BUTTON": "Quero tentar de novo!"
-  },
-  "SPINNER": {
-    "LOADING": "Carregando..."
   }
 }
