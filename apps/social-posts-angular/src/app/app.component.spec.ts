@@ -1,9 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LanguageModule } from '@gus/language';
+import { LanguageModule, languageComponentSelector } from '@gus/language';
 import { getElementBySelector } from '@gus/testing';
-import { headerSelector, languageComponentSelector, UiModule } from '@gus/ui';
+import { headerSelector, UiModule } from '@gus/ui';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
