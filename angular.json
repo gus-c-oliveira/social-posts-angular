@@ -336,6 +336,36 @@
           "style": "scss"
         }
       }
+    },
+    "language": {
+      "projectType": "library",
+      "root": "libs/language",
+      "sourceRoot": "libs/language/src",
+      "prefix": "gus",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/language/tsconfig.lib.json",
+              "libs/language/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/language/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/language/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "defaultProject": "social-posts-angular",

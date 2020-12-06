@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { getElementBySelector } from '@gus/testing';
+import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { LanguageSelectorComponent } from './language-selector.component';
@@ -12,7 +13,7 @@ describe('LanguageSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LanguageSelectorComponent],
-      imports: [TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot(), StoreModule.forRoot({})],
     }).compileComponents();
   });
 

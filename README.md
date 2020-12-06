@@ -4,13 +4,13 @@ A demo app that displays user profiles and posts.
 
 In this demo:
 
+- Nx for monorepo management to create libs and apps
 - State management using Redux/NgRx
 - Internationalization
 - Communicating with a REST API using a service and HTTP requests
 - Routing
 - Displaying a component in a modal window
 - Unit testing using Jest
-- Using Nx to create libs and apps
 - Lazy-loading feature modules
 
 # Play With It!
@@ -20,17 +20,30 @@ App is [deployed and live](https://social-posts-angular-gus-c-oliveira.netlify.a
 # Technologies
 
 - [Angular](https://angular.io/)
+- [Nx](https://nx.dev/angular)
 - [Jest](https://jestjs.io/)
-- [Nx](https://nx.dev/angular) for monorepo development.
+- [Cypress](https://www.cypress.io/)
 - [Stylelint](https://stylelint.io/)
 - [Prettier](https://prettier.io/)
 - [Husky](https://github.com/typicode/husky)
 
-# App Structure
+# Repository Structure
 
-- UserListComponent retrieves and displays a list of users.
-- UserProfileComponent displays the selected user's profile information and posts.
-- UserPostComponent opens in a modal, showing the contents and comments of the selected post.
+Apps:
+
+- social-posts-angular is the main repository app.
+- social-posts-angular-e2e contains the end-to-end tests for the main app.
+
+Libs:
+
+- comment-store: Store module for post's comments.
+- language: module with utilities, components and classes for handling translations inside libs.
+- post-store: Store module for user's posts.
+- stats-shell: feature module for the Statistics app area.
+- testing: utilities for use in unit tests.
+- ui: presentational components.
+- user-shell: feature module for the User app area.
+- user-store: Store module for managing user entities.
 
 # User Data and Images
 

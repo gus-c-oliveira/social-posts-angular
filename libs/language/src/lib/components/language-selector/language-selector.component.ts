@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { SetCurrentLanguage } from '../../store';
 
 export const languageComponentSelector = 'gus-language-selector';
 
@@ -13,7 +15,10 @@ export class LanguageSelectorComponent implements OnDestroy {
   public flagImage = null;
   private currentLanguage = null;
 
-  public constructor(private translateService: TranslateService) {
+  public constructor(
+    private store$: Store<any>,
+    private translateService: TranslateService
+  ) {
     this.setupListenerForLanguageChange();
   }
 
@@ -21,6 +26,7 @@ export class LanguageSelectorComponent implements OnDestroy {
     this.translateService.onDefaultLangChange
       .pipe(untilDestroyed(this))
       .subscribe((event: LangChangeEvent) => {
+        this.store$.dispatch(new SetCurrentLanguage(event.lang));
         this.currentLanguage = event.lang;
         this.setFlagImage();
       });
@@ -35,11 +41,9 @@ export class LanguageSelectorComponent implements OnDestroy {
   }
 
   public toggleLanguage() {
-    if (this.currentLanguage === 'en-US') {
-      this.translateService.setDefaultLang('pt-BR');
-    } else {
-      this.translateService.setDefaultLang('en-US');
-    }
+    const newLanguage = this.currentLanguage === 'en-US' ? 'pt-BR' : 'en-US';
+    this.translateService.setDefaultLang(newLanguage);
+    this.store$.dispatch(new SetCurrentLanguage(newLanguage));
   }
 
   public ngOnDestroy() {}

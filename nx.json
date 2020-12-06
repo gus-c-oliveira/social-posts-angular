@@ -38,6 +38,9 @@
     },
     "stats-shell": {
       "tags": []
+    },
+    "language": {
+      "tags": []
     }
   }
 }

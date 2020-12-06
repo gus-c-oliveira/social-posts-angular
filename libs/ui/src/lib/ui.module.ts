@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from './button';
 import { ErrorComponent } from './error';
 import { HeaderComponent } from './header';
-import { LanguageSelectorComponent } from './language-selector';
 import { SpinnerComponent } from './spinner';
 
 @NgModule({
@@ -14,15 +13,8 @@ import { SpinnerComponent } from './spinner';
     ButtonComponent,
     ErrorComponent,
     HeaderComponent,
-    LanguageSelectorComponent,
     SpinnerComponent,
   ],
-  exports: [
-    ButtonComponent,
-    ErrorComponent,
-    HeaderComponent,
-    LanguageSelectorComponent,
-    SpinnerComponent,
-  ],
+  exports: [ButtonComponent, ErrorComponent, HeaderComponent, SpinnerComponent],
 })
 export class UiModule {}
