@@ -4,11 +4,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommentStoreModule } from '@gus/comment-store';
 import { PostStoreModule } from '@gus/post-store';
-import { LanguageModule } from '@gus/language';
+import {
+  LanguageModule,
+  LibTranslationLoaderFactory,
+  TRANSLATIONS_TOKEN,
+} from '@gus/language';
 import { UiModule } from '@gus/ui';
 import { UserStoreModule } from '@gus/user-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { from, Observable } from 'rxjs';
 
 import en from '../assets/i18n/en-US.json';
 import pt from '../assets/i18n/pt-BR.json';
@@ -21,21 +24,6 @@ import {
 } from './components';
 import { ROUTES } from './routes';
 
-class LibTranslationLoader implements TranslateLoader {
-  private locales = {
-    'en-US': en,
-    'pt-BR': pt,
-  };
-
-  public getTranslation(lang: string): Observable<any> {
-    return from([this.locales[lang] || this.locales['en-US']]);
-  }
-}
-
-function LibTranslationLoaderFactory() {
-  return new LibTranslationLoader();
-}
-
 @NgModule({
   imports: [
     CommonModule,
@@ -44,6 +32,7 @@ function LibTranslationLoaderFactory() {
       loader: {
         provide: TranslateLoader,
         useFactory: LibTranslationLoaderFactory,
+        deps: [TRANSLATIONS_TOKEN],
       },
       isolate: true,
     }),
@@ -68,5 +57,14 @@ function LibTranslationLoaderFactory() {
     UserProfileComponent,
   ],
   entryComponents: [UserPostComponent],
+  providers: [
+    {
+      provide: TRANSLATIONS_TOKEN,
+      useValue: {
+        'en-US': en,
+        'pt-BR': pt,
+      },
+    },
+  ],
 })
 export class UserShellModule {}
