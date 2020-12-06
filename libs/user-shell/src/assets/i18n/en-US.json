@@ -33,5 +33,11 @@
     "LOAD_ERROR": "Sorry! Error loading comments...",
     "CLOSE_ALT": "Close",
     "POST_IMAGE_ALT": "Post Image"
+  },
+  "ERROR": {
+    "BUTTON": "Let me try again!"
+  },
+  "SPINNER": {
+    "LOADING": "Loading..."
   }
 }

@@ -33,5 +33,11 @@
     "LOAD_ERROR": "Desculpe! Erro ao carregar comentários...",
     "CLOSE_ALT": "Fechar",
     "POST_IMAGE_ALT": "Imagem da Publicação"
+  },
+  "ERROR": {
+    "BUTTON": "Quero tentar de novo!"
+  },
+  "SPINNER": {
+    "LOADING": "Carregando..."
   }
 }
