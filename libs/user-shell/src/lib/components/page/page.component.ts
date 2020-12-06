@@ -1,8 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { languageQuery } from '@gus/language';
-import { select, Store } from '@ngrx/store';
-import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { TranslatedPage } from '@gus/language';
 
 export const pageSelector = 'gus-user-page';
 
@@ -11,34 +8,4 @@ export const pageSelector = 'gus-user-page';
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class UserPageComponent implements OnDestroy {
-  public constructor(
-    private store$: Store<any>,
-    private translateService: TranslateService
-  ) {
-    this.addTranslations();
-    this.setupDefaultLanguage();
-    this.listenToLanguageChanges();
-  }
-
-  private addTranslations() {
-    this.translateService.addLangs(['en-US', 'pt-BR']);
-  }
-
-  private setupDefaultLanguage() {
-    const browserLanguage = navigator.language;
-    if (this.translateService.langs.indexOf(browserLanguage) !== -1) {
-      this.translateService.setDefaultLang(browserLanguage);
-    } else {
-      this.translateService.setDefaultLang('en-US');
-    }
-  }
-
-  private listenToLanguageChanges() {
-    this.store$
-      .pipe(untilDestroyed(this), select(languageQuery.getCurrentLanguage))
-      .subscribe((lang) => this.translateService.use(lang));
-  }
-
-  public ngOnDestroy() {}
-}
+export class UserPageComponent extends TranslatedPage implements OnDestroy {}
