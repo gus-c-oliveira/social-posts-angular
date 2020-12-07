@@ -60,7 +60,11 @@
         {{ 'USER_PROFILE.FRIENDS.TITLE' | translate }}
       </h2>
       <div class="friends__box">
-        <div *ngFor="let friend of userFriends" class="friends__item">
+        <div
+          *ngFor="let friend of userFriends"
+          class="friends__item"
+          (click)="updateUser(friend.ID)"
+        >
           <img
             class="friends__picture"
             [src]="friend.pictureURL"
