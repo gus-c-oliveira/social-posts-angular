@@ -1,5 +1,6 @@
 import { userQuery } from './user.selectors';
 import { initialUserState, UserState, USER_STATE_KEY } from '../state/index';
+import { mockUserList } from '../mocks';
 
 describe('User Selectors', () => {
   let store: { [USER_STATE_KEY]: UserState };
@@ -23,6 +24,13 @@ describe('User Selectors', () => {
     store[USER_STATE_KEY].selectedUserID = 5;
     const selected = userQuery.getSelectedUserID(store);
     expect(selected).toEqual(store[USER_STATE_KEY].selectedUserID);
+  });
+
+  it(`"getUserByID" should return the user with the corresponding ID`, () => {
+    const testID = 5;
+    const selected = userQuery.getUserByID(testID)(store);
+    const expectedUser = mockUserList.find((user) => user.id === testID);
+    expect(selected).toEqual(expectedUser);
   });
 
   it(`"getError" should return the current error status`, () => {

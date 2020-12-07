@@ -6,8 +6,9 @@ import {
   LoadUsersSuccess,
   SetSelectedUserID,
 } from '../actions/index';
-import { addUserPicture, userReducer } from '../reducer/index';
+import { userReducer } from '../reducer/index';
 import { initialUserState } from '../state/index';
+import { addUserPicture, addUserFriends } from '../utils/index';
 
 describe('UserReducer', () => {
   describe('LoadUsers', () => {
@@ -31,7 +32,7 @@ describe('UserReducer', () => {
       expect(newState).toEqual({
         ...initialUserState,
         loading: false,
-        users: mockUserList.map(addUserPicture),
+        users: addUserPicture(addUserFriends(mockUserList)),
         error: false,
       });
     });
