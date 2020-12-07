@@ -5,6 +5,8 @@ import {
   UserState,
   mockUserList,
   USER_SERVICE_BASE_URL,
+  addUserFriends,
+  addUserPicture,
 } from '@gus/user-store';
 import {
   COMMENT_SERVICE_BASE_URL,
@@ -20,6 +22,7 @@ import {
 } from '@gus/post-store';
 import { errorSelector, spinnerSelector } from '@gus/ui';
 import {
+  getAllElementsBySelector,
   getAllElementsTextContentBySelector,
   getElementBySelector,
   getElementTextContentBySelector,
@@ -38,11 +41,12 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
   let store$: MockStore<any>;
-  const selectedUser = { ...mockUserList[0] };
+  const mockUsers = addUserFriends(addUserPicture(mockUserList));
+  const selectedUser = { ...mockUsers[0] };
   const userKey = USER_STATE_KEY;
   const userStoreState: UserState = {
     loading: false,
-    users: mockUserList,
+    users: mockUsers,
     error: false,
     selectedUserID: selectedUser.id,
   };
@@ -126,8 +130,16 @@ describe('UserProfileComponent', () => {
     });
   });
 
+  describe('friends', () => {
+    it(`should display the user's friends`, () => {
+      const friends = getAllElementsBySelector(fixture, '.friends__item');
+      expect(friends.length).toEqual(selectedUser.friendIDs.length);
+    });
+  });
+
   describe('address', () => {
-    it(`it should display the user's address street, suite, city, zipcode and geo`, () => {
+    it(`should display the user's address street,
+      suite, city, zipcode and geo`, () => {
       const addressSectionValues = getAllElementsTextContentBySelector(
         fixture,
         '.address__value'
