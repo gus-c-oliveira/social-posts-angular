@@ -25,6 +25,7 @@ export interface User {
   website: string;
   company: UserCompany;
   pictureURL?: string;
+  friendIDs?: number[];
 }
 
 export interface SimpleUser {

@@ -2,7 +2,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
-import { User, userQuery } from '@gus/user-store';
+import { SetSelectedUserID, User, userQuery } from '@gus/user-store';
 import { select, Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnDestroy {
   public error$: Observable<boolean>;
   public overlayRef: OverlayRef;
   public userCoverImgSRC = '';
+  public userFriends = [];
   private currentUserID: number = null;
 
   public constructor(private store$: Store<any>, private overlay: Overlay) {
@@ -45,9 +46,8 @@ export class UserProfileComponent implements OnDestroy {
       filter((user) => !!user),
       tap((user) => {
         this.loadPosts(user.id);
-        this.userCoverImgSRC = `url(https://picsum.photos/seed/${
-          10 * user.id
-        }/1500/300)`;
+        this.updateUserCover(user.id);
+        this.updateUserFriendsArray(user.friendIDs);
       }),
       untilDestroyed(this)
     );
@@ -63,6 +63,27 @@ export class UserProfileComponent implements OnDestroy {
     }
     this.currentUserID = id;
     this.store$.dispatch(new LoadPosts(id));
+  }
+
+  private updateUserCover(id: number) {
+    this.userCoverImgSRC = `url(https://picsum.photos/seed/${
+      10 * id
+    }/1500/300)`;
+  }
+
+  private updateUserFriendsArray(friendIDs: number[]) {
+    this.userFriends = [];
+    friendIDs.forEach((ID) => {
+      this.store$
+        .pipe(take(1), select(userQuery.getUserByID(ID)))
+        .subscribe((user) =>
+          this.userFriends.push({
+            ID,
+            username: user.username,
+            pictureURL: user.pictureURL,
+          })
+        );
+    });
   }
 
   public handlePostSelection(id: number) {
@@ -98,6 +119,10 @@ export class UserProfileComponent implements OnDestroy {
     this.user$
       .pipe(take(1))
       .subscribe((user) => this.store$.dispatch(new LoadPosts(user.id)));
+  }
+
+  public updateUser(ID: number) {
+    this.store$.dispatch(new SetSelectedUserID(ID));
   }
 
   public ngOnDestroy() {}

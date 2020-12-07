@@ -44,6 +44,12 @@ const getSelectedUser = createSelector(
     state.users.find((user) => user.id === state.selectedUserID)
 );
 
+const getUserByID = (id: number) =>
+  createSelector(
+    getUserState,
+    (state: UserState): User => state.users.find((user) => user.id === id)
+  );
+
 export const userQuery = {
   getLoading,
   getError,
@@ -51,4 +57,5 @@ export const userQuery = {
   getUsers,
   getSimpleUsers,
   getSelectedUser,
+  getUserByID,
 };

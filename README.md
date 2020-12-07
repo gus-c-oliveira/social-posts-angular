@@ -12,6 +12,7 @@ In this demo:
 - Displaying a component in a modal window
 - Unit testing using Jest
 - Lazy-loading feature modules
+- Responsive layout
 
 # Play With It!
 

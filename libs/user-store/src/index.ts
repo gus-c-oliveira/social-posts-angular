@@ -8,3 +8,4 @@ export * from './lib/effects/index';
 export * from './lib/selectors/index';
 export * from './lib/mocks/index';
 export * from './lib/service/index';
+export * from './lib/utils/index';
