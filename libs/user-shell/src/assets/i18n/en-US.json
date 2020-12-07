@@ -21,6 +21,9 @@
       "WEBSITE_ALT": "Website Icon",
       "EMAIL_ALT": "Email Icon"
     },
+    "FRIENDS": {
+      "TITLE": "My Friends"
+    },
     "ADDRESS": {
       "TITLE": "Enjoying Life At"
     },

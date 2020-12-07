@@ -55,6 +55,24 @@
       </div>
     </section>
 
+    <section class="friends">
+      <h2 class="section-header">
+        {{ 'USER_PROFILE.FRIENDS.TITLE' | translate }}
+      </h2>
+      <div class="friends__box">
+        <div *ngFor="let friend of userFriends" class="friends__item">
+          <img
+            class="friends__picture"
+            [src]="friend.pictureURL"
+            [alt]="'USER_PROFILE.FRIENDS.FRIEND_ALT' | translate"
+          />
+          <span class="friends__username">
+            {{ friend.username }}
+          </span>
+        </div>
+      </div>
+    </section>
+
     <section class="address">
       <h2 class="section-header section-header--address">
         {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
