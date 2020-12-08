@@ -39,6 +39,7 @@
           >
             <span class="comment__name">{{ comment.name }}</span>
             <img
+              *ngIf="user.friends && user.friends[i]"
               class="comment__user-image"
               [src]="user.friends[i].pictureURL"
             />
