@@ -33,8 +33,16 @@
       </ng-container>
       <ng-template #noError>
         <ng-container *ngIf="((comments$ | async) || []).length">
-          <div class="comment__item" *ngFor="let comment of comments$ | async">
+          <div
+            *ngFor="let comment of comments$ | async; let i = index"
+            class="comment__item"
+          >
             <span class="comment__name">{{ comment.name }}</span>
+            <img
+              *ngIf="user.friends && user.friends[i]"
+              class="comment__user-image"
+              [src]="user.friends[i].pictureURL"
+            />
             <p class="comment__body">{{ comment.body }}</p>
           </div>
         </ng-container>

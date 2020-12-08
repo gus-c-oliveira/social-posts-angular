@@ -25,7 +25,6 @@ export class UserProfileComponent implements OnDestroy {
   public error$: Observable<boolean>;
   public overlayRef: OverlayRef;
   public userCoverImgSRC = '';
-  public userFriends = [];
   private currentUserID: number = null;
 
   public constructor(private store$: Store<any>, private overlay: Overlay) {
@@ -47,7 +46,6 @@ export class UserProfileComponent implements OnDestroy {
       tap((user) => {
         this.loadPosts(user.id);
         this.updateUserCover(user.id);
-        this.updateUserFriendsArray(user.friendIDs);
       }),
       untilDestroyed(this)
     );
@@ -69,21 +67,6 @@ export class UserProfileComponent implements OnDestroy {
     this.userCoverImgSRC = `url(https://picsum.photos/seed/${
       10 * id
     }/1500/300)`;
-  }
-
-  private updateUserFriendsArray(friendIDs: number[]) {
-    this.userFriends = [];
-    friendIDs.forEach((ID) => {
-      this.store$
-        .pipe(take(1), select(userQuery.getUserByID(ID)))
-        .subscribe((user) =>
-          this.userFriends.push({
-            ID,
-            username: user.username,
-            pictureURL: user.pictureURL,
-          })
-        );
-    });
   }
 
   public handlePostSelection(id: number) {
@@ -123,6 +106,7 @@ export class UserProfileComponent implements OnDestroy {
 
   public updateUser(ID: number) {
     this.store$.dispatch(new SetSelectedUserID(ID));
+    window.scrollTo(0, 0);
   }
 
   public ngOnDestroy() {}

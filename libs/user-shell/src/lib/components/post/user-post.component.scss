@@ -138,9 +138,13 @@
   }
 
   &__item {
-    display: block;
+    display: grid;
+    grid-template-columns: auto 5rem;
     margin: 2rem 0;
     padding: 2rem;
+
+    column-gap: 1rem;
+    row-gap: 1.5rem;
 
     background-color: var(--color-white);
     border-radius: 1.5rem;
@@ -150,11 +154,20 @@
   &__name {
     display: block;
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin: auto 0;
 
     font-weight: 600;
     font-size: 1.4rem;
     text-transform: capitalize;
+  }
+
+  &__user-image {
+    width: 5rem;
+    height: 5rem;
+
+    object-fit: cover;
+
+    border-radius: 50%;
   }
 
   &__body {

@@ -11,7 +11,7 @@ export const addUserFriends = (users: User[]): User[] => {
     while (selectedCandidates.length < 5 && candidates.length) {
       selectCandidate(candidates, selectedCandidates);
     }
-    updateUserAndSelectedCandidatesFriendIDs(user, selectedCandidates);
+    updateUserAndSelectedCandidatesFriends(user, selectedCandidates);
   });
   return usersWithFriends;
 };
@@ -19,7 +19,9 @@ export const addUserFriends = (users: User[]): User[] => {
 const getUsersWithEmptyFriendIDs = (users: User[]): User[] => {
   const usersWithEmptyFriends: User[] = [];
   users.forEach((user) => {
-    usersWithEmptyFriends.push(Object.assign({}, { ...user, friendIDs: [] }));
+    usersWithEmptyFriends.push(
+      Object.assign({}, { ...user, friends: [], friendIDs: [] })
+    );
   });
   return usersWithEmptyFriends;
 };
@@ -49,14 +51,24 @@ const selectCandidate = (candidates: User[], selectedCandidates: User[]) => {
   candidates.splice(selectedCandidateIndex, 1);
 };
 
-const updateUserAndSelectedCandidatesFriendIDs = (
+const updateUserAndSelectedCandidatesFriends = (
   user: User,
   selectedCandidates: User[]
 ) => {
   selectedCandidates.forEach((candidate) => {
     if (user.friendIDs.length < 5) {
       user.friendIDs.push(candidate.id);
+      user.friends.push({
+        id: candidate.id,
+        pictureURL: candidate.pictureURL,
+        username: candidate.username,
+      });
       candidate.friendIDs.push(user.id);
+      candidate.friends.push({
+        id: user.id,
+        pictureURL: user.pictureURL,
+        username: user.username,
+      });
     }
   });
 };
