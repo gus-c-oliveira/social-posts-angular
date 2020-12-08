@@ -32,7 +32,7 @@ describe('UserReducer', () => {
       expect(newState).toEqual({
         ...initialUserState,
         loading: false,
-        users: addUserPicture(addUserFriends(mockUserList)),
+        users: addUserFriends(addUserPicture(mockUserList)),
         error: false,
       });
     });

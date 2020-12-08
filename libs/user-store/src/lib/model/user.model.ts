@@ -15,6 +15,12 @@ export interface UserCompany {
   bs: string;
 }
 
+export interface Friend {
+  id: number;
+  username: string;
+  pictureURL: string;
+}
+
 export interface User {
   id: number;
   name: string;
@@ -26,6 +32,7 @@ export interface User {
   company: UserCompany;
   pictureURL?: string;
   friendIDs?: number[];
+  friends?: Friend[];
 }
 
 export interface SimpleUser {

@@ -14,7 +14,7 @@ export const userReducer = (
         error: false,
       };
     case UserActionTypes.LoadUsersSuccess:
-      const users = addUserPicture(addUserFriends(action.users));
+      const users = addUserFriends(addUserPicture(action.users));
       return {
         ...state,
         users,
