@@ -61,9 +61,9 @@
       </h2>
       <div class="friends__box">
         <div
-          *ngFor="let friend of userFriends"
+          *ngFor="let friend of (user$ | async).friends"
           class="friends__item"
-          (click)="updateUser(friend.ID)"
+          (click)="updateUser(friend.id)"
         >
           <img
             class="friends__picture"
