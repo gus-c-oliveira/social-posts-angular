@@ -8,7 +8,7 @@ In this demo:
 - State management using Redux/NgRx
 - Internationalization
 - Communicating with a REST API using a service and HTTP requests
-- Routing
+- Routing and route guarding
 - Displaying a component in a modal window
 - Unit testing using Jest
 - Lazy-loading feature modules

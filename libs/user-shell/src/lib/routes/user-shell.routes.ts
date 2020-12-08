@@ -6,6 +6,7 @@ import {
   UserPageComponent,
 } from '../components/index';
 import { USER_LIST_PATH, USER_PROFILE_PATH } from './paths';
+import { ProfileGuardService } from './profile-guard.service';
 
 export const ROUTES: Route[] = [
   {
@@ -24,6 +25,7 @@ export const ROUTES: Route[] = [
       {
         path: USER_PROFILE_PATH,
         component: UserProfileComponent,
+        canActivate: [ProfileGuardService],
       },
     ],
   },

@@ -21,8 +21,8 @@ import {
   UserPageComponent,
   UserPostComponent,
   UserProfileComponent,
-} from './components';
-import { ROUTES } from './routes';
+} from './components/index';
+import { ProfileGuardService, ROUTES } from './routes/index';
 
 @NgModule({
   imports: [
@@ -65,6 +65,7 @@ import { ROUTES } from './routes';
         'pt-BR': pt,
       },
     },
+    ProfileGuardService,
   ],
 })
 export class UserShellModule {}
