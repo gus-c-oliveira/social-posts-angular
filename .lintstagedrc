@@ -4,8 +4,8 @@
 		"git add"
 	],
 	"*.ts": [
-		"tslint"
-	],
+    "./node_modules/.bin/eslint",
+  ],
 	"*.scss": [
 		"stylelint"
 	]

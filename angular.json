@@ -27,7 +27,9 @@
               "apps/social-posts-angular/src/favicon.ico",
               "apps/social-posts-angular/src/assets"
             ],
-            "styles": ["apps/social-posts-angular/src/styles.scss"],
+            "styles": [
+              "apps/social-posts-angular/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,13 +88,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/social-posts-angular/tsconfig.app.json",
-              "apps/social-posts-angular/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/social-posts-angular/**/*"]
+            "lintFilePatterns": [
+              "apps/social-posts-angular/**/*.ts",
+              "apps/social-posts-angular/**/*.html"
+            ]
           }
         }
       }
@@ -116,12 +117,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/social-posts-angular-e2e/tsconfig.e2e.json"],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/social-posts-angular-e2e/**/*"
+            "lintFilePatterns": [
+              "apps/social-posts-angular-e2e/**/*.ts",
+              "apps/social-posts-angular-e2e/**/*.html"
             ]
           }
         }
@@ -134,13 +134,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/testing/tsconfig.lib.json",
-              "libs/testing/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/testing/**/*"]
+            "lintFilePatterns": [
+              "libs/testing/**/*.ts",
+              "libs/testing/**/*.html"
+            ]
           }
         },
         "test": {
@@ -164,13 +163,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/ui/tsconfig.lib.json",
-              "libs/ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/ui/**/*"]
+            "lintFilePatterns": [
+              "libs/ui/**/*.ts",
+              "libs/ui/**/*.html"
+            ]
           }
         },
         "test": {
@@ -194,13 +192,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/user-store/tsconfig.lib.json",
-              "libs/user-store/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/user-store/**/*"]
+            "lintFilePatterns": [
+              "libs/user-store/**/*.ts",
+              "libs/user-store/**/*.html"
+            ]
           }
         },
         "test": {
@@ -224,13 +221,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/post-store/tsconfig.lib.json",
-              "libs/post-store/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/post-store/**/*"]
+            "lintFilePatterns": [
+              "libs/post-store/**/*.ts",
+              "libs/post-store/**/*.html"
+            ]
           }
         },
         "test": {
@@ -254,13 +250,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/comment-store/tsconfig.lib.json",
-              "libs/comment-store/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/comment-store/**/*"]
+            "lintFilePatterns": [
+              "libs/comment-store/**/*.ts",
+              "libs/comment-store/**/*.html"
+            ]
           }
         },
         "test": {
@@ -284,13 +279,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/user-shell/tsconfig.lib.json",
-              "libs/user-shell/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/user-shell/**/*"]
+            "lintFilePatterns": [
+              "libs/user-shell/**/*.ts",
+              "libs/user-shell/**/*.html"
+            ]
           }
         },
         "test": {
@@ -314,13 +308,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/stats-shell/tsconfig.lib.json",
-              "libs/stats-shell/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/stats-shell/**/*"]
+            "lintFilePatterns": [
+              "libs/stats-shell/**/*.ts",
+              "libs/stats-shell/**/*.html"
+            ]
           }
         },
         "test": {
@@ -344,13 +337,12 @@
       "prefix": "gus",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "libs/language/tsconfig.lib.json",
-              "libs/language/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/language/**/*"]
+            "lintFilePatterns": [
+              "libs/language/**/*.ts",
+              "libs/language/**/*.html"
+            ]
           }
         },
         "test": {
