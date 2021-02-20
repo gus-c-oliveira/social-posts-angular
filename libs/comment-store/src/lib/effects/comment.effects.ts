@@ -19,7 +19,7 @@ export class CommentEffects {
     switchMap((action) =>
       this.service.getComments((action as LoadComments).postId).pipe(
         map((data) => new LoadCommentsSuccess(data)),
-        catchError((error) => of(new LoadCommentsError()))
+        catchError(() => of(new LoadCommentsError()))
       )
     )
   );

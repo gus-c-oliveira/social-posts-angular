@@ -6,14 +6,14 @@ import { Comment } from '../model/index';
 
 @Injectable()
 export class CommentServiceStubSuccessful {
-  public getComments(postId: number): Observable<Comment[]> {
+  public getComments(): Observable<Comment[]> {
     return of(mockCommentList);
   }
 }
 
 @Injectable()
 export class CommentServiceStubFailed {
-  public getComments(postId: number): Observable<Comment[]> {
+  public getComments(): Observable<Comment[]> {
     return new Observable((observer: Observer<any>) => {
       observer.error('Failed request');
       observer.complete();
