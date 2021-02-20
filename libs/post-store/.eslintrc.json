@@ -1,19 +1,14 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "libs/post-store/tsconfig.*?.json"
-        ]
+        "project": ["libs/post-store/tsconfig.*?.json"]
       },
       "rules": {
+        "@angular-eslint/no-empty-lifecycle-method": 0,
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -43,9 +38,7 @@
       ]
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {},
       "extends": [
         "plugin:@nrwl/nx/angular-template",

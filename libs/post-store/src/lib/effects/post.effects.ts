@@ -19,7 +19,7 @@ export class PostEffects {
     switchMap((action) =>
       this.service.getPosts((action as LoadPosts).userId).pipe(
         map((data) => new LoadPostsSuccess(data)),
-        catchError((error) => of(new LoadPostsError()))
+        catchError(() => of(new LoadPostsError()))
       )
     )
   );

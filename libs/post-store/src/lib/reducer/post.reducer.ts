@@ -1,5 +1,4 @@
 import { PostAction, PostActionTypes } from '../actions/index';
-import { Post } from '../model';
 import { initialPostState, PostState } from '../state/index';
 
 export const addImageToPost = (posts) => {
@@ -20,7 +19,7 @@ export const postReducer = (
         loading: true,
         error: false,
       };
-    case PostActionTypes.LoadPostsSuccess:
+    case PostActionTypes.LoadPostsSuccess: {
       const posts = addImageToPost(action.posts);
       return {
         ...state,
@@ -28,6 +27,7 @@ export const postReducer = (
         loading: false,
         error: false,
       };
+    }
     case PostActionTypes.LoadPostsError:
       return {
         ...state,
