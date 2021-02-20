@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { getElementTextContentBySelector } from '@gus/testing';
-
-import { selector, StatsPageComponent } from './page.component';
-import { StoreModule } from '@ngrx/store';
 import { LanguageModule } from '@gus/language';
+import { getElementTextContentBySelector } from '@gus/testing';
+import { StoreModule } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { StatsPageComponent } from './page.component';
 
 describe('StatsPageComponent', () => {
   let component: StatsPageComponent;
