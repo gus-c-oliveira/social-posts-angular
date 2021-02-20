@@ -4,7 +4,7 @@
 		"git add"
 	],
 	"*.ts": [
-    "./node_modules/.bin/eslint",
+    "./node_modules/.bin/eslint --ext .ts",
   ],
 	"*.scss": [
 		"stylelint"

@@ -1,20 +1,15 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
+  "ignorePatterns": ["**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
         "project": "./tsconfig.*?.json"
       },
-      "extends": [
-        "plugin:@nrwl/nx/typescript"
-      ],
+      "extends": ["plugin:@nrwl/nx/typescript"],
       "rules": {
+        "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/no-empty-function": 0,
         "@angular-eslint/no-empty-lifecycle-method": 0,
         "max-len": [
@@ -38,7 +33,5 @@
       }
     }
   ],
-  "plugins": [
-    "@nrwl/nx"
-  ]
+  "plugins": ["@nrwl/nx"]
 }
