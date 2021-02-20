@@ -33,14 +33,16 @@ describe('Testing Utils', () => {
   });
 
   describe('getElementBySelector', () => {
-    it('should return the element given a fixture and corresponding css selector', () => {
+    it(`should return the element given
+      a fixture and corresponding css selector`, () => {
       const buttonElement = getElementBySelector(fixture, 'button');
       expect(buttonElement).toBeTruthy();
     });
   });
 
   describe('getAllElementsBySelector', () => {
-    it('should return all elements given a fixture and corresponding css selector', () => {
+    it(`should return all elements given
+      a fixture and corresponding css selector`, () => {
       const allSpans = getAllElementsBySelector(fixture, '.test-span');
       expect(allSpans).toBeTruthy();
       expect(allSpans.length).toEqual(2);
