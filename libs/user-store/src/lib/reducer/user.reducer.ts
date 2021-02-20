@@ -13,7 +13,7 @@ export const userReducer = (
         loading: true,
         error: false,
       };
-    case UserActionTypes.LoadUsersSuccess:
+    case UserActionTypes.LoadUsersSuccess: {
       const users = addUserFriends(addUserPicture(action.users));
       return {
         ...state,
@@ -21,6 +21,7 @@ export const userReducer = (
         loading: false,
         error: false,
       };
+    }
     case UserActionTypes.LoadUsersError:
       return {
         ...state,

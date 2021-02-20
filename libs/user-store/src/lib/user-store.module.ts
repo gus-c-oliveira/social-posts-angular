@@ -7,7 +7,6 @@ import { UserEffects } from './effects/index';
 import { userReducer } from './reducer/index';
 import { USER_STATE_KEY } from './state/index';
 import { UserService } from './service/index';
-import { USER_SERVICE_BASE_URL } from './token';
 
 @NgModule({
   imports: [
