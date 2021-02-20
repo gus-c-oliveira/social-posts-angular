@@ -11,7 +11,7 @@ export class UserListStubComponent implements OnDestroy {
   public loading$: any;
   public error$: any;
 
-  public handleUserSelection(id: any) {}
+  public handleUserSelection() {}
 
   public retryLoadingUsers() {}
 

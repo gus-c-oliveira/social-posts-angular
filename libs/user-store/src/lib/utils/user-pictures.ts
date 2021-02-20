@@ -3,6 +3,7 @@
 
 import { User } from '../model/index';
 
+/* eslint-disable max-len */
 const userProfilePictures = [
   'assets/img/user-profile/emoji-flirt.svg',
   'https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ',
@@ -16,6 +17,7 @@ const userProfilePictures = [
   'https://i.picsum.photos/id/399/2048/1365.jpg?hmac=Tm7jwbWj0i70u952g5yC0da-gxScdY2mQ6gjKrP8Haw',
   'https://i.picsum.photos/id/822/5616/3744.jpg?hmac=8zzCg2OZ3IRmNTyFii2msfkUBNgzAD8YMpBbbRsIdqk',
 ];
+/* eslint-enable max-len */
 
 export const addUserPicture = (users: User[]): User[] => {
   return users.map((user) => ({

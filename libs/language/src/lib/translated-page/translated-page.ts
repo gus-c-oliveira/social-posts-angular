@@ -6,7 +6,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { languageQuery } from '../store/index';
 
 @Directive()
-// tslint:disable-next-line: directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class TranslatedPage implements OnDestroy {
   public constructor(
     private store$: Store<any>,

@@ -7,7 +7,6 @@ import { CommentEffects } from './effects/index';
 import { commentReducer } from './reducer/index';
 import { CommentService } from './service/index';
 import { COMMENT_STATE_KEY } from './state/index';
-import { COMMENT_SERVICE_BASE_URL } from './token';
 
 @NgModule({
   imports: [

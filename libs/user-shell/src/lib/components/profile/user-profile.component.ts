@@ -91,7 +91,7 @@ export class UserProfileComponent implements OnDestroy {
       backdropClass: ['post-overlay', 'cdk-overlay-dark-backdrop'],
       positionStrategy,
     });
-    this.overlayRef.backdropClick().subscribe((_) => this.overlayRef.dispose());
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.dispose());
     const portal = new ComponentPortal(UserPostComponent);
     const postComponent = this.overlayRef.attach<UserPostComponent>(portal)
       .instance;

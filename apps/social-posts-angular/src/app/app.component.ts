@@ -4,7 +4,6 @@ import { HeaderButtonConfig } from '@gus/ui';
 import { TranslateService } from '@ngx-translate/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { filter } from 'rxjs/operators';
-
 import { STATS_AREA_PATH, USER_AREA_PATH } from './router/app.routes';
 
 @Component({
@@ -54,7 +53,7 @@ export class AppComponent implements OnDestroy {
         untilDestroyed(this),
         filter((event) => event instanceof NavigationEnd)
       )
-      .subscribe((event) => {
+      .subscribe(() => {
         window.scrollTo(0, 0);
       });
   }

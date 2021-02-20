@@ -15,10 +15,10 @@ export class UserEffects {
   @Effect()
   loadUsers$ = this.actions$.pipe(
     ofType(UserActionTypes.LoadUsers),
-    switchMap((action) =>
+    switchMap(() =>
       this.service.getUsers().pipe(
         map((data) => new LoadUsersSuccess(data)),
-        catchError((error) => of(new LoadUsersError()))
+        catchError(() => of(new LoadUsersError()))
       )
     )
   );

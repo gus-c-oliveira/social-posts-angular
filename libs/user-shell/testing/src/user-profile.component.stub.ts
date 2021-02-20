@@ -13,7 +13,7 @@ export class UserProfileStubComponent implements OnDestroy {
   public error$: any;
   public overlayRef: any;
 
-  public handlePostSelection(id: any) {}
+  public handlePostSelection() {}
 
   public retryLoadingPosts() {}
 

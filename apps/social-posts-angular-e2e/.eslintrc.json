@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "plugin:cypress/recommended",
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "src/plugins/index.js"
+      ],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "no-undef": "off"
+      }
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "apps/social-posts-angular-e2e/tsconfig.*?.json"
+        ]
+      },
+      "rules": {
+        "max-len": [
+          "error",
+          {
+            "code": 80
+          }
+        ]
+      },
+      "extends": [
+        "plugin:@nrwl/nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ]
+    }
+  ]
+}

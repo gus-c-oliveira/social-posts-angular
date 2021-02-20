@@ -1,11 +1,13 @@
 {
-	"*.{ts,json,md,html}": [
+	"*.{json,md,html}": [
 		"prettier --write",
 		"git add"
 	],
 	"*.ts": [
-		"tslint"
-	],
+    "prettier --write",
+		"git add",
+    "./node_modules/.bin/eslint --ext .ts"
+  ],
 	"*.scss": [
 		"stylelint"
 	]
