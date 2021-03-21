@@ -1,10 +1,11 @@
 import { Directive, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { languageQuery } from '../store/index';
 
+@UntilDestroy()
 @Directive()
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class TranslatedPage implements OnDestroy {
