@@ -3,15 +3,16 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
 import { SetSelectedUserID, User, userQuery } from '@gus/user-store';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 
-import { UserPostComponent } from '../post';
+import { UserPostComponent } from '../post/index';
 
 export const userProfileSelector = 'gus-user-profile';
 
+@UntilDestroy()
 @Component({
   selector: userProfileSelector,
   templateUrl: 'user-profile.component.html',

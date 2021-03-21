@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClearPosts } from '@gus/post-store';
 import {
   ClearSelectedUserID,
   LoadUsers,
@@ -7,9 +8,8 @@ import {
   SimpleUser,
   userQuery,
 } from '@gus/user-store';
-import { ClearPosts } from '@gus/post-store';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -17,6 +17,7 @@ import { USER_PROFILE_PATH } from '../../routes/paths';
 
 export const userListSelector = 'gus-user-list';
 
+@UntilDestroy()
 @Component({
   selector: userListSelector,
   templateUrl: 'user-list.component.html',
