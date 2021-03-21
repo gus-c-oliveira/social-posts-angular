@@ -8,13 +8,14 @@ import {
 } from '@gus/comment-store';
 import { ClearSelectedPostID, Post, postQuery } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 
 export const userPostSelector = 'gus-user-post';
 
+@UntilDestroy()
 @Component({
   selector: userPostSelector,
   templateUrl: './user-post.component.html',

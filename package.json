@@ -40,6 +40,7 @@
     "@angular/platform-browser-dynamic": "11.0.3",
     "@angular/router": "11.0.3",
     "@briebug/jest-schematic": "^2.1.1",
+    "@ngneat/until-destroy": "^8.0.4",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^10.0.1",
     "@ngrx/router-store": "^10.0.1",
@@ -48,7 +49,6 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@nrwl/angular": "11.2.12",
-    "ngx-take-until-destroy": "^5.4.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -86,6 +86,7 @@
     "jasmine-core": "3.6.0",
     "jasmine-spec-reporter": "5.0.2",
     "jest": "26.2.2",
+    "jest-environment-jsdom-fifteen": "^1.0.2",
     "jest-preset-angular": "8.3.2",
     "lint-staged": "^10.2.11",
     "prettier": "2.2.1",

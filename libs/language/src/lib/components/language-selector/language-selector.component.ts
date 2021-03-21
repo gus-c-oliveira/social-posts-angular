@@ -1,11 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { SetCurrentLanguage } from '../../store';
+
+import { SetCurrentLanguage } from '../../store/index';
 
 export const languageComponentSelector = 'gus-language-selector';
 
+@UntilDestroy()
 @Component({
   selector: languageComponentSelector,
   templateUrl: './language-selector.component.html',
