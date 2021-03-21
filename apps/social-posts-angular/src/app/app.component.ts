@@ -1,11 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { HeaderButtonConfig } from '@gus/ui';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { filter } from 'rxjs/operators';
+
 import { STATS_AREA_PATH, USER_AREA_PATH } from './router/app.routes';
 
+@UntilDestroy()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
