@@ -11,6 +11,7 @@ In this demo:
 - Routing and route guarding
 - Displaying a component in a modal window
 - Unit testing using Jest
+- End-to-End testing using Cypress
 - Lazy-loading feature modules
 - Responsive layout
 
