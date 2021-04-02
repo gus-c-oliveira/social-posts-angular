@@ -1,42 +1,21 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { User } from '../model/index';
 
-export enum UserActionTypes {
-  LoadUsers = '[User] Load Users',
-  LoadUsersSuccess = '[User] Load Users Success',
-  LoadUsersError = '[User] Load Users Error',
-  SetSelectedUserID = '[User] Set Selected User ID',
-  ClearSelectedUserID = '[User] Clear Selected User ID',
-}
+export const loadUsers = createAction('[User] Load Users');
 
-export class LoadUsers implements Action {
-  public readonly type = UserActionTypes.LoadUsers;
-}
+export const loadUsersSuccess = createAction(
+  '[User] Load Users Success',
+  props<{ users: User[] }>()
+);
 
-export class LoadUsersSuccess implements Action {
-  public readonly type = UserActionTypes.LoadUsersSuccess;
+export const loadUsersError = createAction('[User] Load Users Error');
 
-  public constructor(public users: User[]) {}
-}
+export const setSelectedUserID = createAction(
+  '[User] Set Selected User ID',
+  props<{ id: number }>()
+);
 
-export class LoadUsersError implements Action {
-  public readonly type = UserActionTypes.LoadUsersError;
-}
-
-export class SetSelectedUserID implements Action {
-  public readonly type = UserActionTypes.SetSelectedUserID;
-
-  public constructor(public id: number) {}
-}
-
-export class ClearSelectedUserID implements Action {
-  public readonly type = UserActionTypes.ClearSelectedUserID;
-}
-
-export type UserAction =
-  | LoadUsers
-  | LoadUsersSuccess
-  | LoadUsersError
-  | SetSelectedUserID
-  | ClearSelectedUserID;
+export const clearSelectedUserID = createAction(
+  '[User] Clear Selected User ID'
+);
