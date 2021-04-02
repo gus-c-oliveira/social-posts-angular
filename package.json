@@ -43,6 +43,7 @@
     "@ngneat/until-destroy": "^8.0.4",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^10.0.1",
+    "@ngrx/entity": "^10.0.1",
     "@ngrx/router-store": "^10.0.1",
     "@ngrx/store": "^10.0.1",
     "@ngrx/store-devtools": "^10.0.1",
