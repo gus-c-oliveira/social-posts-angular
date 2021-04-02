@@ -7,6 +7,7 @@ import {
   USER_SERVICE_BASE_URL,
   addUserFriends,
   addUserPicture,
+  mapUsersToEntities,
 } from '@gus/user-store';
 import {
   COMMENT_SERVICE_BASE_URL,
@@ -46,9 +47,10 @@ describe('UserProfileComponent', () => {
   const userKey = USER_STATE_KEY;
   const userStoreState: UserState = {
     loading: false,
-    users: mockUsers,
+    entities: mapUsersToEntities(mockUsers),
     error: false,
     selectedUserID: selectedUser.id,
+    ids: mockUsers.map((user) => user.id),
   };
   const postKey = POST_STATE_KEY;
   const postStoreState: PostState = {

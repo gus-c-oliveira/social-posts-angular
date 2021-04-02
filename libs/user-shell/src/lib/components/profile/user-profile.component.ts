@@ -2,7 +2,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
-import { SetSelectedUserID, User, userQuery } from '@gus/user-store';
+import { UserActions, User, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -105,8 +105,8 @@ export class UserProfileComponent implements OnDestroy {
       .subscribe((user) => this.store$.dispatch(new LoadPosts(user.id)));
   }
 
-  public updateUser(ID: number) {
-    this.store$.dispatch(new SetSelectedUserID(ID));
+  public updateUser(id: number) {
+    this.store$.dispatch(UserActions.setSelectedUserID({ id }));
     window.scrollTo(0, 0);
   }
 
