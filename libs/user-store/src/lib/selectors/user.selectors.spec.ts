@@ -1,13 +1,7 @@
-import { Dictionary } from '@ngrx/entity';
-
 import { mockUserList } from '../mocks/index';
-import { User } from '../model/index';
 import { initialUserState, USER_STATE_KEY, UserState } from '../state/index';
 import { userQuery } from './user.selectors';
-
-const mapEntitiesToUsers = (entities: Dictionary<User>): User[] => {
-  return Object.keys(entities).map((id) => entities[id]);
-};
+import { mapEntitiesToUsers } from '../utils/index';
 
 describe('User Selectors', () => {
   let store: { [USER_STATE_KEY]: UserState };

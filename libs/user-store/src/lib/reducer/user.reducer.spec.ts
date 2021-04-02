@@ -1,17 +1,12 @@
-import { Dictionary } from '@ngrx/entity';
-
 import { UserActions } from '../actions/index';
 import { mockUserList } from '../mocks/index';
-import { User } from '../model/index';
 import { userReducer } from '../reducer/index';
 import { initialUserState } from '../state/index';
-import { addUserFriends, addUserPicture } from '../utils/index';
-
-const mapUsersToEntities = (users: User[]): Dictionary<User> => {
-  const entities: Dictionary<User> = {};
-  users.forEach((user) => (entities[user.id] = user));
-  return entities;
-};
+import {
+  addUserFriends,
+  addUserPicture,
+  mapUsersToEntities,
+} from '../utils/index';
 
 describe('UserReducer', () => {
   describe('LoadUsers', () => {
