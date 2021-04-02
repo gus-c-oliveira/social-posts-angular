@@ -4,10 +4,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   mockUserList,
   initialUserState,
-  LoadUsers,
-  SetSelectedUserID,
+  UserActions,
   USER_STATE_KEY,
   UserState,
+  mapUsersToEntities,
 } from '@gus/user-store';
 import { SpinnerStubComponent, spinnerSelector } from '@gus/ui/testing';
 import {
@@ -28,13 +28,26 @@ describe('UserListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
   const storeStates: { [stateName: string]: UserState } = {
-    loading: { loading: true, users: [], error: false, selectedUserID: null },
-    error: { loading: false, users: [], error: true, selectedUserID: null },
-    usersLoaded: {
-      loading: false,
-      users: mockUserList,
+    loading: {
+      loading: true,
+      entities: {},
       error: false,
       selectedUserID: null,
+      ids: [],
+    },
+    error: {
+      loading: false,
+      entities: {},
+      error: true,
+      selectedUserID: null,
+      ids: [],
+    },
+    usersLoaded: {
+      loading: false,
+      entities: mapUsersToEntities(mockUserList),
+      error: false,
+      selectedUserID: null,
+      ids: mockUserList.map((user) => user.id),
     },
   };
   const userStateKey = USER_STATE_KEY;
@@ -108,7 +121,7 @@ describe('UserListComponent', () => {
     });
     fixture.detectChanges();
     getElementBySelector(fixture, '.error__button').click();
-    expect(store.dispatch).toHaveBeenCalledWith(new LoadUsers());
+    expect(store.dispatch).toHaveBeenCalledWith(UserActions.loadUsers());
   });
 
   it(`should dispatch action to set
@@ -120,7 +133,7 @@ describe('UserListComponent', () => {
     fixture.detectChanges();
     getElementBySelector(fixture, '.card').click();
     expect(store.dispatch).toHaveBeenCalledWith(
-      new SetSelectedUserID(mockUserList[0].id)
+      UserActions.setSelectedUserID({ id: mockUserList[0].id })
     );
   });
 
