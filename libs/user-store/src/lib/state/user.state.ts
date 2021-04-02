@@ -1,17 +1,19 @@
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
+
 import { User } from '../model/index';
 
 export const USER_STATE_KEY = 'user';
 
-export interface UserState {
-  users: User[];
-  selectedUserID: number;
-  loading: boolean;
+export interface UserState extends EntityState<User> {
   error: boolean;
+  loading: boolean;
+  selectedUserID: number;
 }
 
-export const initialUserState: UserState = {
-  users: [],
-  selectedUserID: null,
-  loading: false,
+export const adapter = createEntityAdapter<User>();
+
+export const initialUserState: UserState = adapter.getInitialState({
   error: false,
-};
+  loading: false,
+  selectedUserID: null,
+});

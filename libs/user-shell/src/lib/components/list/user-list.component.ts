@@ -1,13 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClearPosts } from '@gus/post-store';
-import {
-  ClearSelectedUserID,
-  LoadUsers,
-  SetSelectedUserID,
-  SimpleUser,
-  userQuery,
-} from '@gus/user-store';
+import { SimpleUser, UserActions, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -40,7 +34,7 @@ export class UserListComponent implements OnDestroy {
   }
 
   private clearPreviousUserData() {
-    this.store$.dispatch(new ClearSelectedUserID());
+    this.store$.dispatch(UserActions.clearSelectedUserID());
     this.store$.dispatch(new ClearPosts());
   }
 
@@ -62,7 +56,7 @@ export class UserListComponent implements OnDestroy {
   private loadUserList() {
     this.userList$.pipe(take(1)).subscribe((users) => {
       if (!users || !users.length) {
-        this.store$.dispatch(new LoadUsers());
+        this.store$.dispatch(UserActions.loadUsers());
       }
     });
   }
@@ -73,7 +67,7 @@ export class UserListComponent implements OnDestroy {
   }
 
   private setSelectedUser(id: number) {
-    this.store$.dispatch(new SetSelectedUserID(id));
+    this.store$.dispatch(UserActions.setSelectedUserID({ id }));
   }
 
   private navigateToUserProfile() {
@@ -83,7 +77,7 @@ export class UserListComponent implements OnDestroy {
   }
 
   public retryLoadingUsers() {
-    this.store$.dispatch(new LoadUsers());
+    this.store$.dispatch(UserActions.loadUsers());
   }
 
   public ngOnDestroy() {}

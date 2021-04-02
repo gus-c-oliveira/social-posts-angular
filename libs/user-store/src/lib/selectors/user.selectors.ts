@@ -1,8 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserState, USER_STATE_KEY } from '../state/index';
+import { UserState, USER_STATE_KEY, adapter } from '../state/index';
 import { User, SimpleUser } from '../model/index';
 
 const getUserState = createFeatureSelector<UserState>(USER_STATE_KEY);
+
+const adapterSelectors = adapter.getSelectors();
 
 export const mapUserToSimpleUser = (user: User): SimpleUser => ({
   id: user.id,
@@ -22,15 +24,10 @@ const getError = createSelector(
   (state: UserState): boolean => !!state.error
 );
 
-const getUsers = createSelector(
-  getUserState,
-  (state: UserState): User[] => state.users || []
-);
+const getUsers = createSelector(getUserState, adapterSelectors.selectAll);
 
-const getSimpleUsers = createSelector(
-  getUserState,
-  (state: UserState): SimpleUser[] =>
-    state.users.map((user) => mapUserToSimpleUser(user))
+const getSimpleUsers = createSelector(getUsers, (users: User[]): SimpleUser[] =>
+  users.map((user) => mapUserToSimpleUser(user))
 );
 
 const getSelectedUserID = createSelector(
@@ -38,17 +35,23 @@ const getSelectedUserID = createSelector(
   (state: UserState): number => state.selectedUserID
 );
 
-const getSelectedUser = createSelector(
+const getUserEntities = createSelector(
   getUserState,
-  (state: UserState): User =>
-    state.users.find((user) => user.id === state.selectedUserID)
+  adapterSelectors.selectEntities
 );
 
-const getUserByID = (id: number) =>
-  createSelector(
-    getUserState,
-    (state: UserState): User => state.users.find((user) => user.id === id)
-  );
+const getSelectedUser = createSelector(
+  getUserEntities,
+  getSelectedUserID,
+  (entities: { [id: number]: User }, selectedUserID: number): User =>
+    entities[selectedUserID]
+);
+
+const getUserByID = createSelector(
+  getUserEntities,
+  (entities: { [id: number]: User }, props: { id: number }) =>
+    entities[props.id]
+);
 
 export const userQuery = {
   getLoading,

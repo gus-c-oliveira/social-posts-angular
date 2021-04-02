@@ -5,14 +5,14 @@ import { StoreModule } from '@ngrx/store';
 import { cold, hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
+import { UserActions } from '../actions/index';
+import { UserEffects } from '../effects/index';
+import { mockUserList } from '../mocks/index';
 import {
   UserService,
   UserServiceStubFailed,
   UserServiceStubSuccessful,
 } from '../service/index';
-import { LoadUsers, LoadUsersError, LoadUsersSuccess } from '../actions/index';
-import { UserEffects } from '../effects/index';
-import { mockUserList } from '../mocks/index';
 
 describe('UserEffects', () => {
   let actions: Observable<any>;
@@ -38,9 +38,11 @@ describe('UserEffects', () => {
     });
 
     it('should dispatch a new LoadUsersSuccess', () => {
-      actions = hot('-a-|', { a: new LoadUsers() });
+      actions = hot('-a-|', { a: UserActions.loadUsers() });
       expect(effects.loadUsers$).toBeObservable(
-        cold('-a-|', { a: new LoadUsersSuccess(mockUserList) })
+        cold('-a-|', {
+          a: UserActions.loadUsersSuccess({ users: mockUserList }),
+        })
       );
     });
   });
@@ -65,9 +67,9 @@ describe('UserEffects', () => {
     });
 
     it('should dispatch a new LoadUsersError', () => {
-      actions = hot('-a-|', { a: new LoadUsers() });
+      actions = hot('-a-|', { a: UserActions.loadUsers() });
       expect(effects.loadUsers$).toBeObservable(
-        cold('-a-|', { a: new LoadUsersError() })
+        cold('-a-|', { a: UserActions.loadUsersError() })
       );
     });
   });

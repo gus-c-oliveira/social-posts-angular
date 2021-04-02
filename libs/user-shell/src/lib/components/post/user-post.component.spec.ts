@@ -29,7 +29,11 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { UserPostComponent } from './user-post.component';
-import { mockUserList, USER_STATE_KEY } from '@gus/user-store';
+import {
+  mockUserList,
+  USER_STATE_KEY,
+  mapUsersToEntities,
+} from '@gus/user-store';
 
 @Component({
   selector: 'gus-test-host',
@@ -53,10 +57,11 @@ describe('UserPostComponent', () => {
   let store$: MockStore<any>;
   const initialState = {
     [userKey]: {
-      users: mockUserList,
+      entities: mapUsersToEntities(mockUserList),
       loading: false,
       error: false,
       selectedUserID: 1,
+      ids: mockUserList.map((user) => user.id),
     },
     [postKey]: { ...initialPostState },
     [commentKey]: { ...initialCommentState },

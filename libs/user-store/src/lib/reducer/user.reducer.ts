@@ -1,44 +1,32 @@
-import { UserAction, UserActionTypes } from '../actions/index';
-import { initialUserState, UserState } from '../state/index';
+import { createReducer, on } from '@ngrx/store';
+
+import { UserActions } from '../actions/index';
+import { User } from '../model/index';
+import { adapter, initialUserState } from '../state/index';
 import { addUserFriends, addUserPicture } from '../utils/index';
 
-export const userReducer = (
-  state: UserState = initialUserState,
-  action: UserAction
-): UserState => {
-  switch (action.type) {
-    case UserActionTypes.LoadUsers:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-      };
-    case UserActionTypes.LoadUsersSuccess: {
-      const users = addUserFriends(addUserPicture(action.users));
-      return {
-        ...state,
-        users,
-        loading: false,
-        error: false,
-      };
-    }
-    case UserActionTypes.LoadUsersError:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-      };
-    case UserActionTypes.SetSelectedUserID:
-      return {
-        ...state,
-        selectedUserID: action.id,
-      };
-    case UserActionTypes.ClearSelectedUserID:
-      return {
-        ...state,
-        selectedUserID: null,
-      };
-    default:
-      return state;
-  }
-};
+export const userReducer = createReducer(
+  initialUserState,
+  on(UserActions.loadUsers, (state) => ({
+    ...state,
+    loading: true,
+    error: false,
+  })),
+  on(UserActions.loadUsersSuccess, (state, action) => {
+    const users: User[] = addUserFriends(addUserPicture(action.users));
+    return adapter.addAll(users, { ...state, loading: false, error: false });
+  }),
+  on(UserActions.loadUsersError, (state) => ({
+    ...state,
+    loading: false,
+    error: true,
+  })),
+  on(UserActions.setSelectedUserID, (state, action) => ({
+    ...state,
+    selectedUserID: action.id,
+  })),
+  on(UserActions.clearSelectedUserID, (state) => ({
+    ...state,
+    selectedUserID: null,
+  }))
+);

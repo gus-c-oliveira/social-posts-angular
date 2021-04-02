@@ -21,24 +21,19 @@ export interface Friend {
   pictureURL: string;
 }
 
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: UserAddress;
-  phone: string;
-  website: string;
-  company: UserCompany;
-  pictureURL?: string;
-  friendIDs?: number[];
-  friends?: Friend[];
-}
-
 export interface SimpleUser {
   id: number;
   name: string;
   username: string;
   email: string;
   pictureURL?: string;
+}
+
+export interface User extends SimpleUser {
+  address: UserAddress;
+  phone: string;
+  website: string;
+  company: UserCompany;
+  friendIDs?: number[];
+  friends?: Friend[];
 }

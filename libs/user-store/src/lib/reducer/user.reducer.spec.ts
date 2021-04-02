@@ -1,19 +1,17 @@
+import { UserActions } from '../actions/index';
 import { mockUserList } from '../mocks/index';
-import {
-  ClearSelectedUserID,
-  LoadUsers,
-  LoadUsersError,
-  LoadUsersSuccess,
-  SetSelectedUserID,
-} from '../actions/index';
 import { userReducer } from '../reducer/index';
 import { initialUserState } from '../state/index';
-import { addUserPicture, addUserFriends } from '../utils/index';
+import {
+  addUserFriends,
+  addUserPicture,
+  mapUsersToEntities,
+} from '../utils/index';
 
 describe('UserReducer', () => {
   describe('LoadUsers', () => {
     it('should set loading to true and error to false', () => {
-      const newState = userReducer(initialUserState, new LoadUsers());
+      const newState = userReducer(initialUserState, UserActions.loadUsers());
       expect(newState).toEqual({
         ...initialUserState,
         loading: true,
@@ -27,12 +25,15 @@ describe('UserReducer', () => {
         and loading and error to false`, () => {
       const newState = userReducer(
         initialUserState,
-        new LoadUsersSuccess(mockUserList)
+        UserActions.loadUsersSuccess({ users: mockUserList })
       );
       expect(newState).toEqual({
         ...initialUserState,
         loading: false,
-        users: addUserFriends(addUserPicture(mockUserList)),
+        entities: mapUsersToEntities(
+          addUserFriends(addUserPicture(mockUserList))
+        ),
+        ids: mockUserList.map((user) => user.id),
         error: false,
       });
     });
@@ -40,7 +41,10 @@ describe('UserReducer', () => {
 
   describe('LoadUsersError', () => {
     it('should set loading to false and error to true', () => {
-      const newState = userReducer(initialUserState, new LoadUsersError());
+      const newState = userReducer(
+        initialUserState,
+        UserActions.loadUsersError()
+      );
       expect(newState).toEqual({
         ...initialUserState,
         loading: false,
@@ -51,7 +55,10 @@ describe('UserReducer', () => {
 
   describe('SetSelectedUserID', () => {
     it('should set the selected user ID', () => {
-      const newState = userReducer(initialUserState, new SetSelectedUserID(5));
+      const newState = userReducer(
+        initialUserState,
+        UserActions.setSelectedUserID({ id: 5 })
+      );
       expect(newState).toEqual({
         ...initialUserState,
         selectedUserID: 5,
@@ -63,7 +70,7 @@ describe('UserReducer', () => {
     it('should clear the selected user ID', () => {
       const newState = userReducer(
         { ...initialUserState, selectedUserID: 5 },
-        new ClearSelectedUserID()
+        UserActions.clearSelectedUserID()
       );
       expect(newState).toEqual({ ...initialUserState });
     });
