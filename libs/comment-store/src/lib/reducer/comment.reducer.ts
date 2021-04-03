@@ -1,36 +1,22 @@
-import { CommentAction, CommentActionTypes } from '../actions/index';
-import { CommentState, initialCommentState } from '../state/index';
+import { createReducer, on } from '@ngrx/store';
 
-export const commentReducer = (
-  state: CommentState = initialCommentState,
-  action: CommentAction
-): CommentState => {
-  switch (action.type) {
-    case CommentActionTypes.LoadComments:
-      return {
-        ...state,
-        loading: true,
-        error: false,
-      };
-    case CommentActionTypes.LoadCommentsSuccess:
-      return {
-        ...state,
-        comments: action.comments,
-        loading: false,
-        error: false,
-      };
-    case CommentActionTypes.LoadCommentsError:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-      };
-    case CommentActionTypes.ClearComments:
-      return {
-        ...state,
-        comments: [],
-      };
-    default:
-      return state;
-  }
-};
+import { CommentActions } from '../actions/index';
+import { initialCommentState, adapter } from '../state/index';
+
+export const commentReducer = createReducer(
+  initialCommentState,
+  on(CommentActions.loadComments, (state) => ({
+    ...state,
+    loading: true,
+    error: false,
+  })),
+  on(CommentActions.loadCommentsSuccess, (state, action) =>
+    adapter.addAll(action.comments, { ...state, loading: false, error: false })
+  ),
+  on(CommentActions.loadCommentsError, (state) => ({
+    ...state,
+    loading: false,
+    error: true,
+  })),
+  on(CommentActions.clearComments, (state) => adapter.removeAll(state))
+);
