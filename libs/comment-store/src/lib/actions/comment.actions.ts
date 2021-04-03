@@ -1,36 +1,17 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Comment } from '../model/index';
 
-export enum CommentActionTypes {
-  LoadComments = '[Comment] Load Comments',
-  LoadCommentsSuccess = '[Comment] Load Comments Success',
-  LoadCommentsError = '[Comment] Load Comments Error',
-  ClearComments = '[Comment] Clear Comments',
-}
+export const loadComments = createAction(
+  '[Comment] Load Comments',
+  props<{ id: number }>()
+);
 
-export class LoadComments implements Action {
-  public readonly type = CommentActionTypes.LoadComments;
+export const loadCommentsSuccess = createAction(
+  '[Comment] Load Comments Success',
+  props<{ comments: Comment[] }>()
+);
 
-  public constructor(public postId: number) {}
-}
+export const loadCommentsError = createAction('[Comment] Load Comments Error');
 
-export class LoadCommentsSuccess implements Action {
-  public readonly type = CommentActionTypes.LoadCommentsSuccess;
-
-  public constructor(public comments: Comment[]) {}
-}
-
-export class LoadCommentsError implements Action {
-  public readonly type = CommentActionTypes.LoadCommentsError;
-}
-
-export class ClearComments implements Action {
-  public readonly type = CommentActionTypes.ClearComments;
-}
-
-export type CommentAction =
-  | LoadComments
-  | LoadCommentsSuccess
-  | LoadCommentsError
-  | ClearComments;
+export const clearComments = createAction('[Comment] Clear Comments');

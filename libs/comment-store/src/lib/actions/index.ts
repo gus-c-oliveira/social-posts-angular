@@ -1,1 +1,3 @@
-export * from './comment.actions';
+import * as CommentActions from './comment.actions';
+
+export { CommentActions };
