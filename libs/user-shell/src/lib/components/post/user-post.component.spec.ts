@@ -11,6 +11,7 @@ import {
   initialPostState,
   POST_STATE_KEY,
   mockPostList,
+  mapPostsToEntities,
 } from '@gus/post-store';
 import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
@@ -102,10 +103,11 @@ describe('UserPostComponent', () => {
   it('should display the selected post', () => {
     store$.setState({
       [postKey]: {
-        posts: mockPostList,
+        entities: mapPostsToEntities(mockPostList),
         loading: false,
         error: false,
         selectedPostID,
+        ids: mockPostList.map((post) => post.id),
       },
     });
     fixture.detectChanges();
@@ -149,10 +151,11 @@ describe('UserPostComponent', () => {
     spyOn(store$, 'dispatch');
     store$.setState({
       [postKey]: {
-        posts: mockPostList,
+        entities: mapPostsToEntities(mockPostList),
         loading: false,
         error: false,
         selectedPostID,
+        ids: mockPostList.map((post) => post.id),
       },
       [commentKey]: { ...initialCommentState, error: true },
     });
