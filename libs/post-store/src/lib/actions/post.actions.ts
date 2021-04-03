@@ -1,50 +1,26 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { Post } from '../model/index';
 
-export enum PostActionTypes {
-  LoadPosts = '[Post] Load Posts',
-  LoadPostsSuccess = '[Post] Load Posts Success',
-  LoadPostsError = '[Post] Load Posts Error',
-  SetSelectedPostID = '[Post] Set Selected Post ID',
-  ClearSelectedPostID = '[Post] Clear Selected Post ID',
-  ClearPosts = '[Post] Clear Posts',
-}
+export const loadPosts = createAction(
+  '[Post] Load Posts',
+  props<{ id: number }>()
+);
 
-export class LoadPosts implements Action {
-  public readonly type = PostActionTypes.LoadPosts;
+export const loadPostsSuccess = createAction(
+  '[Post] Load Posts Success',
+  props<{ posts: Post[] }>()
+);
 
-  public constructor(public userId: number) {}
-}
+export const loadPostsError = createAction('[Post] Load Posts Error');
 
-export class LoadPostsSuccess implements Action {
-  public readonly type = PostActionTypes.LoadPostsSuccess;
+export const setSelectedPostID = createAction(
+  '[Post] Set Selected Post ID',
+  props<{ id: number }>()
+);
 
-  public constructor(public posts: Post[]) {}
-}
+export const clearSelectedPostID = createAction(
+  '[Post] Clear Selected Post ID'
+);
 
-export class LoadPostsError implements Action {
-  public readonly type = PostActionTypes.LoadPostsError;
-}
-
-export class SetSelectedPostID implements Action {
-  public readonly type = PostActionTypes.SetSelectedPostID;
-
-  public constructor(public id: number) {}
-}
-
-export class ClearSelectedPostID implements Action {
-  public readonly type = PostActionTypes.ClearSelectedPostID;
-}
-
-export class ClearPosts implements Action {
-  public readonly type = PostActionTypes.ClearPosts;
-}
-
-export type PostAction =
-  | LoadPosts
-  | LoadPostsSuccess
-  | LoadPostsError
-  | SetSelectedPostID
-  | ClearPosts
-  | ClearSelectedPostID;
+export const clearPosts = createAction('[Post] Clear Posts');

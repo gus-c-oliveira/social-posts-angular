@@ -1,1 +1,3 @@
-export * from './post.actions';
+import * as PostActions from './post.actions';
+
+export { PostActions };

@@ -1,7 +1,7 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { LoadPosts, Post, postQuery, SetSelectedPostID } from '@gus/post-store';
+import { PostActions, Post, postQuery } from '@gus/post-store';
 import { UserActions, User, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
@@ -61,7 +61,7 @@ export class UserProfileComponent implements OnDestroy {
       return;
     }
     this.currentUserID = id;
-    this.store$.dispatch(new LoadPosts(id));
+    this.store$.dispatch(PostActions.loadPosts({ id }));
   }
 
   private updateUserCover(id: number) {
@@ -76,7 +76,7 @@ export class UserProfileComponent implements OnDestroy {
   }
 
   private setSelectedPostID(id: number) {
-    this.store$.dispatch(new SetSelectedPostID(id));
+    this.store$.dispatch(PostActions.setSelectedPostID({ id }));
   }
 
   private openPostModal() {
@@ -102,7 +102,9 @@ export class UserProfileComponent implements OnDestroy {
   public retryLoadingPosts() {
     this.user$
       .pipe(take(1))
-      .subscribe((user) => this.store$.dispatch(new LoadPosts(user.id)));
+      .subscribe((user) =>
+        this.store$.dispatch(PostActions.loadPosts({ id: user.id }))
+      );
   }
 
   public updateUser(id: number) {

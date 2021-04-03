@@ -10,7 +10,7 @@ import {
   PostServiceStubFailed,
   PostServiceStubSuccessful,
 } from '../service/index';
-import { LoadPosts, LoadPostsError, LoadPostsSuccess } from '../actions/index';
+import { PostActions } from '../actions/index';
 import { PostEffects } from './post.effects';
 import { mockPostList } from '../mocks/index';
 
@@ -38,9 +38,11 @@ describe('PostEffects', () => {
     });
 
     it('should dispatch a new LoadPostsSuccess', () => {
-      actions = hot('-a-|', { a: new LoadPosts(5) });
+      actions = hot('-a-|', { a: PostActions.loadPosts({ id: 5 }) });
       expect(effects.loadPosts$).toBeObservable(
-        cold('-a-|', { a: new LoadPostsSuccess(mockPostList) })
+        cold('-a-|', {
+          a: PostActions.loadPostsSuccess({ posts: mockPostList }),
+        })
       );
     });
   });
@@ -65,9 +67,9 @@ describe('PostEffects', () => {
     });
 
     it('should dispatch a new LoadPostsError', () => {
-      actions = hot('-a-|', { a: new LoadPosts(5) });
+      actions = hot('-a-|', { a: PostActions.loadPosts({ id: 5 }) });
       expect(effects.loadPosts$).toBeObservable(
-        cold('-a-|', { a: new LoadPostsError() })
+        cold('-a-|', { a: PostActions.loadPostsError() })
       );
     });
   });

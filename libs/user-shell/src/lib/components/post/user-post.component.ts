@@ -6,7 +6,7 @@ import {
   commentQuery,
   LoadComments,
 } from '@gus/comment-store';
-import { ClearSelectedPostID, Post, postQuery } from '@gus/post-store';
+import { PostActions, Post, postQuery } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
@@ -89,7 +89,7 @@ export class UserPostComponent implements OnDestroy {
   }
 
   private clear() {
-    this.store$.dispatch(new ClearSelectedPostID());
+    this.store$.dispatch(PostActions.clearSelectedPostID());
     this.store$.dispatch(new ClearComments());
   }
 }
