@@ -15,11 +15,12 @@ import {
   initialCommentState,
 } from '@gus/comment-store';
 import {
-  LoadPosts,
+  PostActions,
   POST_STATE_KEY,
   PostState,
   mockPostList,
   POST_SERVICE_BASE_URL,
+  mapPostsToEntities,
 } from '@gus/post-store';
 import { errorSelector, spinnerSelector } from '@gus/ui';
 import {
@@ -55,9 +56,10 @@ describe('UserProfileComponent', () => {
   const postKey = POST_STATE_KEY;
   const postStoreState: PostState = {
     loading: false,
-    posts: mockPostList,
+    entities: mapPostsToEntities(mockPostList),
     error: false,
     selectedPostID: null,
+    ids: mockPostList.map((post) => post.id),
   };
   const commentKey = COMMENT_STATE_KEY;
   const commentStoreState = initialCommentState;
@@ -206,7 +208,7 @@ describe('UserProfileComponent', () => {
     fixture.detectChanges();
     getElementBySelector(fixture, '.error__button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
-      new LoadPosts(selectedUser.id)
+      PostActions.loadPosts({ id: selectedUser.id })
     );
   });
 
