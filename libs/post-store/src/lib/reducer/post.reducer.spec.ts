@@ -1,20 +1,16 @@
+import { PostActions } from '../actions/index';
 import { mockPostList } from '../mocks/index';
-
-import {
-  ClearPosts,
-  ClearSelectedPostID,
-  LoadPosts,
-  LoadPostsError,
-  LoadPostsSuccess,
-  SetSelectedPostID,
-} from '../actions/index';
-import { postReducer } from './post.reducer';
 import { initialPostState } from '../state/index';
+import { mapPostsToEntities } from '../utils/index';
+import { postReducer, addImageToPost } from './post.reducer';
 
 describe('postReducer', () => {
   describe('LoadPosts', () => {
     it('should set loading to true and error to false', () => {
-      const newState = postReducer(initialPostState, new LoadPosts(5));
+      const newState = postReducer(
+        initialPostState,
+        PostActions.loadPosts({ id: 5 })
+      );
       expect(newState).toEqual({
         ...initialPostState,
         loading: true,
@@ -28,20 +24,24 @@ describe('postReducer', () => {
         and loading and error to false`, () => {
       const newState = postReducer(
         initialPostState,
-        new LoadPostsSuccess(mockPostList)
+        PostActions.loadPostsSuccess({ posts: mockPostList })
       );
       expect(newState).toEqual({
         ...initialPostState,
         loading: false,
-        posts: mockPostList,
+        entities: mapPostsToEntities(addImageToPost(mockPostList)),
         error: false,
+        ids: mockPostList.map((post) => post.id),
       });
     });
   });
 
   describe('LoadPostsError', () => {
     it('should set loading to false and error to true', () => {
-      const newState = postReducer(initialPostState, new LoadPostsError());
+      const newState = postReducer(
+        initialPostState,
+        PostActions.loadPostsError()
+      );
       expect(newState).toEqual({
         ...initialPostState,
         loading: false,
@@ -52,7 +52,10 @@ describe('postReducer', () => {
 
   describe('SetSelectedPostID', () => {
     it('should set the selected Post ID', () => {
-      const newState = postReducer(initialPostState, new SetSelectedPostID(5));
+      const newState = postReducer(
+        initialPostState,
+        PostActions.setSelectedPostID({ id: 5 })
+      );
       expect(newState).toEqual({
         ...initialPostState,
         selectedPostID: 5,
@@ -63,8 +66,8 @@ describe('postReducer', () => {
   describe('ClearPosts', () => {
     it('should set posts to an empty array', () => {
       const newState = postReducer(
-        { ...initialPostState, posts: mockPostList },
-        new ClearPosts()
+        { ...initialPostState, entities: mapPostsToEntities(mockPostList) },
+        PostActions.clearPosts()
       );
       expect(newState).toEqual({
         ...initialPostState,
@@ -75,7 +78,7 @@ describe('postReducer', () => {
   describe('ClearSelectedPostID', () => {
     const newState = postReducer(
       { ...initialPostState, selectedPostID: 5 },
-      new ClearSelectedPostID()
+      PostActions.clearSelectedPostID()
     );
     expect(newState).toEqual(initialPostState);
   });
