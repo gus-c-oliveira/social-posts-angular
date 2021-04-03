@@ -5,7 +5,8 @@ import {
   mockCommentList,
   COMMENT_STATE_KEY,
   initialCommentState,
-  LoadComments,
+  CommentActions,
+  mapCommentsToEntities,
 } from '@gus/comment-store';
 import {
   initialPostState,
@@ -162,16 +163,17 @@ describe('UserPostComponent', () => {
     fixture.detectChanges();
     getElementBySelector(fixture, '.error__button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
-      new LoadComments(selectedPost.id)
+      CommentActions.loadComments({ id: selectedPost.id })
     );
   });
 
   it('should display the selected post comments', () => {
     store$.setState({
       [commentKey]: {
-        comments: mockCommentList,
+        entities: mapCommentsToEntities(mockCommentList),
         loading: false,
         error: false,
+        ids: mockCommentList.map((comment) => comment.id),
       },
     });
     fixture.detectChanges();

@@ -1,17 +1,16 @@
 import { mockCommentList } from '../mocks/index';
-import {
-  LoadComments,
-  LoadCommentsError,
-  LoadCommentsSuccess,
-  ClearComments,
-} from '../actions/index';
+import { CommentActions } from '../actions/index';
 import { commentReducer } from './comment.reducer';
 import { initialCommentState } from '../state/index';
+import { mapCommentsToEntities } from '../utils/index';
 
 describe('commentReducer', () => {
   describe('LoadComments', () => {
     it('should set loading to true and error to false', () => {
-      const newState = commentReducer(initialCommentState, new LoadComments(1));
+      const newState = commentReducer(
+        initialCommentState,
+        CommentActions.loadComments({ id: 1 })
+      );
       expect(newState).toEqual({
         ...initialCommentState,
         loading: true,
@@ -25,13 +24,14 @@ describe('commentReducer', () => {
         and loading and error to false`, () => {
       const newState = commentReducer(
         initialCommentState,
-        new LoadCommentsSuccess(mockCommentList)
+        CommentActions.loadCommentsSuccess({ comments: mockCommentList })
       );
       expect(newState).toEqual({
         ...initialCommentState,
         loading: false,
-        comments: mockCommentList,
+        entities: mapCommentsToEntities(mockCommentList),
         error: false,
+        ids: mockCommentList.map((comment) => comment.id),
       });
     });
   });
@@ -40,7 +40,7 @@ describe('commentReducer', () => {
     it('should set loading to false and error to true', () => {
       const newState = commentReducer(
         initialCommentState,
-        new LoadCommentsError()
+        CommentActions.loadCommentsError()
       );
       expect(newState).toEqual({
         ...initialCommentState,
@@ -53,8 +53,11 @@ describe('commentReducer', () => {
   describe('ClearComments', () => {
     it('should set comments to an empty array', () => {
       const newState = commentReducer(
-        { ...initialCommentState, comments: mockCommentList },
-        new ClearComments()
+        {
+          ...initialCommentState,
+          entities: mapCommentsToEntities(mockCommentList),
+        },
+        CommentActions.clearComments()
       );
       expect(newState).toEqual({ ...initialCommentState });
     });

@@ -4,6 +4,7 @@ import {
   CommentState,
   initialCommentState,
 } from '../state/index';
+import { mapEntitiesToComments } from '../utils/index';
 
 describe('Comment Selectors', () => {
   let store: { [COMMENT_STATE_KEY]: CommentState };
@@ -19,7 +20,9 @@ describe('Comment Selectors', () => {
 
   it(`"getComments" should return the current comments`, () => {
     const selected = commentQuery.getComments(store);
-    expect(selected).toEqual(store[COMMENT_STATE_KEY].comments);
+    expect(selected).toEqual(
+      mapEntitiesToComments(store[COMMENT_STATE_KEY].entities)
+    );
   });
 
   it(`"getError" should return the current error status`, () => {
