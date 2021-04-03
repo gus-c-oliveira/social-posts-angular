@@ -1,11 +1,6 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Component, Input, OnDestroy } from '@angular/core';
-import {
-  ClearComments,
-  Comment,
-  commentQuery,
-  LoadComments,
-} from '@gus/comment-store';
+import { CommentActions, Comment, commentQuery } from '@gus/comment-store';
 import { PostActions, Post, postQuery } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -67,7 +62,7 @@ export class UserPostComponent implements OnDestroy {
       return;
     }
     this.selectedPostID = postId;
-    this.store$.dispatch(new LoadComments(postId));
+    this.store$.dispatch(CommentActions.loadComments({ id: postId }));
   }
 
   public closePost() {
@@ -81,7 +76,9 @@ export class UserPostComponent implements OnDestroy {
   public retryLoadingComments() {
     this.post$
       .pipe(take(1))
-      .subscribe((post) => this.store$.dispatch(new LoadComments(post.id)));
+      .subscribe((post) =>
+        this.store$.dispatch(CommentActions.loadComments({ id: post.id }))
+      );
   }
 
   public ngOnDestroy() {
@@ -90,6 +87,6 @@ export class UserPostComponent implements OnDestroy {
 
   private clear() {
     this.store$.dispatch(PostActions.clearSelectedPostID());
-    this.store$.dispatch(new ClearComments());
+    this.store$.dispatch(CommentActions.clearComments());
   }
 }
