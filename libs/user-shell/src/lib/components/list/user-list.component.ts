@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClearPosts } from '@gus/post-store';
+import { PostActions } from '@gus/post-store';
 import { SimpleUser, UserActions, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
@@ -35,7 +35,7 @@ export class UserListComponent implements OnDestroy {
 
   private clearPreviousUserData() {
     this.store$.dispatch(UserActions.clearSelectedUserID());
-    this.store$.dispatch(new ClearPosts());
+    this.store$.dispatch(PostActions.clearPosts());
   }
 
   private initializeObservables() {
