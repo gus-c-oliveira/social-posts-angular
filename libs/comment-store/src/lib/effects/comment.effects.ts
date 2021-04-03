@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
-import {
-  LoadCommentsError,
-  LoadCommentsSuccess,
-  CommentActionTypes,
-  LoadComments,
-} from '../actions/index';
+import { CommentActions } from '../actions/index';
 import { CommentService } from '../service/index';
 
 @Injectable()
 export class CommentEffects {
-  @Effect()
-  loadComments$ = this.actions$.pipe(
-    ofType(CommentActionTypes.LoadComments),
-    switchMap((action) =>
-      this.service.getComments((action as LoadComments).postId).pipe(
-        map((data) => new LoadCommentsSuccess(data)),
-        catchError(() => of(new LoadCommentsError()))
+  public loadComments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CommentActions.loadComments),
+      switchMap((action) =>
+        this.service.getComments(action.id).pipe(
+          map((comments) => CommentActions.loadCommentsSuccess({ comments })),
+          catchError(() => of(CommentActions.loadCommentsError()))
+        )
       )
     )
   );

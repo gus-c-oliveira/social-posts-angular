@@ -6,11 +6,7 @@ import { cold, hot } from '@nrwl/angular/testing';
 import { Observable } from 'rxjs';
 
 import { mockCommentList } from '../mocks/index';
-import {
-  LoadComments,
-  LoadCommentsError,
-  LoadCommentsSuccess,
-} from '../actions/index';
+import { CommentActions } from '../actions/index';
 import { CommentEffects } from './comment.effects';
 import {
   CommentService,
@@ -42,9 +38,11 @@ describe('CommentEffects', () => {
     });
 
     it('should dispatch a new LoadCommentsSuccess', () => {
-      actions = hot('-a-|', { a: new LoadComments(5) });
+      actions = hot('-a-|', { a: CommentActions.loadComments({ id: 5 }) });
       expect(effects.loadComments$).toBeObservable(
-        cold('-a-|', { a: new LoadCommentsSuccess(mockCommentList) })
+        cold('-a-|', {
+          a: CommentActions.loadCommentsSuccess({ comments: mockCommentList }),
+        })
       );
     });
   });
@@ -69,9 +67,9 @@ describe('CommentEffects', () => {
     });
 
     it('should dispatch a new LoadCommentsError', () => {
-      actions = hot('-a-|', { a: new LoadComments(5) });
+      actions = hot('-a-|', { a: CommentActions.loadComments({ id: 5 }) });
       expect(effects.loadComments$).toBeObservable(
-        cold('-a-|', { a: new LoadCommentsError() })
+        cold('-a-|', { a: CommentActions.loadCommentsError() })
       );
     });
   });
