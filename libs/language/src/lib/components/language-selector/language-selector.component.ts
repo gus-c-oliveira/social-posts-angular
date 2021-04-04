@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -14,6 +14,8 @@ export const languageComponentSelector = 'gus-language-selector';
   styleUrls: ['./language-selector.component.scss'],
 })
 export class LanguageSelectorComponent implements OnDestroy {
+  @HostBinding('attr.data-cy') readonly dataCy = languageComponentSelector;
+
   public flagImage = null;
   private currentLanguage = null;
 
