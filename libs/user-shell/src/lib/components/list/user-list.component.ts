@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostActions } from '@gus/post-store';
 import { SimpleUser, UserActions, userQuery } from '@gus/user-store';
@@ -19,6 +24,8 @@ export const userListSelector = 'gus-user-list';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnDestroy {
+  @HostBinding('attr.data-cy') readonly dataCy = userListSelector;
+
   public userList$: Observable<SimpleUser[]>;
   public loading$: Observable<boolean>;
   public error$: Observable<boolean>;
