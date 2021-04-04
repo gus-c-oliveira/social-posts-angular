@@ -1,6 +1,11 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  OnDestroy,
+} from '@angular/core';
 import { PostActions, Post, postQuery } from '@gus/post-store';
 import { UserActions, User, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -20,6 +25,8 @@ export const userProfileSelector = 'gus-user-profile';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent implements OnDestroy {
+  @HostBinding('attr.data-cy') readonly dataCy = userProfileSelector;
+
   public user$: Observable<User>;
   public posts$: Observable<Post[]>;
   public loading$: Observable<boolean>;
