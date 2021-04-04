@@ -10,13 +10,18 @@
       class="post__image"
       [src]="post.img"
       [alt]="'USER_POST.POST_IMAGE_ALT' | translate"
+      [attr.data-cy]="'post-image'"
     />
     <div class="post__content">
       <img class="post__user-img" [src]="user.pictureURL" />
       <span class="post__user-username">{{ user.username }}</span>
       <span class="post__user-name">{{ user.name }}</span>
-      <h2 class="post__title">{{ post.title }}</h2>
-      <p class="post__body">{{ post.body }}</p>
+      <h2 class="post__title" [attr.data-cy]="'post-title'">
+        {{ post.title }}
+      </h2>
+      <p class="post__body" [attr.data-cy]="'post-body'">
+        {{ post.body }}
+      </p>
     </div>
   </ng-container>
   <div class="comment__box">
@@ -36,6 +41,7 @@
           <div
             *ngFor="let comment of comments$ | async; let i = index"
             class="comment__item"
+            [attr.data-cy]="'comment'"
           >
             <span class="comment__name">{{ comment.name }}</span>
             <img

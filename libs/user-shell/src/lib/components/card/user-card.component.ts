@@ -4,6 +4,7 @@ import {
   Input,
   EventEmitter,
   Output,
+  HostBinding,
 } from '@angular/core';
 import { SimpleUser } from '@gus/user-store';
 
@@ -16,6 +17,8 @@ export const userCardSelector = 'gus-user-card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent {
+  @HostBinding('attr.data-cy') readonly dataCy = userCardSelector;
+
   @Input() public user: SimpleUser = null;
   // Emits the user id when card is clicked.
   @Output() public selected = new EventEmitter<number>();

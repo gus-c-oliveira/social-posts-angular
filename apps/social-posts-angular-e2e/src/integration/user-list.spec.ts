@@ -4,8 +4,7 @@ describe('user-list', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display the user cards', () => {
-    getUserCards().should('exist');
-    getUserCards().should('have.length', 10);
+    getUserCards().should('exist').and('have.length', 10);
   });
 
   it('should navigate to user profile after clicking a card', () => {

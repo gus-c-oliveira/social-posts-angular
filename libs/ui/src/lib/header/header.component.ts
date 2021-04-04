@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  HostBinding,
 } from '@angular/core';
 import { HeaderButtonConfig } from './header.model';
 
@@ -16,6 +17,8 @@ export const headerSelector = 'gus-header';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+  @HostBinding('attr.data-cy') readonly dataCy = headerSelector;
+
   @Input() public title = '';
   @Input() public buttonConfigs: HeaderButtonConfig[] = [];
 
