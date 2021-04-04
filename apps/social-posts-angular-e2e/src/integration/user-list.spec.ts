@@ -1,12 +1,9 @@
+import { mockUserListRequest } from '../support/http-mock.po';
 import { getUserCards, getUserProfile } from '../support/user-list.po';
 
-describe.only('user-list', () => {
+describe('user-list', () => {
   beforeEach(() => {
-    cy.fixture('user-list.json').as('userListJSON');
-    cy.server();
-    cy.route('https://jsonplaceholder.typicode.com/users', '@userListJSON').as(
-      'userList'
-    );
+    mockUserListRequest();
     cy.visit('/');
   });
 
