@@ -1,4 +1,4 @@
-<h1>{{ title | translate }}</h1>
+<h1 [attr.data-test]="'header-title'">{{ title | translate }}</h1>
 <div>
   <gus-button
     *ngFor="let config of buttonConfigs"

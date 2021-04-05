@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
 
@@ -30,12 +30,12 @@ describe('ButtonComponent', () => {
   });
 
   it('should display a button', () => {
-    const button = getElementBySelector(fixture, 'button');
+    const button = getElementByDataTest(fixture, 'ui-button');
     expect(button).toBeTruthy();
   });
 
   it('should display the button text inside the button', () => {
-    const displayedText = getElementTextContentBySelector(fixture, 'button');
+    const displayedText = getElementTextContentByDataTest(fixture, 'ui-button');
     expect(displayedText).toEqual(buttonText);
   });
 });

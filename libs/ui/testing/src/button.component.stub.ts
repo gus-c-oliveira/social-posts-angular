@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 export const buttonSelector = 'gus-button';
 
@@ -7,5 +7,6 @@ export const buttonSelector = 'gus-button';
   template: 'Button Stub',
 })
 export class ButtonStubComponent {
+  @HostBinding('attr.data-test') readonly dataTest = 'ui-button';
   @Input() public buttonText: any = '';
 }
