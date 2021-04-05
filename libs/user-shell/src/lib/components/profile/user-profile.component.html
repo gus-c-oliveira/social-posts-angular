@@ -6,6 +6,7 @@
           class="cover__picture"
           [src]="user.pictureURL"
           [alt]="'USER_PROFILE.COVER.PICTURE_ALT' | translate"
+          [attr.data-test]="'cover-picture'"
         />
       </div>
       <span class="cover__username" [attr.data-test]="'username'">
@@ -25,7 +26,7 @@
           src="assets/img/user-profile/v-card.svg"
           [alt]="'USER_PROFILE.GENERAL.CARD_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.name }}
         </span>
         <img
@@ -33,7 +34,7 @@
           src="assets/img/user-profile/phone.svg"
           [alt]="'USER_PROFILE.GENERAL.PHONE_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.phone }}
         </span>
         <img
@@ -41,7 +42,7 @@
           src="assets/img/user-profile/network.svg"
           [alt]="'USER_PROFILE.GENERAL.WEBSITE_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.website }}
         </span>
         <img
@@ -49,7 +50,7 @@
           src="assets/img/user-profile/mail.svg"
           [alt]="'USER_PROFILE.GENERAL.EMAIL_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.email }}
         </span>
       </div>
@@ -82,19 +83,19 @@
       <h2 class="section-header section-header--address">
         {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
       </h2>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.street }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.suite }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.city }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.zipcode }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.geo.lat }} | {{ user.address.geo.lng }}
       </span>
     </section>
@@ -103,13 +104,16 @@
       <h2 class="section-header">
         {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
       </h2>
-      <span class="company__value company__value--name">
+      <span
+        class="company__value company__value--name"
+        [attr.data-test]="'company-value'"
+      >
         {{ user.company.name }}
       </span>
-      <span class="company__value">
+      <span class="company__value" [attr.data-test]="'company-value'">
         &ldquo;{{ user.company.catchPhrase }}&rdquo;
       </span>
-      <span class="company__value">
+      <span class="company__value" [attr.data-test]="'company-value'">
         {{ user.company.bs }}
       </span>
     </section>

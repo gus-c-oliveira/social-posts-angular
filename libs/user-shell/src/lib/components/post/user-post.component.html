@@ -3,6 +3,7 @@
   src="assets/img/icons/close.svg"
   [alt]="'USER_POST.CLOSE_ALT' | translate"
   (click)="closePost()"
+  [attr.data-test]="'post-close'"
 />
 <div *ngIf="user$ | async; let user" class="content">
   <ng-container *ngIf="post$ | async; let post">

@@ -16,9 +16,9 @@ import {
 } from '@gus/post-store';
 import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
-  getAllElementsTextContentBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsTextContentByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
 import {
@@ -112,20 +112,20 @@ describe('UserPostComponent', () => {
       },
     });
     fixture.detectChanges();
-    const postTitle = getElementTextContentBySelector(fixture, '.post__title');
-    const postBody = getElementTextContentBySelector(fixture, '.post__body');
+    const postTitle = getElementTextContentByDataTest(fixture, 'post-title');
+    const postBody = getElementTextContentByDataTest(fixture, 'post-body');
     expect(postTitle).toEqual(selectedPost.title);
     expect(postBody).toEqual(selectedPost.body);
   });
 
   it('should display the close icon', () => {
-    const close = getElementBySelector(fixture, '.close');
+    const close = getElementByDataTest(fixture, 'post-close');
     expect(close).toBeTruthy();
   });
 
   it('should close the overlay after clicking the close icon', () => {
     spyOn(host.postComponent.overlayRef, 'dispose');
-    getElementBySelector(fixture, '.close').click();
+    getElementByDataTest(fixture, 'post-close').click();
     expect(host.postComponent.overlayRef.dispose).toHaveBeenCalled();
   });
 
@@ -134,7 +134,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, loading: true },
     });
     fixture.detectChanges();
-    const spinner = getElementBySelector(fixture, spinnerSelector);
+    const spinner = getElementByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
@@ -143,7 +143,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, error: true },
     });
     fixture.detectChanges();
-    const error = getElementBySelector(fixture, errorSelector);
+    const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -161,7 +161,7 @@ describe('UserPostComponent', () => {
       [commentKey]: { ...initialCommentState, error: true },
     });
     fixture.detectChanges();
-    getElementBySelector(fixture, '.error__button').click();
+    getElementByDataTest(fixture, 'error-button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
       CommentActions.loadComments({ id: selectedPost.id })
     );
@@ -178,10 +178,7 @@ describe('UserPostComponent', () => {
     });
     fixture.detectChanges();
     const expected = mockCommentList.map((item) => `${item.name}${item.body}`);
-    const comments = getAllElementsTextContentBySelector(
-      fixture,
-      '.comment__item'
-    );
+    const comments = getAllElementsTextContentByDataTest(fixture, 'comment');
     expect(comments).toEqual(expected);
   });
 });

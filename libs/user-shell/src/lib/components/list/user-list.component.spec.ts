@@ -9,11 +9,11 @@ import {
   UserState,
   mapUsersToEntities,
 } from '@gus/user-store';
-import { SpinnerStubComponent, spinnerSelector } from '@gus/ui/testing';
+import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
-  getAllElementsBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
 import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
@@ -91,7 +91,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.loading },
     });
     fixture.detectChanges();
-    const spinner = getElementTextContentBySelector(fixture, spinnerSelector);
+    const spinner = getElementTextContentByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
@@ -100,7 +100,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    const cards = getAllElementsBySelector(fixture, userCardSelector);
+    const cards = getAllElementsByDataTest(fixture, userCardSelector);
     expect(cards.length).toEqual(mockUserList.length);
   });
 
@@ -109,7 +109,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.error },
     });
     fixture.detectChanges();
-    const error = getElementBySelector(fixture, errorSelector);
+    const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -120,7 +120,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.error },
     });
     fixture.detectChanges();
-    getElementBySelector(fixture, '.error__button').click();
+    getElementByDataTest(fixture, 'error-button').click();
     expect(store.dispatch).toHaveBeenCalledWith(UserActions.loadUsers());
   });
 
@@ -131,7 +131,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    getElementBySelector(fixture, '.card').click();
+    getElementByDataTest(fixture, 'user-card').click();
     expect(store.dispatch).toHaveBeenCalledWith(
       UserActions.setSelectedUserID({ id: mockUserList[0].id })
     );
@@ -145,7 +145,7 @@ describe('UserListComponent', () => {
       [userStateKey]: { ...storeStates.usersLoaded },
     });
     fixture.detectChanges();
-    getElementBySelector(fixture, '.card').click();
+    getElementByDataTest(fixture, 'user-card').click();
     expect(router.navigate).toHaveBeenCalledWith([USER_PROFILE_PATH], {
       relativeTo: route.parent,
     });
