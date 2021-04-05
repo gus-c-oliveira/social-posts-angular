@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 export const spinnerSelector = 'gus-spinner';
 
@@ -6,4 +6,6 @@ export const spinnerSelector = 'gus-spinner';
   selector: spinnerSelector,
   template: 'Spinner Stub',
 })
-export class SpinnerStubComponent {}
+export class SpinnerStubComponent {
+  @HostBinding('attr.data-test') readonly dataTest = 'loader';
+}

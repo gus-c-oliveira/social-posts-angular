@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector, TranslatePipeStub } from '@gus/testing';
+import { getElementByDataTest, TranslatePipeStub } from '@gus/testing';
 
 import { SpinnerComponent } from './spinner.component';
 
@@ -23,8 +23,8 @@ describe('SpinnerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display a div with class loader', () => {
-    const loader = getElementBySelector(fixture, 'div.loader');
+  it('should display a div representing the spinner', () => {
+    const loader = getElementByDataTest(fixture, 'loader');
     expect(loader).toBeTruthy();
   });
 });

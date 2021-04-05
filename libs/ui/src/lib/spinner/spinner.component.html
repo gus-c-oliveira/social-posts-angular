@@ -1,2 +1,4 @@
 <!-- Attribution: https://projects.lukehaas.me/css-loaders/ -->
-<div class="loader">{{ 'SPINNER.LOADING' | translate }}</div>
+<div class="loader" [attr.data-test]="'loader'">
+  {{ 'SPINNER.LOADING' | translate }}
+</div>

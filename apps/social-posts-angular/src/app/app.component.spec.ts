@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LanguageModule, languageComponentSelector } from '@gus/language';
-import { getElementBySelector } from '@gus/testing';
+import { getElementByDataTest } from '@gus/testing';
 import { headerSelector, UiModule } from '@gus/ui';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -44,7 +44,7 @@ describe('AppComponent', () => {
   });
 
   it('should display the language selector', () => {
-    const langComponent = getElementBySelector(
+    const langComponent = getElementByDataTest(
       fixture,
       languageComponentSelector
     );
@@ -52,7 +52,7 @@ describe('AppComponent', () => {
   });
 
   it('should display the header', () => {
-    const header = getElementBySelector(fixture, headerSelector);
+    const header = getElementByDataTest(fixture, headerSelector);
     expect(header).toBeTruthy();
   });
 });

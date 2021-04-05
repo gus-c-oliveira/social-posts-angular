@@ -22,12 +22,12 @@ import {
   POST_SERVICE_BASE_URL,
   mapPostsToEntities,
 } from '@gus/post-store';
-import { errorSelector, spinnerSelector } from '@gus/ui';
+import { errorSelector } from '@gus/ui';
 import {
-  getAllElementsBySelector,
-  getAllElementsTextContentBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsByDataTest,
+  getAllElementsTextContentByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
 } from '@gus/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -103,24 +103,21 @@ describe('UserProfileComponent', () => {
 
   describe('cover', () => {
     it('should display the user profile picture', () => {
-      const profilePicture = getElementBySelector(fixture, '.cover__picture');
+      const profilePicture = getElementByDataTest(fixture, 'cover-picture');
       expect(profilePicture.src).toContain(selectedUser.pictureURL);
     });
 
     it(`should display the user's username`, () => {
-      const username = getElementTextContentBySelector(
-        fixture,
-        '.cover__username'
-      );
+      const username = getElementTextContentByDataTest(fixture, 'username');
       expect(username).toEqual(selectedUser.username);
     });
   });
 
   describe('general', () => {
     it(`should display the user's name, phone, website and email`, () => {
-      const generalSectionValues = getAllElementsTextContentBySelector(
+      const generalSectionValues = getAllElementsTextContentByDataTest(
         fixture,
-        '.general__value'
+        'general-value'
       );
       // Order should be name, phone, website and email.
       const name = generalSectionValues[0];
@@ -136,7 +133,7 @@ describe('UserProfileComponent', () => {
 
   describe('friends', () => {
     it(`should display the user's friends`, () => {
-      const friends = getAllElementsBySelector(fixture, '.friends__item');
+      const friends = getAllElementsByDataTest(fixture, 'friend');
       expect(friends.length).toEqual(selectedUser.friendIDs.length);
     });
   });
@@ -144,9 +141,9 @@ describe('UserProfileComponent', () => {
   describe('address', () => {
     it(`should display the user's address street,
       suite, city, zipcode and geo`, () => {
-      const addressSectionValues = getAllElementsTextContentBySelector(
+      const addressSectionValues = getAllElementsTextContentByDataTest(
         fixture,
-        '.address__value'
+        'address-value'
       );
       // Order should be street, suite, city, zipcode and email.
       const street = addressSectionValues[0];
@@ -166,9 +163,9 @@ describe('UserProfileComponent', () => {
 
   describe('company', () => {
     it(`should display the user company's name, catchphrase and bs`, () => {
-      const companySectionValues = getAllElementsTextContentBySelector(
+      const companySectionValues = getAllElementsTextContentByDataTest(
         fixture,
-        '.company__value'
+        'company-value'
       );
       // Order should be name, catchphrase and bs.
       const name = companySectionValues[0];
@@ -185,7 +182,7 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, loading: true },
     });
     fixture.detectChanges();
-    const spinner = getElementBySelector(fixture, spinnerSelector);
+    const spinner = getElementByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
@@ -194,7 +191,7 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
-    const error = getElementBySelector(fixture, errorSelector);
+    const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
   });
 
@@ -206,21 +203,21 @@ describe('UserProfileComponent', () => {
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
-    getElementBySelector(fixture, '.error__button').click();
+    getElementByDataTest(fixture, 'error-button').click();
     expect(store$.dispatch).toHaveBeenCalledWith(
       PostActions.loadPosts({ id: selectedUser.id })
     );
   });
 
   it(`should display the user's posts`, () => {
-    const posts = getAllElementsTextContentBySelector(fixture, '.post__item');
+    const posts = getAllElementsTextContentByDataTest(fixture, 'post');
     const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
   });
 
   it(`should create an overlay to display post
       after clicking a user's post`, () => {
-    getElementBySelector(fixture, '.post__item').click();
+    getElementByDataTest(fixture, 'post').click();
     fixture.detectChanges();
     const post = component.overlayRef.overlayElement.querySelector(
       userPostSelector

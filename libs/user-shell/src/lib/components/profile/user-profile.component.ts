@@ -25,7 +25,7 @@ export const userProfileSelector = 'gus-user-profile';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent implements OnDestroy {
-  @HostBinding('attr.data-cy') readonly dataCy = userProfileSelector;
+  @HostBinding('attr.data-test') readonly dataTest = userProfileSelector;
 
   public user$: Observable<User>;
   public posts$: Observable<Post[]>;

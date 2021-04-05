@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { getElementBySelector } from '@gus/testing';
+import { getElementByDataTest } from '@gus/testing';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -30,28 +30,28 @@ describe('LanguageSelectorComponent', () => {
   });
 
   it('should display a flag image', () => {
-    const flagImage = getElementBySelector(fixture, 'img');
+    const flagImage = getElementByDataTest(fixture, 'flag-image');
     expect(flagImage).toBeTruthy();
   });
 
   it('should display the pt-BR flag image, if language is en-US', () => {
     translateService.setDefaultLang('en-US');
     fixture.detectChanges();
-    const flagImage = getElementBySelector(fixture, 'img');
+    const flagImage = getElementByDataTest(fixture, 'flag-image');
     expect(flagImage.src).toContain('pt-BR');
   });
 
   it('should display the en-US flag image, if language is pt-BR', () => {
     translateService.setDefaultLang('pt-BR');
     fixture.detectChanges();
-    const flagImage = getElementBySelector(fixture, 'img');
+    const flagImage = getElementByDataTest(fixture, 'flag-image');
     expect(flagImage.src).toContain('en-US');
   });
 
   it('should toggle language when user clicks flag', () => {
     translateService.setDefaultLang('pt-BR');
     fixture.detectChanges();
-    getElementBySelector(fixture, 'img').click();
+    getElementByDataTest(fixture, 'flag-image').click();
     expect(translateService.defaultLang).toEqual('en-US');
   });
 });

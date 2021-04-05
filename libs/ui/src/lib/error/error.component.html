@@ -4,6 +4,7 @@
     buttonText="ERROR.BUTTON"
     class="error__button"
     (click)="tryAgain.emit()"
+    [attr.data-test]="'error-button'"
   >
   </gus-button>
 </div>

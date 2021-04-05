@@ -3,6 +3,7 @@
   src="assets/img/icons/close.svg"
   [alt]="'USER_POST.CLOSE_ALT' | translate"
   (click)="closePost()"
+  [attr.data-test]="'post-close'"
 />
 <div *ngIf="user$ | async; let user" class="content">
   <ng-container *ngIf="post$ | async; let post">
@@ -10,16 +11,16 @@
       class="post__image"
       [src]="post.img"
       [alt]="'USER_POST.POST_IMAGE_ALT' | translate"
-      [attr.data-cy]="'post-image'"
+      [attr.data-test]="'post-image'"
     />
     <div class="post__content">
       <img class="post__user-img" [src]="user.pictureURL" />
       <span class="post__user-username">{{ user.username }}</span>
       <span class="post__user-name">{{ user.name }}</span>
-      <h2 class="post__title" [attr.data-cy]="'post-title'">
+      <h2 class="post__title" [attr.data-test]="'post-title'">
         {{ post.title }}
       </h2>
-      <p class="post__body" [attr.data-cy]="'post-body'">
+      <p class="post__body" [attr.data-test]="'post-body'">
         {{ post.body }}
       </p>
     </div>
@@ -41,7 +42,7 @@
           <div
             *ngFor="let comment of comments$ | async; let i = index"
             class="comment__item"
-            [attr.data-cy]="'comment'"
+            [attr.data-test]="'comment'"
           >
             <span class="comment__name">{{ comment.name }}</span>
             <img

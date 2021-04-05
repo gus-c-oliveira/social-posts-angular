@@ -6,9 +6,10 @@
           class="cover__picture"
           [src]="user.pictureURL"
           [alt]="'USER_PROFILE.COVER.PICTURE_ALT' | translate"
+          [attr.data-test]="'cover-picture'"
         />
       </div>
-      <span class="cover__username" [attr.data-cy]="'username'">
+      <span class="cover__username" [attr.data-test]="'username'">
         {{ user.username }}
       </span>
     </div>
@@ -19,13 +20,13 @@
       <h2 class="section-header">
         {{ 'USER_PROFILE.GENERAL.TITLE' | translate }}
       </h2>
-      <div class="general__container" [attr.data-cy]="'about-me'">
+      <div class="general__container" [attr.data-test]="'about-me'">
         <img
           class="general__icon"
           src="assets/img/user-profile/v-card.svg"
           [alt]="'USER_PROFILE.GENERAL.CARD_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.name }}
         </span>
         <img
@@ -33,7 +34,7 @@
           src="assets/img/user-profile/phone.svg"
           [alt]="'USER_PROFILE.GENERAL.PHONE_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.phone }}
         </span>
         <img
@@ -41,7 +42,7 @@
           src="assets/img/user-profile/network.svg"
           [alt]="'USER_PROFILE.GENERAL.WEBSITE_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.website }}
         </span>
         <img
@@ -49,7 +50,7 @@
           src="assets/img/user-profile/mail.svg"
           [alt]="'USER_PROFILE.GENERAL.EMAIL_ALT' | translate"
         />
-        <span class="general__value">
+        <span class="general__value" [attr.data-test]="'general-value'">
           {{ user.email }}
         </span>
       </div>
@@ -64,7 +65,7 @@
           *ngFor="let friend of (user$ | async).friends"
           class="friends__item"
           (click)="updateUser(friend.id)"
-          [attr.data-cy]="'friend'"
+          [attr.data-test]="'friend'"
         >
           <img
             class="friends__picture"
@@ -78,38 +79,41 @@
       </div>
     </section>
 
-    <section class="address" [attr.data-cy]="'address'">
+    <section class="address" [attr.data-test]="'address'">
       <h2 class="section-header section-header--address">
         {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
       </h2>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.street }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.suite }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.city }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.zipcode }}
       </span>
-      <span class="address__value">
+      <span class="address__value" [attr.data-test]="'address-value'">
         {{ user.address.geo.lat }} | {{ user.address.geo.lng }}
       </span>
     </section>
 
-    <section class="company" [attr.data-cy]="'company'">
+    <section class="company" [attr.data-test]="'company'">
       <h2 class="section-header">
         {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
       </h2>
-      <span class="company__value company__value--name">
+      <span
+        class="company__value company__value--name"
+        [attr.data-test]="'company-value'"
+      >
         {{ user.company.name }}
       </span>
-      <span class="company__value">
+      <span class="company__value" [attr.data-test]="'company-value'">
         &ldquo;{{ user.company.catchPhrase }}&rdquo;
       </span>
-      <span class="company__value">
+      <span class="company__value" [attr.data-test]="'company-value'">
         {{ user.company.bs }}
       </span>
     </section>
@@ -135,7 +139,7 @@
         *ngFor="let post of posts$ | async"
         class="post__item"
         (click)="handlePostSelection(post.id)"
-        [attr.data-cy]="'post'"
+        [attr.data-test]="'post'"
       >
         <img
           class="post__img"

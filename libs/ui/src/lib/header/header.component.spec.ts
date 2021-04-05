@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonStubComponent, buttonSelector } from '@gus/ui/testing';
+import { ButtonStubComponent } from '@gus/ui/testing';
 import {
-  getAllElementsBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
 
@@ -37,18 +37,18 @@ describe('HeaderComponent', () => {
   });
 
   it('should display the title', () => {
-    const title = getElementTextContentBySelector(fixture, 'h1');
+    const title = getElementTextContentByDataTest(fixture, 'header-title');
     expect(title).toEqual('TITLE');
   });
 
   it('should display the buttons', () => {
-    const buttons = getAllElementsBySelector(fixture, buttonSelector);
+    const buttons = getAllElementsByDataTest(fixture, 'ui-button');
     expect(buttons.length).toEqual(buttonConfigs.length);
   });
 
   it('should emit an event when a button is clicked', () => {
     spyOn(component.buttonClick, 'emit');
-    getElementBySelector(fixture, buttonSelector).click();
+    getElementByDataTest(fixture, 'ui-button').click();
     expect(component.buttonClick.emit).toHaveBeenCalledWith({
       type: buttonConfigs[0].eventType,
     });

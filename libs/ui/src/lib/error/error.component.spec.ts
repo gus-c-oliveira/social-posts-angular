@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonStubComponent, buttonSelector } from '@gus/ui/testing';
-import { getElementBySelector, TranslatePipeStub } from '@gus/testing';
+import { ButtonStubComponent } from '@gus/ui/testing';
+import { getElementByDataTest, TranslatePipeStub } from '@gus/testing';
 
 import { ErrorComponent, errorSelector } from './error.component';
 
@@ -9,7 +9,7 @@ import { ErrorComponent, errorSelector } from './error.component';
   selector: 'gus-test-host',
   template: `
     <gus-error (tryAgain)="retry()">
-      <span class="error__message">Error</span>
+      <span [attr.data-test]="'error-message'">Error</span>
     </gus-error>
   `,
 })
@@ -39,23 +39,23 @@ describe('ErrorComponent', () => {
   });
 
   it('should create', () => {
-    const errorComponent = getElementBySelector(fixture, errorSelector);
+    const errorComponent = getElementByDataTest(fixture, errorSelector);
     expect(errorComponent).toBeTruthy();
   });
 
   it('should display its content using content projection', () => {
-    const errorMessage = getElementBySelector(fixture, '.error__message');
+    const errorMessage = getElementByDataTest(fixture, 'error-message');
     expect(errorMessage).toBeTruthy();
   });
 
   it('should display the try again button', () => {
-    const tryAgainButton = getElementBySelector(fixture, buttonSelector);
+    const tryAgainButton = getElementByDataTest(fixture, 'ui-button');
     expect(tryAgainButton).toBeTruthy();
   });
 
   it('should emit an event when the try again button is clicked', () => {
     spyOn(host, 'retry');
-    getElementBySelector(fixture, buttonSelector).click();
+    getElementByDataTest(fixture, 'ui-button').click();
     expect(host.retry).toHaveBeenCalled();
   });
 });

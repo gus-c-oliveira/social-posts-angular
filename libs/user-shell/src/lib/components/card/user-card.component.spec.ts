@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockUserList, mapUserToSimpleUser, SimpleUser } from '@gus/user-store';
 import {
-  getAllElementsTextContentBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsTextContentByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
 
@@ -47,29 +47,26 @@ describe('UserCardComponent', () => {
   });
 
   it('should create', () => {
-    const card = getElementBySelector(fixture, userCardSelector);
+    const card = getElementByDataTest(fixture, userCardSelector);
     expect(card).toBeTruthy();
   });
 
   it('should display the user picture', () => {
-    const picture = getElementBySelector(fixture, '.card__picture');
+    const picture = getElementByDataTest(fixture, 'card-picture');
     expect(picture.src).toContain(mockSimpleUser.pictureURL);
   });
 
   it(`should display the user's username`, () => {
-    const username = getElementTextContentBySelector(
-      fixture,
-      '.card__username'
-    );
+    const username = getElementTextContentByDataTest(fixture, 'card-username');
     expect(username).toEqual(mockSimpleUser.username);
   });
 
   it(`should display the user's name and email`, () => {
     let name = '';
     let email = '';
-    const nameAndEmail = getAllElementsTextContentBySelector(
+    const nameAndEmail = getAllElementsTextContentByDataTest(
       fixture,
-      '.card__info-value'
+      'card-info-value'
     );
     // Name should be the first value, Email should be the second value.
     name = nameAndEmail[0];
@@ -80,7 +77,7 @@ describe('UserCardComponent', () => {
 
   it(`should emit the id of the user
       to the parent component when clicked`, () => {
-    getElementBySelector(fixture, '.card').click();
+    getElementByDataTest(fixture, 'user-card').click();
     expect(component.selected).toEqual(mockSimpleUser.id);
   });
 });

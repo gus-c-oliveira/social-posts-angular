@@ -1,4 +1,4 @@
-export const getPostImage = () => cy.get('[data-cy=post-image]');
-export const getPostTitle = () => cy.get('[data-cy=post-title]');
-export const getPostBody = () => cy.get('[data-cy=post-body]');
-export const getCommentItems = () => cy.get('[data-cy=comment]');
+export const getPostImage = () => cy.get('[data-test=post-image]');
+export const getPostTitle = () => cy.get('[data-test=post-title]');
+export const getPostBody = () => cy.get('[data-test=post-body]');
+export const getCommentItems = () => cy.get('[data-test=comment]');
