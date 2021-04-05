@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
-  getAllElementsBySelector,
-  getAllElementsTextContentBySelector,
-  getElementBySelector,
-  getElementTextContentBySelector,
+  getAllElementsByDataTest,
+  getAllElementsTextContentByDataTest,
+  getElementByDataTest,
+  getElementTextContentByDataTest,
 } from './testing';
 
 @Component({
   selector: 'gus-test-host',
   template: `
-    <button>Click Me!</button>
-    <span class="test-span">I'm a test component</span>
-    <span class="test-span">and this is a test span</span>
+    <button [attr.data-test]="'button'">Click Me!</button>
+    <span [attr.data-test]="'test-span'">I'm a test component</span>
+    <span [attr.data-test]="'test-span'">and this is a test span</span>
   `,
 })
 class TestHostComponent {}
@@ -32,37 +32,37 @@ describe('Testing Utils', () => {
     fixture.detectChanges();
   });
 
-  describe('getElementBySelector', () => {
+  describe('getElementByDataTest', () => {
     it(`should return the element given
-      a fixture and corresponding css selector`, () => {
-      const buttonElement = getElementBySelector(fixture, 'button');
+      a fixture and corresponding data-test`, () => {
+      const buttonElement = getElementByDataTest(fixture, 'button');
       expect(buttonElement).toBeTruthy();
     });
   });
 
-  describe('getAllElementsBySelector', () => {
+  describe('getAllElementsByDataTest', () => {
     it(`should return all elements given
-      a fixture and corresponding css selector`, () => {
-      const allSpans = getAllElementsBySelector(fixture, '.test-span');
+      a fixture and corresponding data-test`, () => {
+      const allSpans = getAllElementsByDataTest(fixture, 'test-span');
       expect(allSpans).toBeTruthy();
       expect(allSpans.length).toEqual(2);
     });
   });
 
-  describe('getElementTextContentBySelector', () => {
+  describe('getElementTextContentByDataTest', () => {
     it(`should return the text content of an element
-      given a fixture and corresponding selector`, () => {
-      const text = getElementTextContentBySelector(fixture, 'button');
+      given a fixture and corresponding data-test`, () => {
+      const text = getElementTextContentByDataTest(fixture, 'button');
       expect(text).toEqual('Click Me!');
     });
   });
 
-  describe('getAllElementsTextContentBySelector', () => {
+  describe('getAllElementsTextContentByDataTest', () => {
     it(`should return the text content of an element
-    given a fixture and corresponding selector`, () => {
-      const allTexts = getAllElementsTextContentBySelector(
+    given a fixture and corresponding data-test`, () => {
+      const allTexts = getAllElementsTextContentByDataTest(
         fixture,
-        '.test-span'
+        'test-span'
       );
       expect(allTexts).toBeTruthy();
       expect(allTexts.length).toEqual(2);
