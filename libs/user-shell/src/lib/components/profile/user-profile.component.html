@@ -8,7 +8,7 @@
           [alt]="'USER_PROFILE.COVER.PICTURE_ALT' | translate"
         />
       </div>
-      <span class="cover__username" [attr.data-cy]="'username'">
+      <span class="cover__username" [attr.data-test]="'username'">
         {{ user.username }}
       </span>
     </div>
@@ -19,7 +19,7 @@
       <h2 class="section-header">
         {{ 'USER_PROFILE.GENERAL.TITLE' | translate }}
       </h2>
-      <div class="general__container" [attr.data-cy]="'about-me'">
+      <div class="general__container" [attr.data-test]="'about-me'">
         <img
           class="general__icon"
           src="assets/img/user-profile/v-card.svg"
@@ -64,7 +64,7 @@
           *ngFor="let friend of (user$ | async).friends"
           class="friends__item"
           (click)="updateUser(friend.id)"
-          [attr.data-cy]="'friend'"
+          [attr.data-test]="'friend'"
         >
           <img
             class="friends__picture"
@@ -78,7 +78,7 @@
       </div>
     </section>
 
-    <section class="address" [attr.data-cy]="'address'">
+    <section class="address" [attr.data-test]="'address'">
       <h2 class="section-header section-header--address">
         {{ 'USER_PROFILE.ADDRESS.TITLE' | translate }}
       </h2>
@@ -99,7 +99,7 @@
       </span>
     </section>
 
-    <section class="company" [attr.data-cy]="'company'">
+    <section class="company" [attr.data-test]="'company'">
       <h2 class="section-header">
         {{ 'USER_PROFILE.COMPANY.TITLE' | translate }}
       </h2>
@@ -135,7 +135,7 @@
         *ngFor="let post of posts$ | async"
         class="post__item"
         (click)="handlePostSelection(post.id)"
-        [attr.data-cy]="'post'"
+        [attr.data-test]="'post'"
       >
         <img
           class="post__img"

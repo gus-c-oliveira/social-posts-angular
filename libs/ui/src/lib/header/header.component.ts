@@ -17,7 +17,7 @@ export const headerSelector = 'gus-header';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  @HostBinding('attr.data-cy') readonly dataCy = headerSelector;
+  @HostBinding('attr.data-test') readonly dataTest = headerSelector;
 
   @Input() public title = '';
   @Input() public buttonConfigs: HeaderButtonConfig[] = [];

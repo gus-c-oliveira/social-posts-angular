@@ -24,7 +24,7 @@ export const userListSelector = 'gus-user-list';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent implements OnDestroy {
-  @HostBinding('attr.data-cy') readonly dataCy = userListSelector;
+  @HostBinding('attr.data-test') readonly dataTest = userListSelector;
 
   public userList$: Observable<SimpleUser[]>;
   public loading$: Observable<boolean>;

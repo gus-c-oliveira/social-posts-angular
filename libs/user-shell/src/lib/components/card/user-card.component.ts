@@ -17,7 +17,7 @@ export const userCardSelector = 'gus-user-card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent {
-  @HostBinding('attr.data-cy') readonly dataCy = userCardSelector;
+  @HostBinding('attr.data-test') readonly dataTest = userCardSelector;
 
   @Input() public user: SimpleUser = null;
   // Emits the user id when card is clicked.

@@ -14,7 +14,7 @@ export const languageComponentSelector = 'gus-language-selector';
   styleUrls: ['./language-selector.component.scss'],
 })
 export class LanguageSelectorComponent implements OnDestroy {
-  @HostBinding('attr.data-cy') readonly dataCy = languageComponentSelector;
+  @HostBinding('attr.data-test') readonly dataTest = languageComponentSelector;
 
   public flagImage = null;
   private currentLanguage = null;

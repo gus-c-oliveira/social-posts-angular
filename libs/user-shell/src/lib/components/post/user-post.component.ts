@@ -17,7 +17,7 @@ export const userPostSelector = 'gus-user-post';
   styleUrls: ['./user-post.component.scss'],
 })
 export class UserPostComponent implements OnDestroy {
-  @HostBinding('attr.data-cy') readonly dataCy = userPostSelector;
+  @HostBinding('attr.data-test') readonly dataTest = userPostSelector;
 
   @Input() public overlayRef: OverlayRef = null;
 

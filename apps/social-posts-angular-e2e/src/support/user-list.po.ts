@@ -1,2 +1,2 @@
-export const getUserCards = () => cy.get('[data-cy=gus-user-card]');
-export const getUserProfile = () => cy.get('[data-cy=gus-user-profile]');
+export const getUserCards = () => cy.get('[data-test=gus-user-card]');
+export const getUserProfile = () => cy.get('[data-test=gus-user-profile]');

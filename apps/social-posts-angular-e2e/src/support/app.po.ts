@@ -1,4 +1,4 @@
-export const getHeader = () => cy.get('[data-cy=gus-header]');
+export const getHeader = () => cy.get('[data-test=gus-header]');
 export const getLanguageSelector = () =>
-  cy.get('[data-cy=gus-language-selector]');
-export const getUserList = () => cy.get('[data-cy=gus-user-list]');
+  cy.get('[data-test=gus-language-selector]');
+export const getUserList = () => cy.get('[data-test=gus-user-list]');
