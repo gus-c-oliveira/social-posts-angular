@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LanguageModule } from '@gus/language';
-import { getElementTextContentBySelector } from '@gus/testing';
+import { getElementTextContentByDataTest } from '@gus/testing';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -32,7 +32,7 @@ describe('StatsPageComponent', () => {
   });
 
   it('should display warning message', () => {
-    const message = getElementTextContentBySelector(fixture, '.warning');
+    const message = getElementTextContentByDataTest(fixture, 'warning');
     expect(message).toEqual('STATS.WARNING');
   });
 });
