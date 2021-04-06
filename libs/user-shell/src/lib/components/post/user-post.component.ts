@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommentActions, Comment, commentQuery } from '@gus/comment-store';
 import { PostActions, Post, postQuery } from '@gus/post-store';
-import { User, userQuery } from '@gus/user-store';
+import { User, UserActions, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -89,6 +89,11 @@ export class UserPostComponent implements OnInit, OnDestroy {
       .subscribe((post) =>
         this.store$.dispatch(CommentActions.loadComments({ id: post.id }))
       );
+  }
+
+  public openFriendProfile(id: number) {
+    this.store$.dispatch(UserActions.setSelectedUserID({ id }));
+    this.closePost();
   }
 
   public ngOnDestroy() {
