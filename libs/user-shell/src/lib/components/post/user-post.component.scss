@@ -172,6 +172,8 @@
   }
 
   &__body {
+    grid-column: span 2;
+
     font-size: 1.2rem;
   }
 }
