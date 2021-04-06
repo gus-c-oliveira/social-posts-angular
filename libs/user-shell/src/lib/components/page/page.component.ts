@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { TranslatedPage } from '@gus/language';
+import { Component } from '@angular/core';
+import { TranslatedPageComponent } from '@gus/language';
 
 export const pageSelector = 'gus-user-page';
 
@@ -8,4 +8,4 @@ export const pageSelector = 'gus-user-page';
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
-export class UserPageComponent extends TranslatedPage implements OnDestroy {}
+export class UserPageComponent extends TranslatedPageComponent {}
