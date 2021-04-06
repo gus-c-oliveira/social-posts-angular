@@ -168,9 +168,12 @@
     object-fit: cover;
 
     border-radius: 50%;
+    cursor: pointer;
   }
 
   &__body {
+    grid-column: span 2;
+
     font-size: 1.2rem;
   }
 }

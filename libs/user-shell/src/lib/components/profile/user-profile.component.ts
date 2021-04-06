@@ -5,6 +5,7 @@ import {
   Component,
   HostBinding,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { PostActions, Post, postQuery } from '@gus/post-store';
 import { UserActions, User, userQuery } from '@gus/user-store';
@@ -24,7 +25,7 @@ export const userProfileSelector = 'gus-user-profile';
   styleUrls: ['user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserProfileComponent implements OnDestroy {
+export class UserProfileComponent implements OnInit, OnDestroy {
   @HostBinding('attr.data-test') readonly dataTest = userProfileSelector;
 
   public user$: Observable<User>;
@@ -35,7 +36,9 @@ export class UserProfileComponent implements OnDestroy {
   public userCoverImgSRC = '';
   private currentUserID: number = null;
 
-  public constructor(private store$: Store<any>, private overlay: Overlay) {
+  public constructor(private store$: Store<any>, private overlay: Overlay) {}
+
+  public ngOnInit() {
     this.initializeObservables();
   }
 
