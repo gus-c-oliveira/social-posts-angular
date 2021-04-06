@@ -3,6 +3,7 @@ import {
   Component,
   HostBinding,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostActions } from '@gus/post-store';
@@ -23,7 +24,7 @@ export const userListSelector = 'gus-user-list';
   styleUrls: ['user-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserListComponent implements OnDestroy {
+export class UserListComponent implements OnInit, OnDestroy {
   @HostBinding('attr.data-test') readonly dataTest = userListSelector;
 
   public userList$: Observable<SimpleUser[]>;
@@ -34,7 +35,9 @@ export class UserListComponent implements OnDestroy {
     private store$: Store<any>,
     private router: Router,
     private route: ActivatedRoute
-  ) {
+  ) {}
+
+  public ngOnInit() {
     this.clearPreviousUserData();
     this.initializeObservables();
     this.loadUserList();

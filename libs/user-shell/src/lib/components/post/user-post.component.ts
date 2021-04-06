@@ -1,5 +1,11 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CommentActions, Comment, commentQuery } from '@gus/comment-store';
 import { PostActions, Post, postQuery } from '@gus/post-store';
 import { User, userQuery } from '@gus/user-store';
@@ -16,7 +22,7 @@ export const userPostSelector = 'gus-user-post';
   templateUrl: './user-post.component.html',
   styleUrls: ['./user-post.component.scss'],
 })
-export class UserPostComponent implements OnDestroy {
+export class UserPostComponent implements OnInit, OnDestroy {
   @HostBinding('attr.data-test') readonly dataTest = userPostSelector;
 
   @Input() public overlayRef: OverlayRef = null;
@@ -28,7 +34,9 @@ export class UserPostComponent implements OnDestroy {
   public error$: Observable<boolean>;
   private selectedPostID: number = null;
 
-  public constructor(private store$: Store<any>) {
+  public constructor(private store$: Store<any>) {}
+
+  public ngOnInit() {
     this.initializeObservables();
   }
 
