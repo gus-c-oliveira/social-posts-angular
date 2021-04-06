@@ -1,4 +1,4 @@
-import { Directive, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,9 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { languageQuery } from '../store/index';
 
 @UntilDestroy()
-@Directive()
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
-export abstract class TranslatedPage implements OnDestroy {
+@Component({
+  selector: 'gus-translated-page',
+  template: '',
+})
+export class TranslatedPageComponent implements OnDestroy {
   public constructor(
     private store$: Store<any>,
     private translateService: TranslateService
