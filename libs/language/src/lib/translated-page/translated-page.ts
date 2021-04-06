@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,11 +10,13 @@ import { languageQuery } from '../store/index';
   selector: 'gus-translated-page',
   template: '',
 })
-export class TranslatedPageComponent implements OnDestroy {
+export class TranslatedPageComponent implements OnInit, OnDestroy {
   public constructor(
     private store$: Store<any>,
     private translateService: TranslateService
-  ) {
+  ) {}
+
+  public ngOnInit() {
     this.addTranslations();
     this.setupDefaultLanguage();
     this.listenToLanguageChanges();
