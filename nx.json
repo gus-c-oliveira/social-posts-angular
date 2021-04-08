@@ -30,9 +30,6 @@
     "post-store": {
       "tags": []
     },
-    "comment-store": {
-      "tags": []
-    },
     "user-shell": {
       "tags": []
     },

@@ -27,9 +27,7 @@
               "apps/social-posts-angular/src/favicon.ico",
               "apps/social-posts-angular/src/assets"
             ],
-            "styles": [
-              "apps/social-posts-angular/src/styles.scss"
-            ],
+            "styles": ["apps/social-posts-angular/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -165,10 +163,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/**/*.ts",
-              "libs/ui/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/ui/**/*.ts", "libs/ui/**/*.html"]
           }
         },
         "test": {
@@ -233,35 +228,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/post-store/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "comment-store": {
-      "projectType": "library",
-      "root": "libs/comment-store",
-      "sourceRoot": "libs/comment-store/src",
-      "prefix": "gus",
-      "architect": {
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/comment-store/**/*.ts",
-              "libs/comment-store/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/comment-store/jest.config.js",
             "passWithNoTests": true
           }
         }

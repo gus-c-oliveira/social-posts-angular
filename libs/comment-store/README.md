@@ -1,7 +1,0 @@
-# comment-store
-
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test comment-store` to execute the unit tests.
