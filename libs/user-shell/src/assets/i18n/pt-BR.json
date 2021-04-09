@@ -35,7 +35,8 @@
   "USER_POST": {
     "LOAD_ERROR": "Desculpe! Erro ao carregar comentários...",
     "CLOSE_ALT": "Fechar",
-    "POST_IMAGE_ALT": "Imagem da Publicação"
+    "POST_IMAGE_ALT": "Imagem da Publicação",
+    "EMPTY_COMMENTS": "Esta publicação não possui comentários"
   },
   "ERROR": {
     "BUTTON": "Quero tentar de novo!"

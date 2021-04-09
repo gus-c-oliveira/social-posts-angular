@@ -1,41 +1,34 @@
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  mockCommentList,
-  COMMENT_STATE_KEY,
-  initialCommentState,
-  CommentActions,
-  mapCommentsToEntities,
-} from '@gus/comment-store';
-import {
   initialPostState,
-  POST_STATE_KEY,
-  mockPostList,
   mapPostsToEntities,
+  mockCommentList,
+  mockPostList,
+  POST_SERVICE_BASE_URL,
+  POST_STATE_KEY,
+  PostService,
 } from '@gus/post-store';
-import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
   getAllElementsTextContentByDataTest,
   getElementByDataTest,
   getElementTextContentByDataTest,
   TranslatePipeStub,
 } from '@gus/testing';
+import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
+import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
-  ButtonComponent,
-  ErrorComponent,
-  errorSelector,
-  spinnerSelector,
-} from '@gus/ui';
-import { Store } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-
-import { UserPostComponent } from './user-post.component';
-import {
+  mapUsersToEntities,
   mockUserList,
   USER_STATE_KEY,
-  mapUsersToEntities,
 } from '@gus/user-store';
+import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { of } from 'rxjs';
+
+import { UserPostComponent } from './user-post.component';
 
 @Component({
   selector: 'gus-test-host',
@@ -53,9 +46,9 @@ export class TestHostComponent {
 describe('UserPostComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let service: PostService;
   const userKey = USER_STATE_KEY;
   const postKey = POST_STATE_KEY;
-  const commentKey = COMMENT_STATE_KEY;
   let store$: MockStore<any>;
   const initialState = {
     [userKey]: {
@@ -66,14 +59,13 @@ describe('UserPostComponent', () => {
       ids: mockUserList.map((user) => user.id),
     },
     [postKey]: { ...initialPostState },
-    [commentKey]: { ...initialCommentState },
   };
   const selectedPostID = 3;
   const selectedPost = mockPostList.find((item) => item.id === selectedPostID);
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule],
+      imports: [HttpClientTestingModule, OverlayModule],
       declarations: [
         ErrorComponent,
         ButtonComponent,
@@ -86,6 +78,8 @@ describe('UserPostComponent', () => {
         provideMockStore({
           initialState,
         }),
+        PostService,
+        { provide: POST_SERVICE_BASE_URL, useValue: '/' },
       ],
     }).compileComponents();
   });
@@ -94,6 +88,7 @@ describe('UserPostComponent', () => {
     fixture = TestBed.createComponent(TestHostComponent);
     host = fixture.componentInstance;
     store$ = TestBed.inject(Store) as MockStore<any>;
+    service = TestBed.inject(PostService);
     fixture.detectChanges();
   });
 
@@ -130,18 +125,14 @@ describe('UserPostComponent', () => {
   });
 
   it(`should display the spinner while the post's comments are loading`, () => {
-    store$.setState({
-      [commentKey]: { ...initialCommentState, loading: true },
-    });
+    host.postComponent.comments$ = of({ state: 'loading', comments: [] });
     fixture.detectChanges();
     const spinner = getElementByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
   it('should display the error component if comments fail to load', () => {
-    store$.setState({
-      [commentKey]: { ...initialCommentState, error: true },
-    });
+    host.postComponent.comments$ = of({ state: 'error', comments: [] });
     fixture.detectChanges();
     const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
@@ -149,7 +140,6 @@ describe('UserPostComponent', () => {
 
   it(`should retry loading the post comments
       when clicking the error button`, () => {
-    spyOn(store$, 'dispatch');
     store$.setState({
       [postKey]: {
         entities: mapPostsToEntities(mockPostList),
@@ -158,23 +148,18 @@ describe('UserPostComponent', () => {
         selectedPostID,
         ids: mockPostList.map((post) => post.id),
       },
-      [commentKey]: { ...initialCommentState, error: true },
     });
+    spyOn(service, 'loadPostComments');
+    host.postComponent.comments$ = of({ state: 'error', comments: [] });
     fixture.detectChanges();
     getElementByDataTest(fixture, 'error-button').click();
-    expect(store$.dispatch).toHaveBeenCalledWith(
-      CommentActions.loadComments({ id: selectedPost.id })
-    );
+    expect(service.loadPostComments).toHaveBeenCalledWith(selectedPost.id);
   });
 
   it('should display the selected post comments', () => {
-    store$.setState({
-      [commentKey]: {
-        entities: mapCommentsToEntities(mockCommentList),
-        loading: false,
-        error: false,
-        ids: mockCommentList.map((comment) => comment.id),
-      },
+    host.postComponent.comments$ = of({
+      state: 'loaded',
+      comments: mockCommentList,
     });
     fixture.detectChanges();
     const expected = mockCommentList.map((item) => `${item.name}${item.body}`);
