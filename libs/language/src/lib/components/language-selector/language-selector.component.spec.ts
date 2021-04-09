@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { getElementByDataTest } from '@gus/testing';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -10,12 +10,14 @@ describe('LanguageSelectorComponent', () => {
   let fixture: ComponentFixture<LanguageSelectorComponent>;
   let translateService: TranslateService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [LanguageSelectorComponent],
-      imports: [TranslateModule.forRoot(), StoreModule.forRoot({})],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LanguageSelectorComponent],
+        imports: [TranslateModule.forRoot(), StoreModule.forRoot({})],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LanguageSelectorComponent);
