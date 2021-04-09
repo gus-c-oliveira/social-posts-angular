@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonStubComponent } from '@gus/ui/testing';
 import { getElementByDataTest, TranslatePipeStub } from '@gus/testing';
 
@@ -21,16 +21,18 @@ describe('ErrorComponent', () => {
   let host: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        ButtonStubComponent,
-        TestHostComponent,
-        ErrorComponent,
-        TranslatePipeStub,
-      ],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ButtonStubComponent,
+          TestHostComponent,
+          ErrorComponent,
+          TranslatePipeStub,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { getElementByDataTest, TranslatePipeStub } from '@gus/testing';
 
 import { SpinnerComponent } from './spinner.component';
@@ -7,11 +7,13 @@ describe('SpinnerComponent', () => {
   let fixture: ComponentFixture<SpinnerComponent>;
   let component: SpinnerComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [SpinnerComponent, TranslatePipeStub],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SpinnerComponent, TranslatePipeStub],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SpinnerComponent);
