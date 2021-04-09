@@ -26,35 +26,38 @@
     </div>
   </ng-container>
   <div class="comment__box">
-    <ng-container *ngIf="loading$ | async; else loaded">
-      <gus-spinner></gus-spinner>
-    </ng-container>
-    <ng-template #loaded>
-      <ng-container *ngIf="error$ | async; else noError">
+    <ng-container [ngSwitch]="(comments$ | async).state">
+      <ng-container *ngSwitchCase="'loading'">
+        <gus-spinner></gus-spinner>
+      </ng-container>
+      <ng-container *ngSwitchCase="'error'">
         <gus-error (tryAgain)="retryLoadingComments()">
           <span class="error__message">
             {{ 'USER_POST.LOAD_ERROR' | translate }}
           </span>
         </gus-error>
       </ng-container>
-      <ng-template #noError>
-        <ng-container *ngIf="((comments$ | async) || []).length">
-          <div
-            *ngFor="let comment of comments$ | async; let i = index"
-            class="comment__item"
-            [attr.data-test]="'comment'"
-          >
-            <span class="comment__name">{{ comment.name }}</span>
-            <img
-              *ngIf="user.friends && user.friends[i]"
-              class="comment__user-image"
-              [src]="user.friends[i].pictureURL"
-              (click)="openFriendProfile(user.friends[i].id)"
-            />
-            <p class="comment__body">{{ comment.body }}</p>
-          </div>
-        </ng-container>
-      </ng-template>
-    </ng-template>
+      <ng-container *ngSwitchCase="'loaded'">
+        <div
+          *ngFor="let comment of (comments$ | async).comments; let i = index"
+          class="comment__item"
+          [attr.data-test]="'comment'"
+        >
+          <span class="comment__name">{{ comment.name }}</span>
+          <img
+            *ngIf="user.friends && user.friends[i]"
+            class="comment__user-image"
+            [src]="user.friends[i].pictureURL"
+            (click)="openFriendProfile(user.friends[i].id)"
+          />
+          <p class="comment__body">{{ comment.body }}</p>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <span class="comment__empty">{{
+          'USER_POST.EMPTY_COMMENTS' | translate
+        }}</span>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

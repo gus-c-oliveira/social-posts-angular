@@ -6,13 +6,18 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { CommentActions, Comment, commentQuery } from '@gus/comment-store';
-import { PostActions, Post, postQuery } from '@gus/post-store';
+import {
+  CommentData,
+  Post,
+  PostActions,
+  postQuery,
+  PostService,
+} from '@gus/post-store';
 import { User, UserActions, userQuery } from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 export const userPostSelector = 'gus-user-post';
 
@@ -29,26 +34,21 @@ export class UserPostComponent implements OnInit, OnDestroy {
 
   public user$: Observable<User>;
   public post$: Observable<Post>;
-  public comments$: Observable<Comment[]>;
-  public loading$: Observable<boolean>;
-  public error$: Observable<boolean>;
+  public comments$: Observable<CommentData>;
+
   private selectedPostID: number = null;
 
-  public constructor(private store$: Store<any>) {}
+  public constructor(
+    private store$: Store<any>,
+    private postService: PostService
+  ) {}
 
   public ngOnInit() {
-    this.initializeObservables();
+    this.postService.clearComments();
+    this.initObservables();
   }
 
-  private initializeObservables() {
-    this.loading$ = this.store$.pipe(
-      select(commentQuery.getLoading),
-      untilDestroyed(this)
-    );
-    this.error$ = this.store$.pipe(
-      select(commentQuery.getError),
-      untilDestroyed(this)
-    );
+  private initObservables() {
     this.user$ = this.store$.pipe(
       select(userQuery.getSelectedUser),
       untilDestroyed(this)
@@ -61,10 +61,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
       }),
       untilDestroyed(this)
     );
-    this.comments$ = this.store$.pipe(
-      select(commentQuery.getComments),
-      untilDestroyed(this)
-    );
+    this.comments$ = this.postService.comments$.pipe(untilDestroyed(this));
   }
 
   private loadComments(postId: number) {
@@ -72,7 +69,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedPostID = postId;
-    this.store$.dispatch(CommentActions.loadComments({ id: postId }));
+    this.postService.loadPostComments(this.selectedPostID);
   }
 
   public closePost() {
@@ -84,11 +81,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
   }
 
   public retryLoadingComments() {
-    this.post$
-      .pipe(take(1))
-      .subscribe((post) =>
-        this.store$.dispatch(CommentActions.loadComments({ id: post.id }))
-      );
+    this.postService.loadPostComments(this.selectedPostID);
   }
 
   public openFriendProfile(id: number) {
@@ -102,6 +95,5 @@ export class UserPostComponent implements OnInit, OnDestroy {
 
   private clear() {
     this.store$.dispatch(PostActions.clearSelectedPostID());
-    this.store$.dispatch(CommentActions.clearComments());
   }
 }

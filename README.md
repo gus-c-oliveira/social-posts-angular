@@ -38,7 +38,6 @@ Apps:
 
 Libs:
 
-- comment-store: Store module for post's comments.
 - language: module with utilities, components and classes for handling translations inside libs.
 - post-store: Store module for user's posts.
 - stats-shell: feature module for the Statistics app area.

@@ -10,11 +10,6 @@ import {
   mapUsersToEntities,
 } from '@gus/user-store';
 import {
-  COMMENT_SERVICE_BASE_URL,
-  COMMENT_STATE_KEY,
-  initialCommentState,
-} from '@gus/comment-store';
-import {
   PostActions,
   POST_STATE_KEY,
   PostState,
@@ -61,12 +56,9 @@ describe('UserProfileComponent', () => {
     selectedPostID: null,
     ids: mockPostList.map((post) => post.id),
   };
-  const commentKey = COMMENT_STATE_KEY;
-  const commentStoreState = initialCommentState;
   const initialState = {
     [userKey]: { ...userStoreState },
     [postKey]: { ...postStoreState },
-    [commentKey]: { ...commentStoreState },
   };
 
   beforeEach(async () => {
@@ -83,7 +75,6 @@ describe('UserProfileComponent', () => {
         provideMockStore({
           initialState,
         }),
-        { provide: COMMENT_SERVICE_BASE_URL, useValue: '/' },
         { provide: POST_SERVICE_BASE_URL, useValue: '/' },
         { provide: USER_SERVICE_BASE_URL, useValue: '/' },
       ],

@@ -29,6 +29,7 @@
   grid-template-areas:
     'img content'
     'img comments';
+  grid-template-rows: max-content auto;
   grid-template-columns: 2.5fr 1.5fr;
   height: 100%;
 
@@ -73,6 +74,7 @@
       'img name'
       'title title'
       'body body';
+    grid-template-rows: repeat(4, min-content);
     grid-template-columns: 5rem auto;
     padding: 2rem;
 
@@ -176,11 +178,13 @@
 
     font-size: 1.2rem;
   }
-}
 
-gus-error {
-  position: relative;
-  top: -2rem;
+  &__empty {
+    display: block;
+    width: 100%;
+
+    text-align: center;
+  }
 }
 
 .error__message {

@@ -1,22 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, of } from 'rxjs';
-
-import { mockPostList } from '../mocks/index';
-import { Post } from '../model/index';
+import { of } from 'rxjs';
 
 @Injectable()
-export class PostServiceStubSuccessful {
-  public getPosts(): Observable<Post[]> {
-    return of(mockPostList);
-  }
-}
+export class PostServiceStub {
+  public comments$ = of({ state: 'empty', comments: [] });
 
-@Injectable()
-export class PostServiceStubFailed {
-  public getPosts(): Observable<Post[]> {
-    return new Observable((observer: Observer<any>) => {
-      observer.error('Failed request');
-      observer.complete();
-    });
-  }
+  public getPosts() {}
+
+  public loadPostComments() {}
+
+  public clearComments() {}
 }

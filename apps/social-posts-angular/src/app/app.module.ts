@@ -2,7 +2,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
-import { COMMENT_SERVICE_BASE_URL } from '@gus/comment-store';
 import { LanguageModule } from '@gus/language';
 import { POST_SERVICE_BASE_URL } from '@gus/post-store';
 import { UiModule } from '@gus/ui';
@@ -51,7 +50,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageModule,
   ],
   providers: [
-    { provide: COMMENT_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
     { provide: POST_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
     { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
   ],
