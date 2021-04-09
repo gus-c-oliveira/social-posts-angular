@@ -2,7 +2,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommentStoreModule } from '@gus/comment-store';
 import { PostStoreModule } from '@gus/post-store';
 import {
   LanguageModule,
@@ -38,7 +37,6 @@ import { ProfileGuardService, ROUTES } from './routes/index';
     }),
     UiModule,
     RouterModule.forChild(ROUTES),
-    CommentStoreModule,
     PostStoreModule,
     UserStoreModule,
     LanguageModule,
