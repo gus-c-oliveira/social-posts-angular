@@ -2,7 +2,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { USER_SERVICE_BASE_URL } from '../token';
@@ -12,15 +12,17 @@ describe('UserService', () => {
   let service: UserService;
   let http: HttpTestingController;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        UserService,
-        { provide: USER_SERVICE_BASE_URL, useValue: '/' },
-      ],
-    });
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [
+          UserService,
+          { provide: USER_SERVICE_BASE_URL, useValue: '/' },
+        ],
+      });
+    })
+  );
 
   beforeEach(() => {
     service = TestBed.inject(UserService);

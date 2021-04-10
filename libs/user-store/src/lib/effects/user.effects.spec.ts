@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
@@ -19,19 +19,21 @@ describe('UserEffects', () => {
   let effects: UserEffects;
 
   describe('Successful Requests', () => {
-    beforeEach(async () => {
-      await TestBed.configureTestingModule({
-        imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
-        providers: [
-          {
-            provide: UserService,
-            useClass: UserServiceStubSuccessful,
-          },
-          UserEffects,
-          provideMockActions(() => actions),
-        ],
-      });
-    });
+    beforeEach(
+      waitForAsync(() => {
+        TestBed.configureTestingModule({
+          imports: [StoreModule.forRoot({}), EffectsModule.forRoot([])],
+          providers: [
+            {
+              provide: UserService,
+              useClass: UserServiceStubSuccessful,
+            },
+            UserEffects,
+            provideMockActions(() => actions),
+          ],
+        });
+      })
+    );
 
     beforeEach(() => {
       effects = TestBed.inject(UserEffects);

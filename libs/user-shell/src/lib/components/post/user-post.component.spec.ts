@@ -1,7 +1,7 @@
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   initialPostState,
   mapPostsToEntities,
@@ -63,26 +63,28 @@ describe('UserPostComponent', () => {
   const selectedPostID = 3;
   const selectedPost = mockPostList.find((item) => item.id === selectedPostID);
 
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, OverlayModule],
-      declarations: [
-        ErrorComponent,
-        ButtonComponent,
-        SpinnerStubComponent,
-        UserPostComponent,
-        TestHostComponent,
-        TranslatePipeStub,
-      ],
-      providers: [
-        provideMockStore({
-          initialState,
-        }),
-        PostService,
-        { provide: POST_SERVICE_BASE_URL, useValue: '/' },
-      ],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, OverlayModule],
+        declarations: [
+          ErrorComponent,
+          ButtonComponent,
+          SpinnerStubComponent,
+          UserPostComponent,
+          TestHostComponent,
+          TranslatePipeStub,
+        ],
+        providers: [
+          provideMockStore({
+            initialState,
+          }),
+          PostService,
+          { provide: POST_SERVICE_BASE_URL, useValue: '/' },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
@@ -98,6 +100,7 @@ describe('UserPostComponent', () => {
 
   it('should display the selected post', () => {
     store$.setState({
+      ...initialState,
       [postKey]: {
         entities: mapPostsToEntities(mockPostList),
         loading: false,
@@ -141,6 +144,7 @@ describe('UserPostComponent', () => {
   it(`should retry loading the post comments
       when clicking the error button`, () => {
     store$.setState({
+      ...initialState,
       [postKey]: {
         entities: mapPostsToEntities(mockPostList),
         loading: false,

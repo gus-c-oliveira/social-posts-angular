@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -53,26 +53,35 @@ describe('UserListComponent', () => {
   const userStateKey = USER_STATE_KEY;
   let store: MockStore<{ [userStateKey: string]: UserState }>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
-      declarations: [
-        SpinnerStubComponent,
-        ButtonComponent,
-        ErrorComponent,
-        UserListComponent,
-        UserCardComponent,
-        TranslatePipeStub,
-      ],
-      providers: [
-        provideMockStore({
-          initialState: {
-            [userStateKey]: initialUserState,
-          },
-        }),
-      ],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([
+            {
+              path: '**',
+              component: UserListComponent,
+            },
+          ]),
+        ],
+        declarations: [
+          SpinnerStubComponent,
+          ButtonComponent,
+          ErrorComponent,
+          UserListComponent,
+          UserCardComponent,
+          TranslatePipeStub,
+        ],
+        providers: [
+          provideMockStore({
+            initialState: {
+              [userStateKey]: initialUserState,
+            },
+          }),
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserListComponent);

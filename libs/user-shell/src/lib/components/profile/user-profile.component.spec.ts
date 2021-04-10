@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   USER_STATE_KEY,
@@ -61,25 +61,27 @@ describe('UserProfileComponent', () => {
     [postKey]: { ...postStoreState },
   };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        UserShellModule,
-        RouterTestingModule.withRoutes([]),
-        TranslateModule.forRoot(),
-        StoreModule.forRoot({}),
-        EffectsModule.forRoot(),
-        HttpClientTestingModule,
-      ],
-      providers: [
-        provideMockStore({
-          initialState,
-        }),
-        { provide: POST_SERVICE_BASE_URL, useValue: '/' },
-        { provide: USER_SERVICE_BASE_URL, useValue: '/' },
-      ],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          UserShellModule,
+          RouterTestingModule.withRoutes([]),
+          TranslateModule.forRoot(),
+          StoreModule.forRoot({}),
+          EffectsModule.forRoot(),
+          HttpClientTestingModule,
+        ],
+        providers: [
+          provideMockStore({
+            initialState,
+          }),
+          { provide: POST_SERVICE_BASE_URL, useValue: '/' },
+          { provide: USER_SERVICE_BASE_URL, useValue: '/' },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
@@ -170,6 +172,7 @@ describe('UserProfileComponent', () => {
 
   it(`should display the spinner while the user's posts are loading`, () => {
     store$.setState({
+      ...initialState,
       [postKey]: { ...postStoreState, loading: true },
     });
     fixture.detectChanges();
@@ -179,6 +182,7 @@ describe('UserProfileComponent', () => {
 
   it('should display the error component if posts fail to load', () => {
     store$.setState({
+      ...initialState,
       [postKey]: { ...postStoreState, error: true },
     });
     fixture.detectChanges();
