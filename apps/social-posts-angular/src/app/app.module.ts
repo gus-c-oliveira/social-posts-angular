@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/router';
 import { LanguageModule } from '@gus/language';
-import { POST_SERVICE_BASE_URL } from '@gus/post-store';
 import { UiModule } from '@gus/ui';
-import { USER_SERVICE_BASE_URL } from '@gus/user-store';
+import { SERVICE_BASE_URL } from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -49,10 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     LanguageModule,
   ],
-  providers: [
-    { provide: POST_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
-    { provide: USER_SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL },
-  ],
+  providers: [{ provide: SERVICE_BASE_URL, useValue: APP_CONSTANTS.baseURL }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
