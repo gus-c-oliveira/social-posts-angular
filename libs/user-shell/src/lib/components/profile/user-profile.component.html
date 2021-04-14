@@ -120,23 +120,21 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="loading$ | async; else loaded">
-  <gus-spinner></gus-spinner>
-</ng-container>
-
-<ng-template #loaded>
-  <ng-container *ngIf="error$ | async; else noError">
+<ng-container [ngSwitch]="(posts$ | async).state">
+  <ng-container *ngSwitchCase="'loading'">
+    <gus-spinner></gus-spinner>
+  </ng-container>
+  <ng-container *ngSwitchCase="'error'">
     <gus-error (tryAgain)="retryLoadingPosts()">
       <span class="error__message">
         {{ 'USER_PROFILE.LOAD_ERROR' | translate }}
       </span>
     </gus-error>
   </ng-container>
-
-  <ng-template #noError>
-    <section class="post" *ngIf="!!(posts$ | async).length">
+  <ng-container *ngSwitchCase="'loaded'">
+    <section class="post" *ngIf="!!(posts$ | async).data.length">
       <div
-        *ngFor="let post of posts$ | async"
+        *ngFor="let post of (posts$ | async).data"
         class="post__item"
         (click)="handlePostSelection(post.id)"
         [attr.data-test]="'post'"
@@ -151,5 +149,10 @@
         </span>
       </div>
     </section>
-  </ng-template>
-</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <span class="post__empty">
+      {{ 'USER_PROFILE.EMPTY_POSTS' | translate }}
+    </span>
+  </ng-container>
+</ng-container>

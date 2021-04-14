@@ -345,6 +345,13 @@ section {
     margin: 0 auto;
     padding: 0;
   }
+
+  &__empty {
+    margin-top: 5rem;
+
+    font-size: 1.6rem;
+    text-align: center;
+  }
 }
 
 .error__message {
