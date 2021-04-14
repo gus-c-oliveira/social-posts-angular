@@ -1,5 +1,5 @@
 import { Post } from '../model/index';
-import { addImageToPost } from '../reducer';
+import { addImageToPost } from '../utils/index';
 
 export const mockPostList: Post[] = addImageToPost([
   {

@@ -2,7 +2,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PostStoreModule } from '@gus/post-store';
 import {
   LanguageModule,
   LibTranslationLoaderFactory,
@@ -37,7 +36,6 @@ import { ProfileGuardService, ROUTES } from './routes/index';
     }),
     UiModule,
     RouterModule.forChild(ROUTES),
-    PostStoreModule,
     UserStoreModule,
     LanguageModule,
   ],

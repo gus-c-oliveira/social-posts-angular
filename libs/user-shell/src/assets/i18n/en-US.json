@@ -30,7 +30,8 @@
     "COMPANY": {
       "TITLE": "Building Awesome\nProjects With",
       "PICTURE_ALT": "Company Section Picture"
-    }
+    },
+    "EMPTY_POSTS": "This user has no posts"
   },
   "USER_POST": {
     "LOAD_ERROR": "Sorry! Error loading comments...",

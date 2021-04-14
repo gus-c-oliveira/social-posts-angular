@@ -7,13 +7,13 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  CommentData,
   Post,
-  PostActions,
-  postQuery,
   PostService,
-} from '@gus/post-store';
-import { User, UserActions, userQuery } from '@gus/user-store';
+  RequestData,
+  User,
+  UserActions,
+  userQuery,
+} from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -34,7 +34,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
 
   public user$: Observable<User>;
   public post$: Observable<Post>;
-  public comments$: Observable<CommentData>;
+  public comments$: Observable<RequestData>;
 
   private selectedPostID: number = null;
 
@@ -53,8 +53,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
       select(userQuery.getSelectedUser),
       untilDestroyed(this)
     );
-    this.post$ = this.store$.pipe(
-      select(postQuery.getSelectedPost),
+    this.post$ = this.postService.selectedPost$.pipe(
       filter((post) => !!post),
       tap((post) => {
         this.loadComments(post.id);
@@ -69,7 +68,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedPostID = postId;
-    this.postService.loadPostComments(this.selectedPostID);
+    this.postService.loadPostComments(postId);
   }
 
   public closePost() {
@@ -94,6 +93,6 @@ export class UserPostComponent implements OnInit, OnDestroy {
   }
 
   private clear() {
-    this.store$.dispatch(PostActions.clearSelectedPostID());
+    this.postService.clearSelectedPost();
   }
 }

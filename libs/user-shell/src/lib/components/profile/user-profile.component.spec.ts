@@ -1,43 +1,39 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  USER_STATE_KEY,
-  UserState,
-  mockUserList,
-  USER_SERVICE_BASE_URL,
-  addUserFriends,
-  addUserPicture,
-  mapUsersToEntities,
-} from '@gus/user-store';
-import {
-  PostActions,
-  POST_STATE_KEY,
-  PostState,
-  mockPostList,
-  POST_SERVICE_BASE_URL,
-  mapPostsToEntities,
-} from '@gus/post-store';
-import { errorSelector } from '@gus/ui';
 import {
   getAllElementsByDataTest,
   getAllElementsTextContentByDataTest,
   getElementByDataTest,
   getElementTextContentByDataTest,
 } from '@gus/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { userPostSelector } from '../post';
-import { UserShellModule } from '../../user-shell.module';
-import { UserProfileComponent } from './user-profile.component';
+import { errorSelector } from '@gus/ui';
+import {
+  addUserFriends,
+  addUserPicture,
+  mapUsersToEntities,
+  mockPostList,
+  mockUserList,
+  PostService,
+  SERVICE_BASE_URL,
+  USER_STATE_KEY,
+  UserState,
+} from '@gus/user-store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { UserShellModule } from '../../user-shell.module';
+import { userPostSelector } from '../post';
+import { UserProfileComponent } from './user-profile.component';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
-  let store$: MockStore<any>;
+  let service: PostService;
   const mockUsers = addUserFriends(addUserPicture(mockUserList));
   const selectedUser = { ...mockUsers[0] };
   const userKey = USER_STATE_KEY;
@@ -48,17 +44,8 @@ describe('UserProfileComponent', () => {
     selectedUserID: selectedUser.id,
     ids: mockUsers.map((user) => user.id),
   };
-  const postKey = POST_STATE_KEY;
-  const postStoreState: PostState = {
-    loading: false,
-    entities: mapPostsToEntities(mockPostList),
-    error: false,
-    selectedPostID: null,
-    ids: mockPostList.map((post) => post.id),
-  };
   const initialState = {
     [userKey]: { ...userStoreState },
-    [postKey]: { ...postStoreState },
   };
 
   beforeEach(
@@ -76,17 +63,21 @@ describe('UserProfileComponent', () => {
           provideMockStore({
             initialState,
           }),
-          { provide: POST_SERVICE_BASE_URL, useValue: '/' },
-          { provide: USER_SERVICE_BASE_URL, useValue: '/' },
+          { provide: SERVICE_BASE_URL, useValue: '/' },
+          PostService,
         ],
-      }).compileComponents();
+      })
+        .overrideComponent(UserProfileComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
-    store$ = TestBed.inject(Store) as MockStore<any>;
+    service = TestBed.inject(PostService);
     fixture.detectChanges();
   });
 
@@ -171,20 +162,14 @@ describe('UserProfileComponent', () => {
   });
 
   it(`should display the spinner while the user's posts are loading`, () => {
-    store$.setState({
-      ...initialState,
-      [postKey]: { ...postStoreState, loading: true },
-    });
+    component.posts$ = of({ state: 'loading', data: [] });
     fixture.detectChanges();
     const spinner = getElementByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
   it('should display the error component if posts fail to load', () => {
-    store$.setState({
-      ...initialState,
-      [postKey]: { ...postStoreState, error: true },
-    });
+    component.posts$ = of({ state: 'error', data: [] });
     fixture.detectChanges();
     const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
@@ -192,19 +177,16 @@ describe('UserProfileComponent', () => {
 
   it(`should retry loading the user posts
       when clicking the error button`, () => {
-    spyOn(store$, 'dispatch');
-    store$.setState({
-      ...initialState,
-      [postKey]: { ...postStoreState, error: true },
-    });
+    spyOn(service, 'loadPosts');
+    component.posts$ = of({ state: 'error', data: [] });
     fixture.detectChanges();
     getElementByDataTest(fixture, 'error-button').click();
-    expect(store$.dispatch).toHaveBeenCalledWith(
-      PostActions.loadPosts({ id: selectedUser.id })
-    );
+    expect(service.loadPosts).toHaveBeenCalledWith(selectedUser.id);
   });
 
   it(`should display the user's posts`, () => {
+    component.posts$ = of({ state: 'loaded', data: mockPostList });
+    fixture.detectChanges();
     const posts = getAllElementsTextContentByDataTest(fixture, 'post');
     const expected = mockPostList.map((post) => post.title);
     expect(posts).toEqual(expected);
@@ -212,6 +194,8 @@ describe('UserProfileComponent', () => {
 
   it(`should create an overlay to display post
       after clicking a user's post`, () => {
+    component.posts$ = of({ state: 'loaded', data: mockPostList });
+    fixture.detectChanges();
     getElementByDataTest(fixture, 'post').click();
     fixture.detectChanges();
     const post = component.overlayRef.overlayElement.querySelector(

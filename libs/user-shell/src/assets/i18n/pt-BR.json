@@ -30,7 +30,8 @@
     "COMPANY": {
       "TITLE": "Construindo Projetos\nMaravilhosos Com",
       "PICTURE_ALT": "Foto da Área de Empresa"
-    }
+    },
+    "EMPTY_POSTS": "Este usuário não possui publicações"
   },
   "USER_POST": {
     "LOAD_ERROR": "Desculpe! Erro ao carregar comentários...",

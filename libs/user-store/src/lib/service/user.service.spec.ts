@@ -5,7 +5,7 @@ import {
 import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UserService } from './user.service';
-import { USER_SERVICE_BASE_URL } from '../token';
+import { SERVICE_BASE_URL } from '../token';
 import { mockUserList } from '../mocks/index';
 
 describe('UserService', () => {
@@ -16,10 +16,7 @@ describe('UserService', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [
-          UserService,
-          { provide: USER_SERVICE_BASE_URL, useValue: '/' },
-        ],
+        providers: [UserService, { provide: SERVICE_BASE_URL, useValue: '/' }],
       });
     })
   );

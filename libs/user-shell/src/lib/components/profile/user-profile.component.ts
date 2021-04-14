@@ -7,8 +7,13 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { PostActions, Post, postQuery } from '@gus/post-store';
-import { UserActions, User, userQuery } from '@gus/user-store';
+import {
+  UserActions,
+  User,
+  userQuery,
+  PostService,
+  RequestData,
+} from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -29,28 +34,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   @HostBinding('attr.data-test') readonly dataTest = userProfileSelector;
 
   public user$: Observable<User>;
-  public posts$: Observable<Post[]>;
-  public loading$: Observable<boolean>;
-  public error$: Observable<boolean>;
+  public posts$: Observable<RequestData>;
   public overlayRef: OverlayRef;
   public userCoverImgSRC = '';
   private currentUserID: number = null;
 
-  public constructor(private store$: Store<any>, private overlay: Overlay) {}
+  public constructor(
+    private store$: Store<any>,
+    private overlay: Overlay,
+    private postService: PostService
+  ) {}
 
   public ngOnInit() {
     this.initializeObservables();
   }
 
   private initializeObservables() {
-    this.loading$ = this.store$.pipe(
-      select(postQuery.getLoading),
-      untilDestroyed(this)
-    );
-    this.error$ = this.store$.pipe(
-      select(postQuery.getError),
-      untilDestroyed(this)
-    );
     this.user$ = this.store$.pipe(
       select(userQuery.getSelectedUser),
       filter((user) => !!user),
@@ -60,10 +59,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       }),
       untilDestroyed(this)
     );
-    this.posts$ = this.store$.pipe(
-      select(postQuery.getPosts),
-      untilDestroyed(this)
-    );
+    this.posts$ = this.postService.posts$;
   }
 
   private loadPosts(id: number) {
@@ -71,7 +67,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       return;
     }
     this.currentUserID = id;
-    this.store$.dispatch(PostActions.loadPosts({ id }));
+    this.postService.loadPosts(id);
   }
 
   private updateUserCover(id: number) {
@@ -86,7 +82,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private setSelectedPostID(id: number) {
-    this.store$.dispatch(PostActions.setSelectedPostID({ id }));
+    this.postService.setSelectedPost(id);
   }
 
   private openPostModal() {
@@ -112,9 +108,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public retryLoadingPosts() {
     this.user$
       .pipe(take(1))
-      .subscribe((user) =>
-        this.store$.dispatch(PostActions.loadPosts({ id: user.id }))
-      );
+      .subscribe((user) => this.postService.loadPosts(user.id));
   }
 
   public updateUser(id: number) {

@@ -209,35 +209,6 @@
         }
       }
     },
-    "post-store": {
-      "projectType": "library",
-      "root": "libs/post-store",
-      "sourceRoot": "libs/post-store/src",
-      "prefix": "gus",
-      "architect": {
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/post-store/**/*.ts",
-              "libs/post-store/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/post-store/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "user-shell": {
       "projectType": "library",
       "root": "libs/user-shell",
