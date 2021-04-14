@@ -6,8 +6,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PostActions } from '@gus/post-store';
-import { SimpleUser, UserActions, userQuery } from '@gus/user-store';
+import {
+  PostService,
+  SimpleUser,
+  UserActions,
+  userQuery,
+} from '@gus/user-store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -34,21 +38,22 @@ export class UserListComponent implements OnInit, OnDestroy {
   public constructor(
     private store$: Store<any>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private postService: PostService
   ) {}
 
   public ngOnInit() {
     this.clearPreviousUserData();
-    this.initializeObservables();
+    this.initObservables();
     this.loadUserList();
   }
 
   private clearPreviousUserData() {
     this.store$.dispatch(UserActions.clearSelectedUserID());
-    this.store$.dispatch(PostActions.clearPosts());
+    this.postService.clearPosts();
   }
 
-  private initializeObservables() {
+  private initObservables() {
     this.loading$ = this.store$.pipe(
       select(userQuery.getLoading),
       untilDestroyed(this)

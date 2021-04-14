@@ -1,15 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  mockUserList,
-  initialUserState,
-  UserActions,
-  USER_STATE_KEY,
-  UserState,
-  mapUsersToEntities,
-} from '@gus/user-store';
-import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
   getAllElementsByDataTest,
   getElementByDataTest,
@@ -17,11 +9,22 @@ import {
   TranslatePipeStub,
 } from '@gus/testing';
 import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
+import { SpinnerStubComponent } from '@gus/ui/testing';
+import {
+  initialUserState,
+  mapUsersToEntities,
+  mockUserList,
+  PostService,
+  SERVICE_BASE_URL,
+  USER_STATE_KEY,
+  UserActions,
+  UserState,
+} from '@gus/user-store';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { UserCardComponent, userCardSelector } from '../card';
 import { USER_PROFILE_PATH } from '../../routes/paths';
+import { UserCardComponent, userCardSelector } from '../card';
 import { UserListComponent } from './user-list.component';
 
 describe('UserListComponent', () => {
@@ -57,6 +60,7 @@ describe('UserListComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
+          HttpClientTestingModule,
           RouterTestingModule.withRoutes([
             {
               path: '**',
@@ -78,6 +82,8 @@ describe('UserListComponent', () => {
               [userStateKey]: initialUserState,
             },
           }),
+          PostService,
+          { provide: SERVICE_BASE_URL, useValue: '/' },
         ],
       }).compileComponents();
     })
