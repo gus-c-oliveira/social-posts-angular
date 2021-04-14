@@ -1,8 +1,21 @@
-import { Comment } from './comment.model';
-
 export type RequestDataState = 'empty' | 'loading' | 'loaded' | 'error';
 
-export interface CommentData {
+export interface RequestData {
   state: RequestDataState;
-  comments: Comment[];
+  data: any[];
 }
+
+export const emptyRequestData: RequestData = {
+  state: 'empty',
+  data: [],
+};
+
+export const loadingRequestData: RequestData = {
+  state: 'loading',
+  data: [],
+};
+
+export const errorRequestData: RequestData = {
+  state: 'error',
+  data: [],
+};

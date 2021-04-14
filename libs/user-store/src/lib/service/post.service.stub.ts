@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+
+import { emptyRequestData, Post } from '../model';
 
 @Injectable()
 export class PostServiceStub {
-  public comments$ = of({ state: 'empty', comments: [] });
+  public selectedPost$ = new BehaviorSubject<Post>(null);
+  public posts$ = of(emptyRequestData);
+  public comments$ = of(emptyRequestData);
 
-  public getPosts() {}
+  public loadPosts() {}
 
   public loadPostComments() {}
+
+  public setSelectedPost() {}
+
+  public clearSelectedPost() {}
+
+  public clearPosts() {}
 
   public clearComments() {}
 }
