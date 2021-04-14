@@ -3,15 +3,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
-  initialPostState,
-  mapPostsToEntities,
-  mockCommentList,
-  mockPostList,
-  POST_SERVICE_BASE_URL,
-  POST_STATE_KEY,
-  PostService,
-} from '@gus/post-store';
-import {
   getAllElementsTextContentByDataTest,
   getElementByDataTest,
   getElementTextContentByDataTest,
@@ -21,11 +12,14 @@ import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
 import { SpinnerStubComponent } from '@gus/ui/testing';
 import {
   mapUsersToEntities,
+  mockCommentList,
+  mockPostList,
   mockUserList,
+  PostService,
+  SERVICE_BASE_URL,
   USER_STATE_KEY,
 } from '@gus/user-store';
-import { Store } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 
 import { UserPostComponent } from './user-post.component';
@@ -48,8 +42,6 @@ describe('UserPostComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let service: PostService;
   const userKey = USER_STATE_KEY;
-  const postKey = POST_STATE_KEY;
-  let store$: MockStore<any>;
   const initialState = {
     [userKey]: {
       entities: mapUsersToEntities(mockUserList),
@@ -58,7 +50,6 @@ describe('UserPostComponent', () => {
       selectedUserID: 1,
       ids: mockUserList.map((user) => user.id),
     },
-    [postKey]: { ...initialPostState },
   };
   const selectedPostID = 3;
   const selectedPost = mockPostList.find((item) => item.id === selectedPostID);
@@ -80,7 +71,7 @@ describe('UserPostComponent', () => {
             initialState,
           }),
           PostService,
-          { provide: POST_SERVICE_BASE_URL, useValue: '/' },
+          { provide: SERVICE_BASE_URL, useValue: '/' },
         ],
       }).compileComponents();
     })
@@ -89,7 +80,6 @@ describe('UserPostComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     host = fixture.componentInstance;
-    store$ = TestBed.inject(Store) as MockStore<any>;
     service = TestBed.inject(PostService);
     fixture.detectChanges();
   });
@@ -99,16 +89,7 @@ describe('UserPostComponent', () => {
   });
 
   it('should display the selected post', () => {
-    store$.setState({
-      ...initialState,
-      [postKey]: {
-        entities: mapPostsToEntities(mockPostList),
-        loading: false,
-        error: false,
-        selectedPostID,
-        ids: mockPostList.map((post) => post.id),
-      },
-    });
+    host.postComponent.post$ = of(selectedPost);
     fixture.detectChanges();
     const postTitle = getElementTextContentByDataTest(fixture, 'post-title');
     const postBody = getElementTextContentByDataTest(fixture, 'post-body');
@@ -128,14 +109,14 @@ describe('UserPostComponent', () => {
   });
 
   it(`should display the spinner while the post's comments are loading`, () => {
-    host.postComponent.comments$ = of({ state: 'loading', comments: [] });
+    host.postComponent.comments$ = of({ state: 'loading', data: [] });
     fixture.detectChanges();
     const spinner = getElementByDataTest(fixture, 'loader');
     expect(spinner).toBeTruthy();
   });
 
   it('should display the error component if comments fail to load', () => {
-    host.postComponent.comments$ = of({ state: 'error', comments: [] });
+    host.postComponent.comments$ = of({ state: 'error', data: [] });
     fixture.detectChanges();
     const error = getElementByDataTest(fixture, errorSelector);
     expect(error).toBeTruthy();
@@ -143,27 +124,17 @@ describe('UserPostComponent', () => {
 
   it(`should retry loading the post comments
       when clicking the error button`, () => {
-    store$.setState({
-      ...initialState,
-      [postKey]: {
-        entities: mapPostsToEntities(mockPostList),
-        loading: false,
-        error: false,
-        selectedPostID,
-        ids: mockPostList.map((post) => post.id),
-      },
-    });
     spyOn(service, 'loadPostComments');
-    host.postComponent.comments$ = of({ state: 'error', comments: [] });
+    host.postComponent.comments$ = of({ state: 'error', data: [] });
     fixture.detectChanges();
     getElementByDataTest(fixture, 'error-button').click();
-    expect(service.loadPostComments).toHaveBeenCalledWith(selectedPost.id);
+    expect(service.loadPostComments).toHaveBeenCalled();
   });
 
   it('should display the selected post comments', () => {
     host.postComponent.comments$ = of({
       state: 'loaded',
-      comments: mockCommentList,
+      data: mockCommentList,
     });
     fixture.detectChanges();
     const expected = mockCommentList.map((item) => `${item.name}${item.body}`);

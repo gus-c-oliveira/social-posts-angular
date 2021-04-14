@@ -39,7 +39,7 @@
       </ng-container>
       <ng-container *ngSwitchCase="'loaded'">
         <div
-          *ngFor="let comment of (comments$ | async).comments; let i = index"
+          *ngFor="let comment of (comments$ | async).data; let i = index"
           class="comment__item"
           [attr.data-test]="'comment'"
         >
