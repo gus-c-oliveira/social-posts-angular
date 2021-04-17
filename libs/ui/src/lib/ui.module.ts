@@ -2,10 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ButtonComponent } from './button';
-import { ErrorComponent } from './error';
-import { HeaderComponent } from './header';
-import { SpinnerComponent } from './spinner';
+import {
+  ButtonComponent,
+  ErrorComponent,
+  HeaderComponent,
+  SpinnerComponent,
+} from './components/index';
+import { TooltipDirective } from './directives';
 
 @NgModule({
   imports: [CommonModule, TranslateModule],
@@ -14,7 +17,14 @@ import { SpinnerComponent } from './spinner';
     ErrorComponent,
     HeaderComponent,
     SpinnerComponent,
+    TooltipDirective,
   ],
-  exports: [ButtonComponent, ErrorComponent, HeaderComponent, SpinnerComponent],
+  exports: [
+    ButtonComponent,
+    ErrorComponent,
+    HeaderComponent,
+    SpinnerComponent,
+    TooltipDirective,
+  ],
 })
 export class UiModule {}

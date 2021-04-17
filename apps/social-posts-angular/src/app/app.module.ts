@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@app/router';
 import { LanguageModule } from '@gus/language';
 import { UiModule } from '@gus/ui';
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     // Angular
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
 
     // Router

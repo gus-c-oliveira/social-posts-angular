@@ -4,12 +4,14 @@ A demo app that displays user profiles and posts.
 
 In this demo:
 
-- Nx for monorepo management to create libs and apps
+- Nx for monorepo management
 - State management using Redux/NgRx
 - Internationalization
 - Communicating with a REST API using a service and HTTP requests
+- Communicating data to components using a service observable
 - Routing and route guarding
-- Displaying a component in a modal window
+- Displaying components in overlays
+- Creating a custom directive to display tooltips
 - Unit testing using Jest
 - End-to-End testing using Cypress
 - Lazy-loading feature modules

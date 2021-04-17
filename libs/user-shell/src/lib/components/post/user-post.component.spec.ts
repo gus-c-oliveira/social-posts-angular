@@ -9,7 +9,7 @@ import {
   TranslatePipeStub,
 } from '@gus/testing';
 import { ButtonComponent, ErrorComponent, errorSelector } from '@gus/ui';
-import { SpinnerStubComponent } from '@gus/ui/testing';
+import { SpinnerStubComponent, TooltipStubDirective } from '@gus/ui/testing';
 import {
   mapUsersToEntities,
   mockCommentList,
@@ -65,6 +65,7 @@ describe('UserPostComponent', () => {
           UserPostComponent,
           TestHostComponent,
           TranslatePipeStub,
+          TooltipStubDirective,
         ],
         providers: [
           provideMockStore({
