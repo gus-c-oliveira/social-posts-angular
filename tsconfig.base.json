@@ -26,7 +26,8 @@
       "@gus/user-shell/testing": ["libs/user-shell/testing/index.ts"],
       "@gus/stats-shell": ["libs/stats-shell/src/index.ts"],
       "@gus/language": ["libs/language/src/index.ts"],
-      "@gus/language/testing": ["libs/language/testing/index.ts"]
+      "@gus/language/testing": ["libs/language/testing/index.ts"],
+      "@gus/auth": ["libs/auth/src/index.ts"]
     },
     "rootDir": "."
   },

@@ -1,8 +1,6 @@
 {
   "npmScope": "social-posts-angular",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -12,29 +10,14 @@
     "nx.json": "*"
   },
   "projects": {
-    "social-posts-angular": {
-      "tags": []
-    },
-    "social-posts-angular-e2e": {
-      "tags": []
-    },
-    "testing": {
-      "tags": []
-    },
-    "ui": {
-      "tags": []
-    },
-    "user-store": {
-      "tags": []
-    },
-    "user-shell": {
-      "tags": []
-    },
-    "stats-shell": {
-      "tags": []
-    },
-    "language": {
-      "tags": []
-    }
+    "social-posts-angular": { "tags": [] },
+    "social-posts-angular-e2e": { "tags": [] },
+    "testing": { "tags": [] },
+    "ui": { "tags": [] },
+    "user-store": { "tags": [] },
+    "user-shell": { "tags": [] },
+    "stats-shell": { "tags": [] },
+    "language": { "tags": [] },
+    "auth": { "tags": [] }
   }
 }
