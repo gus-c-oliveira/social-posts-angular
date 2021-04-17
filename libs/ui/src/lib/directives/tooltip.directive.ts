@@ -6,6 +6,7 @@ import {
   HostListener,
   Input,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   Overlay,
@@ -18,7 +19,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 @Directive({
   selector: '[gusTooltip]',
 })
-export class TooltipDirective implements OnInit {
+export class TooltipDirective implements OnInit, OnDestroy {
   @Input() public tooltipText = '';
 
   private overlayRef: OverlayRef;
@@ -53,6 +54,10 @@ export class TooltipDirective implements OnInit {
       ]);
     this.overlayRef = this.overlay.create({ positionStrategy });
     this.portal = new ComponentPortal(TooltipComponent);
+  }
+
+  public ngOnDestroy() {
+    this.overlayRef.detach();
   }
 }
 

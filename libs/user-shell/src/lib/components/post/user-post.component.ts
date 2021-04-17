@@ -85,6 +85,7 @@ export class UserPostComponent implements OnInit, OnDestroy {
 
   public openFriendProfile(id: number) {
     this.store$.dispatch(UserActions.setSelectedUserID({ id }));
+    window.scrollTo(0, 0);
     this.closePost();
   }
 
