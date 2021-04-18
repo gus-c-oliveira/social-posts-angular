@@ -238,35 +238,6 @@
         }
       }
     },
-    "stats-shell": {
-      "projectType": "library",
-      "root": "libs/stats-shell",
-      "sourceRoot": "libs/stats-shell/src",
-      "prefix": "gus",
-      "architect": {
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/stats-shell/**/*.ts",
-              "libs/stats-shell/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/stats-shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "language": {
       "projectType": "library",
       "root": "libs/language",

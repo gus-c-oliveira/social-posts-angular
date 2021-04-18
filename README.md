@@ -41,11 +41,11 @@ Apps:
 Libs:
 
 - language: module with utilities, components and classes for handling translations inside libs.
-- stats-shell: feature module for the Statistics app area.
 - testing: utilities for use in unit tests.
 - ui: presentational components.
 - user-shell: feature module for the User app area.
 - user-store: Store module for managing user data.
+- auth: authentication module.
 
 # User Data and Images
 

@@ -16,7 +16,6 @@
     "ui": { "tags": [] },
     "user-store": { "tags": [] },
     "user-shell": { "tags": [] },
-    "stats-shell": { "tags": [] },
     "language": { "tags": [] },
     "auth": { "tags": [] }
   }
