@@ -1,4 +1,4 @@
-import { getHeader, getLanguageSelector, getUserList } from '../support/app.po';
+import { getHeader, getLanguageSelector, getAuth } from '../support/app.po';
 
 describe('social-posts-angular', () => {
   beforeEach(() => cy.visit('/'));
@@ -6,6 +6,6 @@ describe('social-posts-angular', () => {
   it('should display the initial page components', () => {
     getHeader().should('exist');
     getLanguageSelector().should('exist');
-    getUserList().should('exist');
+    getAuth().should('exist');
   });
 });
