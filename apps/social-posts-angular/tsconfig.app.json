@@ -8,6 +8,6 @@
   "include": [
     "src/**/*.d.ts",
     "../../libs/user-shell/src/index.ts",
-    "../../libs/stats-shell/src/index.ts"
+    "../../libs/auth/src/index.ts"
   ]
 }
