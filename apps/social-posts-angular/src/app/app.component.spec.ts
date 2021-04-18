@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthModule } from '@gus/auth';
 import { LanguageModule, languageComponentSelector } from '@gus/language';
 import { getElementByDataTest } from '@gus/testing';
 import { headerSelector, UiModule } from '@gus/ui';
@@ -17,6 +18,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
+        AuthModule,
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([]),
         TranslateModule.forRoot({}),

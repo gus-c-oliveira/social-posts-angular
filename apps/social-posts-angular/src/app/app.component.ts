@@ -1,11 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '@gus/auth';
 import { HeaderButtonConfig } from '@gus/ui';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
 
-import { STATS_AREA_PATH, USER_AREA_PATH } from './router/app.routes';
+import { AUTH_AREA_PATH, USER_AREA_PATH } from './router/app.routes';
 
 @UntilDestroy()
 @Component({
@@ -21,15 +22,17 @@ export class AppComponent implements OnDestroy {
       eventType: 'UserButtonClick',
     },
     {
-      text: 'HEADER.BUTTON.STATS',
-      eventType: 'StatsButtonClick',
+      text: 'HEADER.BUTTON.LOGOUT',
+      eventType: 'LogoutButtonClick',
     },
   ];
+  public isLoggedIn$ = this.authService.isLoggedIn$.pipe(untilDestroyed(this));
 
   public constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authService: AuthService
   ) {
     this.addTranslations();
     this.setupDefaultLanguage();
@@ -66,8 +69,9 @@ export class AppComponent implements OnDestroy {
       : console.warn('Event not handled!', event);
   }
 
-  private reduceStatsButtonClick() {
-    this.router.navigate([STATS_AREA_PATH], {
+  private reduceLogoutButtonClick() {
+    this.authService.logout();
+    this.router.navigate([AUTH_AREA_PATH], {
       relativeTo: this.route.parent,
     });
   }

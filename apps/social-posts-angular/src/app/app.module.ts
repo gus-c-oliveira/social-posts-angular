@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '@app/router';
+import { AuthModule } from '@gus/auth';
 import { LanguageModule } from '@gus/language';
 import { UiModule } from '@gus/ui';
 import { SERVICE_BASE_URL } from '@gus/user-store';
@@ -33,6 +34,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     // Ui
     UiModule,
+
+    // Auth
+    AuthModule,
 
     // Store
     StoreModule.forRoot({}),

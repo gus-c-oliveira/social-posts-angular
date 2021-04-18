@@ -1,7 +1,7 @@
 <main>
   <gus-header
     [title]="title"
-    [buttonConfigs]="headerButtonConfigs"
+    [buttonConfigs]="(isLoggedIn$ | async) ? headerButtonConfigs : []"
     (buttonClick)="reduce($event)"
   ></gus-header>
   <router-outlet></router-outlet>

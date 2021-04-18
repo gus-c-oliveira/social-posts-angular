@@ -2,7 +2,7 @@
   "HEADER": {
     "APP_TITLE": "Social Posts",
     "BUTTON": {
-      "STATS": "Statistics",
+      "LOGOUT": "Logout",
       "USER": "User List"
     }
   },

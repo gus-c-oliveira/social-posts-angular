@@ -2,7 +2,7 @@
   "HEADER": {
     "APP_TITLE": "Rede Social",
     "BUTTON": {
-      "STATS": "Estatísticas",
+      "LOGOUT": "Sair",
       "USER": "Lista de Usuários"
     }
   },
